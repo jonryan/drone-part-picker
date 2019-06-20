@@ -15,11 +15,15 @@ var models = [
   {
     name: "Vote",
     embedded: false
+  },
+  {
+    name: "FlightController",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://us1.prisma.sh/corey-snyder/hackernews-react-apollo/dev`
+  endpoint: `https://us1.prisma.sh/corey-snyder/hackernews-node/dev`
 });
 exports.prisma = new exports.Prisma();
