@@ -6,6 +6,7 @@ import CreateLink from './CreateLink.jsx';
 import Header from './Header'
 import Login from './Login'
 import Search from './Search'
+import FlightControllerList from './FlightControllers/FlightControllerList'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route exact path='/search' component={Search} />
           <Route exact path='/top' component={LinkList} />
           <Route exact path='/new/:page' component={LinkList} />
+          <Route exact path='/products/flight-controller' component={FlightControllerList } />
         </Switch>
       </div>
     </div>

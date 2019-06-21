@@ -27,6 +27,12 @@ class Header extends Component {
             search
           </Link>
 
+          <div className="ml1">|</div>
+
+          <Link to="/products/flight-controller" className="ml1 no-underline black">
+            Flight Controllers
+          </Link>
+
           {authToken && (
             <div className="flex">
               <div className="ml1">|</div>
