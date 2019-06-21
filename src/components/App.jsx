@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../logo.svg';
 import '../styles/App.css';
+import '../styles/custom.scss';
 import LinkList from './LinkList.jsx';
 import CreateLink from './CreateLink.jsx';
 import Header from './Header'

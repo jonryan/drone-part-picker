@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { AUTH_TOKEN } from '../constants'
 import gql from 'graphql-tag'
 import {Mutation} from 'react-apollo'
+import {Alert} from 'react-bootstrap'
 
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation($email: String!, $password: String!, $name: String!) {
@@ -30,51 +31,64 @@ class Login extends Component {
   render() {
     const { login, email, password, name } = this.state
     return (
-      <div>
-        <h4 className="mv3">{login ? 'Login' : 'Sign Up'}</h4>
-        <div className="flex flex-column">
-          {!login && (
-            <input
-              value={name}
-              onChange={e => this.setState({ name: e.target.value })}
-              type="text"
-              placeholder="Your name"
-            />
-          )}
+      <div className='text-center form-signin'>
+
+          <img className="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"/>
+          <h1 className="h3 mb-3 font-weight-normal">{login ? 'Login' : 'Sign Up'}</h1>
+          <label htmlFor="inputEmail" className="sr-only">Email address</label>
           <input
             value={email}
             onChange={e => this.setState({ email: e.target.value })}
-            type="text"
             placeholder="Your email address"
+            type="email"
+            id="inputEmail"
+            className="form-control"
+            placeholder="Email address" r
+            equired=""
+           autoFocus="" autoComplete="off"
           />
-          <input
-            value={password}
-            onChange={e => this.setState({ password: e.target.value })}
-            type="password"
-            placeholder="Choose a safe password"
-          />
-        </div>
-        <div className="flex mt3">
+          <label htmlFor="inputPassword" className="sr-only">Password</label>
+          <input type="password"
+                 id="inputPassword"
+                 className="form-control"
+                 placeholder="Password"
+                 required="true"
+                 value={password}
+                 onChange={e => this.setState({ password: e.target.value })}
+                 autoComplete="off"/>
+          <div className="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"/> Remember me
+            </label>
+          </div>
           <Mutation
             mutation={login ? LOGIN_MUTATION : SIGNUP_MUTATION}
             variables={{ email, password, name }}
             onCompleted={data => this._confirm(data)}
           >
             {mutation => (
-              <div className="pointer mr2 button" onClick={mutation}>
+
+              <button
+                onClick={mutation}
+                className="btn btn-lg btn-primary btn-block"
+                type="submit">
                 {login ? 'login' : 'create account'}
-              </div>
+              </button>
             )}
           </Mutation>
-          <div
-            className="pointer button"
-            onClick={() => this.setState({ login: !login })}
-          >
-            {login
-              ? 'need to create an account?'
-              : 'already have an account?'}
-          </div>
-        </div>
+
+          <Alert variant={'success'} className={'mt-4'}>
+            <a
+              onClick={() => this.setState({ login: !login })}
+              href={"#"}>
+              {login
+                ? 'Need to create an account?'
+                : 'Already have an account?'}
+            </a>
+          </Alert>
+
+
+
       </div>
     )
   }
