@@ -86,9 +86,6 @@ class Login extends Component {
                 : 'Already have an account?'}
             </a>
           </Alert>
-
-
-
       </div>
     )
   }

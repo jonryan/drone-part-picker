@@ -2,65 +2,40 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import {AUTH_TOKEN} from "../constants";
+import {
+  Navbar, NavDropdown, Nav, Form, FormControl, Button,
+} from 'react-bootstrap'
 
 class Header extends Component {
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN)
 
     return (
-      <div className="flex pa1 justify-between nowrap orange">
-        <div className="flex flex-fixed black">
-          <div className="fw7 mr1">Hacker News</div>
-          <Link to="/" className="ml1 no-underline black">
-            new
-          </Link>
-
-          <div className="ml1">|</div>
-
-          <Link to="/top" className="ml1 no-underline black">
-            top
-          </Link>
-
-          <div className="ml1">|</div>
-
-          <Link to="/search" className="ml1 no-underline black">
-            search
-          </Link>
-
-          <div className="ml1">|</div>
-
-          <Link to="/products/flight-controller/1" className="ml1 no-underline black">
-            Flight Controllers
-          </Link>
-
-          {authToken && (
-            <div className="flex">
-              <div className="ml1">|</div>
-              <Link to="/create" className="ml1 no-underline black">
-                submit
-              </Link>
-            </div>
-          )}
-
-        </div>
-        <div className="flex flex-fixed">
-          {authToken ? (
-            <div
-              className="ml1 pointer black"
-              onClick={() => {
-                localStorage.removeItem(AUTH_TOKEN)
-                this.props.history.push(`/`)
-              }}
-            >
-              logout
-            </div>
-          ) : (
-            <Link to="/login" className="ml1 no-underline black">
-              login
-            </Link>
-          )}
-        </div>
-      </div>
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link href="/">New</Nav.Link>
+            <Nav.Link href="/top">Top</Nav.Link>
+            <Nav.Link href="/create">Add Link</Nav.Link>
+            <Nav.Link href="/search">Search</Nav.Link>
+            <Nav.Link href="/products/flight-controller/1">Flight Controllers</Nav.Link>
+          </Nav>
+          <Nav>
+            {authToken ? (
+              <Nav.Link
+                onClick={() => {
+                  localStorage.removeItem(AUTH_TOKEN)
+                  this.props.history.push(`/`)
+                }}
+                href="#">Log Out</Nav.Link>
+            ) : (
+              <Nav.Link href="/login">Login</Nav.Link>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     )
   }
 }
