@@ -22,7 +22,7 @@ function App() {
           <Route exact path='/search' component={Search} />
           <Route exact path='/top' component={LinkList} />
           <Route exact path='/new/:page' component={LinkList} />
-          <Route exact path='/products/flight-controller' component={FlightControllerList } />
+          <Route exact path='/products/flight-controller/:page' component={FlightControllerList } />
         </Switch>
       </div>
     </div>

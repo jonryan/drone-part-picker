@@ -55,8 +55,6 @@ class FlightControllerList extends Component {
     return data.flightControllerFeed.flightControllers
   }
 
-
-
   render() {
 
     return (

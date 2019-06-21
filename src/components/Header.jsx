@@ -29,7 +29,7 @@ class Header extends Component {
 
           <div className="ml1">|</div>
 
-          <Link to="/products/flight-controller" className="ml1 no-underline black">
+          <Link to="/products/flight-controller/1" className="ml1 no-underline black">
             Flight Controllers
           </Link>
 
