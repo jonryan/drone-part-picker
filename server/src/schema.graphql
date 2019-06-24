@@ -14,28 +14,29 @@ type Mutation {
       description: String!
     ): Link!
     addFlightController(
-      name: String!,
-      releaseDate: String!,
-      uarts: Int!,
+      name: String,
+      releaseDate: String,
+      uarts: Int,
       GyroOne: Float,
       GyroTwo: Float,
       weightInGrams: Float,
-      cpu: String!,
+      cpu: String,
       dimensions: String,
-      holePattern: String!,
-      voltageInputMin: Float!,
-      voltageInputMax: Float!,
-      osd: Boolean!,
-      accelerometer: Boolean!,
-      barometer: Boolean!,
-      spektrumPort: Boolean!,
-      usbInterface: Boolean!,
-      LedWS2812Support: Boolean!,
-      RSSIPad: Boolean!,
-      currentSensor: Boolean!,
-      beeperPad: Boolean!,
-      beeperOnBoard: Boolean!,
-      antiVibrationGrommets: Boolean!,
+      description: String,
+      holePattern: String,
+      voltageInputMin: Float,
+      voltageInputMax: Float,
+      osd: Boolean,
+      accelerometer: Boolean,
+      barometer: Boolean,
+      spektrumPort: Boolean,
+      usbInterface: Boolean,
+      LedWS2812Support: Boolean,
+      RSSIPad: Boolean,
+      currentSensor: Boolean,
+      beeperPad: Boolean,
+      beeperOnBoard: Boolean,
+      antiVibrationGrommets: Boolean,
       builtInReceiver: String
     ) : FlightController!
     signup(email: String!, password: String!, name: String!): AuthPayload
@@ -80,32 +81,33 @@ type Link {
 }
 
 type FlightController {
-  id: ID!
-  name: String!
-  releaseDate: String!
-  uarts: Int!
+  id: ID
+  name: String
+  releaseDate: String
+  uarts: Int
   GyroOne: Float
   GyroTwo: Float
   weightInGrams: Float
-  cpu: String!
+  cpu: String
   dimensions: String
-  holePattern: String!
-  voltageInputMin: Float!
-  voltageInputMax: Float!
-  osd: Boolean!
-  accelerometer: Boolean!
-  barometer: Boolean!
-  spektrumPort: Boolean!
-  usbInterface: Boolean!
-  LedWS2812Support: Boolean!
-  RSSIPad: Boolean!
-  currentSensor: Boolean!
-  beeperPad: Boolean!
-  beeperOnBoard: Boolean!
-  antiVibrationGrommets: Boolean!
+  description: String
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  LedWS2812Support: Boolean
+  RSSIPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
   builtInReceiver: String
   postedBy: User
-  cretedAt: DateTime!
+  createdAt: DateTime
 }
 
 type AuthPayload {

@@ -27,30 +27,31 @@ scalar DateTime
 
 type FlightController {
   id: ID!
-  name: String!
-  releaseDate: DateTime!
-  uarts: Int!
+  name: String
+  releaseDate: DateTime
+  uarts: Int
   GyroOne: Float
   GyroTwo: Float
   weightInGrams: Float
-  cpu: String!
+  cpu: String
+  description: String
   dimensions: String
-  holePattern: String!
-  voltageInputMin: Float!
-  voltageInputMax: Float!
-  osd: Boolean!
-  accelerometer: Boolean!
-  barometer: Boolean!
-  spektrumPort: Boolean!
-  usbInterface: Boolean!
-  LedWS2812Support: Boolean!
-  RSSIPad: Boolean!
-  currentSensor: Boolean!
-  beeperPad: Boolean!
-  beeperOnBoard: Boolean!
-  antiVibrationGrommets: Boolean!
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  LedWS2812Support: Boolean
+  RSSIPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
   builtInReceiver: String
-  postedBy: User!
+  postedBy: User
   ThreeVoltOutput: Boolean
   FiveVoltOut: Boolean
   CameraControl: Boolean
@@ -64,30 +65,31 @@ type FlightControllerConnection {
 
 input FlightControllerCreateInput {
   id: ID
-  name: String!
-  releaseDate: DateTime!
-  uarts: Int!
+  name: String
+  releaseDate: DateTime
+  uarts: Int
   GyroOne: Float
   GyroTwo: Float
   weightInGrams: Float
-  cpu: String!
+  cpu: String
+  description: String
   dimensions: String
-  holePattern: String!
-  voltageInputMin: Float!
-  voltageInputMax: Float!
-  osd: Boolean!
-  accelerometer: Boolean!
-  barometer: Boolean!
-  spektrumPort: Boolean!
-  usbInterface: Boolean!
-  LedWS2812Support: Boolean!
-  RSSIPad: Boolean!
-  currentSensor: Boolean!
-  beeperPad: Boolean!
-  beeperOnBoard: Boolean!
-  antiVibrationGrommets: Boolean!
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  LedWS2812Support: Boolean
+  RSSIPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
   builtInReceiver: String
-  postedBy: UserCreateOneWithoutFlightControllersInput!
+  postedBy: UserCreateOneWithoutFlightControllersInput
   ThreeVoltOutput: Boolean
   FiveVoltOut: Boolean
   CameraControl: Boolean
@@ -100,28 +102,29 @@ input FlightControllerCreateManyWithoutPostedByInput {
 
 input FlightControllerCreateWithoutPostedByInput {
   id: ID
-  name: String!
-  releaseDate: DateTime!
-  uarts: Int!
+  name: String
+  releaseDate: DateTime
+  uarts: Int
   GyroOne: Float
   GyroTwo: Float
   weightInGrams: Float
-  cpu: String!
+  cpu: String
+  description: String
   dimensions: String
-  holePattern: String!
-  voltageInputMin: Float!
-  voltageInputMax: Float!
-  osd: Boolean!
-  accelerometer: Boolean!
-  barometer: Boolean!
-  spektrumPort: Boolean!
-  usbInterface: Boolean!
-  LedWS2812Support: Boolean!
-  RSSIPad: Boolean!
-  currentSensor: Boolean!
-  beeperPad: Boolean!
-  beeperOnBoard: Boolean!
-  antiVibrationGrommets: Boolean!
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  LedWS2812Support: Boolean
+  RSSIPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
   builtInReceiver: String
   ThreeVoltOutput: Boolean
   FiveVoltOut: Boolean
@@ -150,6 +153,8 @@ enum FlightControllerOrderByInput {
   weightInGrams_DESC
   cpu_ASC
   cpu_DESC
+  description_ASC
+  description_DESC
   dimensions_ASC
   dimensions_DESC
   holePattern_ASC
@@ -192,28 +197,29 @@ enum FlightControllerOrderByInput {
 
 type FlightControllerPreviousValues {
   id: ID!
-  name: String!
-  releaseDate: DateTime!
-  uarts: Int!
+  name: String
+  releaseDate: DateTime
+  uarts: Int
   GyroOne: Float
   GyroTwo: Float
   weightInGrams: Float
-  cpu: String!
+  cpu: String
+  description: String
   dimensions: String
-  holePattern: String!
-  voltageInputMin: Float!
-  voltageInputMax: Float!
-  osd: Boolean!
-  accelerometer: Boolean!
-  barometer: Boolean!
-  spektrumPort: Boolean!
-  usbInterface: Boolean!
-  LedWS2812Support: Boolean!
-  RSSIPad: Boolean!
-  currentSensor: Boolean!
-  beeperPad: Boolean!
-  beeperOnBoard: Boolean!
-  antiVibrationGrommets: Boolean!
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  LedWS2812Support: Boolean
+  RSSIPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
   builtInReceiver: String
   ThreeVoltOutput: Boolean
   FiveVoltOut: Boolean
@@ -303,6 +309,20 @@ input FlightControllerScalarWhereInput {
   cpu_not_starts_with: String
   cpu_ends_with: String
   cpu_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
   dimensions: String
   dimensions_not: String
   dimensions_in: [String!]
@@ -420,6 +440,7 @@ input FlightControllerUpdateInput {
   GyroTwo: Float
   weightInGrams: Float
   cpu: String
+  description: String
   dimensions: String
   holePattern: String
   voltageInputMin: Float
@@ -436,7 +457,7 @@ input FlightControllerUpdateInput {
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  postedBy: UserUpdateOneRequiredWithoutFlightControllersInput
+  postedBy: UserUpdateOneWithoutFlightControllersInput
   ThreeVoltOutput: Boolean
   FiveVoltOut: Boolean
   CameraControl: Boolean
@@ -450,6 +471,7 @@ input FlightControllerUpdateManyDataInput {
   GyroTwo: Float
   weightInGrams: Float
   cpu: String
+  description: String
   dimensions: String
   holePattern: String
   voltageInputMin: Float
@@ -479,6 +501,7 @@ input FlightControllerUpdateManyMutationInput {
   GyroTwo: Float
   weightInGrams: Float
   cpu: String
+  description: String
   dimensions: String
   holePattern: String
   voltageInputMin: Float
@@ -525,6 +548,7 @@ input FlightControllerUpdateWithoutPostedByDataInput {
   GyroTwo: Float
   weightInGrams: Float
   cpu: String
+  description: String
   dimensions: String
   holePattern: String
   voltageInputMin: Float
@@ -640,6 +664,20 @@ input FlightControllerWhereInput {
   cpu_not_starts_with: String
   cpu_ends_with: String
   cpu_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
   dimensions: String
   dimensions_not: String
   dimensions_in: [String!]
@@ -1205,17 +1243,19 @@ input UserUpdateManyMutationInput {
   password: String
 }
 
-input UserUpdateOneRequiredWithoutFlightControllersInput {
-  create: UserCreateWithoutFlightControllersInput
-  update: UserUpdateWithoutFlightControllersDataInput
-  upsert: UserUpsertWithoutFlightControllersInput
-  connect: UserWhereUniqueInput
-}
-
 input UserUpdateOneRequiredWithoutVotesInput {
   create: UserCreateWithoutVotesInput
   update: UserUpdateWithoutVotesDataInput
   upsert: UserUpsertWithoutVotesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneWithoutFlightControllersInput {
+  create: UserCreateWithoutFlightControllersInput
+  update: UserUpdateWithoutFlightControllersDataInput
+  upsert: UserUpsertWithoutFlightControllersInput
+  delete: Boolean
+  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 

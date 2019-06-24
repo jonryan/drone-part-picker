@@ -251,6 +251,8 @@ export type FlightControllerOrderByInput =
   | "weightInGrams_DESC"
   | "cpu_ASC"
   | "cpu_DESC"
+  | "description_ASC"
+  | "description_DESC"
   | "dimensions_ASC"
   | "dimensions_DESC"
   | "holePattern_ASC"
@@ -358,28 +360,29 @@ export interface VoteUpdateWithWhereUniqueWithoutLinkInput {
 
 export interface FlightControllerCreateWithoutPostedByInput {
   id?: Maybe<ID_Input>;
-  name: String;
-  releaseDate: DateTimeInput;
-  uarts: Int;
+  name?: Maybe<String>;
+  releaseDate?: Maybe<DateTimeInput>;
+  uarts?: Maybe<Int>;
   GyroOne?: Maybe<Float>;
   GyroTwo?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
-  cpu: String;
+  cpu?: Maybe<String>;
+  description?: Maybe<String>;
   dimensions?: Maybe<String>;
-  holePattern: String;
-  voltageInputMin: Float;
-  voltageInputMax: Float;
-  osd: Boolean;
-  accelerometer: Boolean;
-  barometer: Boolean;
-  spektrumPort: Boolean;
-  usbInterface: Boolean;
-  LedWS2812Support: Boolean;
-  RSSIPad: Boolean;
-  currentSensor: Boolean;
-  beeperPad: Boolean;
-  beeperOnBoard: Boolean;
-  antiVibrationGrommets: Boolean;
+  holePattern?: Maybe<String>;
+  voltageInputMin?: Maybe<Float>;
+  voltageInputMax?: Maybe<Float>;
+  osd?: Maybe<Boolean>;
+  accelerometer?: Maybe<Boolean>;
+  barometer?: Maybe<Boolean>;
+  spektrumPort?: Maybe<Boolean>;
+  usbInterface?: Maybe<Boolean>;
+  LedWS2812Support?: Maybe<Boolean>;
+  RSSIPad?: Maybe<Boolean>;
+  currentSensor?: Maybe<Boolean>;
+  beeperPad?: Maybe<Boolean>;
+  beeperOnBoard?: Maybe<Boolean>;
+  antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<String>;
   ThreeVoltOutput?: Maybe<Boolean>;
   FiveVoltOut?: Maybe<Boolean>;
@@ -545,6 +548,20 @@ export interface FlightControllerWhereInput {
   cpu_not_starts_with?: Maybe<String>;
   cpu_ends_with?: Maybe<String>;
   cpu_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
   dimensions?: Maybe<String>;
   dimensions_not?: Maybe<String>;
   dimensions_in?: Maybe<String[] | String>;
@@ -726,6 +743,7 @@ export interface FlightControllerUpdateInput {
   GyroTwo?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
   cpu?: Maybe<String>;
+  description?: Maybe<String>;
   dimensions?: Maybe<String>;
   holePattern?: Maybe<String>;
   voltageInputMin?: Maybe<Float>;
@@ -742,7 +760,7 @@ export interface FlightControllerUpdateInput {
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<String>;
-  postedBy?: Maybe<UserUpdateOneRequiredWithoutFlightControllersInput>;
+  postedBy?: Maybe<UserUpdateOneWithoutFlightControllersInput>;
   ThreeVoltOutput?: Maybe<Boolean>;
   FiveVoltOut?: Maybe<Boolean>;
   CameraControl?: Maybe<Boolean>;
@@ -755,10 +773,12 @@ export interface LinkUpdateInput {
   votes?: Maybe<VoteUpdateManyWithoutLinkInput>;
 }
 
-export interface UserUpdateOneRequiredWithoutFlightControllersInput {
+export interface UserUpdateOneWithoutFlightControllersInput {
   create?: Maybe<UserCreateWithoutFlightControllersInput>;
   update?: Maybe<UserUpdateWithoutFlightControllersDataInput>;
   upsert?: Maybe<UserUpsertWithoutFlightControllersInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
@@ -835,30 +855,31 @@ export interface VoteUpdateManyWithoutLinkInput {
 
 export interface FlightControllerCreateInput {
   id?: Maybe<ID_Input>;
-  name: String;
-  releaseDate: DateTimeInput;
-  uarts: Int;
+  name?: Maybe<String>;
+  releaseDate?: Maybe<DateTimeInput>;
+  uarts?: Maybe<Int>;
   GyroOne?: Maybe<Float>;
   GyroTwo?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
-  cpu: String;
+  cpu?: Maybe<String>;
+  description?: Maybe<String>;
   dimensions?: Maybe<String>;
-  holePattern: String;
-  voltageInputMin: Float;
-  voltageInputMax: Float;
-  osd: Boolean;
-  accelerometer: Boolean;
-  barometer: Boolean;
-  spektrumPort: Boolean;
-  usbInterface: Boolean;
-  LedWS2812Support: Boolean;
-  RSSIPad: Boolean;
-  currentSensor: Boolean;
-  beeperPad: Boolean;
-  beeperOnBoard: Boolean;
-  antiVibrationGrommets: Boolean;
+  holePattern?: Maybe<String>;
+  voltageInputMin?: Maybe<Float>;
+  voltageInputMax?: Maybe<Float>;
+  osd?: Maybe<Boolean>;
+  accelerometer?: Maybe<Boolean>;
+  barometer?: Maybe<Boolean>;
+  spektrumPort?: Maybe<Boolean>;
+  usbInterface?: Maybe<Boolean>;
+  LedWS2812Support?: Maybe<Boolean>;
+  RSSIPad?: Maybe<Boolean>;
+  currentSensor?: Maybe<Boolean>;
+  beeperPad?: Maybe<Boolean>;
+  beeperOnBoard?: Maybe<Boolean>;
+  antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<String>;
-  postedBy: UserCreateOneWithoutFlightControllersInput;
+  postedBy?: Maybe<UserCreateOneWithoutFlightControllersInput>;
   ThreeVoltOutput?: Maybe<Boolean>;
   FiveVoltOut?: Maybe<Boolean>;
   CameraControl?: Maybe<Boolean>;
@@ -1034,6 +1055,7 @@ export interface FlightControllerUpdateWithoutPostedByDataInput {
   GyroTwo?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
   cpu?: Maybe<String>;
+  description?: Maybe<String>;
   dimensions?: Maybe<String>;
   holePattern?: Maybe<String>;
   voltageInputMin?: Maybe<Float>;
@@ -1162,6 +1184,20 @@ export interface FlightControllerScalarWhereInput {
   cpu_not_starts_with?: Maybe<String>;
   cpu_ends_with?: Maybe<String>;
   cpu_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
   dimensions?: Maybe<String>;
   dimensions_not?: Maybe<String>;
   dimensions_in?: Maybe<String[] | String>;
@@ -1286,6 +1322,7 @@ export interface FlightControllerUpdateManyDataInput {
   GyroTwo?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
   cpu?: Maybe<String>;
+  description?: Maybe<String>;
   dimensions?: Maybe<String>;
   holePattern?: Maybe<String>;
   voltageInputMin?: Maybe<Float>;
@@ -1390,6 +1427,7 @@ export interface FlightControllerUpdateManyMutationInput {
   GyroTwo?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
   cpu?: Maybe<String>;
+  description?: Maybe<String>;
   dimensions?: Maybe<String>;
   holePattern?: Maybe<String>;
   voltageInputMin?: Maybe<Float>;
@@ -1930,28 +1968,29 @@ export interface AggregateLinkSubscription
 
 export interface FlightController {
   id: ID_Output;
-  name: String;
-  releaseDate: DateTimeOutput;
-  uarts: Int;
+  name?: String;
+  releaseDate?: DateTimeOutput;
+  uarts?: Int;
   GyroOne?: Float;
   GyroTwo?: Float;
   weightInGrams?: Float;
-  cpu: String;
+  cpu?: String;
+  description?: String;
   dimensions?: String;
-  holePattern: String;
-  voltageInputMin: Float;
-  voltageInputMax: Float;
-  osd: Boolean;
-  accelerometer: Boolean;
-  barometer: Boolean;
-  spektrumPort: Boolean;
-  usbInterface: Boolean;
-  LedWS2812Support: Boolean;
-  RSSIPad: Boolean;
-  currentSensor: Boolean;
-  beeperPad: Boolean;
-  beeperOnBoard: Boolean;
-  antiVibrationGrommets: Boolean;
+  holePattern?: String;
+  voltageInputMin?: Float;
+  voltageInputMax?: Float;
+  osd?: Boolean;
+  accelerometer?: Boolean;
+  barometer?: Boolean;
+  spektrumPort?: Boolean;
+  usbInterface?: Boolean;
+  LedWS2812Support?: Boolean;
+  RSSIPad?: Boolean;
+  currentSensor?: Boolean;
+  beeperPad?: Boolean;
+  beeperOnBoard?: Boolean;
+  antiVibrationGrommets?: Boolean;
   builtInReceiver?: String;
   ThreeVoltOutput?: Boolean;
   FiveVoltOut?: Boolean;
@@ -1969,6 +2008,7 @@ export interface FlightControllerPromise
   GyroTwo: () => Promise<Float>;
   weightInGrams: () => Promise<Float>;
   cpu: () => Promise<String>;
+  description: () => Promise<String>;
   dimensions: () => Promise<String>;
   holePattern: () => Promise<String>;
   voltageInputMin: () => Promise<Float>;
@@ -2002,6 +2042,7 @@ export interface FlightControllerSubscription
   GyroTwo: () => Promise<AsyncIterator<Float>>;
   weightInGrams: () => Promise<AsyncIterator<Float>>;
   cpu: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
   dimensions: () => Promise<AsyncIterator<String>>;
   holePattern: () => Promise<AsyncIterator<String>>;
   voltageInputMin: () => Promise<AsyncIterator<Float>>;
@@ -2035,6 +2076,7 @@ export interface FlightControllerNullablePromise
   GyroTwo: () => Promise<Float>;
   weightInGrams: () => Promise<Float>;
   cpu: () => Promise<String>;
+  description: () => Promise<String>;
   dimensions: () => Promise<String>;
   holePattern: () => Promise<String>;
   voltageInputMin: () => Promise<Float>;
@@ -2184,28 +2226,29 @@ export interface LinkNullablePromise
 
 export interface FlightControllerPreviousValues {
   id: ID_Output;
-  name: String;
-  releaseDate: DateTimeOutput;
-  uarts: Int;
+  name?: String;
+  releaseDate?: DateTimeOutput;
+  uarts?: Int;
   GyroOne?: Float;
   GyroTwo?: Float;
   weightInGrams?: Float;
-  cpu: String;
+  cpu?: String;
+  description?: String;
   dimensions?: String;
-  holePattern: String;
-  voltageInputMin: Float;
-  voltageInputMax: Float;
-  osd: Boolean;
-  accelerometer: Boolean;
-  barometer: Boolean;
-  spektrumPort: Boolean;
-  usbInterface: Boolean;
-  LedWS2812Support: Boolean;
-  RSSIPad: Boolean;
-  currentSensor: Boolean;
-  beeperPad: Boolean;
-  beeperOnBoard: Boolean;
-  antiVibrationGrommets: Boolean;
+  holePattern?: String;
+  voltageInputMin?: Float;
+  voltageInputMax?: Float;
+  osd?: Boolean;
+  accelerometer?: Boolean;
+  barometer?: Boolean;
+  spektrumPort?: Boolean;
+  usbInterface?: Boolean;
+  LedWS2812Support?: Boolean;
+  RSSIPad?: Boolean;
+  currentSensor?: Boolean;
+  beeperPad?: Boolean;
+  beeperOnBoard?: Boolean;
+  antiVibrationGrommets?: Boolean;
   builtInReceiver?: String;
   ThreeVoltOutput?: Boolean;
   FiveVoltOut?: Boolean;
@@ -2223,6 +2266,7 @@ export interface FlightControllerPreviousValuesPromise
   GyroTwo: () => Promise<Float>;
   weightInGrams: () => Promise<Float>;
   cpu: () => Promise<String>;
+  description: () => Promise<String>;
   dimensions: () => Promise<String>;
   holePattern: () => Promise<String>;
   voltageInputMin: () => Promise<Float>;
@@ -2255,6 +2299,7 @@ export interface FlightControllerPreviousValuesSubscription
   GyroTwo: () => Promise<AsyncIterator<Float>>;
   weightInGrams: () => Promise<AsyncIterator<Float>>;
   cpu: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
   dimensions: () => Promise<AsyncIterator<String>>;
   holePattern: () => Promise<AsyncIterator<String>>;
   voltageInputMin: () => Promise<AsyncIterator<Float>>;
