@@ -9,6 +9,7 @@ import Login from './Login'
 import Search from './Search'
 import FlightControllerList from './FlightControllers/FlightControllerList'
 import { Switch, Route, Redirect } from 'react-router-dom'
+import AddFlightController from './AddFlightController.jsx';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route exact path='/top' component={LinkList} />
           <Route exact path='/new/:page' component={LinkList} />
           <Route exact path='/products/flight-controller/:page' component={FlightControllerList } />
+          <Route exact path='/add-flight-controller' component={AddFlightController } />
         </Switch>
       </div>
     </div>

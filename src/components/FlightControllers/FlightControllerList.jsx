@@ -4,24 +4,25 @@ import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import {LINKS_PER_PAGE} from '../../constants.js';
 import FlightController from './FlightController.jsx';
+import {Container, Row, Col, Card, Table,} from 'react-bootstrap'
 
 export const FC_LIST_QUERY  = gql`
- query{
-  flightControllerFeed{
-    flightControllers{
-      id
-      name
-      releaseDate
-      uarts
-      id
-			postedBy{
-        email
+  query{
+    flightControllerFeed{
+      flightControllers{
+        id
+        name
+        releaseDate
+        uarts
+        id
+        postedBy{
+          email
+        }
       }
+      count
     }
-    count
-  }
 
-}
+  }
 `
 
 class FlightControllerList extends Component {
@@ -71,23 +72,57 @@ class FlightControllerList extends Component {
 
 
           return (
-            <div>
-              {FCs.map((fc, index) => (
-                <FlightController
-                  fc={fc}
-                  key={index}
-                  index={index + pageIndex}
-                />
-              ))}
-              <div className="flex ml4 mv3 gray">
-                  <div className="pointer mr2" onClick={this._previousPage}>
-                    Previous
+            <Container fluid className={'mt-4'}>
+              <Row>
+                <Col md={'auto'}>
+                  <Card style={{width: 400}}>
+                    <Card.Header as="h5">Filters</Card.Header>
+                    <Card.Body>
+                      <Card.Title>Filters Header</Card.Title>
+                      <Card.Text>
+                        Filters will go here
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+
+                <Col>
+                  <div>
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Manufacturer</th>
+                          <th>Price</th>
+                          <th>Rating</th>
+                          <th>Number of Builds</th>
+                          <th>Release Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {FCs.map((fc, index) => (
+                          <FlightController
+                            fc={fc}
+                            key={index}
+                            index={index + pageIndex}
+                          />
+                        ))}
+                      </tbody>
+                    </Table>
+
+                    <div className="flex ml4 mv3 gray">
+                      <div className="pointer mr2" onClick={this._previousPage}>
+                        Previous
+                      </div>
+                      <div className="pointer" onClick={() => this._nextPage(data)}>
+                        Next
+                      </div>
+                    </div>
                   </div>
-                  <div className="pointer" onClick={() => this._nextPage(data)}>
-                    Next
-                  </div>
-                </div>
-            </div>
+                </Col>
+              </Row>
+            </Container>
+
           )
         }}
       </Query>

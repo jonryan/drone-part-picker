@@ -6,9 +6,14 @@ class FlightController extends Component {
     let {fc} = this.props
 
     return (
-      <div>
-        I am a FC {fc.name} posted by {fc.postedBy.email}
-      </div>
+      <tr>
+        <td>{fc.name}</td>
+        <td>{fc.manufacturer}</td>
+        <td>$34.99</td>
+        <td>5 Stars</td>
+        <td>13</td>
+        <td>05/05/2019</td>
+      </tr>
     );
   }
 }
