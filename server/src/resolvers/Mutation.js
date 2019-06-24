@@ -53,6 +53,21 @@ function addFlightController(parent, args, context, info){
   })
 }
 
+function addFlightControllerEasy(parent, args, context, info){
+  console.log('addFlightControllerEasy', args)
+  const userId = getUserId(context)
+
+  console.log("About to add", {
+    postedBy: { connect: { id: userId } },
+    ...args.flightController
+  })
+
+  return context.prisma.createFlightController({
+    postedBy: { connect: { id: userId } },
+    ...args.flightController
+  })
+}
+
 async function updateLink(parent, args, context, info) {
   const userId = getUserId(context)
   console.log('updateLink', args)
@@ -94,6 +109,7 @@ module.exports = {
   updateLink,
   vote,
   addFlightController,
+  addFlightControllerEasy
 }
 
 // Mutation: {
