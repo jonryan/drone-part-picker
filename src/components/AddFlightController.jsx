@@ -37,32 +37,8 @@ import { FC_LIST_QUERY } from './FlightControllers/FlightControllerList.jsx'
 // }
 
 const FC_MUTATION = gql`
-  mutation FcMutation(
-    $name: String,
-    $releaseDateUpdated: String,
-    $description: String,
-    $uarts: Int,
-    $weightInGrams: Float,
-    $cpu: String,
-    $dimensions: String,
-    $holePattern: String,
-    $voltageInputMin: Float,
-    $voltageInputMax: Float,
-    $osd: Boolean,
-  ){
-    addFlightController(
-      name: $name, 
-      uarts: $uarts, 
-      description: $description,
-      releaseDate: $releaseDateUpdated,
-      weightInGrams: $weightInGrams,
-      cpu: $cpu,
-      dimensions: $dimensions,
-      holePattern: $holePattern,
-      voltageInputMin: $voltageInputMin
-      voltageInputMax: $voltageInputMax
-      osd: $osd
-    ){
+  mutation FcMutation($flightController: FlightControllerInput!){
+    addFlightControllerEasy(flightController: $flightController){
       id
       createdAt
       description
@@ -130,6 +106,10 @@ class AddFlightController extends Component {
       dimensions, voltageInputMax, voltageInputMin, osd, holePattern,
       cpu, weightInGrams,
     } = this.state
+
+    let flightController = {...this.state}
+    flightController.releaseDate = this.state.releaseDateUpdated;
+    delete flightController.releaseDateUpdated;
 
     return (
       <Container fluid>
@@ -229,9 +209,7 @@ class AddFlightController extends Component {
             <Mutation
               mutation={FC_MUTATION}
               variables={{
-                name, uarts, description, releaseDateUpdated,
-                voltageInputMax, voltageInputMin, cpu, weightInGrams,holePattern, dimensions,
-                osd,
+                flightController
               }}
               onCompleted={() => this.props.history.push('/products/flight-controller/1')}
               update={(store, { data: { flightController } }) => {
