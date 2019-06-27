@@ -52,6 +52,21 @@ function addFlightController(parent, args, context, info){
   })
 }
 
+async function deleteFlightController(parent, args, context, info){
+  if(!args.id){
+    throw new Error('You need to pass a valid productID')
+  }
+
+  const productFound = await context.prisma.flightController({ id: args.id })
+
+  if (productFound) {
+    let result = await context.prisma.deleteFlightController({ id: args.id })
+    return productFound
+  }else{
+    throw new Error(`${args.id} not found.`)
+  }
+}
+
 function addFlightControllerEasy(parent, args, context, info){
   const userId = getUserId(context)
 
@@ -100,7 +115,8 @@ module.exports = {
   updateLink,
   vote,
   addFlightController,
-  addFlightControllerEasy
+  addFlightControllerEasy,
+  deleteFlightController,
 }
 
 // Mutation: {
