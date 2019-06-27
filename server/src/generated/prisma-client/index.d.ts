@@ -245,10 +245,10 @@ export type FlightControllerOrderByInput =
   | "releaseDate_DESC"
   | "uarts_ASC"
   | "uarts_DESC"
-  | "GyroOne_ASC"
-  | "GyroOne_DESC"
-  | "GyroTwo_ASC"
-  | "GyroTwo_DESC"
+  | "gyroOne_ASC"
+  | "gyroOne_DESC"
+  | "gyroTwo_ASC"
+  | "gyroTwo_DESC"
   | "weightInGrams_ASC"
   | "weightInGrams_DESC"
   | "cpu_ASC"
@@ -275,8 +275,8 @@ export type FlightControllerOrderByInput =
   | "usbInterface_DESC"
   | "ledWS2812Support_ASC"
   | "ledWS2812Support_DESC"
-  | "RSSIPad_ASC"
-  | "RSSIPad_DESC"
+  | "rssiPad_ASC"
+  | "rssiPad_DESC"
   | "currentSensor_ASC"
   | "currentSensor_DESC"
   | "beeperPad_ASC"
@@ -366,8 +366,8 @@ export interface FlightControllerCreateWithoutPostedByInput {
   disabled?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   uarts?: Maybe<Int>;
-  GyroOne?: Maybe<Float>;
-  GyroTwo?: Maybe<Float>;
+  gyroOne?: Maybe<Float>;
+  gyroTwo?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
   cpu?: Maybe<String>;
   description?: Maybe<String>;
@@ -381,7 +381,7 @@ export interface FlightControllerCreateWithoutPostedByInput {
   spektrumPort?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
   ledWS2812Support?: Maybe<Boolean>;
-  RSSIPad?: Maybe<Boolean>;
+  rssiPad?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
   beeperOnBoard?: Maybe<Boolean>;
@@ -515,22 +515,22 @@ export interface FlightControllerWhereInput {
   uarts_lte?: Maybe<Int>;
   uarts_gt?: Maybe<Int>;
   uarts_gte?: Maybe<Int>;
-  GyroOne?: Maybe<Float>;
-  GyroOne_not?: Maybe<Float>;
-  GyroOne_in?: Maybe<Float[] | Float>;
-  GyroOne_not_in?: Maybe<Float[] | Float>;
-  GyroOne_lt?: Maybe<Float>;
-  GyroOne_lte?: Maybe<Float>;
-  GyroOne_gt?: Maybe<Float>;
-  GyroOne_gte?: Maybe<Float>;
-  GyroTwo?: Maybe<Float>;
-  GyroTwo_not?: Maybe<Float>;
-  GyroTwo_in?: Maybe<Float[] | Float>;
-  GyroTwo_not_in?: Maybe<Float[] | Float>;
-  GyroTwo_lt?: Maybe<Float>;
-  GyroTwo_lte?: Maybe<Float>;
-  GyroTwo_gt?: Maybe<Float>;
-  GyroTwo_gte?: Maybe<Float>;
+  gyroOne?: Maybe<Float>;
+  gyroOne_not?: Maybe<Float>;
+  gyroOne_in?: Maybe<Float[] | Float>;
+  gyroOne_not_in?: Maybe<Float[] | Float>;
+  gyroOne_lt?: Maybe<Float>;
+  gyroOne_lte?: Maybe<Float>;
+  gyroOne_gt?: Maybe<Float>;
+  gyroOne_gte?: Maybe<Float>;
+  gyroTwo?: Maybe<Float>;
+  gyroTwo_not?: Maybe<Float>;
+  gyroTwo_in?: Maybe<Float[] | Float>;
+  gyroTwo_not_in?: Maybe<Float[] | Float>;
+  gyroTwo_lt?: Maybe<Float>;
+  gyroTwo_lte?: Maybe<Float>;
+  gyroTwo_gt?: Maybe<Float>;
+  gyroTwo_gte?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
   weightInGrams_not?: Maybe<Float>;
   weightInGrams_in?: Maybe<Float[] | Float>;
@@ -623,8 +623,8 @@ export interface FlightControllerWhereInput {
   usbInterface_not?: Maybe<Boolean>;
   ledWS2812Support?: Maybe<Boolean>;
   ledWS2812Support_not?: Maybe<Boolean>;
-  RSSIPad?: Maybe<Boolean>;
-  RSSIPad_not?: Maybe<Boolean>;
+  rssiPad?: Maybe<Boolean>;
+  rssiPad_not?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   currentSensor_not?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
@@ -745,8 +745,8 @@ export interface FlightControllerUpdateInput {
   disabled?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   uarts?: Maybe<Int>;
-  GyroOne?: Maybe<Float>;
-  GyroTwo?: Maybe<Float>;
+  gyroOne?: Maybe<Float>;
+  gyroTwo?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
   cpu?: Maybe<String>;
   description?: Maybe<String>;
@@ -760,7 +760,7 @@ export interface FlightControllerUpdateInput {
   spektrumPort?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
   ledWS2812Support?: Maybe<Boolean>;
-  RSSIPad?: Maybe<Boolean>;
+  rssiPad?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
   beeperOnBoard?: Maybe<Boolean>;
@@ -865,8 +865,8 @@ export interface FlightControllerCreateInput {
   disabled?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   uarts?: Maybe<Int>;
-  GyroOne?: Maybe<Float>;
-  GyroTwo?: Maybe<Float>;
+  gyroOne?: Maybe<Float>;
+  gyroTwo?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
   cpu?: Maybe<String>;
   description?: Maybe<String>;
@@ -880,7 +880,7 @@ export interface FlightControllerCreateInput {
   spektrumPort?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
   ledWS2812Support?: Maybe<Boolean>;
-  RSSIPad?: Maybe<Boolean>;
+  rssiPad?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
   beeperOnBoard?: Maybe<Boolean>;
@@ -1059,8 +1059,8 @@ export interface FlightControllerUpdateWithoutPostedByDataInput {
   disabled?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   uarts?: Maybe<Int>;
-  GyroOne?: Maybe<Float>;
-  GyroTwo?: Maybe<Float>;
+  gyroOne?: Maybe<Float>;
+  gyroTwo?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
   cpu?: Maybe<String>;
   description?: Maybe<String>;
@@ -1074,7 +1074,7 @@ export interface FlightControllerUpdateWithoutPostedByDataInput {
   spektrumPort?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
   ledWS2812Support?: Maybe<Boolean>;
-  RSSIPad?: Maybe<Boolean>;
+  rssiPad?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
   beeperOnBoard?: Maybe<Boolean>;
@@ -1156,22 +1156,22 @@ export interface FlightControllerScalarWhereInput {
   uarts_lte?: Maybe<Int>;
   uarts_gt?: Maybe<Int>;
   uarts_gte?: Maybe<Int>;
-  GyroOne?: Maybe<Float>;
-  GyroOne_not?: Maybe<Float>;
-  GyroOne_in?: Maybe<Float[] | Float>;
-  GyroOne_not_in?: Maybe<Float[] | Float>;
-  GyroOne_lt?: Maybe<Float>;
-  GyroOne_lte?: Maybe<Float>;
-  GyroOne_gt?: Maybe<Float>;
-  GyroOne_gte?: Maybe<Float>;
-  GyroTwo?: Maybe<Float>;
-  GyroTwo_not?: Maybe<Float>;
-  GyroTwo_in?: Maybe<Float[] | Float>;
-  GyroTwo_not_in?: Maybe<Float[] | Float>;
-  GyroTwo_lt?: Maybe<Float>;
-  GyroTwo_lte?: Maybe<Float>;
-  GyroTwo_gt?: Maybe<Float>;
-  GyroTwo_gte?: Maybe<Float>;
+  gyroOne?: Maybe<Float>;
+  gyroOne_not?: Maybe<Float>;
+  gyroOne_in?: Maybe<Float[] | Float>;
+  gyroOne_not_in?: Maybe<Float[] | Float>;
+  gyroOne_lt?: Maybe<Float>;
+  gyroOne_lte?: Maybe<Float>;
+  gyroOne_gt?: Maybe<Float>;
+  gyroOne_gte?: Maybe<Float>;
+  gyroTwo?: Maybe<Float>;
+  gyroTwo_not?: Maybe<Float>;
+  gyroTwo_in?: Maybe<Float[] | Float>;
+  gyroTwo_not_in?: Maybe<Float[] | Float>;
+  gyroTwo_lt?: Maybe<Float>;
+  gyroTwo_lte?: Maybe<Float>;
+  gyroTwo_gt?: Maybe<Float>;
+  gyroTwo_gte?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
   weightInGrams_not?: Maybe<Float>;
   weightInGrams_in?: Maybe<Float[] | Float>;
@@ -1264,8 +1264,8 @@ export interface FlightControllerScalarWhereInput {
   usbInterface_not?: Maybe<Boolean>;
   ledWS2812Support?: Maybe<Boolean>;
   ledWS2812Support_not?: Maybe<Boolean>;
-  RSSIPad?: Maybe<Boolean>;
-  RSSIPad_not?: Maybe<Boolean>;
+  rssiPad?: Maybe<Boolean>;
+  rssiPad_not?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   currentSensor_not?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
@@ -1329,8 +1329,8 @@ export interface FlightControllerUpdateManyDataInput {
   disabled?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   uarts?: Maybe<Int>;
-  GyroOne?: Maybe<Float>;
-  GyroTwo?: Maybe<Float>;
+  gyroOne?: Maybe<Float>;
+  gyroTwo?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
   cpu?: Maybe<String>;
   description?: Maybe<String>;
@@ -1344,7 +1344,7 @@ export interface FlightControllerUpdateManyDataInput {
   spektrumPort?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
   ledWS2812Support?: Maybe<Boolean>;
-  RSSIPad?: Maybe<Boolean>;
+  rssiPad?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
   beeperOnBoard?: Maybe<Boolean>;
@@ -1435,8 +1435,8 @@ export interface FlightControllerUpdateManyMutationInput {
   disabled?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   uarts?: Maybe<Int>;
-  GyroOne?: Maybe<Float>;
-  GyroTwo?: Maybe<Float>;
+  gyroOne?: Maybe<Float>;
+  gyroTwo?: Maybe<Float>;
   weightInGrams?: Maybe<Float>;
   cpu?: Maybe<String>;
   description?: Maybe<String>;
@@ -1450,7 +1450,7 @@ export interface FlightControllerUpdateManyMutationInput {
   spektrumPort?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
   ledWS2812Support?: Maybe<Boolean>;
-  RSSIPad?: Maybe<Boolean>;
+  rssiPad?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
   beeperOnBoard?: Maybe<Boolean>;
@@ -1984,8 +1984,8 @@ export interface FlightController {
   disabled?: Boolean;
   releaseDate?: DateTimeOutput;
   uarts?: Int;
-  GyroOne?: Float;
-  GyroTwo?: Float;
+  gyroOne?: Float;
+  gyroTwo?: Float;
   weightInGrams?: Float;
   cpu?: String;
   description?: String;
@@ -1999,7 +1999,7 @@ export interface FlightController {
   spektrumPort?: Boolean;
   usbInterface?: Boolean;
   ledWS2812Support?: Boolean;
-  RSSIPad?: Boolean;
+  rssiPad?: Boolean;
   currentSensor?: Boolean;
   beeperPad?: Boolean;
   beeperOnBoard?: Boolean;
@@ -2018,8 +2018,8 @@ export interface FlightControllerPromise
   disabled: () => Promise<Boolean>;
   releaseDate: () => Promise<DateTimeOutput>;
   uarts: () => Promise<Int>;
-  GyroOne: () => Promise<Float>;
-  GyroTwo: () => Promise<Float>;
+  gyroOne: () => Promise<Float>;
+  gyroTwo: () => Promise<Float>;
   weightInGrams: () => Promise<Float>;
   cpu: () => Promise<String>;
   description: () => Promise<String>;
@@ -2033,7 +2033,7 @@ export interface FlightControllerPromise
   spektrumPort: () => Promise<Boolean>;
   usbInterface: () => Promise<Boolean>;
   ledWS2812Support: () => Promise<Boolean>;
-  RSSIPad: () => Promise<Boolean>;
+  rssiPad: () => Promise<Boolean>;
   currentSensor: () => Promise<Boolean>;
   beeperPad: () => Promise<Boolean>;
   beeperOnBoard: () => Promise<Boolean>;
@@ -2053,8 +2053,8 @@ export interface FlightControllerSubscription
   disabled: () => Promise<AsyncIterator<Boolean>>;
   releaseDate: () => Promise<AsyncIterator<DateTimeOutput>>;
   uarts: () => Promise<AsyncIterator<Int>>;
-  GyroOne: () => Promise<AsyncIterator<Float>>;
-  GyroTwo: () => Promise<AsyncIterator<Float>>;
+  gyroOne: () => Promise<AsyncIterator<Float>>;
+  gyroTwo: () => Promise<AsyncIterator<Float>>;
   weightInGrams: () => Promise<AsyncIterator<Float>>;
   cpu: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
@@ -2068,7 +2068,7 @@ export interface FlightControllerSubscription
   spektrumPort: () => Promise<AsyncIterator<Boolean>>;
   usbInterface: () => Promise<AsyncIterator<Boolean>>;
   ledWS2812Support: () => Promise<AsyncIterator<Boolean>>;
-  RSSIPad: () => Promise<AsyncIterator<Boolean>>;
+  rssiPad: () => Promise<AsyncIterator<Boolean>>;
   currentSensor: () => Promise<AsyncIterator<Boolean>>;
   beeperPad: () => Promise<AsyncIterator<Boolean>>;
   beeperOnBoard: () => Promise<AsyncIterator<Boolean>>;
@@ -2088,8 +2088,8 @@ export interface FlightControllerNullablePromise
   disabled: () => Promise<Boolean>;
   releaseDate: () => Promise<DateTimeOutput>;
   uarts: () => Promise<Int>;
-  GyroOne: () => Promise<Float>;
-  GyroTwo: () => Promise<Float>;
+  gyroOne: () => Promise<Float>;
+  gyroTwo: () => Promise<Float>;
   weightInGrams: () => Promise<Float>;
   cpu: () => Promise<String>;
   description: () => Promise<String>;
@@ -2103,7 +2103,7 @@ export interface FlightControllerNullablePromise
   spektrumPort: () => Promise<Boolean>;
   usbInterface: () => Promise<Boolean>;
   ledWS2812Support: () => Promise<Boolean>;
-  RSSIPad: () => Promise<Boolean>;
+  rssiPad: () => Promise<Boolean>;
   currentSensor: () => Promise<Boolean>;
   beeperPad: () => Promise<Boolean>;
   beeperOnBoard: () => Promise<Boolean>;
@@ -2246,8 +2246,8 @@ export interface FlightControllerPreviousValues {
   disabled?: Boolean;
   releaseDate?: DateTimeOutput;
   uarts?: Int;
-  GyroOne?: Float;
-  GyroTwo?: Float;
+  gyroOne?: Float;
+  gyroTwo?: Float;
   weightInGrams?: Float;
   cpu?: String;
   description?: String;
@@ -2261,7 +2261,7 @@ export interface FlightControllerPreviousValues {
   spektrumPort?: Boolean;
   usbInterface?: Boolean;
   ledWS2812Support?: Boolean;
-  RSSIPad?: Boolean;
+  rssiPad?: Boolean;
   currentSensor?: Boolean;
   beeperPad?: Boolean;
   beeperOnBoard?: Boolean;
@@ -2280,8 +2280,8 @@ export interface FlightControllerPreviousValuesPromise
   disabled: () => Promise<Boolean>;
   releaseDate: () => Promise<DateTimeOutput>;
   uarts: () => Promise<Int>;
-  GyroOne: () => Promise<Float>;
-  GyroTwo: () => Promise<Float>;
+  gyroOne: () => Promise<Float>;
+  gyroTwo: () => Promise<Float>;
   weightInGrams: () => Promise<Float>;
   cpu: () => Promise<String>;
   description: () => Promise<String>;
@@ -2295,7 +2295,7 @@ export interface FlightControllerPreviousValuesPromise
   spektrumPort: () => Promise<Boolean>;
   usbInterface: () => Promise<Boolean>;
   ledWS2812Support: () => Promise<Boolean>;
-  RSSIPad: () => Promise<Boolean>;
+  rssiPad: () => Promise<Boolean>;
   currentSensor: () => Promise<Boolean>;
   beeperPad: () => Promise<Boolean>;
   beeperOnBoard: () => Promise<Boolean>;
@@ -2314,8 +2314,8 @@ export interface FlightControllerPreviousValuesSubscription
   disabled: () => Promise<AsyncIterator<Boolean>>;
   releaseDate: () => Promise<AsyncIterator<DateTimeOutput>>;
   uarts: () => Promise<AsyncIterator<Int>>;
-  GyroOne: () => Promise<AsyncIterator<Float>>;
-  GyroTwo: () => Promise<AsyncIterator<Float>>;
+  gyroOne: () => Promise<AsyncIterator<Float>>;
+  gyroTwo: () => Promise<AsyncIterator<Float>>;
   weightInGrams: () => Promise<AsyncIterator<Float>>;
   cpu: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
@@ -2329,7 +2329,7 @@ export interface FlightControllerPreviousValuesSubscription
   spektrumPort: () => Promise<AsyncIterator<Boolean>>;
   usbInterface: () => Promise<AsyncIterator<Boolean>>;
   ledWS2812Support: () => Promise<AsyncIterator<Boolean>>;
-  RSSIPad: () => Promise<AsyncIterator<Boolean>>;
+  rssiPad: () => Promise<AsyncIterator<Boolean>>;
   currentSensor: () => Promise<AsyncIterator<Boolean>>;
   beeperPad: () => Promise<AsyncIterator<Boolean>>;
   beeperOnBoard: () => Promise<AsyncIterator<Boolean>>;

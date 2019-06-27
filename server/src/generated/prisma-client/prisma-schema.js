@@ -31,8 +31,8 @@ type FlightController {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -46,7 +46,7 @@ type FlightController {
   spektrumPort: Boolean
   usbInterface: Boolean
   ledWS2812Support: Boolean
-  RSSIPad: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
@@ -70,8 +70,8 @@ input FlightControllerCreateInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -85,7 +85,7 @@ input FlightControllerCreateInput {
   spektrumPort: Boolean
   usbInterface: Boolean
   ledWS2812Support: Boolean
-  RSSIPad: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
@@ -108,8 +108,8 @@ input FlightControllerCreateWithoutPostedByInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -123,7 +123,7 @@ input FlightControllerCreateWithoutPostedByInput {
   spektrumPort: Boolean
   usbInterface: Boolean
   ledWS2812Support: Boolean
-  RSSIPad: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
@@ -150,10 +150,10 @@ enum FlightControllerOrderByInput {
   releaseDate_DESC
   uarts_ASC
   uarts_DESC
-  GyroOne_ASC
-  GyroOne_DESC
-  GyroTwo_ASC
-  GyroTwo_DESC
+  gyroOne_ASC
+  gyroOne_DESC
+  gyroTwo_ASC
+  gyroTwo_DESC
   weightInGrams_ASC
   weightInGrams_DESC
   cpu_ASC
@@ -180,8 +180,8 @@ enum FlightControllerOrderByInput {
   usbInterface_DESC
   ledWS2812Support_ASC
   ledWS2812Support_DESC
-  RSSIPad_ASC
-  RSSIPad_DESC
+  rssiPad_ASC
+  rssiPad_DESC
   currentSensor_ASC
   currentSensor_DESC
   beeperPad_ASC
@@ -206,8 +206,8 @@ type FlightControllerPreviousValues {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -221,7 +221,7 @@ type FlightControllerPreviousValues {
   spektrumPort: Boolean
   usbInterface: Boolean
   ledWS2812Support: Boolean
-  RSSIPad: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
@@ -279,22 +279,22 @@ input FlightControllerScalarWhereInput {
   uarts_lte: Int
   uarts_gt: Int
   uarts_gte: Int
-  GyroOne: Float
-  GyroOne_not: Float
-  GyroOne_in: [Float!]
-  GyroOne_not_in: [Float!]
-  GyroOne_lt: Float
-  GyroOne_lte: Float
-  GyroOne_gt: Float
-  GyroOne_gte: Float
-  GyroTwo: Float
-  GyroTwo_not: Float
-  GyroTwo_in: [Float!]
-  GyroTwo_not_in: [Float!]
-  GyroTwo_lt: Float
-  GyroTwo_lte: Float
-  GyroTwo_gt: Float
-  GyroTwo_gte: Float
+  gyroOne: Float
+  gyroOne_not: Float
+  gyroOne_in: [Float!]
+  gyroOne_not_in: [Float!]
+  gyroOne_lt: Float
+  gyroOne_lte: Float
+  gyroOne_gt: Float
+  gyroOne_gte: Float
+  gyroTwo: Float
+  gyroTwo_not: Float
+  gyroTwo_in: [Float!]
+  gyroTwo_not_in: [Float!]
+  gyroTwo_lt: Float
+  gyroTwo_lte: Float
+  gyroTwo_gt: Float
+  gyroTwo_gte: Float
   weightInGrams: Float
   weightInGrams_not: Float
   weightInGrams_in: [Float!]
@@ -387,8 +387,8 @@ input FlightControllerScalarWhereInput {
   usbInterface_not: Boolean
   ledWS2812Support: Boolean
   ledWS2812Support_not: Boolean
-  RSSIPad: Boolean
-  RSSIPad_not: Boolean
+  rssiPad: Boolean
+  rssiPad_not: Boolean
   currentSensor: Boolean
   currentSensor_not: Boolean
   beeperPad: Boolean
@@ -445,8 +445,8 @@ input FlightControllerUpdateInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -460,7 +460,7 @@ input FlightControllerUpdateInput {
   spektrumPort: Boolean
   usbInterface: Boolean
   ledWS2812Support: Boolean
-  RSSIPad: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
@@ -477,8 +477,8 @@ input FlightControllerUpdateManyDataInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -492,7 +492,7 @@ input FlightControllerUpdateManyDataInput {
   spektrumPort: Boolean
   usbInterface: Boolean
   ledWS2812Support: Boolean
-  RSSIPad: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
@@ -508,8 +508,8 @@ input FlightControllerUpdateManyMutationInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -523,7 +523,7 @@ input FlightControllerUpdateManyMutationInput {
   spektrumPort: Boolean
   usbInterface: Boolean
   ledWS2812Support: Boolean
-  RSSIPad: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
@@ -556,8 +556,8 @@ input FlightControllerUpdateWithoutPostedByDataInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -571,7 +571,7 @@ input FlightControllerUpdateWithoutPostedByDataInput {
   spektrumPort: Boolean
   usbInterface: Boolean
   ledWS2812Support: Boolean
-  RSSIPad: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
@@ -640,22 +640,22 @@ input FlightControllerWhereInput {
   uarts_lte: Int
   uarts_gt: Int
   uarts_gte: Int
-  GyroOne: Float
-  GyroOne_not: Float
-  GyroOne_in: [Float!]
-  GyroOne_not_in: [Float!]
-  GyroOne_lt: Float
-  GyroOne_lte: Float
-  GyroOne_gt: Float
-  GyroOne_gte: Float
-  GyroTwo: Float
-  GyroTwo_not: Float
-  GyroTwo_in: [Float!]
-  GyroTwo_not_in: [Float!]
-  GyroTwo_lt: Float
-  GyroTwo_lte: Float
-  GyroTwo_gt: Float
-  GyroTwo_gte: Float
+  gyroOne: Float
+  gyroOne_not: Float
+  gyroOne_in: [Float!]
+  gyroOne_not_in: [Float!]
+  gyroOne_lt: Float
+  gyroOne_lte: Float
+  gyroOne_gt: Float
+  gyroOne_gte: Float
+  gyroTwo: Float
+  gyroTwo_not: Float
+  gyroTwo_in: [Float!]
+  gyroTwo_not_in: [Float!]
+  gyroTwo_lt: Float
+  gyroTwo_lte: Float
+  gyroTwo_gt: Float
+  gyroTwo_gte: Float
   weightInGrams: Float
   weightInGrams_not: Float
   weightInGrams_in: [Float!]
@@ -748,8 +748,8 @@ input FlightControllerWhereInput {
   usbInterface_not: Boolean
   ledWS2812Support: Boolean
   ledWS2812Support_not: Boolean
-  RSSIPad: Boolean
-  RSSIPad_not: Boolean
+  rssiPad: Boolean
+  rssiPad_not: Boolean
   currentSensor: Boolean
   currentSensor_not: Boolean
   beeperPad: Boolean
