@@ -16,12 +16,13 @@ type Mutation {
     addFlightControllerEasy(
       flightController: FlightControllerInput!
     ) : FlightController
+    deleteFlightController(id: ID!) : FlightController
     addFlightController(
       name: String,
       releaseDate: String,
       uarts: Int,
-      GyroOne: Float,
-      GyroTwo: Float,
+      gyroOne: Float,
+      gyroTwo: Float,
       weightInGrams: Float,
       cpu: String,
       dimensions: String,
@@ -34,8 +35,8 @@ type Mutation {
       barometer: Boolean,
       spektrumPort: Boolean,
       usbInterface: Boolean,
-      LedWS2812Support: Boolean,
-      RSSIPad: Boolean,
+      ledWS2812Support: Boolean,
+      rssiPad: Boolean,
       currentSensor: Boolean,
       beeperPad: Boolean,
       beeperOnBoard: Boolean,
@@ -86,10 +87,11 @@ type Link {
 input FlightControllerInput{
   id: ID
   name: String
+  disabled: Boolean
   releaseDate: String
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   dimensions: String
@@ -102,8 +104,8 @@ input FlightControllerInput{
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
-  RSSIPad: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
@@ -116,10 +118,11 @@ input FlightControllerInput{
 type FlightController {
   id: ID
   name: String
+  disabled: Boolean
   releaseDate: String
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   dimensions: String
@@ -132,8 +135,8 @@ type FlightController {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
-  RSSIPad: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean

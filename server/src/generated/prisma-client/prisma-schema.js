@@ -28,10 +28,11 @@ scalar DateTime
 type FlightController {
   id: ID!
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -44,17 +45,17 @@ type FlightController {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
-  RSSIPad: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
   postedBy: User
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 type FlightControllerConnection {
@@ -66,10 +67,11 @@ type FlightControllerConnection {
 input FlightControllerCreateInput {
   id: ID
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -82,17 +84,17 @@ input FlightControllerCreateInput {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
-  RSSIPad: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
   postedBy: UserCreateOneWithoutFlightControllersInput
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 input FlightControllerCreateManyWithoutPostedByInput {
@@ -103,10 +105,11 @@ input FlightControllerCreateManyWithoutPostedByInput {
 input FlightControllerCreateWithoutPostedByInput {
   id: ID
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -119,16 +122,16 @@ input FlightControllerCreateWithoutPostedByInput {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
-  RSSIPad: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 type FlightControllerEdge {
@@ -141,14 +144,16 @@ enum FlightControllerOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  disabled_ASC
+  disabled_DESC
   releaseDate_ASC
   releaseDate_DESC
   uarts_ASC
   uarts_DESC
-  GyroOne_ASC
-  GyroOne_DESC
-  GyroTwo_ASC
-  GyroTwo_DESC
+  gyroOne_ASC
+  gyroOne_DESC
+  gyroTwo_ASC
+  gyroTwo_DESC
   weightInGrams_ASC
   weightInGrams_DESC
   cpu_ASC
@@ -173,10 +178,10 @@ enum FlightControllerOrderByInput {
   spektrumPort_DESC
   usbInterface_ASC
   usbInterface_DESC
-  LedWS2812Support_ASC
-  LedWS2812Support_DESC
-  RSSIPad_ASC
-  RSSIPad_DESC
+  ledWS2812Support_ASC
+  ledWS2812Support_DESC
+  rssiPad_ASC
+  rssiPad_DESC
   currentSensor_ASC
   currentSensor_DESC
   beeperPad_ASC
@@ -187,21 +192,22 @@ enum FlightControllerOrderByInput {
   antiVibrationGrommets_DESC
   builtInReceiver_ASC
   builtInReceiver_DESC
-  ThreeVoltOutput_ASC
-  ThreeVoltOutput_DESC
-  FiveVoltOut_ASC
-  FiveVoltOut_DESC
-  CameraControl_ASC
-  CameraControl_DESC
+  threeVoltOutput_ASC
+  threeVoltOutput_DESC
+  fiveVoltOut_ASC
+  fiveVoltOut_DESC
+  cameraControl_ASC
+  cameraControl_DESC
 }
 
 type FlightControllerPreviousValues {
   id: ID!
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -214,16 +220,16 @@ type FlightControllerPreviousValues {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
-  RSSIPad: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 input FlightControllerScalarWhereInput {
@@ -255,6 +261,8 @@ input FlightControllerScalarWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  disabled: Boolean
+  disabled_not: Boolean
   releaseDate: DateTime
   releaseDate_not: DateTime
   releaseDate_in: [DateTime!]
@@ -271,22 +279,22 @@ input FlightControllerScalarWhereInput {
   uarts_lte: Int
   uarts_gt: Int
   uarts_gte: Int
-  GyroOne: Float
-  GyroOne_not: Float
-  GyroOne_in: [Float!]
-  GyroOne_not_in: [Float!]
-  GyroOne_lt: Float
-  GyroOne_lte: Float
-  GyroOne_gt: Float
-  GyroOne_gte: Float
-  GyroTwo: Float
-  GyroTwo_not: Float
-  GyroTwo_in: [Float!]
-  GyroTwo_not_in: [Float!]
-  GyroTwo_lt: Float
-  GyroTwo_lte: Float
-  GyroTwo_gt: Float
-  GyroTwo_gte: Float
+  gyroOne: Float
+  gyroOne_not: Float
+  gyroOne_in: [Float!]
+  gyroOne_not_in: [Float!]
+  gyroOne_lt: Float
+  gyroOne_lte: Float
+  gyroOne_gt: Float
+  gyroOne_gte: Float
+  gyroTwo: Float
+  gyroTwo_not: Float
+  gyroTwo_in: [Float!]
+  gyroTwo_not_in: [Float!]
+  gyroTwo_lt: Float
+  gyroTwo_lte: Float
+  gyroTwo_gt: Float
+  gyroTwo_gte: Float
   weightInGrams: Float
   weightInGrams_not: Float
   weightInGrams_in: [Float!]
@@ -377,10 +385,10 @@ input FlightControllerScalarWhereInput {
   spektrumPort_not: Boolean
   usbInterface: Boolean
   usbInterface_not: Boolean
-  LedWS2812Support: Boolean
-  LedWS2812Support_not: Boolean
-  RSSIPad: Boolean
-  RSSIPad_not: Boolean
+  ledWS2812Support: Boolean
+  ledWS2812Support_not: Boolean
+  rssiPad: Boolean
+  rssiPad_not: Boolean
   currentSensor: Boolean
   currentSensor_not: Boolean
   beeperPad: Boolean
@@ -403,12 +411,12 @@ input FlightControllerScalarWhereInput {
   builtInReceiver_not_starts_with: String
   builtInReceiver_ends_with: String
   builtInReceiver_not_ends_with: String
-  ThreeVoltOutput: Boolean
-  ThreeVoltOutput_not: Boolean
-  FiveVoltOut: Boolean
-  FiveVoltOut_not: Boolean
-  CameraControl: Boolean
-  CameraControl_not: Boolean
+  threeVoltOutput: Boolean
+  threeVoltOutput_not: Boolean
+  fiveVoltOut: Boolean
+  fiveVoltOut_not: Boolean
+  cameraControl: Boolean
+  cameraControl_not: Boolean
   AND: [FlightControllerScalarWhereInput!]
   OR: [FlightControllerScalarWhereInput!]
   NOT: [FlightControllerScalarWhereInput!]
@@ -434,10 +442,11 @@ input FlightControllerSubscriptionWhereInput {
 
 input FlightControllerUpdateInput {
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -450,25 +459,26 @@ input FlightControllerUpdateInput {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
-  RSSIPad: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
   postedBy: UserUpdateOneWithoutFlightControllersInput
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 input FlightControllerUpdateManyDataInput {
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -481,24 +491,25 @@ input FlightControllerUpdateManyDataInput {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
-  RSSIPad: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 input FlightControllerUpdateManyMutationInput {
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -511,16 +522,16 @@ input FlightControllerUpdateManyMutationInput {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
-  RSSIPad: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 input FlightControllerUpdateManyWithoutPostedByInput {
@@ -542,10 +553,11 @@ input FlightControllerUpdateManyWithWhereNestedInput {
 
 input FlightControllerUpdateWithoutPostedByDataInput {
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  GyroOne: Float
-  GyroTwo: Float
+  gyroOne: Float
+  gyroTwo: Float
   weightInGrams: Float
   cpu: String
   description: String
@@ -558,16 +570,16 @@ input FlightControllerUpdateWithoutPostedByDataInput {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
-  RSSIPad: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 input FlightControllerUpdateWithWhereUniqueWithoutPostedByInput {
@@ -610,6 +622,8 @@ input FlightControllerWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  disabled: Boolean
+  disabled_not: Boolean
   releaseDate: DateTime
   releaseDate_not: DateTime
   releaseDate_in: [DateTime!]
@@ -626,22 +640,22 @@ input FlightControllerWhereInput {
   uarts_lte: Int
   uarts_gt: Int
   uarts_gte: Int
-  GyroOne: Float
-  GyroOne_not: Float
-  GyroOne_in: [Float!]
-  GyroOne_not_in: [Float!]
-  GyroOne_lt: Float
-  GyroOne_lte: Float
-  GyroOne_gt: Float
-  GyroOne_gte: Float
-  GyroTwo: Float
-  GyroTwo_not: Float
-  GyroTwo_in: [Float!]
-  GyroTwo_not_in: [Float!]
-  GyroTwo_lt: Float
-  GyroTwo_lte: Float
-  GyroTwo_gt: Float
-  GyroTwo_gte: Float
+  gyroOne: Float
+  gyroOne_not: Float
+  gyroOne_in: [Float!]
+  gyroOne_not_in: [Float!]
+  gyroOne_lt: Float
+  gyroOne_lte: Float
+  gyroOne_gt: Float
+  gyroOne_gte: Float
+  gyroTwo: Float
+  gyroTwo_not: Float
+  gyroTwo_in: [Float!]
+  gyroTwo_not_in: [Float!]
+  gyroTwo_lt: Float
+  gyroTwo_lte: Float
+  gyroTwo_gt: Float
+  gyroTwo_gte: Float
   weightInGrams: Float
   weightInGrams_not: Float
   weightInGrams_in: [Float!]
@@ -732,10 +746,10 @@ input FlightControllerWhereInput {
   spektrumPort_not: Boolean
   usbInterface: Boolean
   usbInterface_not: Boolean
-  LedWS2812Support: Boolean
-  LedWS2812Support_not: Boolean
-  RSSIPad: Boolean
-  RSSIPad_not: Boolean
+  ledWS2812Support: Boolean
+  ledWS2812Support_not: Boolean
+  rssiPad: Boolean
+  rssiPad_not: Boolean
   currentSensor: Boolean
   currentSensor_not: Boolean
   beeperPad: Boolean
@@ -759,12 +773,12 @@ input FlightControllerWhereInput {
   builtInReceiver_ends_with: String
   builtInReceiver_not_ends_with: String
   postedBy: UserWhereInput
-  ThreeVoltOutput: Boolean
-  ThreeVoltOutput_not: Boolean
-  FiveVoltOut: Boolean
-  FiveVoltOut_not: Boolean
-  CameraControl: Boolean
-  CameraControl_not: Boolean
+  threeVoltOutput: Boolean
+  threeVoltOutput_not: Boolean
+  fiveVoltOut: Boolean
+  fiveVoltOut_not: Boolean
+  cameraControl: Boolean
+  cameraControl_not: Boolean
   AND: [FlightControllerWhereInput!]
   OR: [FlightControllerWhereInput!]
   NOT: [FlightControllerWhereInput!]

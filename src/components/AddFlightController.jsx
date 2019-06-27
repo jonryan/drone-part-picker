@@ -1,40 +1,10 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {Container, FormControl, Row, Col, Form} from 'react-bootstrap'
 import gql from 'graphql-tag'
 import {Mutation} from 'react-apollo'
 import {LINKS_PER_PAGE} from '../constants.js';
 import { FC_LIST_QUERY } from './FlightControllers/FlightControllerList.jsx'
 
-// type MyCustomInputThatIsDefinedInSchema {
-//   name: String!
-//   releaseDate: DateTime!
-//   uarts: Int!
-//   GyroOne: Float
-//   GyroTwo: Float
-//   weightInGrams: Float
-//   cpu: String!
-//   dimensions: String
-//   holePattern: String!
-//   voltageInputMin: Float!
-//   voltageInputMax: Float!
-//   osd: Boolean!
-//   accelerometer: Boolean!
-//   barometer: Boolean!
-//   spektrumPort: Boolean!
-//   usbInterface: Boolean!
-//   LedWS2812Support: Boolean!
-//   RSSIPad: Boolean!
-//   currentSensor: Boolean!
-//   beeperPad: Boolean!
-//   beeperOnBoard: Boolean!
-//   antiVibrationGrommets: Boolean!
-//   builtInReceiver: String #"CROSSFIRE/DSMX/FRSKY"
-//   postedBy: User!
-//   ThreeVoltOutput: Boolean
-//   FiveVoltOut: Boolean
-//   CameraControl: Boolean
-// }
 
 const FC_MUTATION = gql`
   mutation FcMutation($flightController: FlightControllerInput!){
@@ -51,36 +21,6 @@ const FC_MUTATION = gql`
   }
 `
 
-/*
-mutation{
-  addFlightController(
-    name: "Whitenoise Synergy F4 AIO Flight Controller"
-    releaseDate: "2019-06-20T14:54:14.338Z"
-    uarts: 4
-    weightInGrams: 7.5
-    cpu: "F4"
-    dimensions: "37x37"
-    holePattern: "30.5x30.5"
-    voltageInputMin: 9
-    voltageInputMax: 28
-    osd: true
-    accelerometer: false
-    spektrumPort: false
-    barometer: false
-    usbInterface: true
-    RSSIPad: false,
-    beeperPad: true,
-    LedWS2812Support: true
-    antiVibrationGrommets: false
-    beeperOnBoard: false
-    currentSensor: true
-  ){
-    id
-    name
-    uarts
-  }
-}
- */
 
 class AddFlightController extends Component {
   state = {
@@ -213,7 +153,6 @@ class AddFlightController extends Component {
               }}
               onCompleted={() => this.props.history.push('/products/flight-controller/1')}
               update={(store, { data: { flightController } }) => {
-                console.log("returned fc'", flightController)
                 const first = LINKS_PER_PAGE
                 const skip = 0
                 const orderBy = 'createdAt_DESC'
