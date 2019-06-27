@@ -5,6 +5,7 @@ import { Query } from 'react-apollo'
 import {LINKS_PER_PAGE} from '../../constants.js';
 import FlightController from './FlightController.jsx';
 import {Container, Row, Col, Card, Table,} from 'react-bootstrap'
+const _ = require('underscore')
 
 export const FC_LIST_QUERY  = gql`
   query{
@@ -21,7 +22,6 @@ export const FC_LIST_QUERY  = gql`
       }
       count
     }
-
   }
 `
 
@@ -34,6 +34,21 @@ class FlightControllerList extends Component {
     const first = LINKS_PER_PAGE
     const orderBy = 'createdAt_DESC'
     return { first, skip, orderBy }
+  }
+
+  _updateStoreAfterDelete = (store, fcId) => {
+    const page = parseInt(this.props.match.params.page, 10)
+    const skip = (page - 1) * LINKS_PER_PAGE
+    const first = LINKS_PER_PAGE
+    const orderBy = 'createdAt_DESC'
+    const data = store.readQuery({
+      query: FC_LIST_QUERY,
+      variables: { first, skip, orderBy }
+    })
+
+    data.flightControllerFeed.flightControllers = _.reject(data.flightControllerFeed.flightControllers, fc => fc.id === fcId);
+    data.flightControllerFeed.count = data.flightControllerFeed.count - 1;
+    store.writeQuery({ query: FC_LIST_QUERY, data })
   }
 
   _nextPage = data => {
@@ -52,10 +67,8 @@ class FlightControllerList extends Component {
   }
 
   _getFCsToRender = data => {
-    console.log('data', data);
     return data.flightControllerFeed.flightControllers
   }
-
   render() {
 
     return (
@@ -97,6 +110,7 @@ class FlightControllerList extends Component {
                           <th>Rating</th>
                           <th>Number of Builds</th>
                           <th>Release Date</th>
+                          <th>Edit</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -105,6 +119,7 @@ class FlightControllerList extends Component {
                             fc={fc}
                             key={index}
                             index={index + pageIndex}
+                            updateStoreAfterDelete={this._updateStoreAfterDelete}
                           />
                         ))}
                       </tbody>
