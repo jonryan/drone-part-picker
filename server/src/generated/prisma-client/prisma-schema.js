@@ -28,6 +28,7 @@ scalar DateTime
 type FlightController {
   id: ID!
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
   GyroOne: Float
@@ -44,7 +45,7 @@ type FlightController {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
+  ledWS2812Support: Boolean
   RSSIPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
@@ -52,9 +53,9 @@ type FlightController {
   antiVibrationGrommets: Boolean
   builtInReceiver: String
   postedBy: User
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 type FlightControllerConnection {
@@ -66,6 +67,7 @@ type FlightControllerConnection {
 input FlightControllerCreateInput {
   id: ID
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
   GyroOne: Float
@@ -82,7 +84,7 @@ input FlightControllerCreateInput {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
+  ledWS2812Support: Boolean
   RSSIPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
@@ -90,9 +92,9 @@ input FlightControllerCreateInput {
   antiVibrationGrommets: Boolean
   builtInReceiver: String
   postedBy: UserCreateOneWithoutFlightControllersInput
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 input FlightControllerCreateManyWithoutPostedByInput {
@@ -103,6 +105,7 @@ input FlightControllerCreateManyWithoutPostedByInput {
 input FlightControllerCreateWithoutPostedByInput {
   id: ID
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
   GyroOne: Float
@@ -119,16 +122,16 @@ input FlightControllerCreateWithoutPostedByInput {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
+  ledWS2812Support: Boolean
   RSSIPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 type FlightControllerEdge {
@@ -141,6 +144,8 @@ enum FlightControllerOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  disabled_ASC
+  disabled_DESC
   releaseDate_ASC
   releaseDate_DESC
   uarts_ASC
@@ -173,8 +178,8 @@ enum FlightControllerOrderByInput {
   spektrumPort_DESC
   usbInterface_ASC
   usbInterface_DESC
-  LedWS2812Support_ASC
-  LedWS2812Support_DESC
+  ledWS2812Support_ASC
+  ledWS2812Support_DESC
   RSSIPad_ASC
   RSSIPad_DESC
   currentSensor_ASC
@@ -187,17 +192,18 @@ enum FlightControllerOrderByInput {
   antiVibrationGrommets_DESC
   builtInReceiver_ASC
   builtInReceiver_DESC
-  ThreeVoltOutput_ASC
-  ThreeVoltOutput_DESC
-  FiveVoltOut_ASC
-  FiveVoltOut_DESC
-  CameraControl_ASC
-  CameraControl_DESC
+  threeVoltOutput_ASC
+  threeVoltOutput_DESC
+  fiveVoltOut_ASC
+  fiveVoltOut_DESC
+  cameraControl_ASC
+  cameraControl_DESC
 }
 
 type FlightControllerPreviousValues {
   id: ID!
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
   GyroOne: Float
@@ -214,16 +220,16 @@ type FlightControllerPreviousValues {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
+  ledWS2812Support: Boolean
   RSSIPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 input FlightControllerScalarWhereInput {
@@ -255,6 +261,8 @@ input FlightControllerScalarWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  disabled: Boolean
+  disabled_not: Boolean
   releaseDate: DateTime
   releaseDate_not: DateTime
   releaseDate_in: [DateTime!]
@@ -377,8 +385,8 @@ input FlightControllerScalarWhereInput {
   spektrumPort_not: Boolean
   usbInterface: Boolean
   usbInterface_not: Boolean
-  LedWS2812Support: Boolean
-  LedWS2812Support_not: Boolean
+  ledWS2812Support: Boolean
+  ledWS2812Support_not: Boolean
   RSSIPad: Boolean
   RSSIPad_not: Boolean
   currentSensor: Boolean
@@ -403,12 +411,12 @@ input FlightControllerScalarWhereInput {
   builtInReceiver_not_starts_with: String
   builtInReceiver_ends_with: String
   builtInReceiver_not_ends_with: String
-  ThreeVoltOutput: Boolean
-  ThreeVoltOutput_not: Boolean
-  FiveVoltOut: Boolean
-  FiveVoltOut_not: Boolean
-  CameraControl: Boolean
-  CameraControl_not: Boolean
+  threeVoltOutput: Boolean
+  threeVoltOutput_not: Boolean
+  fiveVoltOut: Boolean
+  fiveVoltOut_not: Boolean
+  cameraControl: Boolean
+  cameraControl_not: Boolean
   AND: [FlightControllerScalarWhereInput!]
   OR: [FlightControllerScalarWhereInput!]
   NOT: [FlightControllerScalarWhereInput!]
@@ -434,6 +442,7 @@ input FlightControllerSubscriptionWhereInput {
 
 input FlightControllerUpdateInput {
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
   GyroOne: Float
@@ -450,7 +459,7 @@ input FlightControllerUpdateInput {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
+  ledWS2812Support: Boolean
   RSSIPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
@@ -458,13 +467,14 @@ input FlightControllerUpdateInput {
   antiVibrationGrommets: Boolean
   builtInReceiver: String
   postedBy: UserUpdateOneWithoutFlightControllersInput
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 input FlightControllerUpdateManyDataInput {
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
   GyroOne: Float
@@ -481,20 +491,21 @@ input FlightControllerUpdateManyDataInput {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
+  ledWS2812Support: Boolean
   RSSIPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 input FlightControllerUpdateManyMutationInput {
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
   GyroOne: Float
@@ -511,16 +522,16 @@ input FlightControllerUpdateManyMutationInput {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
+  ledWS2812Support: Boolean
   RSSIPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 input FlightControllerUpdateManyWithoutPostedByInput {
@@ -542,6 +553,7 @@ input FlightControllerUpdateManyWithWhereNestedInput {
 
 input FlightControllerUpdateWithoutPostedByDataInput {
   name: String
+  disabled: Boolean
   releaseDate: DateTime
   uarts: Int
   GyroOne: Float
@@ -558,16 +570,16 @@ input FlightControllerUpdateWithoutPostedByDataInput {
   barometer: Boolean
   spektrumPort: Boolean
   usbInterface: Boolean
-  LedWS2812Support: Boolean
+  ledWS2812Support: Boolean
   RSSIPad: Boolean
   currentSensor: Boolean
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  ThreeVoltOutput: Boolean
-  FiveVoltOut: Boolean
-  CameraControl: Boolean
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
 }
 
 input FlightControllerUpdateWithWhereUniqueWithoutPostedByInput {
@@ -610,6 +622,8 @@ input FlightControllerWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  disabled: Boolean
+  disabled_not: Boolean
   releaseDate: DateTime
   releaseDate_not: DateTime
   releaseDate_in: [DateTime!]
@@ -732,8 +746,8 @@ input FlightControllerWhereInput {
   spektrumPort_not: Boolean
   usbInterface: Boolean
   usbInterface_not: Boolean
-  LedWS2812Support: Boolean
-  LedWS2812Support_not: Boolean
+  ledWS2812Support: Boolean
+  ledWS2812Support_not: Boolean
   RSSIPad: Boolean
   RSSIPad_not: Boolean
   currentSensor: Boolean
@@ -759,12 +773,12 @@ input FlightControllerWhereInput {
   builtInReceiver_ends_with: String
   builtInReceiver_not_ends_with: String
   postedBy: UserWhereInput
-  ThreeVoltOutput: Boolean
-  ThreeVoltOutput_not: Boolean
-  FiveVoltOut: Boolean
-  FiveVoltOut_not: Boolean
-  CameraControl: Boolean
-  CameraControl_not: Boolean
+  threeVoltOutput: Boolean
+  threeVoltOutput_not: Boolean
+  fiveVoltOut: Boolean
+  fiveVoltOut_not: Boolean
+  cameraControl: Boolean
+  cameraControl_not: Boolean
   AND: [FlightControllerWhereInput!]
   OR: [FlightControllerWhereInput!]
   NOT: [FlightControllerWhereInput!]

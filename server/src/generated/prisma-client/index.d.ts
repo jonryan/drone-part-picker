@@ -239,6 +239,8 @@ export type FlightControllerOrderByInput =
   | "id_DESC"
   | "name_ASC"
   | "name_DESC"
+  | "disabled_ASC"
+  | "disabled_DESC"
   | "releaseDate_ASC"
   | "releaseDate_DESC"
   | "uarts_ASC"
@@ -271,8 +273,8 @@ export type FlightControllerOrderByInput =
   | "spektrumPort_DESC"
   | "usbInterface_ASC"
   | "usbInterface_DESC"
-  | "LedWS2812Support_ASC"
-  | "LedWS2812Support_DESC"
+  | "ledWS2812Support_ASC"
+  | "ledWS2812Support_DESC"
   | "RSSIPad_ASC"
   | "RSSIPad_DESC"
   | "currentSensor_ASC"
@@ -285,12 +287,12 @@ export type FlightControllerOrderByInput =
   | "antiVibrationGrommets_DESC"
   | "builtInReceiver_ASC"
   | "builtInReceiver_DESC"
-  | "ThreeVoltOutput_ASC"
-  | "ThreeVoltOutput_DESC"
-  | "FiveVoltOut_ASC"
-  | "FiveVoltOut_DESC"
-  | "CameraControl_ASC"
-  | "CameraControl_DESC";
+  | "threeVoltOutput_ASC"
+  | "threeVoltOutput_DESC"
+  | "fiveVoltOut_ASC"
+  | "fiveVoltOut_DESC"
+  | "cameraControl_ASC"
+  | "cameraControl_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -361,6 +363,7 @@ export interface VoteUpdateWithWhereUniqueWithoutLinkInput {
 export interface FlightControllerCreateWithoutPostedByInput {
   id?: Maybe<ID_Input>;
   name?: Maybe<String>;
+  disabled?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   uarts?: Maybe<Int>;
   GyroOne?: Maybe<Float>;
@@ -377,16 +380,16 @@ export interface FlightControllerCreateWithoutPostedByInput {
   barometer?: Maybe<Boolean>;
   spektrumPort?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
-  LedWS2812Support?: Maybe<Boolean>;
+  ledWS2812Support?: Maybe<Boolean>;
   RSSIPad?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<String>;
-  ThreeVoltOutput?: Maybe<Boolean>;
-  FiveVoltOut?: Maybe<Boolean>;
-  CameraControl?: Maybe<Boolean>;
+  threeVoltOutput?: Maybe<Boolean>;
+  fiveVoltOut?: Maybe<Boolean>;
+  cameraControl?: Maybe<Boolean>;
 }
 
 export interface UserWhereInput {
@@ -494,6 +497,8 @@ export interface FlightControllerWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
+  disabled?: Maybe<Boolean>;
+  disabled_not?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   releaseDate_not?: Maybe<DateTimeInput>;
   releaseDate_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -616,8 +621,8 @@ export interface FlightControllerWhereInput {
   spektrumPort_not?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
   usbInterface_not?: Maybe<Boolean>;
-  LedWS2812Support?: Maybe<Boolean>;
-  LedWS2812Support_not?: Maybe<Boolean>;
+  ledWS2812Support?: Maybe<Boolean>;
+  ledWS2812Support_not?: Maybe<Boolean>;
   RSSIPad?: Maybe<Boolean>;
   RSSIPad_not?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
@@ -643,12 +648,12 @@ export interface FlightControllerWhereInput {
   builtInReceiver_ends_with?: Maybe<String>;
   builtInReceiver_not_ends_with?: Maybe<String>;
   postedBy?: Maybe<UserWhereInput>;
-  ThreeVoltOutput?: Maybe<Boolean>;
-  ThreeVoltOutput_not?: Maybe<Boolean>;
-  FiveVoltOut?: Maybe<Boolean>;
-  FiveVoltOut_not?: Maybe<Boolean>;
-  CameraControl?: Maybe<Boolean>;
-  CameraControl_not?: Maybe<Boolean>;
+  threeVoltOutput?: Maybe<Boolean>;
+  threeVoltOutput_not?: Maybe<Boolean>;
+  fiveVoltOut?: Maybe<Boolean>;
+  fiveVoltOut_not?: Maybe<Boolean>;
+  cameraControl?: Maybe<Boolean>;
+  cameraControl_not?: Maybe<Boolean>;
   AND?: Maybe<FlightControllerWhereInput[] | FlightControllerWhereInput>;
   OR?: Maybe<FlightControllerWhereInput[] | FlightControllerWhereInput>;
   NOT?: Maybe<FlightControllerWhereInput[] | FlightControllerWhereInput>;
@@ -737,6 +742,7 @@ export type LinkWhereUniqueInput = AtLeastOne<{
 
 export interface FlightControllerUpdateInput {
   name?: Maybe<String>;
+  disabled?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   uarts?: Maybe<Int>;
   GyroOne?: Maybe<Float>;
@@ -753,7 +759,7 @@ export interface FlightControllerUpdateInput {
   barometer?: Maybe<Boolean>;
   spektrumPort?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
-  LedWS2812Support?: Maybe<Boolean>;
+  ledWS2812Support?: Maybe<Boolean>;
   RSSIPad?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
@@ -761,9 +767,9 @@ export interface FlightControllerUpdateInput {
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<String>;
   postedBy?: Maybe<UserUpdateOneWithoutFlightControllersInput>;
-  ThreeVoltOutput?: Maybe<Boolean>;
-  FiveVoltOut?: Maybe<Boolean>;
-  CameraControl?: Maybe<Boolean>;
+  threeVoltOutput?: Maybe<Boolean>;
+  fiveVoltOut?: Maybe<Boolean>;
+  cameraControl?: Maybe<Boolean>;
 }
 
 export interface LinkUpdateInput {
@@ -856,6 +862,7 @@ export interface VoteUpdateManyWithoutLinkInput {
 export interface FlightControllerCreateInput {
   id?: Maybe<ID_Input>;
   name?: Maybe<String>;
+  disabled?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   uarts?: Maybe<Int>;
   GyroOne?: Maybe<Float>;
@@ -872,7 +879,7 @@ export interface FlightControllerCreateInput {
   barometer?: Maybe<Boolean>;
   spektrumPort?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
-  LedWS2812Support?: Maybe<Boolean>;
+  ledWS2812Support?: Maybe<Boolean>;
   RSSIPad?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
@@ -880,9 +887,9 @@ export interface FlightControllerCreateInput {
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<String>;
   postedBy?: Maybe<UserCreateOneWithoutFlightControllersInput>;
-  ThreeVoltOutput?: Maybe<Boolean>;
-  FiveVoltOut?: Maybe<Boolean>;
-  CameraControl?: Maybe<Boolean>;
+  threeVoltOutput?: Maybe<Boolean>;
+  fiveVoltOut?: Maybe<Boolean>;
+  cameraControl?: Maybe<Boolean>;
 }
 
 export interface LinkUpdateOneRequiredWithoutVotesInput {
@@ -1049,6 +1056,7 @@ export interface VoteUpdateInput {
 
 export interface FlightControllerUpdateWithoutPostedByDataInput {
   name?: Maybe<String>;
+  disabled?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   uarts?: Maybe<Int>;
   GyroOne?: Maybe<Float>;
@@ -1065,16 +1073,16 @@ export interface FlightControllerUpdateWithoutPostedByDataInput {
   barometer?: Maybe<Boolean>;
   spektrumPort?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
-  LedWS2812Support?: Maybe<Boolean>;
+  ledWS2812Support?: Maybe<Boolean>;
   RSSIPad?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<String>;
-  ThreeVoltOutput?: Maybe<Boolean>;
-  FiveVoltOut?: Maybe<Boolean>;
-  CameraControl?: Maybe<Boolean>;
+  threeVoltOutput?: Maybe<Boolean>;
+  fiveVoltOut?: Maybe<Boolean>;
+  cameraControl?: Maybe<Boolean>;
 }
 
 export interface UserCreateInput {
@@ -1130,6 +1138,8 @@ export interface FlightControllerScalarWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
+  disabled?: Maybe<Boolean>;
+  disabled_not?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   releaseDate_not?: Maybe<DateTimeInput>;
   releaseDate_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1252,8 +1262,8 @@ export interface FlightControllerScalarWhereInput {
   spektrumPort_not?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
   usbInterface_not?: Maybe<Boolean>;
-  LedWS2812Support?: Maybe<Boolean>;
-  LedWS2812Support_not?: Maybe<Boolean>;
+  ledWS2812Support?: Maybe<Boolean>;
+  ledWS2812Support_not?: Maybe<Boolean>;
   RSSIPad?: Maybe<Boolean>;
   RSSIPad_not?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
@@ -1278,12 +1288,12 @@ export interface FlightControllerScalarWhereInput {
   builtInReceiver_not_starts_with?: Maybe<String>;
   builtInReceiver_ends_with?: Maybe<String>;
   builtInReceiver_not_ends_with?: Maybe<String>;
-  ThreeVoltOutput?: Maybe<Boolean>;
-  ThreeVoltOutput_not?: Maybe<Boolean>;
-  FiveVoltOut?: Maybe<Boolean>;
-  FiveVoltOut_not?: Maybe<Boolean>;
-  CameraControl?: Maybe<Boolean>;
-  CameraControl_not?: Maybe<Boolean>;
+  threeVoltOutput?: Maybe<Boolean>;
+  threeVoltOutput_not?: Maybe<Boolean>;
+  fiveVoltOut?: Maybe<Boolean>;
+  fiveVoltOut_not?: Maybe<Boolean>;
+  cameraControl?: Maybe<Boolean>;
+  cameraControl_not?: Maybe<Boolean>;
   AND?: Maybe<
     FlightControllerScalarWhereInput[] | FlightControllerScalarWhereInput
   >;
@@ -1316,6 +1326,7 @@ export interface UserUpdateWithoutLinksDataInput {
 
 export interface FlightControllerUpdateManyDataInput {
   name?: Maybe<String>;
+  disabled?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   uarts?: Maybe<Int>;
   GyroOne?: Maybe<Float>;
@@ -1332,16 +1343,16 @@ export interface FlightControllerUpdateManyDataInput {
   barometer?: Maybe<Boolean>;
   spektrumPort?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
-  LedWS2812Support?: Maybe<Boolean>;
+  ledWS2812Support?: Maybe<Boolean>;
   RSSIPad?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<String>;
-  ThreeVoltOutput?: Maybe<Boolean>;
-  FiveVoltOut?: Maybe<Boolean>;
-  CameraControl?: Maybe<Boolean>;
+  threeVoltOutput?: Maybe<Boolean>;
+  fiveVoltOut?: Maybe<Boolean>;
+  cameraControl?: Maybe<Boolean>;
 }
 
 export interface UserCreateOneWithoutFlightControllersInput {
@@ -1421,6 +1432,7 @@ export interface LinkUpsertWithWhereUniqueWithoutPostedByInput {
 
 export interface FlightControllerUpdateManyMutationInput {
   name?: Maybe<String>;
+  disabled?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
   uarts?: Maybe<Int>;
   GyroOne?: Maybe<Float>;
@@ -1437,16 +1449,16 @@ export interface FlightControllerUpdateManyMutationInput {
   barometer?: Maybe<Boolean>;
   spektrumPort?: Maybe<Boolean>;
   usbInterface?: Maybe<Boolean>;
-  LedWS2812Support?: Maybe<Boolean>;
+  ledWS2812Support?: Maybe<Boolean>;
   RSSIPad?: Maybe<Boolean>;
   currentSensor?: Maybe<Boolean>;
   beeperPad?: Maybe<Boolean>;
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<String>;
-  ThreeVoltOutput?: Maybe<Boolean>;
-  FiveVoltOut?: Maybe<Boolean>;
-  CameraControl?: Maybe<Boolean>;
+  threeVoltOutput?: Maybe<Boolean>;
+  fiveVoltOut?: Maybe<Boolean>;
+  cameraControl?: Maybe<Boolean>;
 }
 
 export interface LinkScalarWhereInput {
@@ -1969,6 +1981,7 @@ export interface AggregateLinkSubscription
 export interface FlightController {
   id: ID_Output;
   name?: String;
+  disabled?: Boolean;
   releaseDate?: DateTimeOutput;
   uarts?: Int;
   GyroOne?: Float;
@@ -1985,16 +1998,16 @@ export interface FlightController {
   barometer?: Boolean;
   spektrumPort?: Boolean;
   usbInterface?: Boolean;
-  LedWS2812Support?: Boolean;
+  ledWS2812Support?: Boolean;
   RSSIPad?: Boolean;
   currentSensor?: Boolean;
   beeperPad?: Boolean;
   beeperOnBoard?: Boolean;
   antiVibrationGrommets?: Boolean;
   builtInReceiver?: String;
-  ThreeVoltOutput?: Boolean;
-  FiveVoltOut?: Boolean;
-  CameraControl?: Boolean;
+  threeVoltOutput?: Boolean;
+  fiveVoltOut?: Boolean;
+  cameraControl?: Boolean;
 }
 
 export interface FlightControllerPromise
@@ -2002,6 +2015,7 @@ export interface FlightControllerPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
+  disabled: () => Promise<Boolean>;
   releaseDate: () => Promise<DateTimeOutput>;
   uarts: () => Promise<Int>;
   GyroOne: () => Promise<Float>;
@@ -2018,7 +2032,7 @@ export interface FlightControllerPromise
   barometer: () => Promise<Boolean>;
   spektrumPort: () => Promise<Boolean>;
   usbInterface: () => Promise<Boolean>;
-  LedWS2812Support: () => Promise<Boolean>;
+  ledWS2812Support: () => Promise<Boolean>;
   RSSIPad: () => Promise<Boolean>;
   currentSensor: () => Promise<Boolean>;
   beeperPad: () => Promise<Boolean>;
@@ -2026,9 +2040,9 @@ export interface FlightControllerPromise
   antiVibrationGrommets: () => Promise<Boolean>;
   builtInReceiver: () => Promise<String>;
   postedBy: <T = UserPromise>() => T;
-  ThreeVoltOutput: () => Promise<Boolean>;
-  FiveVoltOut: () => Promise<Boolean>;
-  CameraControl: () => Promise<Boolean>;
+  threeVoltOutput: () => Promise<Boolean>;
+  fiveVoltOut: () => Promise<Boolean>;
+  cameraControl: () => Promise<Boolean>;
 }
 
 export interface FlightControllerSubscription
@@ -2036,6 +2050,7 @@ export interface FlightControllerSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
+  disabled: () => Promise<AsyncIterator<Boolean>>;
   releaseDate: () => Promise<AsyncIterator<DateTimeOutput>>;
   uarts: () => Promise<AsyncIterator<Int>>;
   GyroOne: () => Promise<AsyncIterator<Float>>;
@@ -2052,7 +2067,7 @@ export interface FlightControllerSubscription
   barometer: () => Promise<AsyncIterator<Boolean>>;
   spektrumPort: () => Promise<AsyncIterator<Boolean>>;
   usbInterface: () => Promise<AsyncIterator<Boolean>>;
-  LedWS2812Support: () => Promise<AsyncIterator<Boolean>>;
+  ledWS2812Support: () => Promise<AsyncIterator<Boolean>>;
   RSSIPad: () => Promise<AsyncIterator<Boolean>>;
   currentSensor: () => Promise<AsyncIterator<Boolean>>;
   beeperPad: () => Promise<AsyncIterator<Boolean>>;
@@ -2060,9 +2075,9 @@ export interface FlightControllerSubscription
   antiVibrationGrommets: () => Promise<AsyncIterator<Boolean>>;
   builtInReceiver: () => Promise<AsyncIterator<String>>;
   postedBy: <T = UserSubscription>() => T;
-  ThreeVoltOutput: () => Promise<AsyncIterator<Boolean>>;
-  FiveVoltOut: () => Promise<AsyncIterator<Boolean>>;
-  CameraControl: () => Promise<AsyncIterator<Boolean>>;
+  threeVoltOutput: () => Promise<AsyncIterator<Boolean>>;
+  fiveVoltOut: () => Promise<AsyncIterator<Boolean>>;
+  cameraControl: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface FlightControllerNullablePromise
@@ -2070,6 +2085,7 @@ export interface FlightControllerNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
+  disabled: () => Promise<Boolean>;
   releaseDate: () => Promise<DateTimeOutput>;
   uarts: () => Promise<Int>;
   GyroOne: () => Promise<Float>;
@@ -2086,7 +2102,7 @@ export interface FlightControllerNullablePromise
   barometer: () => Promise<Boolean>;
   spektrumPort: () => Promise<Boolean>;
   usbInterface: () => Promise<Boolean>;
-  LedWS2812Support: () => Promise<Boolean>;
+  ledWS2812Support: () => Promise<Boolean>;
   RSSIPad: () => Promise<Boolean>;
   currentSensor: () => Promise<Boolean>;
   beeperPad: () => Promise<Boolean>;
@@ -2094,9 +2110,9 @@ export interface FlightControllerNullablePromise
   antiVibrationGrommets: () => Promise<Boolean>;
   builtInReceiver: () => Promise<String>;
   postedBy: <T = UserPromise>() => T;
-  ThreeVoltOutput: () => Promise<Boolean>;
-  FiveVoltOut: () => Promise<Boolean>;
-  CameraControl: () => Promise<Boolean>;
+  threeVoltOutput: () => Promise<Boolean>;
+  fiveVoltOut: () => Promise<Boolean>;
+  cameraControl: () => Promise<Boolean>;
 }
 
 export interface LinkConnection {
@@ -2227,6 +2243,7 @@ export interface LinkNullablePromise
 export interface FlightControllerPreviousValues {
   id: ID_Output;
   name?: String;
+  disabled?: Boolean;
   releaseDate?: DateTimeOutput;
   uarts?: Int;
   GyroOne?: Float;
@@ -2243,16 +2260,16 @@ export interface FlightControllerPreviousValues {
   barometer?: Boolean;
   spektrumPort?: Boolean;
   usbInterface?: Boolean;
-  LedWS2812Support?: Boolean;
+  ledWS2812Support?: Boolean;
   RSSIPad?: Boolean;
   currentSensor?: Boolean;
   beeperPad?: Boolean;
   beeperOnBoard?: Boolean;
   antiVibrationGrommets?: Boolean;
   builtInReceiver?: String;
-  ThreeVoltOutput?: Boolean;
-  FiveVoltOut?: Boolean;
-  CameraControl?: Boolean;
+  threeVoltOutput?: Boolean;
+  fiveVoltOut?: Boolean;
+  cameraControl?: Boolean;
 }
 
 export interface FlightControllerPreviousValuesPromise
@@ -2260,6 +2277,7 @@ export interface FlightControllerPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
+  disabled: () => Promise<Boolean>;
   releaseDate: () => Promise<DateTimeOutput>;
   uarts: () => Promise<Int>;
   GyroOne: () => Promise<Float>;
@@ -2276,16 +2294,16 @@ export interface FlightControllerPreviousValuesPromise
   barometer: () => Promise<Boolean>;
   spektrumPort: () => Promise<Boolean>;
   usbInterface: () => Promise<Boolean>;
-  LedWS2812Support: () => Promise<Boolean>;
+  ledWS2812Support: () => Promise<Boolean>;
   RSSIPad: () => Promise<Boolean>;
   currentSensor: () => Promise<Boolean>;
   beeperPad: () => Promise<Boolean>;
   beeperOnBoard: () => Promise<Boolean>;
   antiVibrationGrommets: () => Promise<Boolean>;
   builtInReceiver: () => Promise<String>;
-  ThreeVoltOutput: () => Promise<Boolean>;
-  FiveVoltOut: () => Promise<Boolean>;
-  CameraControl: () => Promise<Boolean>;
+  threeVoltOutput: () => Promise<Boolean>;
+  fiveVoltOut: () => Promise<Boolean>;
+  cameraControl: () => Promise<Boolean>;
 }
 
 export interface FlightControllerPreviousValuesSubscription
@@ -2293,6 +2311,7 @@ export interface FlightControllerPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
+  disabled: () => Promise<AsyncIterator<Boolean>>;
   releaseDate: () => Promise<AsyncIterator<DateTimeOutput>>;
   uarts: () => Promise<AsyncIterator<Int>>;
   GyroOne: () => Promise<AsyncIterator<Float>>;
@@ -2309,16 +2328,16 @@ export interface FlightControllerPreviousValuesSubscription
   barometer: () => Promise<AsyncIterator<Boolean>>;
   spektrumPort: () => Promise<AsyncIterator<Boolean>>;
   usbInterface: () => Promise<AsyncIterator<Boolean>>;
-  LedWS2812Support: () => Promise<AsyncIterator<Boolean>>;
+  ledWS2812Support: () => Promise<AsyncIterator<Boolean>>;
   RSSIPad: () => Promise<AsyncIterator<Boolean>>;
   currentSensor: () => Promise<AsyncIterator<Boolean>>;
   beeperPad: () => Promise<AsyncIterator<Boolean>>;
   beeperOnBoard: () => Promise<AsyncIterator<Boolean>>;
   antiVibrationGrommets: () => Promise<AsyncIterator<Boolean>>;
   builtInReceiver: () => Promise<AsyncIterator<String>>;
-  ThreeVoltOutput: () => Promise<AsyncIterator<Boolean>>;
-  FiveVoltOut: () => Promise<AsyncIterator<Boolean>>;
-  CameraControl: () => Promise<AsyncIterator<Boolean>>;
+  threeVoltOutput: () => Promise<AsyncIterator<Boolean>>;
+  fiveVoltOut: () => Promise<AsyncIterator<Boolean>>;
+  cameraControl: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface FlightControllerSubscriptionPayload {
@@ -2430,19 +2449,14 @@ export interface UserPreviousValuesSubscription
 }
 
 /*
-DateTime scalar input type, allowing Date
-*/
-export type DateTimeInput = Date | string;
-
-/*
-DateTime scalar output type, which is always a string
-*/
-export type DateTimeOutput = string;
-
-/*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+*/
+export type Float = number;
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
@@ -2450,9 +2464,9 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
-export type Float = number;
+export type Int = number;
 
 export type Long = string;
 
@@ -2463,9 +2477,14 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+DateTime scalar input type, allowing Date
 */
-export type Int = number;
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
 
 /**
  * Model Metadata
