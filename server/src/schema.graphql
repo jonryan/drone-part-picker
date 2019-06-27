@@ -13,6 +13,9 @@ type Mutation {
       url: String!,
       description: String!
     ): Link!
+    addFlightControllerEasy(
+      flightController: FlightControllerInput!
+    ) : FlightController
     addFlightController(
       name: String,
       releaseDate: String,
@@ -80,6 +83,36 @@ type Link {
     votes: [Vote!]!
 }
 
+input FlightControllerInput{
+  id: ID
+  name: String
+  releaseDate: String
+  uarts: Int
+  GyroOne: Float
+  GyroTwo: Float
+  weightInGrams: Float
+  cpu: String
+  dimensions: String
+  description: String
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  LedWS2812Support: Boolean
+  RSSIPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
+  builtInReceiver: String
+  postedBy: UserInput
+  createdAt: DateTime
+}
+
 type FlightController {
   id: ID
   name: String
@@ -121,6 +154,12 @@ type User {
   email: String!
   links: [Link!]!
   flightControllers: [FlightController!]!
+}
+
+input UserInput {
+  id: ID!
+  name: String!
+  email: String!
 }
 
 enum ReceiverProtocol{

@@ -45,7 +45,6 @@ function post(parent, args, context, info) {
 
 function addFlightController(parent, args, context, info){
   const userId = getUserId(context)
-  console.log("Adding Flight Controller as", userId, args)
 
   return context.prisma.createFlightController({
     postedBy: { connect: { id: userId } },
@@ -53,11 +52,18 @@ function addFlightController(parent, args, context, info){
   })
 }
 
+function addFlightControllerEasy(parent, args, context, info){
+  const userId = getUserId(context)
+
+  return context.prisma.createFlightController({
+    postedBy: { connect: { id: userId } },
+    ...args.flightController
+  })
+}
+
 async function updateLink(parent, args, context, info) {
   const userId = getUserId(context)
-  console.log('updateLink', args)
   const existingLink = await context.prisma.link({ id: args.id })
-  console.log('existingLink', existingLink)
   if (!existingLink) {
     throw new Error('No such link found by that ID')
   }
@@ -94,6 +100,7 @@ module.exports = {
   updateLink,
   vote,
   addFlightController,
+  addFlightControllerEasy
 }
 
 // Mutation: {
