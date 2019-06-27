@@ -27,10 +27,11 @@ type Vote{
 type FlightController{
     id: ID! @id
     name: String
+    disabled: Boolean
     releaseDate: DateTime
     uarts: Int
-    GyroOne: Float
-    GyroTwo: Float
+    gyroOne: Float
+    gyroTwo: Float
     weightInGrams: Float
     cpu: String
     description: String
@@ -43,16 +44,16 @@ type FlightController{
     barometer: Boolean
     spektrumPort: Boolean
     usbInterface: Boolean
-    LedWS2812Support: Boolean
-    RSSIPad: Boolean
+    ledWS2812Support: Boolean
+    rssiPad: Boolean
     currentSensor: Boolean
     beeperPad: Boolean
     beeperOnBoard: Boolean
     antiVibrationGrommets: Boolean
     builtInReceiver: String #"CROSSFIRE/DSMX/FRSKY"
     postedBy: User
-    ThreeVoltOutput: Boolean
-    FiveVoltOut: Boolean
-    CameraControl: Boolean
+    threeVoltOutput: Boolean
+    fiveVoltOut: Boolean
+    cameraControl: Boolean
 
 }
