@@ -42,6 +42,15 @@ async function flightControllerFeed(parent, args, context, info) {
   }
 }
 
+async function getFlightController(parent, args, context, info){
+  const productFound = await context.prisma.flightController({ id: args.id })
+  if(!productFound){
+    throw new Error(`Flight Controller by ID ${args.id} not found.`)
+  }else{
+    return productFound
+  }
+}
+
 async function userList(parent, args, context, info){
   let users = context.prisma.users()
   return {users}
@@ -65,5 +74,6 @@ module.exports = {
   feed,
   info,
   flightControllerFeed,
+  getFlightController,
   userList
 }

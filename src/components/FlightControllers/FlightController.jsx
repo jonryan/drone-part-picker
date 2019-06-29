@@ -4,6 +4,7 @@ import { Mutation } from 'react-apollo';
 
 import { Query } from 'react-apollo'
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 
 export const FC_DELETE_MUTATION = gql`
   mutation deleteFlightController($id: ID!){
@@ -28,9 +29,15 @@ class FlightController extends Component {
         <td>13</td>
         <td>05/05/2019</td>
         <td>
-          <a href="#" >
+          <Link
+            to={{
+              state: {
+                fc: fc.id
+              },
+              pathname: "/add-flight-controller"
+            }}>
             Edit
-          </a>
+          </Link>
           <Mutation
             mutation={FC_DELETE_MUTATION}
             variables={{ id: fc.id }}
@@ -44,7 +51,6 @@ class FlightController extends Component {
               </a>
             )}
           </Mutation>
-
 
         </td>
       </tr>
