@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {Container, FormControl, Row, Col, Form} from 'react-bootstrap'
 import gql from 'graphql-tag'
 import {Mutation, Query} from 'react-apollo'
-import { transformGraphQLErrors } from './apolloHelpers'
-import Page from '../components/Page'
-import FlightControllerForm from "./FlightControllers/FlightControllerForm.jsx";
-let _ = require('underscore')
+import {LINKS_PER_PAGE} from '../constants.js';
+import { FC_LIST_QUERY } from './FlightControllers/FlightControllerList.jsx'
+import flightControllerForm from './FlightControllers/FlightControllerForm.jsx'
+
 
 const FC_MUTATION = gql`
   mutation addFlightController($flightController: FlightControllerInput!){
@@ -21,6 +21,16 @@ const FC_MUTATION = gql`
     }
   }
 `
+
+const FC_QUERY = gql`
+  query FcQuery($id: ID){
+    getFlightController(id: $id){
+      id,
+      name
+    }
+  }
+`
+
 
 class AddFlightController extends Component {
   state = {
@@ -66,28 +76,21 @@ class AddFlightController extends Component {
     return (
       <Container fluid>
         <h1>Testing</h1>
-        <Mutation mutation={FC_MUTATION}>
-          {addFlightControllerEasy => (
-            <Page title="Flight Controller Edit" className="editor-page">
-              <FlightControllerForm
-                onSubmit={async (values, { setSubmitting, setErrors }) => {
-                  console.log("values", values)
-                  values.releaseDate = new Date(values.releaseDate + " 00:00:00")
-                  const { data } = await addFlightControllerEasy({ variables: { values } })
+        <Row>
+          <Col>
+            <Query query={FC_QUERY} variables={{id: this.props.location.state.fc}}>
+              {({ loading, error, data, subscribeToMore }) => {
+                if (loading) return <div>Fetching</div>
+                if (error) return <div>Error</div>
 
-                  setSubmitting(false)
-                  setErrors(transformGraphQLErrors(data.createArticle.errors))
+                return (
+                  <flightControllerForm />
+                )
+              }}
+            </Query>
 
-                  if (!_.isEmpty(data.createArticle.errors)) return
-
-                  // TODO: Figure out how to do this with the returne from my graphQL response
-                  // const slug = _.get(data, 'createArticle.article.slug')
-                  // history.push(`/article/${slug}`)
-                }}
-              />
-            </Page>
-          )}
-        </Mutation>
+          </Col>
+        </Row>
 
 
       </Container>
