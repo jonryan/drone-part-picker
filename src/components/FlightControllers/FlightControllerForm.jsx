@@ -19,18 +19,18 @@ class FlightControllerForm extends Component {
           <Col>
             <Formik
               initialValues={{
-                name: fc.name || 'Test',
-                description: fc.description || 'Test',
-                releaseDate: fc.releaseDate || '2005-05-05',
-                uarts: fc.uarts || 3,
-                weightInGrams: fc.weightInGrams || 7.5,
-                cpu: fc.cpu || 'F7',
+                name: fc.name || '',
+                description: fc.description || '',
+                releaseDate: fc.releaseDate || '',
+                uarts: fc.uarts || 0,
+                weightInGrams: fc.weightInGrams || 0,
+                cpu: fc.cpu || '',
                 // releaseDateUpdated: fc.releaseDateUpdated || new Date(),
-                dimensions: fc.dimensions || '30.5x30.5',
-                holePattern: fc.holePattern || '30.5x30.5',
-                voltageInputMin: fc.voltageInputMin || 5,
-                voltageInputMax: fc.voltageInputMax || 25,
-                osd: fc.osd || true,
+                dimensions: fc.dimensions || '',
+                holePattern: fc.holePattern || '',
+                voltageInputMin: fc.voltageInputMin || 0,
+                voltageInputMax: fc.voltageInputMax || 0,
+                osd: fc.osd || false,
               }}
               onSubmit={onSubmit}
             >

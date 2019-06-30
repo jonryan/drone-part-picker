@@ -10,13 +10,13 @@ import Search from './Search'
 import FlightControllerList from './FlightControllers/FlightControllerList'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import AddFlightController from './AddFlightController.jsx';
+import EditFlightController from './EditFlightController.jsx';
 
 function App() {
 
   return (
-    <div className="center w85">
-      <Header />
-      <div className="ph3 pv1 background-gray">
+    <div>
+      <div>
         <Switch>
           <Route exact path='/' render={() => <Redirect to='/new/1' />} />
           <Route exact path="/create" component={CreateLink} />
@@ -26,6 +26,7 @@ function App() {
           <Route exact path='/new/:page' component={LinkList} />
           <Route exact path='/products/flight-controller/:page' component={FlightControllerList } />
           <Route exact path='/add-flight-controller' component={AddFlightController } />
+          <Route exact path='/edit-flight-controller/:fc' component={EditFlightController } />
         </Switch>
       </div>
     </div>

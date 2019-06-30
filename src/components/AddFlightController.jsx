@@ -7,9 +7,10 @@ import Page from '../components/Page'
 import FlightControllerForm from "./FlightControllers/FlightControllerForm.jsx";
 let _ = require('underscore')
 
+
 const FC_MUTATION = gql`
-  mutation addFlightController($flightController: FlightControllerInput!){
-    addFlightControllerEasy(flightController: $flightController){
+  mutation addFlightController($flightController: AddFlightControllerInput!){
+    addFlightController(flightController: $flightController){
       id
       createdAt
       description
@@ -29,22 +30,35 @@ class AddFlightController extends Component {
     const history = this.props.history
 
     return (
-      <Container fluid>
-        <h1>Testing</h1>
-        <Mutation mutation={FC_MUTATION}>
-          {addFlightControllerEasy => (
+      <Mutation mutation={FC_MUTATION}>
+          {addFlightController => (
             <Page title="Flight Controller Edit" className="editor-page">
+              <h1>Add New Flight Controller</h1>
               <FlightControllerForm
+                fc={{
+                  name: 'Test2',
+                  description: 'Test',
+                  releaseDate: '2005-05-05',
+                  uarts: 3,
+                  weightInGrams: 7.5,
+                  cpu: 'F7',
+                  // releaseDateUpdated: fc.releaseDateUpdated || new Date(),
+                  dimensions: '30.5x30.5',
+                  holePattern: '30.5x30.5',
+                  voltageInputMin: 5,
+                  voltageInputMax: 25,
+                  osd: true,
+                }}
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
                   console.log("values", values)
                   values.releaseDate = new Date(values.releaseDate + " 00:00:00")
-                  const { data } = await addFlightControllerEasy({ variables: { flightController: values } })
+                  const { data } = await addFlightController({ variables: { flightController: values } })
 
                   console.log('data', data)
                   setSubmitting(false)
                   // TODO: Get errors coming back from API in errors prop so they'll be picked up here
-                  // setErrors(transformGraphQLErrors(data.addFlightControllerEasy.errors))
-                  // if (!_.isEmpty(data.addFlightControllerEasy.errors)) return
+                  // setErrors(transformGraphQLErrors(data.addFlightController.errors))
+                  // if (!_.isEmpty(data.addFlightController.errors)) return
 
                   // TODO: Figure out how to do this with the returne from my graphQL response
                   // const slug = _.get(data, 'createArticle.article.slug')
@@ -55,9 +69,6 @@ class AddFlightController extends Component {
             </Page>
           )}
         </Mutation>
-
-
-      </Container>
     );
   }
 }

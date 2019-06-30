@@ -14,36 +14,13 @@ type Mutation {
       url: String!,
       description: String!
     ): Link!
-    addFlightControllerEasy(
-      flightController: FlightControllerInput!
+    addFlightController(
+      flightController: AddFlightControllerInput!
+    ) : FlightController
+    updateFlightController(
+      flightController: UpdateFlightControllerInput!
     ) : FlightController
     deleteFlightController(id: ID!) : FlightController
-    addFlightController(
-      name: String,
-      releaseDate: String,
-      uarts: Int,
-      gyroOne: Float,
-      gyroTwo: Float,
-      weightInGrams: Float,
-      cpu: String,
-      dimensions: String,
-      description: String,
-      holePattern: String,
-      voltageInputMin: Float,
-      voltageInputMax: Float,
-      osd: Boolean,
-      accelerometer: Boolean,
-      barometer: Boolean,
-      spektrumPort: Boolean,
-      usbInterface: Boolean,
-      ledWS2812Support: Boolean,
-      rssiPad: Boolean,
-      currentSensor: Boolean,
-      beeperPad: Boolean,
-      beeperOnBoard: Boolean,
-      antiVibrationGrommets: Boolean,
-      builtInReceiver: String
-    ) : FlightController!
     signup(email: String!, password: String!, name: String!): AuthPayload
     login(email: String!, password: String!): AuthPayload
     updateLink(id: ID!, url: String, description: String): Link
@@ -85,8 +62,39 @@ type Link {
     votes: [Vote!]!
 }
 
-input FlightControllerInput{
-  id: ID
+input UpdateFlightControllerInput{
+  id: ID!
+  name: String
+  disabled: Boolean
+  releaseDate: String
+  uarts: Int
+  gyroOne: Float
+  gyroTwo: Float
+  weightInGrams: Float
+  cpu: String
+  dimensions: String
+  description: String
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
+  builtInReceiver: String
+  postedBy: UserInput
+  createdAt: DateTime
+}
+
+
+input AddFlightControllerInput{
   name: String
   disabled: Boolean
   releaseDate: String

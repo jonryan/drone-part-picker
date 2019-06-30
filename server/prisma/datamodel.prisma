@@ -55,5 +55,4 @@ type FlightController{
     threeVoltOutput: Boolean
     fiveVoltOut: Boolean
     cameraControl: Boolean
-
 }
