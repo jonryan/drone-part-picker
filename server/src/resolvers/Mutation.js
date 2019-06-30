@@ -81,13 +81,13 @@ async function updateFlightController(parent, args, context, info){
   }
 
   let updatedFC = {...existingFC, ...args.flightController};
-  // updatedFC.releaseDate = '2005-05-05T04:00:00.000Z'
-  delete updatedFC.releaseDate;
-  console.log('updatedFC', updatedFC)
+  delete updatedFC.id; // Can't have ID
+  await context.prisma.updateFlightController({
+    data: updatedFC,
+    where: {id: existingFC.id}
+  })
 
-  await context.prisma.updateFlightController({data:updatedFC})
-
-  return updatedFC
+  return {...updatedFC, id: existingFC.id};
 }
 
 async function updateLink(parent, args, context, info) {
