@@ -72,9 +72,7 @@ function addFlightController(parent, args, context, info){
 async function updateFlightController(parent, args, context, info){
   const userId = getUserId(context)
 
-  console.log('args', args.id, args);
   existingFC = await context.prisma.flightController({ id: args.flightController.id })
-  console.log('existingFC', existingFC);
 
   if(!existingFC){
     throw new Error('No such FC found by that ID')
