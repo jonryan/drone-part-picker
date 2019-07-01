@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import {Container, FormControl, Row, Col, Form} from 'react-bootstrap'
+import {Container} from 'react-bootstrap'
 import gql from 'graphql-tag'
 import {Mutation, Query} from 'react-apollo'
 import Page from '../components/Page'
-import {LINKS_PER_PAGE} from '../constants.js';
-import { FC_LIST_QUERY } from './FlightControllers/FlightControllerList.jsx'
 import FlightControllerForm from './FlightControllers/FlightControllerForm.jsx'
 let moment = require('moment')
 
@@ -83,6 +81,7 @@ class EditFlightController extends Component {
     return (
       <Container fluid>
         <Page title="Edit Flight Controller" className="editor-page">
+            <h1>Edit Flight Controller</h1>
             <Query query={GET_FLIGHTCONTROLLER} variables={{id: fc}}>
               {({ loading, error, data }) => {
                 if (loading) return <div>Fetching</div>
@@ -106,6 +105,7 @@ class EditFlightController extends Component {
                           console.log('Result', mutationData)
 
                           setSubmitting(false)
+                          // TODO: Figure out errors
                           // setErrors(transformGraphQLErrors(mutationData.updateFlightController.errors))
                           //
                           // if (!_.isEmpty(mutationData.updateFlightController.errors)) return
@@ -120,25 +120,6 @@ class EditFlightController extends Component {
               }}
             </Query>
           </Page>
-
-        {/*<h1>Testing</h1>*/}
-        {/*<Row>*/}
-          {/*<Col>*/}
-            {/*<Query query={GET_FLIGHTCONTROLLER} variables={{id: this.props.location.state.fc}}>*/}
-              {/*{({ loading, error, data, subscribeToMore }) => {*/}
-                {/*if (loading) return <div>Fetching</div>*/}
-                {/*if (error) return <div>Error</div>*/}
-
-                {/*return (*/}
-                  {/*<flightControllerForm />*/}
-                {/*)*/}
-              {/*}}*/}
-            {/*</Query>*/}
-
-          {/*</Col>*/}
-        {/*</Row>*/}
-
-
       </Container>
     );
   }
