@@ -43,14 +43,7 @@ function post(parent, args, context, info) {
   })
 }
 
-function addFlightController(parent, args, context, info){
-  const userId = getUserId(context)
 
-  return context.prisma.createFlightController({
-    postedBy: { connect: { id: userId } },
-    ...args
-  })
-}
 
 async function deleteFlightController(parent, args, context, info){
   if(!args.id){
@@ -67,7 +60,7 @@ async function deleteFlightController(parent, args, context, info){
   }
 }
 
-function addFlightControllerEasy(parent, args, context, info){
+function addFlightController(parent, args, context, info){
   const userId = getUserId(context)
 
   return context.prisma.createFlightController({
@@ -76,15 +69,32 @@ function addFlightControllerEasy(parent, args, context, info){
   })
 }
 
+async function updateFlightController(parent, args, context, info){
+  const userId = getUserId(context)
+
+  existingFC = await context.prisma.flightController({ id: args.flightController.id })
+
+  if(!existingFC){
+    throw new Error('No such FC found by that ID')
+  }
+
+  let updatedFC = {...existingFC, ...args.flightController};
+  delete updatedFC.id; // Can't have ID
+  await context.prisma.updateFlightController({
+    data: updatedFC,
+    where: {id: existingFC.id}
+  })
+
+  return {...updatedFC, id: existingFC.id};
+}
+
 async function updateLink(parent, args, context, info) {
   const userId = getUserId(context)
   const existingLink = await context.prisma.link({ id: args.id })
   if (!existingLink) {
     throw new Error('No such link found by that ID')
   }
-
   let updatedLink = {...existingLink, ...args};
-  console.log("updated link", updatedLink);
 
   return context.prisma.updateLink(updatedLink)
 }
@@ -115,7 +125,7 @@ module.exports = {
   updateLink,
   vote,
   addFlightController,
-  addFlightControllerEasy,
+  updateFlightController,
   deleteFlightController,
 }
 

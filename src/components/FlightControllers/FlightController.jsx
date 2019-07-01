@@ -31,10 +31,10 @@ class FlightController extends Component {
         <td>
           <Link
             to={{
-              state: {
-                fc: fc.id
-              },
-              pathname: "/add-flight-controller"
+              // state: {
+              //   fc: fc.id
+              // },
+              pathname: `/edit-flight-controller/${fc.id}`
             }}>
             Edit
           </Link>
