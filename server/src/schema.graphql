@@ -28,6 +28,7 @@ type Mutation {
     deleteLink(id: ID!): Link
     vote(linkId: ID!): Vote
     addMerchant(merchant: MerchantInput!) : Merchant
+    updateMerchant(merchant: MerchantEdit!) : Merchant
 }
 
 type Subscription {
@@ -157,6 +158,14 @@ type Merchant {
 }
 
 input MerchantInput {
+    name: String!
+    url: String!
+    affiliateId: String
+    disabled: Boolean
+}
+
+input MerchantEdit {
+    id: ID!
     name: String!
     url: String!
     affiliateId: String

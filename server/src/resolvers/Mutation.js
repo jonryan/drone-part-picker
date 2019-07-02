@@ -78,10 +78,36 @@ function addMerchant(parent, args, context, info){
   })
 }
 
+
+async function updateMerchant(parent, args, context, info){
+  console.log('updateMerchant');
+  const userId = getUserId(context)
+
+  console.log('updateMerchant', userId);
+  let existingMerchant = await context.prisma.merchant({ id: args.merchant.id })
+  console.log('existingMerchant', existingMerchant)
+
+  if(!existingMerchant){
+    throw new Error('No such Merchant found by that ID')
+  }
+
+  let updatedMerchant = {...existingMerchant, ...args.merchant};
+  delete updatedMerchant.id; // Can't have ID
+  delete updatedMerchant.createdAt; // Can't have ID
+  delete updatedMerchant.updatedAt; // Can't have ID
+  console.log("Trying to save", updatedMerchant)
+  await context.prisma.updateMerchant({
+    data: updatedMerchant,
+    where: {id: existingMerchant.id}
+  })
+
+  return {...updatedMerchant, id: existingMerchant.id};
+}
+
 async function updateFlightController(parent, args, context, info){
   const userId = getUserId(context)
 
-  existingFC = await context.prisma.flightController({ id: args.flightController.id })
+  let existingFC = await context.prisma.flightController({ id: args.flightController.id })
 
   if(!existingFC){
     throw new Error('No such FC found by that ID')
@@ -137,6 +163,7 @@ module.exports = {
   updateFlightController,
   deleteFlightController,
   addMerchant,
+  updateMerchant,
 }
 
 // Mutation: {
