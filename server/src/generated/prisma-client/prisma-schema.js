@@ -31,6 +31,10 @@ scalar DateTime
 
 type FlightController {
   id: ID!
+  createdAt: DateTime
+  updatedAt: DateTime
+  postedBy: User
+  updatedBy: User
   name: String
   disabled: Boolean
   releaseDate: DateTime
@@ -56,7 +60,6 @@ type FlightController {
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  postedBy: User
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -70,6 +73,8 @@ type FlightControllerConnection {
 
 input FlightControllerCreateInput {
   id: ID
+  postedBy: UserCreateOneWithoutFlightControllersInput
+  updatedBy: UserCreateOneWithoutEditedFlightControllersInput
   name: String
   disabled: Boolean
   releaseDate: DateTime
@@ -95,7 +100,6 @@ input FlightControllerCreateInput {
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  postedBy: UserCreateOneWithoutFlightControllersInput
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -106,8 +110,47 @@ input FlightControllerCreateManyWithoutPostedByInput {
   connect: [FlightControllerWhereUniqueInput!]
 }
 
+input FlightControllerCreateManyWithoutUpdatedByInput {
+  create: [FlightControllerCreateWithoutUpdatedByInput!]
+  connect: [FlightControllerWhereUniqueInput!]
+}
+
 input FlightControllerCreateWithoutPostedByInput {
   id: ID
+  updatedBy: UserCreateOneWithoutEditedFlightControllersInput
+  name: String
+  disabled: Boolean
+  releaseDate: DateTime
+  uarts: Int
+  gyroOne: Float
+  gyroTwo: Float
+  weightInGrams: Float
+  cpu: String
+  description: String
+  dimensions: String
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
+  builtInReceiver: String
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
+}
+
+input FlightControllerCreateWithoutUpdatedByInput {
+  id: ID
+  postedBy: UserCreateOneWithoutFlightControllersInput
   name: String
   disabled: Boolean
   releaseDate: DateTime
@@ -146,6 +189,10 @@ type FlightControllerEdge {
 enum FlightControllerOrderByInput {
   id_ASC
   id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
   name_ASC
   name_DESC
   disabled_ASC
@@ -206,6 +253,8 @@ enum FlightControllerOrderByInput {
 
 type FlightControllerPreviousValues {
   id: ID!
+  createdAt: DateTime
+  updatedAt: DateTime
   name: String
   disabled: Boolean
   releaseDate: DateTime
@@ -251,6 +300,22 @@ input FlightControllerScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   name: String
   name_not: String
   name_in: [String!]
@@ -445,6 +510,8 @@ input FlightControllerSubscriptionWhereInput {
 }
 
 input FlightControllerUpdateInput {
+  postedBy: UserUpdateOneWithoutFlightControllersInput
+  updatedBy: UserUpdateOneWithoutEditedFlightControllersInput
   name: String
   disabled: Boolean
   releaseDate: DateTime
@@ -470,7 +537,6 @@ input FlightControllerUpdateInput {
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: String
-  postedBy: UserUpdateOneWithoutFlightControllersInput
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -550,12 +616,57 @@ input FlightControllerUpdateManyWithoutPostedByInput {
   updateMany: [FlightControllerUpdateManyWithWhereNestedInput!]
 }
 
+input FlightControllerUpdateManyWithoutUpdatedByInput {
+  create: [FlightControllerCreateWithoutUpdatedByInput!]
+  delete: [FlightControllerWhereUniqueInput!]
+  connect: [FlightControllerWhereUniqueInput!]
+  set: [FlightControllerWhereUniqueInput!]
+  disconnect: [FlightControllerWhereUniqueInput!]
+  update: [FlightControllerUpdateWithWhereUniqueWithoutUpdatedByInput!]
+  upsert: [FlightControllerUpsertWithWhereUniqueWithoutUpdatedByInput!]
+  deleteMany: [FlightControllerScalarWhereInput!]
+  updateMany: [FlightControllerUpdateManyWithWhereNestedInput!]
+}
+
 input FlightControllerUpdateManyWithWhereNestedInput {
   where: FlightControllerScalarWhereInput!
   data: FlightControllerUpdateManyDataInput!
 }
 
 input FlightControllerUpdateWithoutPostedByDataInput {
+  updatedBy: UserUpdateOneWithoutEditedFlightControllersInput
+  name: String
+  disabled: Boolean
+  releaseDate: DateTime
+  uarts: Int
+  gyroOne: Float
+  gyroTwo: Float
+  weightInGrams: Float
+  cpu: String
+  description: String
+  dimensions: String
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
+  builtInReceiver: String
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
+}
+
+input FlightControllerUpdateWithoutUpdatedByDataInput {
+  postedBy: UserUpdateOneWithoutFlightControllersInput
   name: String
   disabled: Boolean
   releaseDate: DateTime
@@ -591,10 +702,21 @@ input FlightControllerUpdateWithWhereUniqueWithoutPostedByInput {
   data: FlightControllerUpdateWithoutPostedByDataInput!
 }
 
+input FlightControllerUpdateWithWhereUniqueWithoutUpdatedByInput {
+  where: FlightControllerWhereUniqueInput!
+  data: FlightControllerUpdateWithoutUpdatedByDataInput!
+}
+
 input FlightControllerUpsertWithWhereUniqueWithoutPostedByInput {
   where: FlightControllerWhereUniqueInput!
   update: FlightControllerUpdateWithoutPostedByDataInput!
   create: FlightControllerCreateWithoutPostedByInput!
+}
+
+input FlightControllerUpsertWithWhereUniqueWithoutUpdatedByInput {
+  where: FlightControllerWhereUniqueInput!
+  update: FlightControllerUpdateWithoutUpdatedByDataInput!
+  create: FlightControllerCreateWithoutUpdatedByInput!
 }
 
 input FlightControllerWhereInput {
@@ -612,6 +734,24 @@ input FlightControllerWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  postedBy: UserWhereInput
+  updatedBy: UserWhereInput
   name: String
   name_not: String
   name_in: [String!]
@@ -776,7 +916,6 @@ input FlightControllerWhereInput {
   builtInReceiver_not_starts_with: String
   builtInReceiver_ends_with: String
   builtInReceiver_not_ends_with: String
-  postedBy: UserWhereInput
   threeVoltOutput: Boolean
   threeVoltOutput_not: Boolean
   fiveVoltOut: Boolean
@@ -1517,6 +1656,7 @@ type User {
   links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link!]
   votes(where: VoteWhereInput, orderBy: VoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vote!]
   flightControllers(where: FlightControllerWhereInput, orderBy: FlightControllerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlightController!]
+  editedFlightControllers(where: FlightControllerWhereInput, orderBy: FlightControllerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlightController!]
   addedMerchants(where: MerchantWhereInput, orderBy: MerchantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Merchant!]
   editedMerchants(where: MerchantWhereInput, orderBy: MerchantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Merchant!]
 }
@@ -1535,12 +1675,18 @@ input UserCreateInput {
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
 }
 
 input UserCreateOneWithoutAddedMerchantsInput {
   create: UserCreateWithoutAddedMerchantsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutEditedFlightControllersInput {
+  create: UserCreateWithoutEditedFlightControllersInput
   connect: UserWhereUniqueInput
 }
 
@@ -1572,6 +1718,19 @@ input UserCreateWithoutAddedMerchantsInput {
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
+  editedMerchants: MerchantCreateManyWithoutUpdatedByInput
+}
+
+input UserCreateWithoutEditedFlightControllersInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  links: LinkCreateManyWithoutPostedByInput
+  votes: VoteCreateManyWithoutUserInput
+  flightControllers: FlightControllerCreateManyWithoutPostedByInput
+  addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
 }
 
@@ -1583,6 +1742,7 @@ input UserCreateWithoutEditedMerchantsInput {
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
 }
 
@@ -1593,6 +1753,7 @@ input UserCreateWithoutFlightControllersInput {
   password: String!
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
+  editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
 }
@@ -1604,6 +1765,7 @@ input UserCreateWithoutLinksInput {
   password: String!
   votes: VoteCreateManyWithoutUserInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
 }
@@ -1615,6 +1777,7 @@ input UserCreateWithoutVotesInput {
   password: String!
   links: LinkCreateManyWithoutPostedByInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
 }
@@ -1667,6 +1830,7 @@ input UserUpdateInput {
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
 }
@@ -1688,6 +1852,15 @@ input UserUpdateOneWithoutAddedMerchantsInput {
   create: UserCreateWithoutAddedMerchantsInput
   update: UserUpdateWithoutAddedMerchantsDataInput
   upsert: UserUpsertWithoutAddedMerchantsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneWithoutEditedFlightControllersInput {
+  create: UserCreateWithoutEditedFlightControllersInput
+  update: UserUpdateWithoutEditedFlightControllersDataInput
+  upsert: UserUpsertWithoutEditedFlightControllersInput
   delete: Boolean
   disconnect: Boolean
   connect: UserWhereUniqueInput
@@ -1727,6 +1900,18 @@ input UserUpdateWithoutAddedMerchantsDataInput {
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
+  editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
+}
+
+input UserUpdateWithoutEditedFlightControllersDataInput {
+  name: String
+  email: String
+  password: String
+  links: LinkUpdateManyWithoutPostedByInput
+  votes: VoteUpdateManyWithoutUserInput
+  flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+  addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
 }
 
@@ -1737,6 +1922,7 @@ input UserUpdateWithoutEditedMerchantsDataInput {
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
 }
 
@@ -1746,6 +1932,7 @@ input UserUpdateWithoutFlightControllersDataInput {
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
+  editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
 }
@@ -1756,6 +1943,7 @@ input UserUpdateWithoutLinksDataInput {
   password: String
   votes: VoteUpdateManyWithoutUserInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
 }
@@ -1766,6 +1954,7 @@ input UserUpdateWithoutVotesDataInput {
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
 }
@@ -1773,6 +1962,11 @@ input UserUpdateWithoutVotesDataInput {
 input UserUpsertWithoutAddedMerchantsInput {
   update: UserUpdateWithoutAddedMerchantsDataInput!
   create: UserCreateWithoutAddedMerchantsInput!
+}
+
+input UserUpsertWithoutEditedFlightControllersInput {
+  update: UserUpdateWithoutEditedFlightControllersDataInput!
+  create: UserCreateWithoutEditedFlightControllersInput!
 }
 
 input UserUpsertWithoutEditedMerchantsInput {
@@ -1861,6 +2055,9 @@ input UserWhereInput {
   flightControllers_every: FlightControllerWhereInput
   flightControllers_some: FlightControllerWhereInput
   flightControllers_none: FlightControllerWhereInput
+  editedFlightControllers_every: FlightControllerWhereInput
+  editedFlightControllers_some: FlightControllerWhereInput
+  editedFlightControllers_none: FlightControllerWhereInput
   addedMerchants_every: MerchantWhereInput
   addedMerchants_some: MerchantWhereInput
   addedMerchants_none: MerchantWhereInput

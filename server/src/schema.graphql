@@ -143,7 +143,9 @@ type FlightController {
   antiVibrationGrommets: Boolean
   builtInReceiver: String
   postedBy: User
-  createdAt: DateTime
+  updatedBy: User
+    createdAt: DateTime
+    updatedAt: DateTime
 }
 
 ##### Merchant
@@ -206,6 +208,7 @@ type User {
   flightControllers: [FlightController!]!
     addedMerchants: [Merchant!]!
     editedMerchants: [Merchant!]!
+    editedFlightControllers: [Merchant!]!
 }
 
 input UserInput {

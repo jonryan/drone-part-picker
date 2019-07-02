@@ -6,6 +6,10 @@ function flightControllers(parent, args, context) {
   return context.prisma.user({ id: parent.id }).flightControllers()
 }
 
+function editedFlightControllers(parent, args, context) {
+  return context.prisma.user({ id: parent.id }).editedFlightControllers()
+}
+
 function addedMerchants(parent, args, context) {
   return context.prisma.user({id: parent.id}).addedMerchants()
 }
@@ -17,5 +21,6 @@ module.exports = {
   links,
   flightControllers,
   addedMerchants,
-  editedMerchants
+  editedMerchants,
+  editedFlightControllers,
 }

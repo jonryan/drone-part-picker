@@ -117,8 +117,14 @@ async function updateFlightController(parent, args, context, info){
     throw new Error('No such FC found by that ID')
   }
 
-  let updatedFC = {...existingFC, ...args.flightController};
+  let updatedFC = {
+    ...existingFC,
+    ...args.flightController,
+    updatedBy: { connect: { id: userId } },
+  };
   delete updatedFC.id; // Can't have ID
+  delete updatedFC.updatedAt; // Can't have ID
+  delete updatedFC.createdAt; // Can't have ID
   await context.prisma.updateFlightController({
     data: updatedFC,
     where: {id: existingFC.id}
