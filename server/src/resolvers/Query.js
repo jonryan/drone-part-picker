@@ -52,6 +52,25 @@ async function getFlightController(parent, args, context, info){
 }
 
 async function merchantList(parent, args, context, info){
+
+  /*
+  query{
+    merchantList{
+      merchants {
+        id
+        name
+        postedBy{
+          id,
+          name
+        }
+        affiliateId
+        url
+        disabled
+      }
+    }
+  }
+   */
+
   let merchants = context.prisma.merchants()
   console.log('merchants', merchants);
   return {merchants}

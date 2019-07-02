@@ -69,6 +69,15 @@ function addFlightController(parent, args, context, info){
   })
 }
 
+function addMerchant(parent, args, context, info){
+  const userId = getUserId(context)
+
+  return context.prisma.createMerchant({
+    postedBy: { connect: { id: userId } },
+    ...args.merchant
+  })
+}
+
 async function updateFlightController(parent, args, context, info){
   const userId = getUserId(context)
 
@@ -127,6 +136,7 @@ module.exports = {
   addFlightController,
   updateFlightController,
   deleteFlightController,
+  addMerchant,
 }
 
 // Mutation: {
