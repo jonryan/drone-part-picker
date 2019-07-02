@@ -7,6 +7,7 @@ type Query {
     getFlightController(id: ID!): FlightController!
     flightControllerFeed: FlightControllerFeed!
     userList: UserList!
+    merchantList: MerchantList!
 }
 
 type Mutation {
@@ -26,6 +27,8 @@ type Mutation {
     updateLink(id: ID!, url: String, description: String): Link
     deleteLink(id: ID!): Link
     vote(linkId: ID!): Vote
+    addMerchant(merchant: MerchantInput!) : Merchant
+    updateMerchant(merchant: MerchantEdit!) : Merchant
 }
 
 type Subscription {
@@ -48,19 +51,7 @@ type UserList {
   users: [User!]!
 }
 
-type Feed {
-  links: [Link!]!
-  count: Int!
-}
 
-type Link {
-    id: ID!
-    description: String!
-    url: String!
-    postedBy: User
-    createdAt: DateTime!
-    votes: [Vote!]!
-}
 
 input UpdateFlightControllerInput{
   id: ID!
@@ -152,9 +143,58 @@ type FlightController {
   antiVibrationGrommets: Boolean
   builtInReceiver: String
   postedBy: User
-  createdAt: DateTime
+  updatedBy: User
+    createdAt: DateTime
+    updatedAt: DateTime
 }
 
+##### Merchant
+type Merchant {
+    id: ID!
+    name: String!
+    url: String!
+    postedBy: User
+    updatedBy: User
+    createdAt: DateTime!
+    affiliateId: String
+    disabled: Boolean
+}
+
+input MerchantInput {
+    name: String!
+    url: String!
+    affiliateId: String
+    disabled: Boolean
+}
+
+input MerchantEdit {
+    id: ID!
+    name: String!
+    url: String!
+    affiliateId: String
+    disabled: Boolean
+}
+
+type MerchantList {
+  merchants: [Merchant!]!
+}
+
+#### Links
+type Feed {
+  links: [Link!]!
+  count: Int!
+}
+
+type Link {
+    id: ID!
+    description: String!
+    url: String!
+    postedBy: User
+    createdAt: DateTime!
+    votes: [Vote!]!
+}
+
+#### User Auth
 type AuthPayload {
   token: String
   user: User
@@ -166,6 +206,9 @@ type User {
   email: String!
   links: [Link!]!
   flightControllers: [FlightController!]!
+    addedMerchants: [Merchant!]!
+    editedMerchants: [Merchant!]!
+    editedFlightControllers: [Merchant!]!
 }
 
 input UserInput {

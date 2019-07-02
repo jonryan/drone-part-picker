@@ -69,17 +69,62 @@ function addFlightController(parent, args, context, info){
   })
 }
 
+function addMerchant(parent, args, context, info){
+  const userId = getUserId(context)
+
+  return context.prisma.createMerchant({
+    postedBy: { connect: { id: userId } },
+    ...args.merchant
+  })
+}
+
+
+async function updateMerchant(parent, args, context, info){
+  console.log('updateMerchant');
+  const userId = getUserId(context)
+
+  console.log('updateMerchant', userId);
+  let existingMerchant = await context.prisma.merchant({ id: args.merchant.id })
+  console.log('existingMerchant', existingMerchant)
+
+  if(!existingMerchant){
+    throw new Error('No such Merchant found by that ID')
+  }
+
+  let updatedMerchant = {
+    ...existingMerchant,
+    ...args.merchant,
+    updatedBy: { connect: { id: userId } },
+  };
+  delete updatedMerchant.id; // Can't have ID
+  delete updatedMerchant.createdAt; // Can't have ID
+  delete updatedMerchant.updatedAt; // Can't have ID
+  console.log("Trying to save", updatedMerchant)
+  await context.prisma.updateMerchant({
+    data: updatedMerchant,
+    where: {id: existingMerchant.id}
+  })
+
+  return {...updatedMerchant, id: existingMerchant.id};
+}
+
 async function updateFlightController(parent, args, context, info){
   const userId = getUserId(context)
 
-  existingFC = await context.prisma.flightController({ id: args.flightController.id })
+  let existingFC = await context.prisma.flightController({ id: args.flightController.id })
 
   if(!existingFC){
     throw new Error('No such FC found by that ID')
   }
 
-  let updatedFC = {...existingFC, ...args.flightController};
+  let updatedFC = {
+    ...existingFC,
+    ...args.flightController,
+    updatedBy: { connect: { id: userId } },
+  };
   delete updatedFC.id; // Can't have ID
+  delete updatedFC.updatedAt; // Can't have ID
+  delete updatedFC.createdAt; // Can't have ID
   await context.prisma.updateFlightController({
     data: updatedFC,
     where: {id: existingFC.id}
@@ -127,6 +172,8 @@ module.exports = {
   addFlightController,
   updateFlightController,
   deleteFlightController,
+  addMerchant,
+  updateMerchant,
 }
 
 // Mutation: {

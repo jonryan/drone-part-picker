@@ -1,3 +1,4 @@
+
 type Link {
     id: ID! @id
     createdAt: DateTime! @createdAt
@@ -14,7 +15,10 @@ type User {
     password: String!
     links: [Link!]!
     votes: [Vote!]!
-    flightControllers: [FlightController!]!
+    flightControllers: [FlightController!]! @relation(name: "AddedFlightControllers")
+    editedFlightControllers: [FlightController!]! @relation(name: "EditedFlightControllers")
+    addedMerchants: [Merchant!]! @relation(name: "AddedMerchants")
+    editedMerchants: [Merchant!]! @relation(name: "EditedMerchants")
 }
 
 type Vote{
@@ -24,8 +28,13 @@ type Vote{
 }
 
 
+
 type FlightController{
     id: ID! @id
+    createdAt: DateTime @createdAt
+    updatedAt: DateTime @updatedAt
+    postedBy: User @relation(name: "AddedFlightControllers")
+    updatedBy: User @relation(name: "EditedFlightControllers")
     name: String
     disabled: Boolean
     releaseDate: DateTime
@@ -51,8 +60,19 @@ type FlightController{
     beeperOnBoard: Boolean
     antiVibrationGrommets: Boolean
     builtInReceiver: String #"CROSSFIRE/DSMX/FRSKY"
-    postedBy: User
     threeVoltOutput: Boolean
     fiveVoltOut: Boolean
     cameraControl: Boolean
+}
+
+type Merchant{
+    id: ID! @id
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime @updatedAt
+    postedBy: User @relation(name: "AddedMerchants")
+    updatedBy: User @relation(name: "EditedMerchants")
+    name: String
+    url: String
+    affiliateId: String
+    disabled: Boolean
 }
