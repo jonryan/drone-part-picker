@@ -205,6 +205,7 @@ type User {
   links: [Link!]!
   flightControllers: [FlightController!]!
     addedMerchants: [Merchant!]!
+    editedMerchants: [Merchant!]!
 }
 
 input UserInput {

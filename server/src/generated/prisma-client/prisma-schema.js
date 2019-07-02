@@ -1076,6 +1076,7 @@ type Merchant {
   createdAt: DateTime!
   updatedAt: DateTime
   postedBy: User
+  updatedBy: User
   name: String
   url: String
   affiliateId: String
@@ -1091,6 +1092,7 @@ type MerchantConnection {
 input MerchantCreateInput {
   id: ID
   postedBy: UserCreateOneWithoutAddedMerchantsInput
+  updatedBy: UserCreateOneWithoutEditedMerchantsInput
   name: String
   url: String
   affiliateId: String
@@ -1102,8 +1104,23 @@ input MerchantCreateManyWithoutPostedByInput {
   connect: [MerchantWhereUniqueInput!]
 }
 
+input MerchantCreateManyWithoutUpdatedByInput {
+  create: [MerchantCreateWithoutUpdatedByInput!]
+  connect: [MerchantWhereUniqueInput!]
+}
+
 input MerchantCreateWithoutPostedByInput {
   id: ID
+  updatedBy: UserCreateOneWithoutEditedMerchantsInput
+  name: String
+  url: String
+  affiliateId: String
+  disabled: Boolean
+}
+
+input MerchantCreateWithoutUpdatedByInput {
+  id: ID
+  postedBy: UserCreateOneWithoutAddedMerchantsInput
   name: String
   url: String
   affiliateId: String
@@ -1242,6 +1259,7 @@ input MerchantSubscriptionWhereInput {
 
 input MerchantUpdateInput {
   postedBy: UserUpdateOneWithoutAddedMerchantsInput
+  updatedBy: UserUpdateOneWithoutEditedMerchantsInput
   name: String
   url: String
   affiliateId: String
@@ -1274,12 +1292,33 @@ input MerchantUpdateManyWithoutPostedByInput {
   updateMany: [MerchantUpdateManyWithWhereNestedInput!]
 }
 
+input MerchantUpdateManyWithoutUpdatedByInput {
+  create: [MerchantCreateWithoutUpdatedByInput!]
+  delete: [MerchantWhereUniqueInput!]
+  connect: [MerchantWhereUniqueInput!]
+  set: [MerchantWhereUniqueInput!]
+  disconnect: [MerchantWhereUniqueInput!]
+  update: [MerchantUpdateWithWhereUniqueWithoutUpdatedByInput!]
+  upsert: [MerchantUpsertWithWhereUniqueWithoutUpdatedByInput!]
+  deleteMany: [MerchantScalarWhereInput!]
+  updateMany: [MerchantUpdateManyWithWhereNestedInput!]
+}
+
 input MerchantUpdateManyWithWhereNestedInput {
   where: MerchantScalarWhereInput!
   data: MerchantUpdateManyDataInput!
 }
 
 input MerchantUpdateWithoutPostedByDataInput {
+  updatedBy: UserUpdateOneWithoutEditedMerchantsInput
+  name: String
+  url: String
+  affiliateId: String
+  disabled: Boolean
+}
+
+input MerchantUpdateWithoutUpdatedByDataInput {
+  postedBy: UserUpdateOneWithoutAddedMerchantsInput
   name: String
   url: String
   affiliateId: String
@@ -1291,10 +1330,21 @@ input MerchantUpdateWithWhereUniqueWithoutPostedByInput {
   data: MerchantUpdateWithoutPostedByDataInput!
 }
 
+input MerchantUpdateWithWhereUniqueWithoutUpdatedByInput {
+  where: MerchantWhereUniqueInput!
+  data: MerchantUpdateWithoutUpdatedByDataInput!
+}
+
 input MerchantUpsertWithWhereUniqueWithoutPostedByInput {
   where: MerchantWhereUniqueInput!
   update: MerchantUpdateWithoutPostedByDataInput!
   create: MerchantCreateWithoutPostedByInput!
+}
+
+input MerchantUpsertWithWhereUniqueWithoutUpdatedByInput {
+  where: MerchantWhereUniqueInput!
+  update: MerchantUpdateWithoutUpdatedByDataInput!
+  create: MerchantCreateWithoutUpdatedByInput!
 }
 
 input MerchantWhereInput {
@@ -1329,6 +1379,7 @@ input MerchantWhereInput {
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
   postedBy: UserWhereInput
+  updatedBy: UserWhereInput
   name: String
   name_not: String
   name_in: [String!]
@@ -1467,6 +1518,7 @@ type User {
   votes(where: VoteWhereInput, orderBy: VoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vote!]
   flightControllers(where: FlightControllerWhereInput, orderBy: FlightControllerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlightController!]
   addedMerchants(where: MerchantWhereInput, orderBy: MerchantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Merchant!]
+  editedMerchants(where: MerchantWhereInput, orderBy: MerchantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Merchant!]
 }
 
 type UserConnection {
@@ -1484,10 +1536,16 @@ input UserCreateInput {
   votes: VoteCreateManyWithoutUserInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
+  editedMerchants: MerchantCreateManyWithoutUpdatedByInput
 }
 
 input UserCreateOneWithoutAddedMerchantsInput {
   create: UserCreateWithoutAddedMerchantsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutEditedMerchantsInput {
+  create: UserCreateWithoutEditedMerchantsInput
   connect: UserWhereUniqueInput
 }
 
@@ -1514,6 +1572,18 @@ input UserCreateWithoutAddedMerchantsInput {
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
+  editedMerchants: MerchantCreateManyWithoutUpdatedByInput
+}
+
+input UserCreateWithoutEditedMerchantsInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  links: LinkCreateManyWithoutPostedByInput
+  votes: VoteCreateManyWithoutUserInput
+  flightControllers: FlightControllerCreateManyWithoutPostedByInput
+  addedMerchants: MerchantCreateManyWithoutPostedByInput
 }
 
 input UserCreateWithoutFlightControllersInput {
@@ -1524,6 +1594,7 @@ input UserCreateWithoutFlightControllersInput {
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
+  editedMerchants: MerchantCreateManyWithoutUpdatedByInput
 }
 
 input UserCreateWithoutLinksInput {
@@ -1534,6 +1605,7 @@ input UserCreateWithoutLinksInput {
   votes: VoteCreateManyWithoutUserInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
+  editedMerchants: MerchantCreateManyWithoutUpdatedByInput
 }
 
 input UserCreateWithoutVotesInput {
@@ -1544,6 +1616,7 @@ input UserCreateWithoutVotesInput {
   links: LinkCreateManyWithoutPostedByInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
+  editedMerchants: MerchantCreateManyWithoutUpdatedByInput
 }
 
 type UserEdge {
@@ -1595,6 +1668,7 @@ input UserUpdateInput {
   votes: VoteUpdateManyWithoutUserInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
+  editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
 }
 
 input UserUpdateManyMutationInput {
@@ -1614,6 +1688,15 @@ input UserUpdateOneWithoutAddedMerchantsInput {
   create: UserCreateWithoutAddedMerchantsInput
   update: UserUpdateWithoutAddedMerchantsDataInput
   upsert: UserUpsertWithoutAddedMerchantsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneWithoutEditedMerchantsInput {
+  create: UserCreateWithoutEditedMerchantsInput
+  update: UserUpdateWithoutEditedMerchantsDataInput
+  upsert: UserUpsertWithoutEditedMerchantsInput
   delete: Boolean
   disconnect: Boolean
   connect: UserWhereUniqueInput
@@ -1644,6 +1727,17 @@ input UserUpdateWithoutAddedMerchantsDataInput {
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+  editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
+}
+
+input UserUpdateWithoutEditedMerchantsDataInput {
+  name: String
+  email: String
+  password: String
+  links: LinkUpdateManyWithoutPostedByInput
+  votes: VoteUpdateManyWithoutUserInput
+  flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+  addedMerchants: MerchantUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateWithoutFlightControllersDataInput {
@@ -1653,6 +1747,7 @@ input UserUpdateWithoutFlightControllersDataInput {
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
+  editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
 }
 
 input UserUpdateWithoutLinksDataInput {
@@ -1662,6 +1757,7 @@ input UserUpdateWithoutLinksDataInput {
   votes: VoteUpdateManyWithoutUserInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
+  editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
 }
 
 input UserUpdateWithoutVotesDataInput {
@@ -1671,11 +1767,17 @@ input UserUpdateWithoutVotesDataInput {
   links: LinkUpdateManyWithoutPostedByInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
+  editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
 }
 
 input UserUpsertWithoutAddedMerchantsInput {
   update: UserUpdateWithoutAddedMerchantsDataInput!
   create: UserCreateWithoutAddedMerchantsInput!
+}
+
+input UserUpsertWithoutEditedMerchantsInput {
+  update: UserUpdateWithoutEditedMerchantsDataInput!
+  create: UserCreateWithoutEditedMerchantsInput!
 }
 
 input UserUpsertWithoutFlightControllersInput {
@@ -1762,6 +1864,9 @@ input UserWhereInput {
   addedMerchants_every: MerchantWhereInput
   addedMerchants_some: MerchantWhereInput
   addedMerchants_none: MerchantWhereInput
+  editedMerchants_every: MerchantWhereInput
+  editedMerchants_some: MerchantWhereInput
+  editedMerchants_none: MerchantWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
