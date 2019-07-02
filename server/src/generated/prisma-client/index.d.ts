@@ -338,6 +338,8 @@ export type MerchantOrderByInput =
   | "id_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
   | "name_ASC"
   | "name_DESC"
   | "url_ASC"
@@ -1392,6 +1394,14 @@ export interface MerchantWhereInput {
   createdAt_lte?: Maybe<DateTimeInput>;
   createdAt_gt?: Maybe<DateTimeInput>;
   createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   postedBy?: Maybe<UserWhereInput>;
   name?: Maybe<String>;
   name_not?: Maybe<String>;
@@ -2579,6 +2589,7 @@ export interface AggregateMerchantSubscription
 export interface MerchantPreviousValues {
   id: ID_Output;
   createdAt: DateTimeOutput;
+  updatedAt?: DateTimeOutput;
   name?: String;
   url?: String;
   affiliateId?: String;
@@ -2590,6 +2601,7 @@ export interface MerchantPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
   name: () => Promise<String>;
   url: () => Promise<String>;
   affiliateId: () => Promise<String>;
@@ -2601,6 +2613,7 @@ export interface MerchantPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   name: () => Promise<AsyncIterator<String>>;
   url: () => Promise<AsyncIterator<String>>;
   affiliateId: () => Promise<AsyncIterator<String>>;
@@ -2760,6 +2773,7 @@ export interface LinkEdgeSubscription
 export interface Merchant {
   id: ID_Output;
   createdAt: DateTimeOutput;
+  updatedAt?: DateTimeOutput;
   name?: String;
   url?: String;
   affiliateId?: String;
@@ -2769,6 +2783,7 @@ export interface Merchant {
 export interface MerchantPromise extends Promise<Merchant>, Fragmentable {
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
   postedBy: <T = UserPromise>() => T;
   name: () => Promise<String>;
   url: () => Promise<String>;
@@ -2781,6 +2796,7 @@ export interface MerchantSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   postedBy: <T = UserSubscription>() => T;
   name: () => Promise<AsyncIterator<String>>;
   url: () => Promise<AsyncIterator<String>>;
@@ -2793,6 +2809,7 @@ export interface MerchantNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
   postedBy: <T = UserPromise>() => T;
   name: () => Promise<String>;
   url: () => Promise<String>;
@@ -2844,6 +2861,10 @@ export type Int = number;
 
 export const models: Model[] = [
   {
+    name: "Merchant",
+    embedded: false
+  },
+  {
     name: "Link",
     embedded: false
   },
@@ -2853,10 +2874,6 @@ export const models: Model[] = [
   },
   {
     name: "Vote",
-    embedded: false
-  },
-  {
-    name: "Merchant",
     embedded: false
   },
   {

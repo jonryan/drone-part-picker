@@ -2,6 +2,7 @@
 type Merchant{
     id: ID! @id
     createdAt: DateTime! @createdAt
+    updatedAt: DateTime @updatedAt
     postedBy: User
     name: String
     url: String

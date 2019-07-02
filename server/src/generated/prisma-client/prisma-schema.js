@@ -1074,6 +1074,7 @@ scalar Long
 type Merchant {
   id: ID!
   createdAt: DateTime!
+  updatedAt: DateTime
   postedBy: User
   name: String
   url: String
@@ -1106,6 +1107,8 @@ enum MerchantOrderByInput {
   id_DESC
   createdAt_ASC
   createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
   name_ASC
   name_DESC
   url_ASC
@@ -1119,6 +1122,7 @@ enum MerchantOrderByInput {
 type MerchantPreviousValues {
   id: ID!
   createdAt: DateTime!
+  updatedAt: DateTime
   name: String
   url: String
   affiliateId: String
@@ -1181,6 +1185,14 @@ input MerchantWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   postedBy: UserWhereInput
   name: String
   name_not: String

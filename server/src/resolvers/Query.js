@@ -53,6 +53,7 @@ async function getFlightController(parent, args, context, info){
 
 async function merchantList(parent, args, context, info){
   let merchants = context.prisma.merchants()
+  console.log('merchants', merchants);
   return {merchants}
 }
 
@@ -80,5 +81,6 @@ module.exports = {
   info,
   flightControllerFeed,
   getFlightController,
-  userList
+  userList,
+  merchantList,
 }
