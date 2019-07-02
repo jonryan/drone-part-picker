@@ -3,7 +3,8 @@ type Merchant{
     id: ID! @id
     createdAt: DateTime! @createdAt
     updatedAt: DateTime @updatedAt
-    postedBy: User
+    postedBy: User @relation(name: "AddedMerchants")
+#    updatedBy: User @relation(name: "EditedMerchants")
     name: String
     url: String
     affiliateId: String
@@ -27,6 +28,8 @@ type User {
     links: [Link!]!
     votes: [Vote!]!
     flightControllers: [FlightController!]!
+    addedMerchants: [Merchant!]! @relation(name: "AddedMerchants")
+#    editedMerchants: [Merchant!]! @relation(name: "EditedMerchants")
 }
 
 type Vote{

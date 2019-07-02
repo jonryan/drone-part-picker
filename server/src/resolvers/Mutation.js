@@ -91,7 +91,11 @@ async function updateMerchant(parent, args, context, info){
     throw new Error('No such Merchant found by that ID')
   }
 
-  let updatedMerchant = {...existingMerchant, ...args.merchant};
+  let updatedMerchant = {
+    ...existingMerchant,
+    ...args.merchant,
+    updatedBy: { connect: { id: userId } },
+  };
   delete updatedMerchant.id; // Can't have ID
   delete updatedMerchant.createdAt; // Can't have ID
   delete updatedMerchant.updatedAt; // Can't have ID

@@ -1090,7 +1090,20 @@ type MerchantConnection {
 
 input MerchantCreateInput {
   id: ID
-  postedBy: UserCreateOneInput
+  postedBy: UserCreateOneWithoutAddedMerchantsInput
+  name: String
+  url: String
+  affiliateId: String
+  disabled: Boolean
+}
+
+input MerchantCreateManyWithoutPostedByInput {
+  create: [MerchantCreateWithoutPostedByInput!]
+  connect: [MerchantWhereUniqueInput!]
+}
+
+input MerchantCreateWithoutPostedByInput {
+  id: ID
   name: String
   url: String
   affiliateId: String
@@ -1129,6 +1142,86 @@ type MerchantPreviousValues {
   disabled: Boolean
 }
 
+input MerchantScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  affiliateId: String
+  affiliateId_not: String
+  affiliateId_in: [String!]
+  affiliateId_not_in: [String!]
+  affiliateId_lt: String
+  affiliateId_lte: String
+  affiliateId_gt: String
+  affiliateId_gte: String
+  affiliateId_contains: String
+  affiliateId_not_contains: String
+  affiliateId_starts_with: String
+  affiliateId_not_starts_with: String
+  affiliateId_ends_with: String
+  affiliateId_not_ends_with: String
+  disabled: Boolean
+  disabled_not: Boolean
+  AND: [MerchantScalarWhereInput!]
+  OR: [MerchantScalarWhereInput!]
+  NOT: [MerchantScalarWhereInput!]
+}
+
 type MerchantSubscriptionPayload {
   mutation: MutationType!
   node: Merchant
@@ -1148,7 +1241,14 @@ input MerchantSubscriptionWhereInput {
 }
 
 input MerchantUpdateInput {
-  postedBy: UserUpdateOneInput
+  postedBy: UserUpdateOneWithoutAddedMerchantsInput
+  name: String
+  url: String
+  affiliateId: String
+  disabled: Boolean
+}
+
+input MerchantUpdateManyDataInput {
   name: String
   url: String
   affiliateId: String
@@ -1160,6 +1260,41 @@ input MerchantUpdateManyMutationInput {
   url: String
   affiliateId: String
   disabled: Boolean
+}
+
+input MerchantUpdateManyWithoutPostedByInput {
+  create: [MerchantCreateWithoutPostedByInput!]
+  delete: [MerchantWhereUniqueInput!]
+  connect: [MerchantWhereUniqueInput!]
+  set: [MerchantWhereUniqueInput!]
+  disconnect: [MerchantWhereUniqueInput!]
+  update: [MerchantUpdateWithWhereUniqueWithoutPostedByInput!]
+  upsert: [MerchantUpsertWithWhereUniqueWithoutPostedByInput!]
+  deleteMany: [MerchantScalarWhereInput!]
+  updateMany: [MerchantUpdateManyWithWhereNestedInput!]
+}
+
+input MerchantUpdateManyWithWhereNestedInput {
+  where: MerchantScalarWhereInput!
+  data: MerchantUpdateManyDataInput!
+}
+
+input MerchantUpdateWithoutPostedByDataInput {
+  name: String
+  url: String
+  affiliateId: String
+  disabled: Boolean
+}
+
+input MerchantUpdateWithWhereUniqueWithoutPostedByInput {
+  where: MerchantWhereUniqueInput!
+  data: MerchantUpdateWithoutPostedByDataInput!
+}
+
+input MerchantUpsertWithWhereUniqueWithoutPostedByInput {
+  where: MerchantWhereUniqueInput!
+  update: MerchantUpdateWithoutPostedByDataInput!
+  create: MerchantCreateWithoutPostedByInput!
 }
 
 input MerchantWhereInput {
@@ -1331,6 +1466,7 @@ type User {
   links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link!]
   votes(where: VoteWhereInput, orderBy: VoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vote!]
   flightControllers(where: FlightControllerWhereInput, orderBy: FlightControllerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlightController!]
+  addedMerchants(where: MerchantWhereInput, orderBy: MerchantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Merchant!]
 }
 
 type UserConnection {
@@ -1347,10 +1483,11 @@ input UserCreateInput {
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
+  addedMerchants: MerchantCreateManyWithoutPostedByInput
 }
 
-input UserCreateOneInput {
-  create: UserCreateInput
+input UserCreateOneWithoutAddedMerchantsInput {
+  create: UserCreateWithoutAddedMerchantsInput
   connect: UserWhereUniqueInput
 }
 
@@ -1369,6 +1506,16 @@ input UserCreateOneWithoutVotesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutAddedMerchantsInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  links: LinkCreateManyWithoutPostedByInput
+  votes: VoteCreateManyWithoutUserInput
+  flightControllers: FlightControllerCreateManyWithoutPostedByInput
+}
+
 input UserCreateWithoutFlightControllersInput {
   id: ID
   name: String!
@@ -1376,6 +1523,7 @@ input UserCreateWithoutFlightControllersInput {
   password: String!
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
+  addedMerchants: MerchantCreateManyWithoutPostedByInput
 }
 
 input UserCreateWithoutLinksInput {
@@ -1385,6 +1533,7 @@ input UserCreateWithoutLinksInput {
   password: String!
   votes: VoteCreateManyWithoutUserInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
+  addedMerchants: MerchantCreateManyWithoutPostedByInput
 }
 
 input UserCreateWithoutVotesInput {
@@ -1394,6 +1543,7 @@ input UserCreateWithoutVotesInput {
   password: String!
   links: LinkCreateManyWithoutPostedByInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
+  addedMerchants: MerchantCreateManyWithoutPostedByInput
 }
 
 type UserEdge {
@@ -1437,15 +1587,6 @@ input UserSubscriptionWhereInput {
   NOT: [UserSubscriptionWhereInput!]
 }
 
-input UserUpdateDataInput {
-  name: String
-  email: String
-  password: String
-  links: LinkUpdateManyWithoutPostedByInput
-  votes: VoteUpdateManyWithoutUserInput
-  flightControllers: FlightControllerUpdateManyWithoutPostedByInput
-}
-
 input UserUpdateInput {
   name: String
   email: String
@@ -1453,6 +1594,7 @@ input UserUpdateInput {
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+  addedMerchants: MerchantUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateManyMutationInput {
@@ -1461,19 +1603,19 @@ input UserUpdateManyMutationInput {
   password: String
 }
 
-input UserUpdateOneInput {
-  create: UserCreateInput
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: UserWhereUniqueInput
-}
-
 input UserUpdateOneRequiredWithoutVotesInput {
   create: UserCreateWithoutVotesInput
   update: UserUpdateWithoutVotesDataInput
   upsert: UserUpsertWithoutVotesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneWithoutAddedMerchantsInput {
+  create: UserCreateWithoutAddedMerchantsInput
+  update: UserUpdateWithoutAddedMerchantsDataInput
+  upsert: UserUpsertWithoutAddedMerchantsInput
+  delete: Boolean
+  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 
@@ -1495,12 +1637,22 @@ input UserUpdateOneWithoutLinksInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateWithoutAddedMerchantsDataInput {
+  name: String
+  email: String
+  password: String
+  links: LinkUpdateManyWithoutPostedByInput
+  votes: VoteUpdateManyWithoutUserInput
+  flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+}
+
 input UserUpdateWithoutFlightControllersDataInput {
   name: String
   email: String
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
+  addedMerchants: MerchantUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateWithoutLinksDataInput {
@@ -1509,6 +1661,7 @@ input UserUpdateWithoutLinksDataInput {
   password: String
   votes: VoteUpdateManyWithoutUserInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+  addedMerchants: MerchantUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateWithoutVotesDataInput {
@@ -1517,11 +1670,12 @@ input UserUpdateWithoutVotesDataInput {
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+  addedMerchants: MerchantUpdateManyWithoutPostedByInput
 }
 
-input UserUpsertNestedInput {
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
+input UserUpsertWithoutAddedMerchantsInput {
+  update: UserUpdateWithoutAddedMerchantsDataInput!
+  create: UserCreateWithoutAddedMerchantsInput!
 }
 
 input UserUpsertWithoutFlightControllersInput {
@@ -1605,6 +1759,9 @@ input UserWhereInput {
   flightControllers_every: FlightControllerWhereInput
   flightControllers_some: FlightControllerWhereInput
   flightControllers_none: FlightControllerWhereInput
+  addedMerchants_every: MerchantWhereInput
+  addedMerchants_some: MerchantWhereInput
+  addedMerchants_none: MerchantWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

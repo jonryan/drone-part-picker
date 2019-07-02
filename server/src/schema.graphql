@@ -152,6 +152,7 @@ type Merchant {
     name: String!
     url: String!
     postedBy: User
+    updatedBy: User
     createdAt: DateTime!
     affiliateId: String
     disabled: Boolean
@@ -203,6 +204,7 @@ type User {
   email: String!
   links: [Link!]!
   flightControllers: [FlightController!]!
+    addedMerchants: [Merchant!]!
 }
 
 input UserInput {
