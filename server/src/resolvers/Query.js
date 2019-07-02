@@ -51,6 +51,11 @@ async function getFlightController(parent, args, context, info){
   }
 }
 
+async function merchantList(parent, args, context, info){
+  let merchants = context.prisma.merchants()
+  return {merchants}
+}
+
 async function userList(parent, args, context, info){
   let users = context.prisma.users()
   return {users}

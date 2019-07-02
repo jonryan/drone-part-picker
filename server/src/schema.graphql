@@ -7,6 +7,7 @@ type Query {
     getFlightController(id: ID!): FlightController!
     flightControllerFeed: FlightControllerFeed!
     userList: UserList!
+    merchantList: MerchantList!
 }
 
 type Mutation {
@@ -48,19 +49,7 @@ type UserList {
   users: [User!]!
 }
 
-type Feed {
-  links: [Link!]!
-  count: Int!
-}
 
-type Link {
-    id: ID!
-    description: String!
-    url: String!
-    postedBy: User
-    createdAt: DateTime!
-    votes: [Vote!]!
-}
 
 input UpdateFlightControllerInput{
   id: ID!
@@ -155,6 +144,37 @@ type FlightController {
   createdAt: DateTime
 }
 
+##### Merchant
+type Merchant {
+    id: ID!
+    name: String!
+    url: String!
+    postedBy: User
+    createdAt: DateTime!
+    affiliateId: String
+    disabled: Boolean
+}
+
+type MerchantList {
+  merchants: [Merchant!]!
+}
+
+#### Links
+type Feed {
+  links: [Link!]!
+  count: Int!
+}
+
+type Link {
+    id: ID!
+    description: String!
+    url: String!
+    postedBy: User
+    createdAt: DateTime!
+    votes: [Vote!]!
+}
+
+#### User Auth
 type AuthPayload {
   token: String
   user: User

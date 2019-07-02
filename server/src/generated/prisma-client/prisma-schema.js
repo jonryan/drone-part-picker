@@ -11,6 +11,10 @@ type AggregateLink {
   count: Int!
 }
 
+type AggregateMerchant {
+  count: Int!
+}
+
 type AggregateUser {
   count: Int!
 }
@@ -1067,6 +1071,170 @@ input LinkWhereUniqueInput {
 
 scalar Long
 
+type Merchant {
+  id: ID!
+  createdAt: DateTime!
+  postedBy: User
+  name: String
+  url: String
+  affiliateId: String
+  disabled: Boolean
+}
+
+type MerchantConnection {
+  pageInfo: PageInfo!
+  edges: [MerchantEdge]!
+  aggregate: AggregateMerchant!
+}
+
+input MerchantCreateInput {
+  id: ID
+  postedBy: UserCreateOneInput
+  name: String
+  url: String
+  affiliateId: String
+  disabled: Boolean
+}
+
+type MerchantEdge {
+  node: Merchant!
+  cursor: String!
+}
+
+enum MerchantOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  name_ASC
+  name_DESC
+  url_ASC
+  url_DESC
+  affiliateId_ASC
+  affiliateId_DESC
+  disabled_ASC
+  disabled_DESC
+}
+
+type MerchantPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  name: String
+  url: String
+  affiliateId: String
+  disabled: Boolean
+}
+
+type MerchantSubscriptionPayload {
+  mutation: MutationType!
+  node: Merchant
+  updatedFields: [String!]
+  previousValues: MerchantPreviousValues
+}
+
+input MerchantSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: MerchantWhereInput
+  AND: [MerchantSubscriptionWhereInput!]
+  OR: [MerchantSubscriptionWhereInput!]
+  NOT: [MerchantSubscriptionWhereInput!]
+}
+
+input MerchantUpdateInput {
+  postedBy: UserUpdateOneInput
+  name: String
+  url: String
+  affiliateId: String
+  disabled: Boolean
+}
+
+input MerchantUpdateManyMutationInput {
+  name: String
+  url: String
+  affiliateId: String
+  disabled: Boolean
+}
+
+input MerchantWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  postedBy: UserWhereInput
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  affiliateId: String
+  affiliateId_not: String
+  affiliateId_in: [String!]
+  affiliateId_not_in: [String!]
+  affiliateId_lt: String
+  affiliateId_lte: String
+  affiliateId_gt: String
+  affiliateId_gte: String
+  affiliateId_contains: String
+  affiliateId_not_contains: String
+  affiliateId_starts_with: String
+  affiliateId_not_starts_with: String
+  affiliateId_ends_with: String
+  affiliateId_not_ends_with: String
+  disabled: Boolean
+  disabled_not: Boolean
+  AND: [MerchantWhereInput!]
+  OR: [MerchantWhereInput!]
+  NOT: [MerchantWhereInput!]
+}
+
+input MerchantWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
   createFlightController(data: FlightControllerCreateInput!): FlightController!
   updateFlightController(data: FlightControllerUpdateInput!, where: FlightControllerWhereUniqueInput!): FlightController
@@ -1080,6 +1248,12 @@ type Mutation {
   upsertLink(where: LinkWhereUniqueInput!, create: LinkCreateInput!, update: LinkUpdateInput!): Link!
   deleteLink(where: LinkWhereUniqueInput!): Link
   deleteManyLinks(where: LinkWhereInput): BatchPayload!
+  createMerchant(data: MerchantCreateInput!): Merchant!
+  updateMerchant(data: MerchantUpdateInput!, where: MerchantWhereUniqueInput!): Merchant
+  updateManyMerchants(data: MerchantUpdateManyMutationInput!, where: MerchantWhereInput): BatchPayload!
+  upsertMerchant(where: MerchantWhereUniqueInput!, create: MerchantCreateInput!, update: MerchantUpdateInput!): Merchant!
+  deleteMerchant(where: MerchantWhereUniqueInput!): Merchant
+  deleteManyMerchants(where: MerchantWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -1117,6 +1291,9 @@ type Query {
   link(where: LinkWhereUniqueInput!): Link
   links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link]!
   linksConnection(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LinkConnection!
+  merchant(where: MerchantWhereUniqueInput!): Merchant
+  merchants(where: MerchantWhereInput, orderBy: MerchantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Merchant]!
+  merchantsConnection(where: MerchantWhereInput, orderBy: MerchantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MerchantConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -1129,6 +1306,7 @@ type Query {
 type Subscription {
   flightController(where: FlightControllerSubscriptionWhereInput): FlightControllerSubscriptionPayload
   link(where: LinkSubscriptionWhereInput): LinkSubscriptionPayload
+  merchant(where: MerchantSubscriptionWhereInput): MerchantSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   vote(where: VoteSubscriptionWhereInput): VoteSubscriptionPayload
 }
@@ -1157,6 +1335,11 @@ input UserCreateInput {
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutFlightControllersInput {
@@ -1242,6 +1425,15 @@ input UserSubscriptionWhereInput {
   NOT: [UserSubscriptionWhereInput!]
 }
 
+input UserUpdateDataInput {
+  name: String
+  email: String
+  password: String
+  links: LinkUpdateManyWithoutPostedByInput
+  votes: VoteUpdateManyWithoutUserInput
+  flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+}
+
 input UserUpdateInput {
   name: String
   email: String
@@ -1255,6 +1447,15 @@ input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
+}
+
+input UserUpdateOneInput {
+  create: UserCreateInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
 }
 
 input UserUpdateOneRequiredWithoutVotesInput {
@@ -1304,6 +1505,11 @@ input UserUpdateWithoutVotesDataInput {
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
 }
 
 input UserUpsertWithoutFlightControllersInput {

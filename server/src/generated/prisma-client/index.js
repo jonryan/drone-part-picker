@@ -17,6 +17,10 @@ var models = [
     embedded: false
   },
   {
+    name: "Merchant",
+    embedded: false
+  },
+  {
     name: "FlightController",
     embedded: false
   }
