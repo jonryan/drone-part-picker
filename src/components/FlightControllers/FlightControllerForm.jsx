@@ -1,7 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
-import {FC_LIST_QUERY} from "./FlightControllerList";
-import {LINKS_PER_PAGE} from "../../constants";
 import FormErrors from '../FormErrors.js'
 import {Container, FormControl, Row, Col, Form} from 'react-bootstrap'
 import {Field, Formik} from 'formik'
