@@ -5,12 +5,27 @@ import {Mutation, Query} from 'react-apollo'
 import Page from '../Page'
 import MerchantForm from './MerchantForm'
 import {MERCHANT_LIST_QUERY} from './ViewMerchants'
+import {FEED_QUERY} from "../LinkList";
+import {LINKS_PER_PAGE} from "../../constants";
+let _ = require('underscore')
 
 const EDIT_MERCHANT = gql`
   mutation UpdateMerchant($merchant: MerchantEdit!){
     updateMerchant(merchant: $merchant){
       id
       name
+      url
+      affiliateId
+      disabled
+      postedBy{
+        id
+        name
+      }
+      updatedAt
+      updatedBy{
+        id
+        name
+      }
     }
   }
 `
@@ -22,6 +37,7 @@ const GET_MERCHANT =  gql`
       name
       url
       affiliateId
+      disabled
       postedBy{
         id
         name
@@ -53,7 +69,30 @@ class EditMerchant extends Component {
             if(error) return <div>Error</div>
 
             return(
-              <Mutation mutation={EDIT_MERCHANT}>
+              <Mutation
+                mutation={EDIT_MERCHANT}
+                update={(store, {data: {updateMerchant}}) => {
+
+                  const localStoreData = store.readQuery({
+                    query: MERCHANT_LIST_QUERY
+                  })
+
+                  console.log('localStoreData', localStoreData, updateMerchant);
+
+                  let merchantList = localStoreData.merchantList.merchants
+                  let matchedInStore = _.findWhere(merchantList, {id: updateMerchant.id})
+                  console.log("matchedInStore'", matchedInStore)
+                  console.log("updateMerchant'", updateMerchant)
+                  matchedInStore = {...matchedInStore, ...updateMerchant}
+                  console.log("Mixed", matchedInStore);
+                  // _.findWhere(merchantList, {id
+                  // localStoreData.feed.links.unshift(post)
+                  store.writeQuery({
+                    query: MERCHANT_LIST_QUERY,
+                    localStoreData
+                  })
+                }}
+              >
                 {UpdateMerchant => (
                   <MerchantForm
                     merchant={data.getMerchant}
