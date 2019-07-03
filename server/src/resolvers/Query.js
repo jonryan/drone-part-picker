@@ -51,6 +51,15 @@ async function getFlightController(parent, args, context, info){
   }
 }
 
+async function getMerchant(parent, args, context, info){
+  const merchantFound = await context.prisma.merchant({ id: args.id })
+  if(!merchantFound){
+    throw new Error(`Flight Controller by ID ${args.id} not found.`)
+  }else{
+    return merchantFound
+  }
+}
+
 async function merchantList(parent, args, context, info){
 
   /*
@@ -102,4 +111,5 @@ module.exports = {
   getFlightController,
   userList,
   merchantList,
+  getMerchant,
 }

@@ -8,6 +8,7 @@ type Query {
     flightControllerFeed: FlightControllerFeed!
     userList: UserList!
     merchantList: MerchantList!
+    getMerchant(id: ID!): Merchant!
 }
 
 type Mutation {
@@ -156,6 +157,7 @@ type Merchant {
     postedBy: User
     updatedBy: User
     createdAt: DateTime!
+    updatedAt: DateTime
     affiliateId: String
     disabled: Boolean
 }

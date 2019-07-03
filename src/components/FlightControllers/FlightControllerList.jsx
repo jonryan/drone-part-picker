@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+import Page from '../Page'
 import {LINKS_PER_PAGE} from '../../constants.js';
 import FlightController from './FlightController.jsx';
 import {Container, Row, Col, Card, Table,} from 'react-bootstrap'
@@ -72,75 +73,77 @@ class FlightControllerList extends Component {
   render() {
 
     return (
-      <Query query={FC_LIST_QUERY} variables={this._getQueryVariables()}>
-        {({ loading, error, data, subscribeToMore }) => {
+      <Page title="Add Merchant" className="editor-page">
+        <Query query={FC_LIST_QUERY} variables={this._getQueryVariables()}>
+          {({ loading, error, data, subscribeToMore }) => {
 
-          if (loading) return <div>Fetching</div>
-          if (error) return <div>Error</div>
+            if (loading) return <div>Fetching</div>
+            if (error) return <div>Error</div>
 
-          const FCs = this._getFCsToRender(data)
-          const pageIndex = this.props.match.params.page
-            ? (this.props.match.params.page - 1) * LINKS_PER_PAGE
-            : 0
+            const FCs = this._getFCsToRender(data)
+            const pageIndex = this.props.match.params.page
+              ? (this.props.match.params.page - 1) * LINKS_PER_PAGE
+              : 0
 
 
-          return (
-            <Container fluid className={'mt-4'}>
-              <Row>
-                <Col md={'auto'}>
-                  <Card style={{width: 400}}>
-                    <Card.Header as="h5">Filters</Card.Header>
-                    <Card.Body>
-                      <Card.Title>Filters Header</Card.Title>
-                      <Card.Text>
-                        Filters will go here
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
+            return (
+              <Container fluid className={'mt-4'}>
+                <Row>
+                  <Col md={'auto'}>
+                    <Card style={{width: 400}}>
+                      <Card.Header as="h5">Filters</Card.Header>
+                      <Card.Body>
+                        <Card.Title>Filters Header</Card.Title>
+                        <Card.Text>
+                          Filters will go here
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
 
-                <Col>
-                  <div>
-                    <Table striped bordered hover>
-                      <thead>
-                        <tr>
-                          <th>Name</th>
-                          <th>Manufacturer</th>
-                          <th>Price</th>
-                          <th>Rating</th>
-                          <th>Number of Builds</th>
-                          <th>Release Date</th>
-                          <th>Edit</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {FCs.map((fc, index) => (
-                          <FlightController
-                            fc={fc}
-                            key={index}
-                            index={index + pageIndex}
-                            updateStoreAfterDelete={this._updateStoreAfterDelete}
-                          />
-                        ))}
-                      </tbody>
-                    </Table>
+                  <Col>
+                    <div>
+                      <Table striped bordered hover>
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Manufacturer</th>
+                            <th>Price</th>
+                            <th>Rating</th>
+                            <th>Number of Builds</th>
+                            <th>Release Date</th>
+                            <th>Edit</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {FCs.map((fc, index) => (
+                            <FlightController
+                              fc={fc}
+                              key={index}
+                              index={index + pageIndex}
+                              updateStoreAfterDelete={this._updateStoreAfterDelete}
+                            />
+                          ))}
+                        </tbody>
+                      </Table>
 
-                    <div className="flex ml4 mv3 gray">
-                      <div className="pointer mr2" onClick={this._previousPage}>
-                        Previous
-                      </div>
-                      <div className="pointer" onClick={() => this._nextPage(data)}>
-                        Next
+                      <div className="flex ml4 mv3 gray">
+                        <div className="pointer mr2" onClick={this._previousPage}>
+                          Previous
+                        </div>
+                        <div className="pointer" onClick={() => this._nextPage(data)}>
+                          Next
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
+                  </Col>
+                </Row>
+              </Container>
 
-          )
-        }}
-      </Query>
+            )
+          }}
+        </Query>
+      </Page>
 
     );
   }

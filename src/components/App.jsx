@@ -4,7 +4,6 @@ import '../styles/App.css';
 import '../styles/custom.scss';
 import LinkList from './LinkList.jsx';
 import CreateLink from './CreateLink.jsx';
-import Header from './Header'
 import Login from './Login'
 import Search from './Search'
 import FlightControllerList from './FlightControllers/FlightControllerList'
@@ -13,6 +12,7 @@ import AddFlightController from './AddFlightController.jsx';
 import EditFlightController from './EditFlightController.jsx';
 import AddMerchant from "./Merchant/AddMerchant";
 import ViewMerchants from "./Merchant/ViewMerchants";
+import EditMerchant from "./Merchant/EditMerchant";
 
 function App() {
 
@@ -31,7 +31,7 @@ function App() {
           <Route exact path='/edit-flight-controller/:fc' component={EditFlightController } />
           <Route exact path='/add-merchant' component={AddMerchant } />
           <Route exact path='/merchants' component={ViewMerchants } />
-          {/*<Route exact path='/edit-merchant/:merchant' component={EditMerchant } />*/}
+          <Route exact path='/edit-merchant/:merchant' component={EditMerchant } />
         </Switch>
       </div>
     </div>

@@ -58,7 +58,6 @@ class MerchantForm extends Component {
                             autoComplete='off'
                             className="form-control"
                             rows="8"
-                            required
                           />
                         </fieldset>
                       </Form.Group>

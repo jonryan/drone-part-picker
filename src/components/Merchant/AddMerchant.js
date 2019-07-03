@@ -41,7 +41,7 @@ class AddMerchant extends Component {
                   // TODO: Figure out how to do this with the returne from my graphQL response
                   // const slug = _.get(data, 'createArticle.article.slug')
                   // history.push(`/flightcontroller/${slug}`)
-                  history.push(`/products/flight-controller/1`)
+                  history.push(`/merchants`)
                 }}
               />
             </Page>
