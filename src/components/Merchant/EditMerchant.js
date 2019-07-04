@@ -48,6 +48,15 @@ const GET_MERCHANT =  gql`
         id
         name
       }
+      flightControllers{
+        price
+        inStock
+        url
+        flightController{
+          id
+          name
+        }
+      }
     }
   }
 `

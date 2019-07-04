@@ -94,6 +94,20 @@ class MerchantForm extends Component {
                 </Fragment>
               )}
             </Formik>
+
+            <h3 className='mt-5'>Flight Controllers</h3>
+            {merchant.flightControllers && merchant.flightControllers.length > 0 && (
+              <ul>
+                {merchant.flightControllers.map((fc, index)=> (
+                  <li>
+                    {fc.flightController.name} - {fc.price} - {fc.url}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+
+
           </Col>
         </Row>
       </Container>
