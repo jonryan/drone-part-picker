@@ -20,6 +20,16 @@ export const FC_LIST_QUERY  = gql`
         postedBy{
           email
         }
+        merchantLinks{
+          id
+          price
+          url
+          inStock
+          merchant{
+            id
+            name
+          }
+        }
       }
       count
     }
