@@ -130,6 +130,22 @@ async function deleteFlightControllerMerchantLink(parent, args, context, info){
   return linkFound
 }
 
+async function deleteMerchant(parent, args, context, info){
+  if(!args.id){
+    throw new Error('You need to pass a valid merchant id')
+  }
+
+  const merchantFound = await context.prisma.merchant({id: args.id})
+
+  if(merchantFound){
+    await context.prisma.deleteMerchant({id: args.id})
+  }else{
+    throw new Error('You need to pass a valid merchant id')
+  }
+
+  return merchantFound
+}
+
 async function updateMerchant(parent, args, context, info){
   console.log('updateMerchant');
   const userId = getUserId(context)
@@ -227,6 +243,7 @@ module.exports = {
   updateMerchant,
   addFlightControllerMerchantLink,
   deleteFlightControllerMerchantLink,
+  deleteMerchant,
 }
 
 // Mutation: {

@@ -77,14 +77,9 @@ class EditMerchant extends Component {
                     query: MERCHANT_LIST_QUERY
                   })
 
-                  console.log('localStoreData', localStoreData, updateMerchant);
-
                   let merchantList = localStoreData.merchantList.merchants
                   let matchedInStore = _.findWhere(merchantList, {id: updateMerchant.id})
-                  console.log("matchedInStore'", matchedInStore)
-                  console.log("updateMerchant'", updateMerchant)
                   matchedInStore = {...matchedInStore, ...updateMerchant}
-                  console.log("Mixed", matchedInStore);
                   // _.findWhere(merchantList, {id
                   // localStoreData.feed.links.unshift(post)
                   store.writeQuery({
