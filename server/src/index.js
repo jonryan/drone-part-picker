@@ -11,6 +11,7 @@ const Subscription = require('./resolvers/Subscription')
 const Vote = require('./resolvers/Vote')
 const FlightController = require('./resolvers/FlightController')
 const Merchant = require('./resolvers/Merchant')
+const FlightControllerMerchantLink = require('./resolvers/FlightControllerMerchantLink')
 
 const resolvers = {
   Query,
@@ -21,6 +22,7 @@ const resolvers = {
   Vote,
   FlightController,
   Merchant,
+  FlightControllerMerchantLink,
 }
 
 const server = new GraphQLServer({

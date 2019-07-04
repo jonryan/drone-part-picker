@@ -7,7 +7,7 @@ import MerchantForm from './MerchantForm'
 let _ = require('underscore')
 
 
-const FC_MUTATION = gql`
+const MERCHANT_MUTATION = gql`
   mutation AddMerchant($merchant: MerchantInput!){
     addMerchant(merchant: $merchant){
       id
@@ -23,16 +23,13 @@ class AddMerchant extends Component {
     const history = this.props.history
 
     return (
-      <Mutation mutation={FC_MUTATION}>
+      <Mutation mutation={MERCHANT_MUTATION}>
           {AddMerchant => (
             <Page title="Flight Controller Edit" className="editor-page">
               <h1>Add a Merchant</h1>
               <MerchantForm
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
-                  console.log("values", values)
                   const { data } = await AddMerchant({ variables: { merchant: values } })
-
-                  console.log('data', data)
                   setSubmitting(false)
                   // TODO: Get errors coming back from API in errors prop so they'll be picked up here
                   // setErrors(transformGraphQLErrors(data.AddMerchant.errors))

@@ -7,6 +7,10 @@ module.exports = {
   count: Int!
 }
 
+type AggregateFlightControllerMerchantLink {
+  count: Int!
+}
+
 type AggregateLink {
   count: Int!
 }
@@ -35,6 +39,7 @@ type FlightController {
   updatedAt: DateTime
   postedBy: User
   updatedBy: User
+  merchantLinks(where: FlightControllerMerchantLinkWhereInput, orderBy: FlightControllerMerchantLinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlightControllerMerchantLink!]
   name: String
   disabled: Boolean
   releaseDate: DateTime
@@ -75,6 +80,7 @@ input FlightControllerCreateInput {
   id: ID
   postedBy: UserCreateOneWithoutFlightControllersInput
   updatedBy: UserCreateOneWithoutEditedFlightControllersInput
+  merchantLinks: FlightControllerMerchantLinkCreateManyWithoutFlightControllerInput
   name: String
   disabled: Boolean
   releaseDate: DateTime
@@ -115,9 +121,49 @@ input FlightControllerCreateManyWithoutUpdatedByInput {
   connect: [FlightControllerWhereUniqueInput!]
 }
 
+input FlightControllerCreateOneWithoutMerchantLinksInput {
+  create: FlightControllerCreateWithoutMerchantLinksInput
+  connect: FlightControllerWhereUniqueInput
+}
+
+input FlightControllerCreateWithoutMerchantLinksInput {
+  id: ID
+  postedBy: UserCreateOneWithoutFlightControllersInput
+  updatedBy: UserCreateOneWithoutEditedFlightControllersInput
+  name: String
+  disabled: Boolean
+  releaseDate: DateTime
+  uarts: Int
+  gyroOne: Float
+  gyroTwo: Float
+  weightInGrams: Float
+  cpu: String
+  description: String
+  dimensions: String
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
+  builtInReceiver: String
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
+}
+
 input FlightControllerCreateWithoutPostedByInput {
   id: ID
   updatedBy: UserCreateOneWithoutEditedFlightControllersInput
+  merchantLinks: FlightControllerMerchantLinkCreateManyWithoutFlightControllerInput
   name: String
   disabled: Boolean
   releaseDate: DateTime
@@ -151,6 +197,7 @@ input FlightControllerCreateWithoutPostedByInput {
 input FlightControllerCreateWithoutUpdatedByInput {
   id: ID
   postedBy: UserCreateOneWithoutFlightControllersInput
+  merchantLinks: FlightControllerMerchantLinkCreateManyWithoutFlightControllerInput
   name: String
   disabled: Boolean
   releaseDate: DateTime
@@ -184,6 +231,369 @@ input FlightControllerCreateWithoutUpdatedByInput {
 type FlightControllerEdge {
   node: FlightController!
   cursor: String!
+}
+
+type FlightControllerMerchantLink {
+  id: ID!
+  merchant: Merchant!
+  flightController: FlightController!
+  url: String!
+  price: Float!
+  inStock: Boolean
+  postedBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type FlightControllerMerchantLinkConnection {
+  pageInfo: PageInfo!
+  edges: [FlightControllerMerchantLinkEdge]!
+  aggregate: AggregateFlightControllerMerchantLink!
+}
+
+input FlightControllerMerchantLinkCreateInput {
+  id: ID
+  merchant: MerchantCreateOneWithoutFlightControllersInput!
+  flightController: FlightControllerCreateOneWithoutMerchantLinksInput!
+  url: String!
+  price: Float!
+  inStock: Boolean
+  postedBy: UserCreateOneWithoutAddedFlightControllersInput!
+}
+
+input FlightControllerMerchantLinkCreateManyWithoutFlightControllerInput {
+  create: [FlightControllerMerchantLinkCreateWithoutFlightControllerInput!]
+  connect: [FlightControllerMerchantLinkWhereUniqueInput!]
+}
+
+input FlightControllerMerchantLinkCreateManyWithoutMerchantInput {
+  create: [FlightControllerMerchantLinkCreateWithoutMerchantInput!]
+  connect: [FlightControllerMerchantLinkWhereUniqueInput!]
+}
+
+input FlightControllerMerchantLinkCreateManyWithoutPostedByInput {
+  create: [FlightControllerMerchantLinkCreateWithoutPostedByInput!]
+  connect: [FlightControllerMerchantLinkWhereUniqueInput!]
+}
+
+input FlightControllerMerchantLinkCreateWithoutFlightControllerInput {
+  id: ID
+  merchant: MerchantCreateOneWithoutFlightControllersInput!
+  url: String!
+  price: Float!
+  inStock: Boolean
+  postedBy: UserCreateOneWithoutAddedFlightControllersInput!
+}
+
+input FlightControllerMerchantLinkCreateWithoutMerchantInput {
+  id: ID
+  flightController: FlightControllerCreateOneWithoutMerchantLinksInput!
+  url: String!
+  price: Float!
+  inStock: Boolean
+  postedBy: UserCreateOneWithoutAddedFlightControllersInput!
+}
+
+input FlightControllerMerchantLinkCreateWithoutPostedByInput {
+  id: ID
+  merchant: MerchantCreateOneWithoutFlightControllersInput!
+  flightController: FlightControllerCreateOneWithoutMerchantLinksInput!
+  url: String!
+  price: Float!
+  inStock: Boolean
+}
+
+type FlightControllerMerchantLinkEdge {
+  node: FlightControllerMerchantLink!
+  cursor: String!
+}
+
+enum FlightControllerMerchantLinkOrderByInput {
+  id_ASC
+  id_DESC
+  url_ASC
+  url_DESC
+  price_ASC
+  price_DESC
+  inStock_ASC
+  inStock_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type FlightControllerMerchantLinkPreviousValues {
+  id: ID!
+  url: String!
+  price: Float!
+  inStock: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+input FlightControllerMerchantLinkScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  price: Float
+  price_not: Float
+  price_in: [Float!]
+  price_not_in: [Float!]
+  price_lt: Float
+  price_lte: Float
+  price_gt: Float
+  price_gte: Float
+  inStock: Boolean
+  inStock_not: Boolean
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [FlightControllerMerchantLinkScalarWhereInput!]
+  OR: [FlightControllerMerchantLinkScalarWhereInput!]
+  NOT: [FlightControllerMerchantLinkScalarWhereInput!]
+}
+
+type FlightControllerMerchantLinkSubscriptionPayload {
+  mutation: MutationType!
+  node: FlightControllerMerchantLink
+  updatedFields: [String!]
+  previousValues: FlightControllerMerchantLinkPreviousValues
+}
+
+input FlightControllerMerchantLinkSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: FlightControllerMerchantLinkWhereInput
+  AND: [FlightControllerMerchantLinkSubscriptionWhereInput!]
+  OR: [FlightControllerMerchantLinkSubscriptionWhereInput!]
+  NOT: [FlightControllerMerchantLinkSubscriptionWhereInput!]
+}
+
+input FlightControllerMerchantLinkUpdateInput {
+  merchant: MerchantUpdateOneRequiredWithoutFlightControllersInput
+  flightController: FlightControllerUpdateOneRequiredWithoutMerchantLinksInput
+  url: String
+  price: Float
+  inStock: Boolean
+  postedBy: UserUpdateOneRequiredWithoutAddedFlightControllersInput
+}
+
+input FlightControllerMerchantLinkUpdateManyDataInput {
+  url: String
+  price: Float
+  inStock: Boolean
+}
+
+input FlightControllerMerchantLinkUpdateManyMutationInput {
+  url: String
+  price: Float
+  inStock: Boolean
+}
+
+input FlightControllerMerchantLinkUpdateManyWithoutFlightControllerInput {
+  create: [FlightControllerMerchantLinkCreateWithoutFlightControllerInput!]
+  delete: [FlightControllerMerchantLinkWhereUniqueInput!]
+  connect: [FlightControllerMerchantLinkWhereUniqueInput!]
+  set: [FlightControllerMerchantLinkWhereUniqueInput!]
+  disconnect: [FlightControllerMerchantLinkWhereUniqueInput!]
+  update: [FlightControllerMerchantLinkUpdateWithWhereUniqueWithoutFlightControllerInput!]
+  upsert: [FlightControllerMerchantLinkUpsertWithWhereUniqueWithoutFlightControllerInput!]
+  deleteMany: [FlightControllerMerchantLinkScalarWhereInput!]
+  updateMany: [FlightControllerMerchantLinkUpdateManyWithWhereNestedInput!]
+}
+
+input FlightControllerMerchantLinkUpdateManyWithoutMerchantInput {
+  create: [FlightControllerMerchantLinkCreateWithoutMerchantInput!]
+  delete: [FlightControllerMerchantLinkWhereUniqueInput!]
+  connect: [FlightControllerMerchantLinkWhereUniqueInput!]
+  set: [FlightControllerMerchantLinkWhereUniqueInput!]
+  disconnect: [FlightControllerMerchantLinkWhereUniqueInput!]
+  update: [FlightControllerMerchantLinkUpdateWithWhereUniqueWithoutMerchantInput!]
+  upsert: [FlightControllerMerchantLinkUpsertWithWhereUniqueWithoutMerchantInput!]
+  deleteMany: [FlightControllerMerchantLinkScalarWhereInput!]
+  updateMany: [FlightControllerMerchantLinkUpdateManyWithWhereNestedInput!]
+}
+
+input FlightControllerMerchantLinkUpdateManyWithoutPostedByInput {
+  create: [FlightControllerMerchantLinkCreateWithoutPostedByInput!]
+  delete: [FlightControllerMerchantLinkWhereUniqueInput!]
+  connect: [FlightControllerMerchantLinkWhereUniqueInput!]
+  set: [FlightControllerMerchantLinkWhereUniqueInput!]
+  disconnect: [FlightControllerMerchantLinkWhereUniqueInput!]
+  update: [FlightControllerMerchantLinkUpdateWithWhereUniqueWithoutPostedByInput!]
+  upsert: [FlightControllerMerchantLinkUpsertWithWhereUniqueWithoutPostedByInput!]
+  deleteMany: [FlightControllerMerchantLinkScalarWhereInput!]
+  updateMany: [FlightControllerMerchantLinkUpdateManyWithWhereNestedInput!]
+}
+
+input FlightControllerMerchantLinkUpdateManyWithWhereNestedInput {
+  where: FlightControllerMerchantLinkScalarWhereInput!
+  data: FlightControllerMerchantLinkUpdateManyDataInput!
+}
+
+input FlightControllerMerchantLinkUpdateWithoutFlightControllerDataInput {
+  merchant: MerchantUpdateOneRequiredWithoutFlightControllersInput
+  url: String
+  price: Float
+  inStock: Boolean
+  postedBy: UserUpdateOneRequiredWithoutAddedFlightControllersInput
+}
+
+input FlightControllerMerchantLinkUpdateWithoutMerchantDataInput {
+  flightController: FlightControllerUpdateOneRequiredWithoutMerchantLinksInput
+  url: String
+  price: Float
+  inStock: Boolean
+  postedBy: UserUpdateOneRequiredWithoutAddedFlightControllersInput
+}
+
+input FlightControllerMerchantLinkUpdateWithoutPostedByDataInput {
+  merchant: MerchantUpdateOneRequiredWithoutFlightControllersInput
+  flightController: FlightControllerUpdateOneRequiredWithoutMerchantLinksInput
+  url: String
+  price: Float
+  inStock: Boolean
+}
+
+input FlightControllerMerchantLinkUpdateWithWhereUniqueWithoutFlightControllerInput {
+  where: FlightControllerMerchantLinkWhereUniqueInput!
+  data: FlightControllerMerchantLinkUpdateWithoutFlightControllerDataInput!
+}
+
+input FlightControllerMerchantLinkUpdateWithWhereUniqueWithoutMerchantInput {
+  where: FlightControllerMerchantLinkWhereUniqueInput!
+  data: FlightControllerMerchantLinkUpdateWithoutMerchantDataInput!
+}
+
+input FlightControllerMerchantLinkUpdateWithWhereUniqueWithoutPostedByInput {
+  where: FlightControllerMerchantLinkWhereUniqueInput!
+  data: FlightControllerMerchantLinkUpdateWithoutPostedByDataInput!
+}
+
+input FlightControllerMerchantLinkUpsertWithWhereUniqueWithoutFlightControllerInput {
+  where: FlightControllerMerchantLinkWhereUniqueInput!
+  update: FlightControllerMerchantLinkUpdateWithoutFlightControllerDataInput!
+  create: FlightControllerMerchantLinkCreateWithoutFlightControllerInput!
+}
+
+input FlightControllerMerchantLinkUpsertWithWhereUniqueWithoutMerchantInput {
+  where: FlightControllerMerchantLinkWhereUniqueInput!
+  update: FlightControllerMerchantLinkUpdateWithoutMerchantDataInput!
+  create: FlightControllerMerchantLinkCreateWithoutMerchantInput!
+}
+
+input FlightControllerMerchantLinkUpsertWithWhereUniqueWithoutPostedByInput {
+  where: FlightControllerMerchantLinkWhereUniqueInput!
+  update: FlightControllerMerchantLinkUpdateWithoutPostedByDataInput!
+  create: FlightControllerMerchantLinkCreateWithoutPostedByInput!
+}
+
+input FlightControllerMerchantLinkWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  merchant: MerchantWhereInput
+  flightController: FlightControllerWhereInput
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  price: Float
+  price_not: Float
+  price_in: [Float!]
+  price_not_in: [Float!]
+  price_lt: Float
+  price_lte: Float
+  price_gt: Float
+  price_gte: Float
+  inStock: Boolean
+  inStock_not: Boolean
+  postedBy: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [FlightControllerMerchantLinkWhereInput!]
+  OR: [FlightControllerMerchantLinkWhereInput!]
+  NOT: [FlightControllerMerchantLinkWhereInput!]
+}
+
+input FlightControllerMerchantLinkWhereUniqueInput {
+  id: ID
 }
 
 enum FlightControllerOrderByInput {
@@ -512,6 +922,7 @@ input FlightControllerSubscriptionWhereInput {
 input FlightControllerUpdateInput {
   postedBy: UserUpdateOneWithoutFlightControllersInput
   updatedBy: UserUpdateOneWithoutEditedFlightControllersInput
+  merchantLinks: FlightControllerMerchantLinkUpdateManyWithoutFlightControllerInput
   name: String
   disabled: Boolean
   releaseDate: DateTime
@@ -633,8 +1044,49 @@ input FlightControllerUpdateManyWithWhereNestedInput {
   data: FlightControllerUpdateManyDataInput!
 }
 
+input FlightControllerUpdateOneRequiredWithoutMerchantLinksInput {
+  create: FlightControllerCreateWithoutMerchantLinksInput
+  update: FlightControllerUpdateWithoutMerchantLinksDataInput
+  upsert: FlightControllerUpsertWithoutMerchantLinksInput
+  connect: FlightControllerWhereUniqueInput
+}
+
+input FlightControllerUpdateWithoutMerchantLinksDataInput {
+  postedBy: UserUpdateOneWithoutFlightControllersInput
+  updatedBy: UserUpdateOneWithoutEditedFlightControllersInput
+  name: String
+  disabled: Boolean
+  releaseDate: DateTime
+  uarts: Int
+  gyroOne: Float
+  gyroTwo: Float
+  weightInGrams: Float
+  cpu: String
+  description: String
+  dimensions: String
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  ledWS2812Support: Boolean
+  rssiPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
+  builtInReceiver: String
+  threeVoltOutput: Boolean
+  fiveVoltOut: Boolean
+  cameraControl: Boolean
+}
+
 input FlightControllerUpdateWithoutPostedByDataInput {
   updatedBy: UserUpdateOneWithoutEditedFlightControllersInput
+  merchantLinks: FlightControllerMerchantLinkUpdateManyWithoutFlightControllerInput
   name: String
   disabled: Boolean
   releaseDate: DateTime
@@ -667,6 +1119,7 @@ input FlightControllerUpdateWithoutPostedByDataInput {
 
 input FlightControllerUpdateWithoutUpdatedByDataInput {
   postedBy: UserUpdateOneWithoutFlightControllersInput
+  merchantLinks: FlightControllerMerchantLinkUpdateManyWithoutFlightControllerInput
   name: String
   disabled: Boolean
   releaseDate: DateTime
@@ -705,6 +1158,11 @@ input FlightControllerUpdateWithWhereUniqueWithoutPostedByInput {
 input FlightControllerUpdateWithWhereUniqueWithoutUpdatedByInput {
   where: FlightControllerWhereUniqueInput!
   data: FlightControllerUpdateWithoutUpdatedByDataInput!
+}
+
+input FlightControllerUpsertWithoutMerchantLinksInput {
+  update: FlightControllerUpdateWithoutMerchantLinksDataInput!
+  create: FlightControllerCreateWithoutMerchantLinksInput!
 }
 
 input FlightControllerUpsertWithWhereUniqueWithoutPostedByInput {
@@ -752,6 +1210,9 @@ input FlightControllerWhereInput {
   updatedAt_gte: DateTime
   postedBy: UserWhereInput
   updatedBy: UserWhereInput
+  merchantLinks_every: FlightControllerMerchantLinkWhereInput
+  merchantLinks_some: FlightControllerMerchantLinkWhereInput
+  merchantLinks_none: FlightControllerMerchantLinkWhereInput
   name: String
   name_not: String
   name_in: [String!]
@@ -1216,6 +1677,7 @@ type Merchant {
   updatedAt: DateTime
   postedBy: User
   updatedBy: User
+  flightControllers(where: FlightControllerMerchantLinkWhereInput, orderBy: FlightControllerMerchantLinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlightControllerMerchantLink!]
   name: String
   url: String
   affiliateId: String
@@ -1232,6 +1694,7 @@ input MerchantCreateInput {
   id: ID
   postedBy: UserCreateOneWithoutAddedMerchantsInput
   updatedBy: UserCreateOneWithoutEditedMerchantsInput
+  flightControllers: FlightControllerMerchantLinkCreateManyWithoutMerchantInput
   name: String
   url: String
   affiliateId: String
@@ -1248,9 +1711,25 @@ input MerchantCreateManyWithoutUpdatedByInput {
   connect: [MerchantWhereUniqueInput!]
 }
 
+input MerchantCreateOneWithoutFlightControllersInput {
+  create: MerchantCreateWithoutFlightControllersInput
+  connect: MerchantWhereUniqueInput
+}
+
+input MerchantCreateWithoutFlightControllersInput {
+  id: ID
+  postedBy: UserCreateOneWithoutAddedMerchantsInput
+  updatedBy: UserCreateOneWithoutEditedMerchantsInput
+  name: String
+  url: String
+  affiliateId: String
+  disabled: Boolean
+}
+
 input MerchantCreateWithoutPostedByInput {
   id: ID
   updatedBy: UserCreateOneWithoutEditedMerchantsInput
+  flightControllers: FlightControllerMerchantLinkCreateManyWithoutMerchantInput
   name: String
   url: String
   affiliateId: String
@@ -1260,6 +1739,7 @@ input MerchantCreateWithoutPostedByInput {
 input MerchantCreateWithoutUpdatedByInput {
   id: ID
   postedBy: UserCreateOneWithoutAddedMerchantsInput
+  flightControllers: FlightControllerMerchantLinkCreateManyWithoutMerchantInput
   name: String
   url: String
   affiliateId: String
@@ -1399,6 +1879,7 @@ input MerchantSubscriptionWhereInput {
 input MerchantUpdateInput {
   postedBy: UserUpdateOneWithoutAddedMerchantsInput
   updatedBy: UserUpdateOneWithoutEditedMerchantsInput
+  flightControllers: FlightControllerMerchantLinkUpdateManyWithoutMerchantInput
   name: String
   url: String
   affiliateId: String
@@ -1448,8 +1929,25 @@ input MerchantUpdateManyWithWhereNestedInput {
   data: MerchantUpdateManyDataInput!
 }
 
+input MerchantUpdateOneRequiredWithoutFlightControllersInput {
+  create: MerchantCreateWithoutFlightControllersInput
+  update: MerchantUpdateWithoutFlightControllersDataInput
+  upsert: MerchantUpsertWithoutFlightControllersInput
+  connect: MerchantWhereUniqueInput
+}
+
+input MerchantUpdateWithoutFlightControllersDataInput {
+  postedBy: UserUpdateOneWithoutAddedMerchantsInput
+  updatedBy: UserUpdateOneWithoutEditedMerchantsInput
+  name: String
+  url: String
+  affiliateId: String
+  disabled: Boolean
+}
+
 input MerchantUpdateWithoutPostedByDataInput {
   updatedBy: UserUpdateOneWithoutEditedMerchantsInput
+  flightControllers: FlightControllerMerchantLinkUpdateManyWithoutMerchantInput
   name: String
   url: String
   affiliateId: String
@@ -1458,6 +1956,7 @@ input MerchantUpdateWithoutPostedByDataInput {
 
 input MerchantUpdateWithoutUpdatedByDataInput {
   postedBy: UserUpdateOneWithoutAddedMerchantsInput
+  flightControllers: FlightControllerMerchantLinkUpdateManyWithoutMerchantInput
   name: String
   url: String
   affiliateId: String
@@ -1472,6 +1971,11 @@ input MerchantUpdateWithWhereUniqueWithoutPostedByInput {
 input MerchantUpdateWithWhereUniqueWithoutUpdatedByInput {
   where: MerchantWhereUniqueInput!
   data: MerchantUpdateWithoutUpdatedByDataInput!
+}
+
+input MerchantUpsertWithoutFlightControllersInput {
+  update: MerchantUpdateWithoutFlightControllersDataInput!
+  create: MerchantCreateWithoutFlightControllersInput!
 }
 
 input MerchantUpsertWithWhereUniqueWithoutPostedByInput {
@@ -1519,6 +2023,9 @@ input MerchantWhereInput {
   updatedAt_gte: DateTime
   postedBy: UserWhereInput
   updatedBy: UserWhereInput
+  flightControllers_every: FlightControllerMerchantLinkWhereInput
+  flightControllers_some: FlightControllerMerchantLinkWhereInput
+  flightControllers_none: FlightControllerMerchantLinkWhereInput
   name: String
   name_not: String
   name_in: [String!]
@@ -1579,6 +2086,12 @@ type Mutation {
   upsertFlightController(where: FlightControllerWhereUniqueInput!, create: FlightControllerCreateInput!, update: FlightControllerUpdateInput!): FlightController!
   deleteFlightController(where: FlightControllerWhereUniqueInput!): FlightController
   deleteManyFlightControllers(where: FlightControllerWhereInput): BatchPayload!
+  createFlightControllerMerchantLink(data: FlightControllerMerchantLinkCreateInput!): FlightControllerMerchantLink!
+  updateFlightControllerMerchantLink(data: FlightControllerMerchantLinkUpdateInput!, where: FlightControllerMerchantLinkWhereUniqueInput!): FlightControllerMerchantLink
+  updateManyFlightControllerMerchantLinks(data: FlightControllerMerchantLinkUpdateManyMutationInput!, where: FlightControllerMerchantLinkWhereInput): BatchPayload!
+  upsertFlightControllerMerchantLink(where: FlightControllerMerchantLinkWhereUniqueInput!, create: FlightControllerMerchantLinkCreateInput!, update: FlightControllerMerchantLinkUpdateInput!): FlightControllerMerchantLink!
+  deleteFlightControllerMerchantLink(where: FlightControllerMerchantLinkWhereUniqueInput!): FlightControllerMerchantLink
+  deleteManyFlightControllerMerchantLinks(where: FlightControllerMerchantLinkWhereInput): BatchPayload!
   createLink(data: LinkCreateInput!): Link!
   updateLink(data: LinkUpdateInput!, where: LinkWhereUniqueInput!): Link
   updateManyLinks(data: LinkUpdateManyMutationInput!, where: LinkWhereInput): BatchPayload!
@@ -1625,6 +2138,9 @@ type Query {
   flightController(where: FlightControllerWhereUniqueInput!): FlightController
   flightControllers(where: FlightControllerWhereInput, orderBy: FlightControllerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlightController]!
   flightControllersConnection(where: FlightControllerWhereInput, orderBy: FlightControllerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FlightControllerConnection!
+  flightControllerMerchantLink(where: FlightControllerMerchantLinkWhereUniqueInput!): FlightControllerMerchantLink
+  flightControllerMerchantLinks(where: FlightControllerMerchantLinkWhereInput, orderBy: FlightControllerMerchantLinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlightControllerMerchantLink]!
+  flightControllerMerchantLinksConnection(where: FlightControllerMerchantLinkWhereInput, orderBy: FlightControllerMerchantLinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FlightControllerMerchantLinkConnection!
   link(where: LinkWhereUniqueInput!): Link
   links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link]!
   linksConnection(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LinkConnection!
@@ -1642,6 +2158,7 @@ type Query {
 
 type Subscription {
   flightController(where: FlightControllerSubscriptionWhereInput): FlightControllerSubscriptionPayload
+  flightControllerMerchantLink(where: FlightControllerMerchantLinkSubscriptionWhereInput): FlightControllerMerchantLinkSubscriptionPayload
   link(where: LinkSubscriptionWhereInput): LinkSubscriptionPayload
   merchant(where: MerchantSubscriptionWhereInput): MerchantSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
@@ -1659,6 +2176,7 @@ type User {
   editedFlightControllers(where: FlightControllerWhereInput, orderBy: FlightControllerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlightController!]
   addedMerchants(where: MerchantWhereInput, orderBy: MerchantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Merchant!]
   editedMerchants(where: MerchantWhereInput, orderBy: MerchantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Merchant!]
+  AddedFlightControllers(where: FlightControllerMerchantLinkWhereInput, orderBy: FlightControllerMerchantLinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlightControllerMerchantLink!]
 }
 
 type UserConnection {
@@ -1678,6 +2196,12 @@ input UserCreateInput {
   editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
+}
+
+input UserCreateOneWithoutAddedFlightControllersInput {
+  create: UserCreateWithoutAddedFlightControllersInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutAddedMerchantsInput {
@@ -1710,6 +2234,19 @@ input UserCreateOneWithoutVotesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutAddedFlightControllersInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  links: LinkCreateManyWithoutPostedByInput
+  votes: VoteCreateManyWithoutUserInput
+  flightControllers: FlightControllerCreateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
+  addedMerchants: MerchantCreateManyWithoutPostedByInput
+  editedMerchants: MerchantCreateManyWithoutUpdatedByInput
+}
+
 input UserCreateWithoutAddedMerchantsInput {
   id: ID
   name: String!
@@ -1720,6 +2257,7 @@ input UserCreateWithoutAddedMerchantsInput {
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
   editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
 }
 
 input UserCreateWithoutEditedFlightControllersInput {
@@ -1732,6 +2270,7 @@ input UserCreateWithoutEditedFlightControllersInput {
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
 }
 
 input UserCreateWithoutEditedMerchantsInput {
@@ -1744,6 +2283,7 @@ input UserCreateWithoutEditedMerchantsInput {
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
   editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
 }
 
 input UserCreateWithoutFlightControllersInput {
@@ -1756,6 +2296,7 @@ input UserCreateWithoutFlightControllersInput {
   editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
 }
 
 input UserCreateWithoutLinksInput {
@@ -1768,6 +2309,7 @@ input UserCreateWithoutLinksInput {
   editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
 }
 
 input UserCreateWithoutVotesInput {
@@ -1780,6 +2322,7 @@ input UserCreateWithoutVotesInput {
   editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
 }
 
 type UserEdge {
@@ -1833,12 +2376,20 @@ input UserUpdateInput {
   editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
+}
+
+input UserUpdateOneRequiredWithoutAddedFlightControllersInput {
+  create: UserCreateWithoutAddedFlightControllersInput
+  update: UserUpdateWithoutAddedFlightControllersDataInput
+  upsert: UserUpsertWithoutAddedFlightControllersInput
+  connect: UserWhereUniqueInput
 }
 
 input UserUpdateOneRequiredWithoutVotesInput {
@@ -1893,6 +2444,18 @@ input UserUpdateOneWithoutLinksInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateWithoutAddedFlightControllersDataInput {
+  name: String
+  email: String
+  password: String
+  links: LinkUpdateManyWithoutPostedByInput
+  votes: VoteUpdateManyWithoutUserInput
+  flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
+  addedMerchants: MerchantUpdateManyWithoutPostedByInput
+  editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
+}
+
 input UserUpdateWithoutAddedMerchantsDataInput {
   name: String
   email: String
@@ -1902,6 +2465,7 @@ input UserUpdateWithoutAddedMerchantsDataInput {
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
   editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateWithoutEditedFlightControllersDataInput {
@@ -1913,6 +2477,7 @@ input UserUpdateWithoutEditedFlightControllersDataInput {
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateWithoutEditedMerchantsDataInput {
@@ -1924,6 +2489,7 @@ input UserUpdateWithoutEditedMerchantsDataInput {
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
   editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateWithoutFlightControllersDataInput {
@@ -1935,6 +2501,7 @@ input UserUpdateWithoutFlightControllersDataInput {
   editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateWithoutLinksDataInput {
@@ -1946,6 +2513,7 @@ input UserUpdateWithoutLinksDataInput {
   editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateWithoutVotesDataInput {
@@ -1957,6 +2525,12 @@ input UserUpdateWithoutVotesDataInput {
   editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
+}
+
+input UserUpsertWithoutAddedFlightControllersInput {
+  update: UserUpdateWithoutAddedFlightControllersDataInput!
+  create: UserCreateWithoutAddedFlightControllersInput!
 }
 
 input UserUpsertWithoutAddedMerchantsInput {
@@ -2064,6 +2638,9 @@ input UserWhereInput {
   editedMerchants_every: MerchantWhereInput
   editedMerchants_some: MerchantWhereInput
   editedMerchants_none: MerchantWhereInput
+  AddedFlightControllers_every: FlightControllerMerchantLinkWhereInput
+  AddedFlightControllers_some: FlightControllerMerchantLinkWhereInput
+  AddedFlightControllers_none: FlightControllerMerchantLinkWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

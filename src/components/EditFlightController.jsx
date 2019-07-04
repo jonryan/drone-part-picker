@@ -51,9 +51,19 @@ const GET_FLIGHTCONTROLLER = gql`
       antiVibrationGrommets
       builtInReceiver
       postedBy{
-        id,
-        name,
+        id
+        name
         email
+      }
+      merchantLinks{
+        id
+        price
+        url
+        inStock
+        merchant{
+          id
+          name
+        }
       }
     }
   }
