@@ -1,10 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
-import {FC_LIST_QUERY} from "./FlightControllerList";
-import {LINKS_PER_PAGE} from "../../constants";
 import FormErrors from '../FormErrors.js'
-import {Container, FormControl, Row, Col, Form} from 'react-bootstrap'
+import {Container, Button, Table, Row, Col, Form} from 'react-bootstrap'
 import {Field, Formik} from 'formik'
+import ProductMerchantForm from "../Merchant/ProductMerchantForm";
 
 const CheckboxInput = (props) => (
   <Field {...props} render={({field}) => {
@@ -16,11 +15,32 @@ const CheckboxInput = (props) => (
 );
 
 class FlightControllerForm extends Component {
+  constructor(props)
+  {
+    super(props);
 
+    this.state = {
+      showMerchantLinkModal: false,
+      merchantToEdit: {},
+    }
+  }
+
+  _openMerchantLinkModal =() => {
+    this.setState({
+      merchantToEdit: {},
+      showMerchantLinkModal: true
+    })
+  }
+  _hideMerchantLinkModal =() => {
+    this.setState({
+      showMerchantLinkModal: false
+    })
+  }
 
   render() {
 
     let {fc, onSubmit} = this.props;
+    let {showMerchantLinkModal} = this.state
 
     return (
       <Container>
@@ -57,7 +77,6 @@ class FlightControllerForm extends Component {
             >
               {({values, isSubmitting, handleSubmit, setFieldValue, errors}) => (
                 <Fragment>
-                  {console.log('values', values)}
                   <FormErrors errors={errors}/>
                   <form onSubmit={(formSubmitValues, anything) => {
                     console.log('formSubmitValues', formSubmitValues, anything);
@@ -204,88 +223,141 @@ class FlightControllerForm extends Component {
 
                       <div className="form-check">
                         <CheckboxInput
-                            name="osd"
-                            className="form-check-input"
-                          />
-                          <label title="Built-in OSD" type="checkbox" className="form-check-label">
-                            Built-in OSD
-                          </label>
+                          name="osd"
+                          className="form-check-input"
+                        />
+                        <label title="Built-in OSD" type="checkbox" className="form-check-label">
+                          Built-in OSD
+                        </label>
                       </div>
 
                       <div className="form-check">
                         <CheckboxInput
-                            name="barometer"
-                            className="form-check-input"
-                          />
-                          <label title="Built-in Barometer" type="checkbox"  className="form-check-label">
-                            Built-in Barometer
-                          </label>
+                          name="barometer"
+                          className="form-check-input"
+                        />
+                        <label title="Built-in Barometer" type="checkbox"  className="form-check-label">
+                          Built-in Barometer
+                        </label>
                       </div>
 
                       <div className="form-check">
                         <CheckboxInput
-                            name="spektrumPort"
-                            className="form-check-input"
-                          />
-                          <label title="Spektrum Satellite Port" type="checkbox"  className="form-check-label">
-                            Spektrum Satellite Port
-                          </label>
+                          name="spektrumPort"
+                          className="form-check-input"
+                        />
+                        <label title="Spektrum Satellite Port" type="checkbox"  className="form-check-label">
+                          Spektrum Satellite Port
+                        </label>
                       </div>
                       <div className="form-check">
                         <CheckboxInput
-                            name="usbInterface"
-                            className="form-check-input"
-                          />
-                          <label title="USB Interface" type="checkbox"  className="form-check-label">
-                            USB Interface
-                          </label>
+                          name="usbInterface"
+                          className="form-check-input"
+                        />
+                        <label title="USB Interface" type="checkbox"  className="form-check-label">
+                          USB Interface
+                        </label>
                       </div>
                       <div className="form-check">
                         <CheckboxInput
-                            name="ledWS2812Support"
-                            className="form-check-input"
-                          />
-                          <label title="LED WS2812 Support" type="checkbox"  className="form-check-label">
-                            LED WS2812 Support
-                          </label>
+                          name="ledWS2812Support"
+                          className="form-check-input"
+                        />
+                        <label title="LED WS2812 Support" type="checkbox"  className="form-check-label">
+                          LED WS2812 Support
+                        </label>
                       </div>
                       <div className="form-check">
                         <CheckboxInput
-                            name="rssiPad"
-                            className="form-check-input"
-                          />
-                          <label title="RSSI Pad" type="checkbox"  className="form-check-label">
-                            RSSI Pad
-                          </label>
+                          name="rssiPad"
+                          className="form-check-input"
+                        />
+                        <label title="RSSI Pad" type="checkbox"  className="form-check-label">
+                          RSSI Pad
+                        </label>
                       </div>
 
                       <div className="form-check">
                         <CheckboxInput
-                            name="currentSensor"
-                            className="form-check-input"
-                          />
-                          <label title="Current Sensor" type="checkbox"  className="form-check-label">
-                            Current Sensor
-                          </label>
+                          name="currentSensor"
+                          className="form-check-input"
+                        />
+                        <label title="Current Sensor" type="checkbox"  className="form-check-label">
+                          Current Sensor
+                        </label>
                       </div>
                       <div className="form-check">
                         <CheckboxInput
-                            name="beeperOnBoard"
-                            className="form-check-input"
-                          />
-                          <label title="On-Board Beeper" type="checkbox"  className="form-check-label">
-                            On-Board Beeper
-                          </label>
+                          name="beeperOnBoard"
+                          className="form-check-input"
+                        />
+                        <label title="On-Board Beeper" type="checkbox"  className="form-check-label">
+                          On-Board Beeper
+                        </label>
                       </div>
                       <div className="form-check">
                         <CheckboxInput
-                            name="antiVibrationGrommets"
-                            className="form-check-input"
-                          />
-                          <label title="Anti-Vibration Grommets" type="checkbox"  className="form-check-label">
-                            Anti-Vibration Grommets
-                          </label>
+                          name="antiVibrationGrommets"
+                          className="form-check-input"
+                        />
+                        <label title="Anti-Vibration Grommets" type="checkbox"  className="form-check-label">
+                          Anti-Vibration Grommets
+                        </label>
                       </div>
+
+                      <hr/>
+
+                      <h3>
+                        Merchant Links
+                        <Button onClick={()=> this._openMerchantLinkModal()} className='float-right' variant="primary">Add New Price</Button>
+                      </h3>
+                      {fc.merchantLinks && (
+                        <>
+                          <Table>
+                            <thead>
+                            <tr>
+                              <th>
+                                Store
+                              </th>
+                              <th>
+                                Price
+                              </th>
+                              <th>
+                                URL
+                              </th>
+                              <th>
+                                In Stock
+                              </th>
+                              <th>
+                                Update
+                              </th>
+                            </tr>
+
+                            </thead>
+                            <tbody>
+                            { fc.id && fc.merchantLinks.map((merchantLink, index)=> (
+                              <tr key={index}>
+                                <td>{merchantLink.merchant.name}</td>
+                                <td>${merchantLink.price}</td>
+                                <td>{merchantLink.url}</td>
+                                <td>{merchantLink.inStock && (
+                                  <span>yes</span>
+                                )}</td>
+                                <td>
+                                  <a href="#" onClick={()=> {
+                                    this.setState({
+                                      merchantToEdit: merchantLink,
+                                      showMerchantLinkModal: true
+                                    })
+                                  }}>Update</a>
+                                </td>
+                              </tr>
+                            ))}
+                            </tbody>
+                          </Table>
+                        </>
+                      )}
 
                       <button type="submit" className="btn btn-lg pull-xs-right btn-primary">
                         Save Flight Controller
@@ -295,6 +367,14 @@ class FlightControllerForm extends Component {
                 </Fragment>
               )}
             </Formik>
+
+
+            <ProductMerchantForm
+              flightControllerId={fc.id}
+              productMerchant={this.state.merchantToEdit}
+              handleClose={this._hideMerchantLinkModal}
+              handleSave={()=> {}}
+              show={showMerchantLinkModal}/>
           </Col>
         </Row>
       </Container>

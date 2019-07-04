@@ -23,6 +23,10 @@ var models = [
   {
     name: "Merchant",
     embedded: false
+  },
+  {
+    name: "FlightControllerMerchantLink",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({

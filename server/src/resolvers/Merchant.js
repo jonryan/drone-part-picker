@@ -5,12 +5,15 @@ function postedBy(parent, args, context) {
 function updatedBy(parent, args, context) {
   return context.prisma.merchant({ id: parent.id }).updatedBy()
 }
-function updatedBy(parent, args, context) {
-  return context.prisma.merchant({ id: parent.id }).updatedBy()
+
+function flightControllers(parent, args, context) {
+  return context.prisma.merchant({ id: parent.id }).flightControllers()
 }
+
+
 
 module.exports = {
   postedBy,
   updatedBy,
-  updatedBy,
+  flightControllers,
 }

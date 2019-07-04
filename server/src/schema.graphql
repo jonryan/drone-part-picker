@@ -8,6 +8,7 @@ type Query {
     flightControllerFeed: FlightControllerFeed!
     userList: UserList!
     merchantList: MerchantList!
+    getMerchant(id: ID!): Merchant!
 }
 
 type Mutation {
@@ -27,8 +28,12 @@ type Mutation {
     updateLink(id: ID!, url: String, description: String): Link
     deleteLink(id: ID!): Link
     vote(linkId: ID!): Vote
+    # Merchant
     addMerchant(merchant: MerchantInput!) : Merchant
     updateMerchant(merchant: MerchantEdit!) : Merchant
+    # Flight Controller Merchant Link
+    addFlightControllerMerchantLink(flightControllerMerchantLink : AddFlightControllerMerchantLink):
+      FlightControllerMerchantLink
 }
 
 type Subscription {
@@ -144,20 +149,23 @@ type FlightController {
   builtInReceiver: String
   postedBy: User
   updatedBy: User
-    createdAt: DateTime
-    updatedAt: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  merchantLinks: [FlightControllerMerchantLink!]!
 }
 
 ##### Merchant
 type Merchant {
-    id: ID!
-    name: String!
-    url: String!
-    postedBy: User
-    updatedBy: User
-    createdAt: DateTime!
-    affiliateId: String
-    disabled: Boolean
+  id: ID!
+  name: String!
+  url: String!
+  postedBy: User
+  updatedBy: User
+  createdAt: DateTime
+  updatedAt: DateTime
+  affiliateId: String
+  disabled: Boolean
+  flightControllers: [FlightControllerMerchantLink!]!
 }
 
 input MerchantInput {
@@ -177,6 +185,28 @@ input MerchantEdit {
 
 type MerchantList {
   merchants: [Merchant!]!
+}
+
+#### Flight Controller Merchant Links
+type FlightControllerMerchantLink{
+  id: ID!
+  merchant: Merchant!
+  flightController: FlightController!
+  url: String!
+  price: Float!
+  inStock: Boolean
+  postedBy: User
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input AddFlightControllerMerchantLink{
+  id: ID
+  merchantId: String!
+  flightControllerId: String!
+  url: String!
+  price: Float!
+  inStock: Boolean
 }
 
 #### Links
@@ -206,9 +236,9 @@ type User {
   email: String!
   links: [Link!]!
   flightControllers: [FlightController!]!
-    addedMerchants: [Merchant!]!
-    editedMerchants: [Merchant!]!
-    editedFlightControllers: [Merchant!]!
+  addedMerchants: [Merchant!]!
+  editedMerchants: [Merchant!]!
+  editedFlightControllers: [Merchant!]!
 }
 
 input UserInput {

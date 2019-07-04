@@ -69,6 +69,41 @@ function addFlightController(parent, args, context, info){
   })
 }
 
+async function addFlightControllerMerchantLink(parent, args, context, info){
+  const userId = getUserId(context)
+
+  if(args.flightControllerMerchantLink.id){
+    // EDIT EXISTING
+    const productFound = await context.prisma.flightControllerMerchantLink({ id: args.flightControllerMerchantLink.id })
+    if (productFound) {
+      return context.prisma.updateFlightControllerMerchantLink({
+        data: {
+          url: args.flightControllerMerchantLink.url,
+          price: args.flightControllerMerchantLink.price,
+          inStock: args.flightControllerMerchantLink.inStock,
+          postedBy: { connect: { id: userId } },
+          flightController: { connect: { id: args.flightControllerMerchantLink.flightControllerId } },
+          merchant: { connect: { id: args.flightControllerMerchantLink.merchantId } },
+        },
+        where: {id: args.flightControllerMerchantLink.id}
+      })
+    }else{
+      throw new Error(`FlightControllerMerchant ${args.id} not found.`)
+    }
+
+  }else{
+    // ADD NEW
+    return context.prisma.createFlightControllerMerchantLink({
+      url: args.flightControllerMerchantLink.url,
+      price: args.flightControllerMerchantLink.price,
+      inStock: args.flightControllerMerchantLink.inStock,
+      postedBy: { connect: { id: userId } },
+      flightController: { connect: { id: args.flightControllerMerchantLink.flightControllerId } },
+      merchant: { connect: { id: args.flightControllerMerchantLink.merchantId } },
+    })
+  }
+}
+
 function addMerchant(parent, args, context, info){
   const userId = getUserId(context)
 
@@ -174,6 +209,7 @@ module.exports = {
   deleteFlightController,
   addMerchant,
   updateMerchant,
+  addFlightControllerMerchantLink,
 }
 
 // Mutation: {

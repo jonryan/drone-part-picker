@@ -26,6 +26,9 @@ class Header extends Component {
             <Nav.Link href="/search">Search</Nav.Link>
             <Nav.Link href="/products/flight-controller/1">Flight Controllers</Nav.Link>
             <Nav.Link href="/add-flight-controller">Add FC</Nav.Link>
+            <Nav.Link href="/add-merchant">Add Merchant</Nav.Link>
+            <Nav.Link href="/merchants">Merchants</Nav.Link>
+
           </Nav>
           <Nav>
             {authToken ? (
