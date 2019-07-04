@@ -124,7 +124,7 @@ class FlightControllerForm extends Component {
                         <fieldset className="form-group">
                           <Field
                             name="uarts"
-                            type="text"
+                            type="number"
                             className="form-control form-control-lg"
                             placeholder=""
                             required
@@ -136,7 +136,7 @@ class FlightControllerForm extends Component {
                         <fieldset className="form-group">
                           <Field
                             name="weightInGrams"
-                            type="text"
+                            type="number"
                             className="form-control form-control-lg"
                             placeholder=""
                             required
@@ -184,7 +184,7 @@ class FlightControllerForm extends Component {
                         <fieldset className="form-group">
                           <Field
                             name="voltageInputMin"
-                            type="text"
+                            type="number"
                             className="form-control form-control-lg"
                             placeholder=""
                             required
@@ -197,7 +197,7 @@ class FlightControllerForm extends Component {
                         <fieldset className="form-group">
                           <Field
                             name="voltageInputMax"
-                            type="text"
+                            type="number"
                             className="form-control form-control-lg"
                             placeholder=""
                           />
@@ -308,55 +308,60 @@ class FlightControllerForm extends Component {
 
                       <hr/>
 
-                      <h3>
-                        Merchant Links
-                        <Button onClick={()=> this._openMerchantLinkModal()} className='float-right' variant="primary">Add New Price</Button>
-                      </h3>
-                      {fc.merchantLinks && (
-                        <>
-                          <Table>
-                            <thead>
-                            <tr>
-                              <th>
-                                Store
-                              </th>
-                              <th>
-                                Price
-                              </th>
-                              <th>
-                                URL
-                              </th>
-                              <th>
-                                In Stock
-                              </th>
-                              <th>
-                                Update
-                              </th>
-                            </tr>
 
-                            </thead>
-                            <tbody>
-                            { fc.id && fc.merchantLinks.map((merchantLink, index)=> (
-                              <tr key={index}>
-                                <td>{merchantLink.merchant.name}</td>
-                                <td>${merchantLink.price}</td>
-                                <td>{merchantLink.url}</td>
-                                <td>{merchantLink.inStock && (
-                                  <span>yes</span>
-                                )}</td>
-                                <td>
-                                  <a href="#" onClick={()=> {
-                                    this.setState({
-                                      merchantToEdit: merchantLink,
-                                      showMerchantLinkModal: true
-                                    })
-                                  }}>Update</a>
-                                </td>
-                              </tr>
-                            ))}
-                            </tbody>
-                          </Table>
-                        </>
+                      {fc.id && (
+                        <React.Fragment>
+                          <h3>
+                            Merchant Links
+                            <Button onClick={()=> this._openMerchantLinkModal()} className='float-right' variant="primary">Add New Price</Button>
+                          </h3>
+                          {fc.merchantLinks && (
+                            <>
+                              <Table>
+                                <thead>
+                                <tr>
+                                  <th>
+                                    Store
+                                  </th>
+                                  <th>
+                                    Price
+                                  </th>
+                                  <th>
+                                    URL
+                                  </th>
+                                  <th>
+                                    In Stock
+                                  </th>
+                                  <th>
+                                    Update
+                                  </th>
+                                </tr>
+
+                                </thead>
+                                <tbody>
+                                { fc.merchantLinks.map((merchantLink, index)=> (
+                                  <tr key={index}>
+                                    <td>{merchantLink.merchant.name}</td>
+                                    <td>${merchantLink.price}</td>
+                                    <td>{merchantLink.url}</td>
+                                    <td>{merchantLink.inStock && (
+                                      <span>yes</span>
+                                    )}</td>
+                                    <td>
+                                      <a href="#" onClick={()=> {
+                                        this.setState({
+                                          merchantToEdit: merchantLink,
+                                          showMerchantLinkModal: true
+                                        })
+                                      }}>Update</a>
+                                    </td>
+                                  </tr>
+                                ))}
+                                </tbody>
+                              </Table>
+                            </>
+                          )}
+                        </React.Fragment>
                       )}
 
                       <button type="submit" className="btn btn-lg pull-xs-right btn-primary">
