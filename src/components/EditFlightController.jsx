@@ -21,7 +21,7 @@ const EDIT_FLIGHT_CONTROLLER = gql`
   }
 `
 
-const GET_FLIGHTCONTROLLER = gql`
+export const GET_FLIGHTCONTROLLER = gql`
   query getFlightController($id: ID!){
     getFlightController(id: $id){
       id

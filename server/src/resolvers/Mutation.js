@@ -113,6 +113,22 @@ function addMerchant(parent, args, context, info){
   })
 }
 
+async function deleteFlightControllerMerchantLink(parent, args, context, info){
+  if(!args.id){
+    throw new Error('You need to pass a valid link id')
+  }
+
+  const linkFound = await context.prisma.flightControllerMerchantLink({id: args.id})
+
+  if(linkFound){
+    await context.prisma.deleteFlightControllerMerchantLink({id: args.id})
+
+  }else{
+    throw new Error('You need to pass a valid link id')
+  }
+
+  return linkFound
+}
 
 async function updateMerchant(parent, args, context, info){
   console.log('updateMerchant');
@@ -210,6 +226,7 @@ module.exports = {
   addMerchant,
   updateMerchant,
   addFlightControllerMerchantLink,
+  deleteFlightControllerMerchantLink,
 }
 
 // Mutation: {

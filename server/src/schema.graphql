@@ -34,6 +34,7 @@ type Mutation {
     # Flight Controller Merchant Link
     addFlightControllerMerchantLink(flightControllerMerchantLink : AddFlightControllerMerchantLink):
       FlightControllerMerchantLink
+    deleteFlightControllerMerchantLink(id: ID!) : FlightControllerMerchantLink
 }
 
 type Subscription {

@@ -5,6 +5,8 @@ import {Button, Modal, Form} from 'react-bootstrap'
 import {Field, Formik} from 'formik'
 import gql from 'graphql-tag'
 import {Mutation, Query} from 'react-apollo'
+import {GET_FLIGHTCONTROLLER} from '../EditFlightController'
+const _ = require('underscore')
 
 const CheckboxInput = (props) => (
   <Field {...props} render={({field}) => {
@@ -19,6 +21,14 @@ const CheckboxInput = (props) => (
 const PRODUCT_MERCHANT_MUTATION = gql`
   mutation AddProductMerchantLink($flightControllerMerchantLink: AddFlightControllerMerchantLink!){
     addFlightControllerMerchantLink(flightControllerMerchantLink: $flightControllerMerchantLink) {
+      id
+    }
+  }
+`
+
+const PRODUCT_MERCHANT_DELETE_MUTATION = gql`
+  mutation DeleteProductMutationLink($id: ID!){
+    deleteFlightControllerMerchantLink(id: $id) {
       id
     }
   }
@@ -114,6 +124,41 @@ class ProductMerchantForm extends Component {
                           <Button variant="secondary" onClick={this.props.handleClose}>
                             Close
                           </Button>
+
+                          {productMerchant && productMerchant.id && (
+                            <Mutation
+                              mutation={PRODUCT_MERCHANT_DELETE_MUTATION}
+                              update={(store, data) => {
+                                // Find the item in the store by id, and remove it
+                                const deletedMerchantLink = data.data.deleteFlightControllerMerchantLink;
+                                let localStoreData = store.readQuery({
+                                  query: GET_FLIGHTCONTROLLER,
+                                  variables: { id: flightControllerId }
+                                })
+                                localStoreData.getFlightController.merchantLinks = _.reject(
+                                  localStoreData.getFlightController.merchantLinks, (link) => {
+                                    return link.id === deletedMerchantLink.id
+                                  }
+                                )
+                                store.writeQuery({
+                                  query: GET_FLIGHTCONTROLLER,
+                                  variables: { id: flightControllerId },
+                                  localStoreData
+                                })
+                              }}>
+                              {deleteMerchant => (
+                                <Button variant="danger" onClick={async () => {
+                                  let result = await deleteMerchant({
+                                    variables: {id: productMerchant.id}
+                                  });
+                                  this.props.handleClose();
+                                }}>
+                                  Delete
+                                </Button>
+                              )}
+
+                            </Mutation>
+                          )}
                           <Button type="submit" variant="primary">
                             Save Changes
                           </Button>
