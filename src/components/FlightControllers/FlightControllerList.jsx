@@ -6,6 +6,7 @@ import Page from '../Page'
 import {LINKS_PER_PAGE} from '../../constants.js';
 import FlightController from './FlightController.jsx';
 import {Container, Row, Col, Card, Table,} from 'react-bootstrap'
+import FlightControllerCard from "./FlightControllerCard";
 const _ = require('underscore')
 
 export const FC_LIST_QUERY  = gql`
@@ -16,10 +17,28 @@ export const FC_LIST_QUERY  = gql`
         name
         releaseDate
         uarts
-        id
+        weightInGrams
+        cpu
+        dimensions
+        holePattern
+        voltageInputMin
+        voltageInputMax
+        osd
+        accelerometer
+        barometer
+        spektrumPort
+        usbInterface
+        ledWS2812Support
+        builtInReceiver
         postedBy{
+          id
+        }
+        updatedBy{
+          id
           email
         }
+        createdAt
+        updatedAt
         merchantLinks{
           id
           price
@@ -110,30 +129,46 @@ class FlightControllerList extends Component {
                       </Card.Body>
                     </Card>
                   </Col>
+                  <Col>
+                    <Row>
+                      {FCs.map((fc, index) => (
+                        <Col md={3} key={index}>
+                          <FlightControllerCard
+                            fc={fc}
+                            key={index}
+                            index={index + pageIndex}
+                          />
+                        </Col>
+                      ))}
 
+                    </Row>
+
+                  </Col>
+                </Row>
+                <Row>
                   <Col>
                     <div>
                       <Table striped bordered hover>
                         <thead>
-                          <tr>
-                            <th>Name</th>
-                            <th>Manufacturer</th>
-                            <th>Price</th>
-                            <th>Rating</th>
-                            <th>Number of Builds</th>
-                            <th>Release Date</th>
-                            <th>Edit</th>
-                          </tr>
+                        <tr>
+                          <th>Name</th>
+                          <th>Manufacturer</th>
+                          <th>Price</th>
+                          <th>Rating</th>
+                          <th>Number of Builds</th>
+                          <th>Release Date</th>
+                          <th>Edit</th>
+                        </tr>
                         </thead>
                         <tbody>
-                          {FCs.map((fc, index) => (
-                            <FlightController
-                              fc={fc}
-                              key={index}
-                              index={index + pageIndex}
-                              updateStoreAfterDelete={this._updateStoreAfterDelete}
-                            />
-                          ))}
+                        {FCs.map((fc, index) => (
+                          <FlightController
+                            fc={fc}
+                            key={index}
+                            index={index + pageIndex}
+                            updateStoreAfterDelete={this._updateStoreAfterDelete}
+                          />
+                        ))}
                         </tbody>
                       </Table>
 

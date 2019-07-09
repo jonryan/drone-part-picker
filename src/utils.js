@@ -32,3 +32,16 @@ export function timeDifferenceForDate(date) {
   const updated = new Date(date).getTime()
   return timeDifference(now, updated)
 }
+
+export function getLowestPrice(prices) {
+  if(!prices || prices.length < 1){
+    return "N/A"
+  }
+  let lowest = 99999999;
+  prices.forEach((price, index) => {
+    if(price.price < lowest){
+      lowest = price.price
+    }
+  })
+  return `$${lowest}`
+}
