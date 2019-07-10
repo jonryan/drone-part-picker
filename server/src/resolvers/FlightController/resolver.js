@@ -12,6 +12,10 @@ const resolver = {
 
     updatedBy(parent, args, context) {
       return context.prisma.flightController({ id: parent.id }).updatedBy()
+    },
+
+    builtInReceiver(parent, args, context) {
+      return context.prisma.flightController({ id: parent.id }).builtInReceiver()
     }
   },
 
@@ -49,6 +53,7 @@ const resolver = {
       const where = fcFilters ? {
         AND: [
           ...andFilters,
+          { builtInReceiver_in: fcFilters.builtInReceiver },
           { voltageInputMax_gte: fcFilters.voltageInputMax },
           { voltageInputMin_lte: fcFilters.voltageInputMin },
           { releaseDate_gte: fcFilters.releaseDateAfter },

@@ -214,9 +214,10 @@ class FlightControllerForm extends Component {
                             className="form-control"
                           >
                             <option value="">--- Select a Receiver Type --</option>
-                            <option value="Spektrum">Spektrum</option>
-                            <option value="FrSky">FrSky</option>
-                            <option value="Crossfire">Crossfire</option>
+                            <option value="SPEKTRUM">Spektrum</option>
+                            <option value="FRSKY">FrSky</option>
+                            <option value="FLYSKY">FlySky</option>
+                            <option value="CROSSFIRE">Crossfire</option>
                           </Field>
                         </fieldset>
                       </Form.Group>

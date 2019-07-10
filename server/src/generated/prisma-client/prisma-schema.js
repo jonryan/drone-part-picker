@@ -64,7 +64,7 @@ type FlightController {
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -105,7 +105,7 @@ input FlightControllerCreateInput {
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -154,7 +154,7 @@ input FlightControllerCreateWithoutMerchantLinksInput {
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -188,7 +188,7 @@ input FlightControllerCreateWithoutPostedByInput {
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -222,7 +222,7 @@ input FlightControllerCreateWithoutUpdatedByInput {
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -689,7 +689,7 @@ type FlightControllerPreviousValues {
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -876,20 +876,10 @@ input FlightControllerScalarWhereInput {
   beeperOnBoard_not: Boolean
   antiVibrationGrommets: Boolean
   antiVibrationGrommets_not: Boolean
-  builtInReceiver: String
-  builtInReceiver_not: String
-  builtInReceiver_in: [String!]
-  builtInReceiver_not_in: [String!]
-  builtInReceiver_lt: String
-  builtInReceiver_lte: String
-  builtInReceiver_gt: String
-  builtInReceiver_gte: String
-  builtInReceiver_contains: String
-  builtInReceiver_not_contains: String
-  builtInReceiver_starts_with: String
-  builtInReceiver_not_starts_with: String
-  builtInReceiver_ends_with: String
-  builtInReceiver_not_ends_with: String
+  builtInReceiver: ReceiverProtocol
+  builtInReceiver_not: ReceiverProtocol
+  builtInReceiver_in: [ReceiverProtocol!]
+  builtInReceiver_not_in: [ReceiverProtocol!]
   threeVoltOutput: Boolean
   threeVoltOutput_not: Boolean
   fiveVoltOut: Boolean
@@ -947,7 +937,7 @@ input FlightControllerUpdateInput {
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -978,7 +968,7 @@ input FlightControllerUpdateManyDataInput {
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -1009,7 +999,7 @@ input FlightControllerUpdateManyMutationInput {
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -1078,7 +1068,7 @@ input FlightControllerUpdateWithoutMerchantLinksDataInput {
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -1111,7 +1101,7 @@ input FlightControllerUpdateWithoutPostedByDataInput {
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -1144,7 +1134,7 @@ input FlightControllerUpdateWithoutUpdatedByDataInput {
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   threeVoltOutput: Boolean
   fiveVoltOut: Boolean
   cameraControl: Boolean
@@ -1363,20 +1353,10 @@ input FlightControllerWhereInput {
   beeperOnBoard_not: Boolean
   antiVibrationGrommets: Boolean
   antiVibrationGrommets_not: Boolean
-  builtInReceiver: String
-  builtInReceiver_not: String
-  builtInReceiver_in: [String!]
-  builtInReceiver_not_in: [String!]
-  builtInReceiver_lt: String
-  builtInReceiver_lte: String
-  builtInReceiver_gt: String
-  builtInReceiver_gte: String
-  builtInReceiver_contains: String
-  builtInReceiver_not_contains: String
-  builtInReceiver_starts_with: String
-  builtInReceiver_not_starts_with: String
-  builtInReceiver_ends_with: String
-  builtInReceiver_not_ends_with: String
+  builtInReceiver: ReceiverProtocol
+  builtInReceiver_not: ReceiverProtocol
+  builtInReceiver_in: [ReceiverProtocol!]
+  builtInReceiver_not_in: [ReceiverProtocol!]
   threeVoltOutput: Boolean
   threeVoltOutput_not: Boolean
   fiveVoltOut: Boolean
@@ -2154,6 +2134,13 @@ type Query {
   votes(where: VoteWhereInput, orderBy: VoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vote]!
   votesConnection(where: VoteWhereInput, orderBy: VoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): VoteConnection!
   node(id: ID!): Node
+}
+
+enum ReceiverProtocol {
+  CROSSFIRE
+  FRSKY
+  FLYSKY
+  SPEKTRUM
 }
 
 type Subscription {

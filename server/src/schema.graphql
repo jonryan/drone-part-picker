@@ -90,7 +90,7 @@ input UpdateFlightControllerInput{
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   postedBy: UserInput
   createdAt: DateTime
 }
@@ -104,13 +104,14 @@ input FlightControllerFilter{
     spektrumPort: Boolean
     ledWS2812Support: Boolean
     osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
-  usbInterface: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperOnBoard: Boolean
-  antiVibrationGrommets: Boolean
+    accelerometer: Boolean
+    barometer: Boolean
+    usbInterface: Boolean
+    rssiPad: Boolean
+    currentSensor: Boolean
+    beeperOnBoard: Boolean
+    antiVibrationGrommets: Boolean
+    builtInReceiver: ReceiverProtocol
 }
 
 
@@ -128,7 +129,7 @@ input AddFlightControllerInput{
     holePattern: String
     voltageInputMin: Float
     voltageInputMax: Float
-    builtInReceiver: String
+    builtInReceiver: ReceiverProtocol
     osd: Boolean
     accelerometer: Boolean
     barometer: Boolean
@@ -170,7 +171,7 @@ type FlightController {
   beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
-  builtInReceiver: String
+  builtInReceiver: ReceiverProtocol
   postedBy: User
   updatedBy: User
   createdAt: DateTime
@@ -272,9 +273,10 @@ input UserInput {
 }
 
 enum ReceiverProtocol{
-  CROSSFIRE
-  DSMX
-  FRSKY
+    CROSSFIRE
+    FRSKY
+    FLYSKY
+    SPEKTRUM
 }
 
 enum LinkOrderByInput {

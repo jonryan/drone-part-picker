@@ -59,7 +59,7 @@ type FlightController{
     beeperPad: Boolean
     beeperOnBoard: Boolean
     antiVibrationGrommets: Boolean
-    builtInReceiver: String #"CROSSFIRE/DSMX/FRSKY"
+    builtInReceiver: ReceiverProtocol
     threeVoltOutput: Boolean
     fiveVoltOut: Boolean
     cameraControl: Boolean
@@ -88,4 +88,11 @@ type FlightControllerMerchantLink{
     postedBy: User! @relation(name: "AddedFlightControllerMerchantLinks")
     createdAt: DateTime! @createdAt
     updatedAt: DateTime @updatedAt
+}
+
+enum ReceiverProtocol{
+    CROSSFIRE
+    FRSKY
+    FLYSKY
+    SPEKTRUM
 }
