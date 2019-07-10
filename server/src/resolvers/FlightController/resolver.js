@@ -38,6 +38,46 @@ const resolver = {
         flightControllers: fcs,
         count
       }
+    },
+
+    async flightControllerFilter(parent, args, context, info) {
+      const fcFilters = args.flightControllerFilter
+      console.log('flightControllerFilter', fcFilters)
+
+      let andFilters = [];
+
+      const where = fcFilters ? {
+        AND: [
+          ...andFilters,
+          { voltageInputMax_gte: fcFilters.voltageInputMax },
+          { voltageInputMin_lte: fcFilters.voltageInputMin },
+          { releaseDate_gte: fcFilters.releaseDateAfter },
+          { uarts_gte: fcFilters.minUarts },
+          { name_contains: fcFilters.name },
+          { osd: fcFilters.osd },
+          { ledWS2812Support: fcFilters.ledWS2812Support },
+          { accelerometer: fcFilters.accelerometer },
+          { barometer: fcFilters.barometer },
+          { rssiPad: fcFilters.rssiPad },
+          { currentSensor: fcFilters.currentSensor },
+          { beeperOnBoard: fcFilters.beeperOnBoard },
+          { antiVibrationGrommets: fcFilters.antiVibrationGrommets },
+        ]
+      } : {}
+
+      const flightControllers = await context.prisma.flightControllers({
+        where
+      })
+
+      const count = await context.prisma
+        .flightControllersConnection({
+        where
+      }).aggregate().count()
+
+      return {
+        flightControllers,
+        count,
+      }
     }
   },
 

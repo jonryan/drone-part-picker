@@ -6,6 +6,9 @@ type Query {
     link(id: String!): Link!
     getFlightController(id: ID!): FlightController!
     flightControllerFeed: FlightControllerFeed!
+    flightControllerFilter(
+        flightControllerFilter: FlightControllerFilter!
+    ) : FlightControllerFeed!
     userList: UserList!
     merchantList: MerchantList!
     getMerchant(id: ID!): Merchant!
@@ -38,6 +41,7 @@ type Mutation {
     deleteMerchant(id: ID!) : Merchant
 }
 
+
 type Subscription {
   newLink: Link
   newVote: Vote
@@ -59,7 +63,7 @@ type UserList {
 }
 
 
-
+### FlightController
 input UpdateFlightControllerInput{
   id: ID!
   name: String
@@ -91,6 +95,24 @@ input UpdateFlightControllerInput{
   createdAt: DateTime
 }
 
+input FlightControllerFilter{
+    name: String
+    minUarts: Int
+    releaseDateAfter: DateTime
+    voltageInputMin: Float
+    voltageInputMax: Float
+    spektrumPort: Boolean
+    ledWS2812Support: Boolean
+    osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  usbInterface: Boolean
+  rssiPad: Boolean
+  currentSensor: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
+}
+
 
 input AddFlightControllerInput{
   name: String
@@ -98,26 +120,26 @@ input AddFlightControllerInput{
   releaseDate: String
   uarts: Int
   gyroOne: Float
-  gyroTwo: Float
-  weightInGrams: Float
-  cpu: String
-  dimensions: String
-  description: String
-  holePattern: String
-  voltageInputMin: Float
-  voltageInputMax: Float
-  osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
-  spektrumPort: Boolean
-  usbInterface: Boolean
-  ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
-  beeperOnBoard: Boolean
-  antiVibrationGrommets: Boolean
-  builtInReceiver: String
+    gyroTwo: Float
+    weightInGrams: Float
+    cpu: String
+    dimensions: String
+    description: String
+    holePattern: String
+    voltageInputMin: Float
+    voltageInputMax: Float
+    builtInReceiver: String
+    osd: Boolean
+    accelerometer: Boolean
+    barometer: Boolean
+    spektrumPort: Boolean
+    usbInterface: Boolean
+    ledWS2812Support: Boolean
+    rssiPad: Boolean
+    currentSensor: Boolean
+    beeperPad: Boolean
+    beeperOnBoard: Boolean
+    antiVibrationGrommets: Boolean
   postedBy: UserInput
   createdAt: DateTime
 }
