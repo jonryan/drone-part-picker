@@ -1,3 +1,35 @@
+## Technologies Involved and Documentation
+### FE & BE
+ * [GraphQL](https://graphql.org/learn/) 
+ * [graphql-config](https://github.com/prisma/graphql-config) - Used to tell my IDE about my GraphQL Implementation
+### API/Back-End:
+
+ * [Prisma.io](https://www.prisma.io/docs/1.34/) - Used as the ORM & Database layer. It scans the [datamodel.prisma](https://github.com/coreysnyder04/drone-part-picker/blob/master/server/prisma/datamodel.prisma) file and generates a client for interfacing with the database.
+ * [GraphQL-Yoga](https://github.com/prisma/graphql-yoga) - A Fully-featured GraphQL Server with focus on easy setup, performance & great developer experience. Written and managed by Prisma
+   * [GraphQL Yoga Example Apps](https://github.com/prisma/graphql-yoga/tree/master/examples)
+### FE
+ * ReactJS - Create React App
+ * [Apollo](https://www.apollographql.com/docs/)
+   * [React Apollo](https://github.com/apollographql/react-apollo) - React integration for Apollo Client. In this app we `import {Mutation, Query} from 'react-apollo'` in order to connect our components to the GraphQL Server. 
+     * [Apollo Client](https://github.com/apollographql/apollo-client) - A fully-featured, production ready caching GraphQL client for every UI framework and GraphQL server
+     * [Apollo Boost](https://github.com/apollographql/apollo-client/tree/master/packages/apollo-boost) - The fastest, easiest way to get started with Apollo Client!
+     * [Apollo-link-http](https://www.npmjs.com/package/apollo-link-http) - Get GraphQL results over a network using HTTP fetch
+     
+
+ 
+### Where to talk to others:
+ * [Prisma.io Spectrum Chat](https://spectrum.chat/prisma?tab=posts)
+ * [Prisma Slack Chat](https://slack.prisma.io/)
+   * Prisma 
+   * GraphQL-Yoga
+ * 
+ 
+### Other Sources
+ * [DB Diagram](https://dbdiagram.io/d/5d1a2279ced98361d6dc385d)
+ * [How To GraphQL](https://www.howtographql.com/) - Where I learned most of what I used to get started on both the FE & BE. 
+ 
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
