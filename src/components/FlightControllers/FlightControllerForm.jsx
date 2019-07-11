@@ -60,7 +60,6 @@ class FlightControllerForm extends Component {
                 voltageInputMin: fc.voltageInputMin || 0,
                 voltageInputMax: fc.voltageInputMax || 0,
                 osd: fc.osd || false,
-                accelerometer: fc.accelerometer || false,
                 barometer: fc.barometer || false,
                 spektrumPort: fc.spektrumPort || false,
                 usbInterface: fc.usbInterface || false,
@@ -71,7 +70,7 @@ class FlightControllerForm extends Component {
                 beeperPad: fc.beeperPad || false,
                 beeperOnBoard: fc.beeperOnBoard || false,
                 antiVibrationGrommets: fc.antiVibrationGrommets || false,
-                builtInReceiver: fc.builtInReceiver || '',
+                builtInReceiver: fc.builtInReceiver || undefined,
               }}
               onSubmit={onSubmit}
             >
@@ -104,7 +103,6 @@ class FlightControllerForm extends Component {
                             className="form-control"
                             rows="8"
                             placeholder="Tell a little about the flight controller"
-                            required
                           />
                         </fieldset>
                       </Form.Group>
@@ -115,7 +113,6 @@ class FlightControllerForm extends Component {
                             name="releaseDate"
                             type="date"
                             className="form-control form-control-lg"
-                            required
                           />
                         </fieldset>
                       </Form.Group>
@@ -127,7 +124,6 @@ class FlightControllerForm extends Component {
                             type="number"
                             className="form-control form-control-lg"
                             placeholder=""
-                            required
                           />
                         </fieldset>
                       </Form.Group>
@@ -151,7 +147,6 @@ class FlightControllerForm extends Component {
                             type="text"
                             className="form-control form-control-lg"
                             placeholder=""
-                            required
                           />
                         </fieldset>
                       </Form.Group>
@@ -163,13 +158,22 @@ class FlightControllerForm extends Component {
                             type="text"
                             className="form-control form-control-lg"
                             placeholder=""
-                            required
                           />
                         </fieldset>
                       </Form.Group>
                       <Form.Group controlId="holePattern">
                         <Form.Label>Hole Pattern (mm)</Form.Label>
                         <fieldset className="form-group">
+                          <Field
+                            name="holePattern"
+                            component="select"
+                            className="form-control"
+                          >
+                            <option value="">--- Select a Hole Pattern--</option>
+                            <option value="SIXTEEN">16x16mm</option>
+                            <option value="TWENTY">20x20mm</option>
+                            <option value="THIRTY">30.5x30.5mm</option>
+                          </Field>
                           <Field
                             name="holePattern"
                             type="text"
@@ -187,7 +191,6 @@ class FlightControllerForm extends Component {
                             type="number"
                             className="form-control form-control-lg"
                             placeholder=""
-                            required
                           />
                         </fieldset>
                       </Form.Group>

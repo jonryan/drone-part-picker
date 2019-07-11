@@ -95,8 +95,6 @@ class EditFlightController extends Component {
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching</div>
             if (error) return <div>Error</div>
-
-            console.log("FC Returned", data)
             data.getFlightController.releaseDate = moment(data.getFlightController.releaseDate).format('YYYY-MM-DD')
 
             return (
@@ -105,11 +103,16 @@ class EditFlightController extends Component {
                   <FlightControllerForm
                     fc={data.getFlightController}
                     onSubmit={async (values, { setSubmitting, setErrors }) => {
-                      console.log('onSubmit', data, values)
+                      values = {...values}
                       values.id = data.getFlightController.id;
+                      // I've got to null out values so they don't get sent to the server as empty strings.
+                      values.builtInReceiver = (values.builtInReceiver) ? values.builtInReceiver : null
+                      console.log('onSubmit', data, values)
                       const { data: mutationData } = await updateFlightController({
                         variables: { flightController: values }
                       })
+
+
 
                       console.log('Result', mutationData)
 

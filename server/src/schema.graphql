@@ -105,6 +105,7 @@ input FlightControllerFilter{
     ledWS2812Support: Boolean
     osd: Boolean
     accelerometer: Boolean
+    accelerometer: Boolean
     barometer: Boolean
     usbInterface: Boolean
     rssiPad: Boolean
@@ -279,6 +280,12 @@ enum ReceiverProtocol{
     SPEKTRUM
 }
 
+enum HolePattern{
+    SIXTEEN # 16x16
+    TWENTY # 20x20
+    THIRTY # 30.5x30.5
+}
+
 enum LinkOrderByInput {
   description_ASC
   description_DESC
@@ -287,3 +294,4 @@ enum LinkOrderByInput {
   createdAt_ASC
   createdAt_DESC
 }
+
