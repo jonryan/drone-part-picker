@@ -43,7 +43,7 @@ class FlightControllerSizeDropdown extends Component {
                 >
                   <option value="">--- Select a Hole Pattern--</option>
                   {values.map( (value, index) => (
-                    <option key={index} value={value.name}>{displayValues[value.name]}</option>
+                    <option key={index} value={value.name}>{displayValues[value.name] || value.name}</option>
                   ))}
                 </Field>
               </fieldset>
