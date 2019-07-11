@@ -3,6 +3,7 @@ import { Form } from 'react-bootstrap';
 import { Formik } from 'formik';
 
 import PropTypes from 'prop-types';
+import FlightControllerSizeDropdown from './Inputs/FlightControllerSizeDropdown.jsx';
 
 class FlightControllerFiltersForm extends Component {
 
@@ -24,9 +25,16 @@ class FlightControllerFiltersForm extends Component {
         <Formik
           initialValues={{
             minUarts: 0,
+            voltageInputMax: '',
+            voltageInputMin: '',
           }}
           onSubmit={(values, { setSubmitting }) => {
+            values = {...values}
             setSubmitting(false)
+
+            values.voltageInputMax = (values.voltageInputMax.length < 1) ? undefined : values.voltageInputMax
+            values.voltageInputMin = (values.voltageInputMin.length < 1) ? undefined : values.voltageInputMin
+
             this.props.submitCB(values)
           }}
         >
@@ -41,7 +49,7 @@ class FlightControllerFiltersForm extends Component {
               /* and other goodies */
             }) => (
             <form onSubmit={handleSubmit}>
-              <Form.Group controlId="formBasicEmail">
+              <Form.Group>
                 <Form.Label>Minimum UARTs</Form.Label>
                 <input
                   type="number"
@@ -52,6 +60,33 @@ class FlightControllerFiltersForm extends Component {
                   className='form-control'
                 />
               </Form.Group>
+
+              <Form.Group>
+                <Form.Label>Voltage Input Minimum</Form.Label>
+                <input
+                  type="number"
+                  name="voltageInputMin"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                  className='form-control'
+                />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Label>Voltage Input Maximum</Form.Label>
+                <input
+                  type="number"
+                  name="voltageInputMax"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                  className='form-control'
+                />
+              </Form.Group>
+
+              <FlightControllerSizeDropdown/>
+
               {errors.minUarts && touched.minUarts && errors.minUarts}
               <button type="submit" disabled={isSubmitting}>
                 Submit

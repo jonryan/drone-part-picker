@@ -53,6 +53,7 @@ const resolver = {
       const where = fcFilters ? {
         AND: [
           ...andFilters,
+          { holePattern_in: fcFilters.holePattern},
           { builtInReceiver_in: fcFilters.builtInReceiver },
           { voltageInputMax_gte: fcFilters.voltageInputMax },
           { voltageInputMin_lte: fcFilters.voltageInputMin },
