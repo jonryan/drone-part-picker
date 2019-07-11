@@ -310,6 +310,8 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type HolePattern = "SIXTEEN" | "TWENTY" | "THIRTY";
+
 export type ReceiverProtocol = "CROSSFIRE" | "FRSKY" | "FLYSKY" | "SPEKTRUM";
 
 export type LinkOrderByInput =
@@ -430,13 +432,39 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserUpdateOneWithoutEditedFlightControllersInput {
-  create?: Maybe<UserCreateWithoutEditedFlightControllersInput>;
-  update?: Maybe<UserUpdateWithoutEditedFlightControllersDataInput>;
-  upsert?: Maybe<UserUpsertWithoutEditedFlightControllersInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<UserWhereUniqueInput>;
+export interface FlightControllerUpdateWithoutPostedByDataInput {
+  updatedBy?: Maybe<UserUpdateOneWithoutEditedFlightControllersInput>;
+  merchantLinks?: Maybe<
+    FlightControllerMerchantLinkUpdateManyWithoutFlightControllerInput
+  >;
+  name?: Maybe<String>;
+  disabled?: Maybe<Boolean>;
+  releaseDate?: Maybe<DateTimeInput>;
+  uarts?: Maybe<Int>;
+  gyroOne?: Maybe<Float>;
+  gyroTwo?: Maybe<Float>;
+  weightInGrams?: Maybe<Float>;
+  cpu?: Maybe<String>;
+  description?: Maybe<String>;
+  dimensions?: Maybe<String>;
+  holePattern?: Maybe<HolePattern>;
+  voltageInputMin?: Maybe<Float>;
+  voltageInputMax?: Maybe<Float>;
+  osd?: Maybe<Boolean>;
+  accelerometer?: Maybe<Boolean>;
+  barometer?: Maybe<Boolean>;
+  spektrumPort?: Maybe<Boolean>;
+  usbInterface?: Maybe<Boolean>;
+  ledWS2812Support?: Maybe<Boolean>;
+  rssiPad?: Maybe<Boolean>;
+  currentSensor?: Maybe<Boolean>;
+  beeperPad?: Maybe<Boolean>;
+  beeperOnBoard?: Maybe<Boolean>;
+  antiVibrationGrommets?: Maybe<Boolean>;
+  builtInReceiver?: Maybe<ReceiverProtocol>;
+  threeVoltOutput?: Maybe<Boolean>;
+  fiveVoltOut?: Maybe<Boolean>;
+  cameraControl?: Maybe<Boolean>;
 }
 
 export type FlightControllerWhereUniqueInput = AtLeastOne<{
@@ -450,7 +478,7 @@ export interface LinkUpdateOneRequiredWithoutVotesInput {
   connect?: Maybe<LinkWhereUniqueInput>;
 }
 
-export interface FlightControllerMerchantLinkWhereInput {
+export interface MerchantWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -465,33 +493,6 @@ export interface FlightControllerMerchantLinkWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  merchant?: Maybe<MerchantWhereInput>;
-  flightController?: Maybe<FlightControllerWhereInput>;
-  url?: Maybe<String>;
-  url_not?: Maybe<String>;
-  url_in?: Maybe<String[] | String>;
-  url_not_in?: Maybe<String[] | String>;
-  url_lt?: Maybe<String>;
-  url_lte?: Maybe<String>;
-  url_gt?: Maybe<String>;
-  url_gte?: Maybe<String>;
-  url_contains?: Maybe<String>;
-  url_not_contains?: Maybe<String>;
-  url_starts_with?: Maybe<String>;
-  url_not_starts_with?: Maybe<String>;
-  url_ends_with?: Maybe<String>;
-  url_not_ends_with?: Maybe<String>;
-  price?: Maybe<Float>;
-  price_not?: Maybe<Float>;
-  price_in?: Maybe<Float[] | Float>;
-  price_not_in?: Maybe<Float[] | Float>;
-  price_lt?: Maybe<Float>;
-  price_lte?: Maybe<Float>;
-  price_gt?: Maybe<Float>;
-  price_gte?: Maybe<Float>;
-  inStock?: Maybe<Boolean>;
-  inStock_not?: Maybe<Boolean>;
-  postedBy?: Maybe<UserWhereInput>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -508,18 +509,58 @@ export interface FlightControllerMerchantLinkWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<
-    | FlightControllerMerchantLinkWhereInput[]
-    | FlightControllerMerchantLinkWhereInput
-  >;
-  OR?: Maybe<
-    | FlightControllerMerchantLinkWhereInput[]
-    | FlightControllerMerchantLinkWhereInput
-  >;
-  NOT?: Maybe<
-    | FlightControllerMerchantLinkWhereInput[]
-    | FlightControllerMerchantLinkWhereInput
-  >;
+  postedBy?: Maybe<UserWhereInput>;
+  updatedBy?: Maybe<UserWhereInput>;
+  flightControllers_every?: Maybe<FlightControllerMerchantLinkWhereInput>;
+  flightControllers_some?: Maybe<FlightControllerMerchantLinkWhereInput>;
+  flightControllers_none?: Maybe<FlightControllerMerchantLinkWhereInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  url?: Maybe<String>;
+  url_not?: Maybe<String>;
+  url_in?: Maybe<String[] | String>;
+  url_not_in?: Maybe<String[] | String>;
+  url_lt?: Maybe<String>;
+  url_lte?: Maybe<String>;
+  url_gt?: Maybe<String>;
+  url_gte?: Maybe<String>;
+  url_contains?: Maybe<String>;
+  url_not_contains?: Maybe<String>;
+  url_starts_with?: Maybe<String>;
+  url_not_starts_with?: Maybe<String>;
+  url_ends_with?: Maybe<String>;
+  url_not_ends_with?: Maybe<String>;
+  affiliateId?: Maybe<String>;
+  affiliateId_not?: Maybe<String>;
+  affiliateId_in?: Maybe<String[] | String>;
+  affiliateId_not_in?: Maybe<String[] | String>;
+  affiliateId_lt?: Maybe<String>;
+  affiliateId_lte?: Maybe<String>;
+  affiliateId_gt?: Maybe<String>;
+  affiliateId_gte?: Maybe<String>;
+  affiliateId_contains?: Maybe<String>;
+  affiliateId_not_contains?: Maybe<String>;
+  affiliateId_starts_with?: Maybe<String>;
+  affiliateId_not_starts_with?: Maybe<String>;
+  affiliateId_ends_with?: Maybe<String>;
+  affiliateId_not_ends_with?: Maybe<String>;
+  disabled?: Maybe<Boolean>;
+  disabled_not?: Maybe<Boolean>;
+  AND?: Maybe<MerchantWhereInput[] | MerchantWhereInput>;
+  OR?: Maybe<MerchantWhereInput[] | MerchantWhereInput>;
+  NOT?: Maybe<MerchantWhereInput[] | MerchantWhereInput>;
 }
 
 export interface FlightControllerMerchantLinkCreateManyWithoutPostedByInput {
@@ -569,7 +610,7 @@ export interface FlightControllerUpdateInput {
   cpu?: Maybe<String>;
   description?: Maybe<String>;
   dimensions?: Maybe<String>;
-  holePattern?: Maybe<String>;
+  holePattern?: Maybe<HolePattern>;
   voltageInputMin?: Maybe<Float>;
   voltageInputMax?: Maybe<Float>;
   osd?: Maybe<Boolean>;
@@ -723,20 +764,10 @@ export interface FlightControllerWhereInput {
   dimensions_not_starts_with?: Maybe<String>;
   dimensions_ends_with?: Maybe<String>;
   dimensions_not_ends_with?: Maybe<String>;
-  holePattern?: Maybe<String>;
-  holePattern_not?: Maybe<String>;
-  holePattern_in?: Maybe<String[] | String>;
-  holePattern_not_in?: Maybe<String[] | String>;
-  holePattern_lt?: Maybe<String>;
-  holePattern_lte?: Maybe<String>;
-  holePattern_gt?: Maybe<String>;
-  holePattern_gte?: Maybe<String>;
-  holePattern_contains?: Maybe<String>;
-  holePattern_not_contains?: Maybe<String>;
-  holePattern_starts_with?: Maybe<String>;
-  holePattern_not_starts_with?: Maybe<String>;
-  holePattern_ends_with?: Maybe<String>;
-  holePattern_not_ends_with?: Maybe<String>;
+  holePattern?: Maybe<HolePattern>;
+  holePattern_not?: Maybe<HolePattern>;
+  holePattern_in?: Maybe<HolePattern[] | HolePattern>;
+  holePattern_not_in?: Maybe<HolePattern[] | HolePattern>;
   voltageInputMin?: Maybe<Float>;
   voltageInputMin_not?: Maybe<Float>;
   voltageInputMin_in?: Maybe<Float[] | Float>;
@@ -799,15 +830,15 @@ export interface UserUpdateOneWithoutFlightControllersInput {
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface UserSubscriptionWhereInput {
+export interface VoteSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  node?: Maybe<VoteWhereInput>;
+  AND?: Maybe<VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput>;
+  OR?: Maybe<VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput>;
+  NOT?: Maybe<VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput>;
 }
 
 export interface UserUpdateWithoutFlightControllersDataInput {
@@ -826,19 +857,15 @@ export interface UserUpdateWithoutFlightControllersDataInput {
   >;
 }
 
-export interface MerchantSubscriptionWhereInput {
+export interface UserSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<MerchantWhereInput>;
-  AND?: Maybe<
-    MerchantSubscriptionWhereInput[] | MerchantSubscriptionWhereInput
-  >;
-  OR?: Maybe<MerchantSubscriptionWhereInput[] | MerchantSubscriptionWhereInput>;
-  NOT?: Maybe<
-    MerchantSubscriptionWhereInput[] | MerchantSubscriptionWhereInput
-  >;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
 }
 
 export interface LinkUpdateManyWithoutPostedByInput {
@@ -863,15 +890,19 @@ export interface LinkUpdateManyWithoutPostedByInput {
   >;
 }
 
-export interface LinkSubscriptionWhereInput {
+export interface MerchantSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<LinkWhereInput>;
-  AND?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
-  OR?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
-  NOT?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
+  node?: Maybe<MerchantWhereInput>;
+  AND?: Maybe<
+    MerchantSubscriptionWhereInput[] | MerchantSubscriptionWhereInput
+  >;
+  OR?: Maybe<MerchantSubscriptionWhereInput[] | MerchantSubscriptionWhereInput>;
+  NOT?: Maybe<
+    MerchantSubscriptionWhereInput[] | MerchantSubscriptionWhereInput
+  >;
 }
 
 export interface LinkUpdateWithWhereUniqueWithoutPostedByInput {
@@ -879,23 +910,23 @@ export interface LinkUpdateWithWhereUniqueWithoutPostedByInput {
   data: LinkUpdateWithoutPostedByDataInput;
 }
 
-export interface FlightControllerSubscriptionWhereInput {
+export interface FlightControllerMerchantLinkSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<FlightControllerWhereInput>;
+  node?: Maybe<FlightControllerMerchantLinkWhereInput>;
   AND?: Maybe<
-    | FlightControllerSubscriptionWhereInput[]
-    | FlightControllerSubscriptionWhereInput
+    | FlightControllerMerchantLinkSubscriptionWhereInput[]
+    | FlightControllerMerchantLinkSubscriptionWhereInput
   >;
   OR?: Maybe<
-    | FlightControllerSubscriptionWhereInput[]
-    | FlightControllerSubscriptionWhereInput
+    | FlightControllerMerchantLinkSubscriptionWhereInput[]
+    | FlightControllerMerchantLinkSubscriptionWhereInput
   >;
   NOT?: Maybe<
-    | FlightControllerSubscriptionWhereInput[]
-    | FlightControllerSubscriptionWhereInput
+    | FlightControllerMerchantLinkSubscriptionWhereInput[]
+    | FlightControllerMerchantLinkSubscriptionWhereInput
   >;
 }
 
@@ -905,10 +936,9 @@ export interface LinkUpdateWithoutPostedByDataInput {
   votes?: Maybe<VoteUpdateManyWithoutLinkInput>;
 }
 
-export interface VoteCreateInput {
-  id?: Maybe<ID_Input>;
-  link: LinkCreateOneWithoutVotesInput;
-  user: UserCreateOneWithoutVotesInput;
+export interface VoteUpdateInput {
+  link?: Maybe<LinkUpdateOneRequiredWithoutVotesInput>;
+  user?: Maybe<UserUpdateOneRequiredWithoutVotesInput>;
 }
 
 export interface VoteUpdateManyWithoutLinkInput {
@@ -928,21 +958,10 @@ export interface VoteUpdateManyWithoutLinkInput {
   deleteMany?: Maybe<VoteScalarWhereInput[] | VoteScalarWhereInput>;
 }
 
-export interface UserUpdateInput {
+export interface UserUpdateManyMutationInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
-  links?: Maybe<LinkUpdateManyWithoutPostedByInput>;
-  votes?: Maybe<VoteUpdateManyWithoutUserInput>;
-  flightControllers?: Maybe<FlightControllerUpdateManyWithoutPostedByInput>;
-  editedFlightControllers?: Maybe<
-    FlightControllerUpdateManyWithoutUpdatedByInput
-  >;
-  addedMerchants?: Maybe<MerchantUpdateManyWithoutPostedByInput>;
-  editedMerchants?: Maybe<MerchantUpdateManyWithoutUpdatedByInput>;
-  AddedFlightControllers?: Maybe<
-    FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
-  >;
 }
 
 export interface VoteUpdateWithWhereUniqueWithoutLinkInput {
@@ -958,12 +977,7 @@ export interface VoteUpdateWithoutLinkDataInput {
   user?: Maybe<UserUpdateOneRequiredWithoutVotesInput>;
 }
 
-export interface MerchantUpdateInput {
-  postedBy?: Maybe<UserUpdateOneWithoutAddedMerchantsInput>;
-  updatedBy?: Maybe<UserUpdateOneWithoutEditedMerchantsInput>;
-  flightControllers?: Maybe<
-    FlightControllerMerchantLinkUpdateManyWithoutMerchantInput
-  >;
+export interface MerchantUpdateManyMutationInput {
   name?: Maybe<String>;
   url?: Maybe<String>;
   affiliateId?: Maybe<String>;
@@ -997,11 +1011,9 @@ export interface UserUpdateWithoutVotesDataInput {
   >;
 }
 
-export interface LinkUpdateInput {
+export interface LinkUpdateManyMutationInput {
   description?: Maybe<String>;
   url?: Maybe<String>;
-  postedBy?: Maybe<UserUpdateOneWithoutLinksInput>;
-  votes?: Maybe<VoteUpdateManyWithoutLinkInput>;
 }
 
 export interface FlightControllerUpdateManyWithoutPostedByInput {
@@ -1047,22 +1059,33 @@ export interface FlightControllerUpdateWithWhereUniqueWithoutPostedByInput {
   data: FlightControllerUpdateWithoutPostedByDataInput;
 }
 
-export interface FlightControllerMerchantLinkUpdateInput {
-  merchant?: Maybe<MerchantUpdateOneRequiredWithoutFlightControllersInput>;
-  flightController?: Maybe<
-    FlightControllerUpdateOneRequiredWithoutMerchantLinksInput
-  >;
+export interface FlightControllerMerchantLinkUpdateManyMutationInput {
   url?: Maybe<String>;
   price?: Maybe<Float>;
   inStock?: Maybe<Boolean>;
-  postedBy?: Maybe<UserUpdateOneRequiredWithoutAddedFlightControllersInput>;
 }
 
-export interface FlightControllerUpdateWithoutPostedByDataInput {
-  updatedBy?: Maybe<UserUpdateOneWithoutEditedFlightControllersInput>;
-  merchantLinks?: Maybe<
-    FlightControllerMerchantLinkUpdateManyWithoutFlightControllerInput
-  >;
+export interface VoteUpsertWithWhereUniqueWithoutLinkInput {
+  where: VoteWhereUniqueInput;
+  update: VoteUpdateWithoutLinkDataInput;
+  create: VoteCreateWithoutLinkInput;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface UserUpdateOneWithoutEditedFlightControllersInput {
+  create?: Maybe<UserCreateWithoutEditedFlightControllersInput>;
+  update?: Maybe<UserUpdateWithoutEditedFlightControllersDataInput>;
+  upsert?: Maybe<UserUpsertWithoutEditedFlightControllersInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface FlightControllerUpdateManyMutationInput {
   name?: Maybe<String>;
   disabled?: Maybe<Boolean>;
   releaseDate?: Maybe<DateTimeInput>;
@@ -1073,7 +1096,7 @@ export interface FlightControllerUpdateWithoutPostedByDataInput {
   cpu?: Maybe<String>;
   description?: Maybe<String>;
   dimensions?: Maybe<String>;
-  holePattern?: Maybe<String>;
+  holePattern?: Maybe<HolePattern>;
   voltageInputMin?: Maybe<Float>;
   voltageInputMax?: Maybe<Float>;
   osd?: Maybe<Boolean>;
@@ -1093,21 +1116,6 @@ export interface FlightControllerUpdateWithoutPostedByDataInput {
   cameraControl?: Maybe<Boolean>;
 }
 
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-}>;
-
-export interface UserUpsertWithoutVotesInput {
-  update: UserUpdateWithoutVotesDataInput;
-  create: UserCreateWithoutVotesInput;
-}
-
-export interface UserUpsertWithoutFlightControllersInput {
-  update: UserUpdateWithoutFlightControllersDataInput;
-  create: UserCreateWithoutFlightControllersInput;
-}
-
 export interface UserUpdateWithoutEditedFlightControllersDataInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
@@ -1122,9 +1130,9 @@ export interface UserUpdateWithoutEditedFlightControllersDataInput {
   >;
 }
 
-export interface LinkUpdateManyWithWhereNestedInput {
-  where: LinkScalarWhereInput;
-  data: LinkUpdateManyDataInput;
+export interface LinkUpdateManyDataInput {
+  description?: Maybe<String>;
+  url?: Maybe<String>;
 }
 
 export interface VoteUpdateManyWithoutUserInput {
@@ -1144,60 +1152,9 @@ export interface VoteUpdateManyWithoutUserInput {
   deleteMany?: Maybe<VoteScalarWhereInput[] | VoteScalarWhereInput>;
 }
 
-export interface LinkScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  url?: Maybe<String>;
-  url_not?: Maybe<String>;
-  url_in?: Maybe<String[] | String>;
-  url_not_in?: Maybe<String[] | String>;
-  url_lt?: Maybe<String>;
-  url_lte?: Maybe<String>;
-  url_gt?: Maybe<String>;
-  url_gte?: Maybe<String>;
-  url_contains?: Maybe<String>;
-  url_not_contains?: Maybe<String>;
-  url_starts_with?: Maybe<String>;
-  url_not_starts_with?: Maybe<String>;
-  url_ends_with?: Maybe<String>;
-  url_not_ends_with?: Maybe<String>;
-  AND?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
-  OR?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
-  NOT?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
+export interface LinkUpdateManyWithWhereNestedInput {
+  where: LinkScalarWhereInput;
+  data: LinkUpdateManyDataInput;
 }
 
 export interface VoteUpdateWithWhereUniqueWithoutUserInput {
@@ -1205,10 +1162,10 @@ export interface VoteUpdateWithWhereUniqueWithoutUserInput {
   data: VoteUpdateWithoutUserDataInput;
 }
 
-export interface VoteUpsertWithWhereUniqueWithoutLinkInput {
-  where: VoteWhereUniqueInput;
-  update: VoteUpdateWithoutLinkDataInput;
-  create: VoteCreateWithoutLinkInput;
+export interface LinkUpsertWithWhereUniqueWithoutPostedByInput {
+  where: LinkWhereUniqueInput;
+  update: LinkUpdateWithoutPostedByDataInput;
+  create: LinkCreateWithoutPostedByInput;
 }
 
 export interface VoteUpdateWithoutUserDataInput {
@@ -1232,7 +1189,7 @@ export interface FlightControllerCreateInput {
   cpu?: Maybe<String>;
   description?: Maybe<String>;
   dimensions?: Maybe<String>;
-  holePattern?: Maybe<String>;
+  holePattern?: Maybe<HolePattern>;
   voltageInputMin?: Maybe<Float>;
   voltageInputMax?: Maybe<Float>;
   osd?: Maybe<Boolean>;
@@ -1252,89 +1209,9 @@ export interface FlightControllerCreateInput {
   cameraControl?: Maybe<Boolean>;
 }
 
-export interface MerchantWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  postedBy?: Maybe<UserWhereInput>;
-  updatedBy?: Maybe<UserWhereInput>;
-  flightControllers_every?: Maybe<FlightControllerMerchantLinkWhereInput>;
-  flightControllers_some?: Maybe<FlightControllerMerchantLinkWhereInput>;
-  flightControllers_none?: Maybe<FlightControllerMerchantLinkWhereInput>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  url?: Maybe<String>;
-  url_not?: Maybe<String>;
-  url_in?: Maybe<String[] | String>;
-  url_not_in?: Maybe<String[] | String>;
-  url_lt?: Maybe<String>;
-  url_lte?: Maybe<String>;
-  url_gt?: Maybe<String>;
-  url_gte?: Maybe<String>;
-  url_contains?: Maybe<String>;
-  url_not_contains?: Maybe<String>;
-  url_starts_with?: Maybe<String>;
-  url_not_starts_with?: Maybe<String>;
-  url_ends_with?: Maybe<String>;
-  url_not_ends_with?: Maybe<String>;
-  affiliateId?: Maybe<String>;
-  affiliateId_not?: Maybe<String>;
-  affiliateId_in?: Maybe<String[] | String>;
-  affiliateId_not_in?: Maybe<String[] | String>;
-  affiliateId_lt?: Maybe<String>;
-  affiliateId_lte?: Maybe<String>;
-  affiliateId_gt?: Maybe<String>;
-  affiliateId_gte?: Maybe<String>;
-  affiliateId_contains?: Maybe<String>;
-  affiliateId_not_contains?: Maybe<String>;
-  affiliateId_starts_with?: Maybe<String>;
-  affiliateId_not_starts_with?: Maybe<String>;
-  affiliateId_ends_with?: Maybe<String>;
-  affiliateId_not_ends_with?: Maybe<String>;
-  disabled?: Maybe<Boolean>;
-  disabled_not?: Maybe<Boolean>;
-  AND?: Maybe<MerchantWhereInput[] | MerchantWhereInput>;
-  OR?: Maybe<MerchantWhereInput[] | MerchantWhereInput>;
-  NOT?: Maybe<MerchantWhereInput[] | MerchantWhereInput>;
+export interface UserUpsertWithoutVotesInput {
+  update: UserUpdateWithoutVotesDataInput;
+  create: UserCreateWithoutVotesInput;
 }
 
 export interface UserCreateWithoutFlightControllersInput {
@@ -1464,7 +1341,7 @@ export interface FlightControllerCreateWithoutPostedByInput {
   cpu?: Maybe<String>;
   description?: Maybe<String>;
   dimensions?: Maybe<String>;
-  holePattern?: Maybe<String>;
+  holePattern?: Maybe<HolePattern>;
   voltageInputMin?: Maybe<Float>;
   voltageInputMax?: Maybe<Float>;
   osd?: Maybe<Boolean>;
@@ -1519,7 +1396,7 @@ export interface FlightControllerUpdateWithoutUpdatedByDataInput {
   cpu?: Maybe<String>;
   description?: Maybe<String>;
   dimensions?: Maybe<String>;
-  holePattern?: Maybe<String>;
+  holePattern?: Maybe<HolePattern>;
   voltageInputMin?: Maybe<Float>;
   voltageInputMax?: Maybe<Float>;
   osd?: Maybe<Boolean>;
@@ -1636,7 +1513,7 @@ export interface FlightControllerCreateWithoutUpdatedByInput {
   cpu?: Maybe<String>;
   description?: Maybe<String>;
   dimensions?: Maybe<String>;
-  holePattern?: Maybe<String>;
+  holePattern?: Maybe<HolePattern>;
   voltageInputMin?: Maybe<Float>;
   voltageInputMax?: Maybe<Float>;
   osd?: Maybe<Boolean>;
@@ -1796,7 +1673,7 @@ export interface FlightControllerCreateWithoutMerchantLinksInput {
   cpu?: Maybe<String>;
   description?: Maybe<String>;
   dimensions?: Maybe<String>;
-  holePattern?: Maybe<String>;
+  holePattern?: Maybe<HolePattern>;
   voltageInputMin?: Maybe<Float>;
   voltageInputMax?: Maybe<Float>;
   osd?: Maybe<Boolean>;
@@ -2027,7 +1904,7 @@ export interface FlightControllerUpdateWithoutMerchantLinksDataInput {
   cpu?: Maybe<String>;
   description?: Maybe<String>;
   dimensions?: Maybe<String>;
-  holePattern?: Maybe<String>;
+  holePattern?: Maybe<HolePattern>;
   voltageInputMin?: Maybe<Float>;
   voltageInputMax?: Maybe<Float>;
   osd?: Maybe<Boolean>;
@@ -2047,9 +1924,24 @@ export interface FlightControllerUpdateWithoutMerchantLinksDataInput {
   cameraControl?: Maybe<Boolean>;
 }
 
-export interface VoteUpdateInput {
-  link?: Maybe<LinkUpdateOneRequiredWithoutVotesInput>;
-  user?: Maybe<UserUpdateOneRequiredWithoutVotesInput>;
+export interface FlightControllerSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<FlightControllerWhereInput>;
+  AND?: Maybe<
+    | FlightControllerSubscriptionWhereInput[]
+    | FlightControllerSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    | FlightControllerSubscriptionWhereInput[]
+    | FlightControllerSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    | FlightControllerSubscriptionWhereInput[]
+    | FlightControllerSubscriptionWhereInput
+  >;
 }
 
 export interface FlightControllerUpsertWithoutMerchantLinksInput {
@@ -2057,21 +1949,20 @@ export interface FlightControllerUpsertWithoutMerchantLinksInput {
   create: FlightControllerCreateWithoutMerchantLinksInput;
 }
 
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  email: String;
-  password: String;
-  links?: Maybe<LinkCreateManyWithoutPostedByInput>;
-  votes?: Maybe<VoteCreateManyWithoutUserInput>;
-  flightControllers?: Maybe<FlightControllerCreateManyWithoutPostedByInput>;
+export interface UserUpdateInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  links?: Maybe<LinkUpdateManyWithoutPostedByInput>;
+  votes?: Maybe<VoteUpdateManyWithoutUserInput>;
+  flightControllers?: Maybe<FlightControllerUpdateManyWithoutPostedByInput>;
   editedFlightControllers?: Maybe<
-    FlightControllerCreateManyWithoutUpdatedByInput
+    FlightControllerUpdateManyWithoutUpdatedByInput
   >;
-  addedMerchants?: Maybe<MerchantCreateManyWithoutPostedByInput>;
-  editedMerchants?: Maybe<MerchantCreateManyWithoutUpdatedByInput>;
+  addedMerchants?: Maybe<MerchantUpdateManyWithoutPostedByInput>;
+  editedMerchants?: Maybe<MerchantUpdateManyWithoutUpdatedByInput>;
   AddedFlightControllers?: Maybe<
-    FlightControllerMerchantLinkCreateManyWithoutPostedByInput
+    FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
   >;
 }
 
@@ -2082,12 +1973,11 @@ export interface UserUpdateOneRequiredWithoutAddedFlightControllersInput {
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface MerchantCreateInput {
-  id?: Maybe<ID_Input>;
-  postedBy?: Maybe<UserCreateOneWithoutAddedMerchantsInput>;
-  updatedBy?: Maybe<UserCreateOneWithoutEditedMerchantsInput>;
+export interface MerchantUpdateInput {
+  postedBy?: Maybe<UserUpdateOneWithoutAddedMerchantsInput>;
+  updatedBy?: Maybe<UserUpdateOneWithoutEditedMerchantsInput>;
   flightControllers?: Maybe<
-    FlightControllerMerchantLinkCreateManyWithoutMerchantInput
+    FlightControllerMerchantLinkUpdateManyWithoutMerchantInput
   >;
   name?: Maybe<String>;
   url?: Maybe<String>;
@@ -2109,12 +1999,11 @@ export interface UserUpdateWithoutAddedFlightControllersDataInput {
   editedMerchants?: Maybe<MerchantUpdateManyWithoutUpdatedByInput>;
 }
 
-export interface LinkCreateInput {
-  id?: Maybe<ID_Input>;
-  description: String;
-  url: String;
-  postedBy?: Maybe<UserCreateOneWithoutLinksInput>;
-  votes?: Maybe<VoteCreateManyWithoutLinkInput>;
+export interface LinkUpdateInput {
+  description?: Maybe<String>;
+  url?: Maybe<String>;
+  postedBy?: Maybe<UserUpdateOneWithoutLinksInput>;
+  votes?: Maybe<VoteUpdateManyWithoutLinkInput>;
 }
 
 export interface MerchantUpdateManyWithoutPostedByInput {
@@ -2140,14 +2029,15 @@ export interface MerchantUpdateManyWithoutPostedByInput {
   >;
 }
 
-export interface FlightControllerMerchantLinkCreateInput {
-  id?: Maybe<ID_Input>;
-  merchant: MerchantCreateOneWithoutFlightControllersInput;
-  flightController: FlightControllerCreateOneWithoutMerchantLinksInput;
-  url: String;
-  price: Float;
+export interface FlightControllerMerchantLinkUpdateInput {
+  merchant?: Maybe<MerchantUpdateOneRequiredWithoutFlightControllersInput>;
+  flightController?: Maybe<
+    FlightControllerUpdateOneRequiredWithoutMerchantLinksInput
+  >;
+  url?: Maybe<String>;
+  price?: Maybe<Float>;
   inStock?: Maybe<Boolean>;
-  postedBy: UserCreateOneWithoutAddedFlightControllersInput;
+  postedBy?: Maybe<UserUpdateOneRequiredWithoutAddedFlightControllersInput>;
 }
 
 export interface MerchantUpdateWithWhereUniqueWithoutPostedByInput {
@@ -2155,9 +2045,9 @@ export interface MerchantUpdateWithWhereUniqueWithoutPostedByInput {
   data: MerchantUpdateWithoutPostedByDataInput;
 }
 
-export interface LinkUpdateManyDataInput {
-  description?: Maybe<String>;
-  url?: Maybe<String>;
+export interface UserUpsertWithoutFlightControllersInput {
+  update: UserUpdateWithoutFlightControllersDataInput;
+  create: UserCreateWithoutFlightControllersInput;
 }
 
 export interface MerchantUpdateWithoutPostedByDataInput {
@@ -2171,10 +2061,60 @@ export interface MerchantUpdateWithoutPostedByDataInput {
   disabled?: Maybe<Boolean>;
 }
 
-export interface LinkUpsertWithWhereUniqueWithoutPostedByInput {
-  where: LinkWhereUniqueInput;
-  update: LinkUpdateWithoutPostedByDataInput;
-  create: LinkCreateWithoutPostedByInput;
+export interface LinkScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  url?: Maybe<String>;
+  url_not?: Maybe<String>;
+  url_in?: Maybe<String[] | String>;
+  url_not_in?: Maybe<String[] | String>;
+  url_lt?: Maybe<String>;
+  url_lte?: Maybe<String>;
+  url_gt?: Maybe<String>;
+  url_gte?: Maybe<String>;
+  url_contains?: Maybe<String>;
+  url_not_contains?: Maybe<String>;
+  url_starts_with?: Maybe<String>;
+  url_not_starts_with?: Maybe<String>;
+  url_ends_with?: Maybe<String>;
+  url_not_ends_with?: Maybe<String>;
+  AND?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
+  OR?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
+  NOT?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
 }
 
 export interface UserUpdateOneWithoutEditedMerchantsInput {
@@ -2583,10 +2523,10 @@ export interface MerchantScalarWhereInput {
   NOT?: Maybe<MerchantScalarWhereInput[] | MerchantScalarWhereInput>;
 }
 
-export interface UserUpdateManyMutationInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
+export interface VoteCreateInput {
+  id?: Maybe<ID_Input>;
+  link: LinkCreateOneWithoutVotesInput;
+  user: UserCreateOneWithoutVotesInput;
 }
 
 export interface MerchantUpdateManyWithWhereNestedInput {
@@ -2594,9 +2534,17 @@ export interface MerchantUpdateManyWithWhereNestedInput {
   data: MerchantUpdateManyDataInput;
 }
 
-export interface LinkUpdateManyMutationInput {
-  description?: Maybe<String>;
+export interface MerchantCreateInput {
+  id?: Maybe<ID_Input>;
+  postedBy?: Maybe<UserCreateOneWithoutAddedMerchantsInput>;
+  updatedBy?: Maybe<UserCreateOneWithoutEditedMerchantsInput>;
+  flightControllers?: Maybe<
+    FlightControllerMerchantLinkCreateManyWithoutMerchantInput
+  >;
+  name?: Maybe<String>;
   url?: Maybe<String>;
+  affiliateId?: Maybe<String>;
+  disabled?: Maybe<Boolean>;
 }
 
 export interface MerchantUpdateManyDataInput {
@@ -2606,35 +2554,14 @@ export interface MerchantUpdateManyDataInput {
   disabled?: Maybe<Boolean>;
 }
 
-export interface FlightControllerUpdateManyMutationInput {
-  name?: Maybe<String>;
-  disabled?: Maybe<Boolean>;
-  releaseDate?: Maybe<DateTimeInput>;
-  uarts?: Maybe<Int>;
-  gyroOne?: Maybe<Float>;
-  gyroTwo?: Maybe<Float>;
-  weightInGrams?: Maybe<Float>;
-  cpu?: Maybe<String>;
-  description?: Maybe<String>;
-  dimensions?: Maybe<String>;
-  holePattern?: Maybe<String>;
-  voltageInputMin?: Maybe<Float>;
-  voltageInputMax?: Maybe<Float>;
-  osd?: Maybe<Boolean>;
-  accelerometer?: Maybe<Boolean>;
-  barometer?: Maybe<Boolean>;
-  spektrumPort?: Maybe<Boolean>;
-  usbInterface?: Maybe<Boolean>;
-  ledWS2812Support?: Maybe<Boolean>;
-  rssiPad?: Maybe<Boolean>;
-  currentSensor?: Maybe<Boolean>;
-  beeperPad?: Maybe<Boolean>;
-  beeperOnBoard?: Maybe<Boolean>;
-  antiVibrationGrommets?: Maybe<Boolean>;
-  builtInReceiver?: Maybe<ReceiverProtocol>;
-  threeVoltOutput?: Maybe<Boolean>;
-  fiveVoltOut?: Maybe<Boolean>;
-  cameraControl?: Maybe<Boolean>;
+export interface FlightControllerMerchantLinkCreateInput {
+  id?: Maybe<ID_Input>;
+  merchant: MerchantCreateOneWithoutFlightControllersInput;
+  flightController: FlightControllerCreateOneWithoutMerchantLinksInput;
+  url: String;
+  price: Float;
+  inStock?: Maybe<Boolean>;
+  postedBy: UserCreateOneWithoutAddedFlightControllersInput;
 }
 
 export interface UserUpsertWithoutAddedFlightControllersInput {
@@ -2684,15 +2611,76 @@ export interface MerchantUpsertWithoutFlightControllersInput {
   create: MerchantCreateWithoutFlightControllersInput;
 }
 
-export interface VoteSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<VoteWhereInput>;
-  AND?: Maybe<VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput>;
-  OR?: Maybe<VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput>;
-  NOT?: Maybe<VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput>;
+export interface FlightControllerMerchantLinkWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  merchant?: Maybe<MerchantWhereInput>;
+  flightController?: Maybe<FlightControllerWhereInput>;
+  url?: Maybe<String>;
+  url_not?: Maybe<String>;
+  url_in?: Maybe<String[] | String>;
+  url_not_in?: Maybe<String[] | String>;
+  url_lt?: Maybe<String>;
+  url_lte?: Maybe<String>;
+  url_gt?: Maybe<String>;
+  url_gte?: Maybe<String>;
+  url_contains?: Maybe<String>;
+  url_not_contains?: Maybe<String>;
+  url_starts_with?: Maybe<String>;
+  url_not_starts_with?: Maybe<String>;
+  url_ends_with?: Maybe<String>;
+  url_not_ends_with?: Maybe<String>;
+  price?: Maybe<Float>;
+  price_not?: Maybe<Float>;
+  price_in?: Maybe<Float[] | Float>;
+  price_not_in?: Maybe<Float[] | Float>;
+  price_lt?: Maybe<Float>;
+  price_lte?: Maybe<Float>;
+  price_gt?: Maybe<Float>;
+  price_gte?: Maybe<Float>;
+  inStock?: Maybe<Boolean>;
+  inStock_not?: Maybe<Boolean>;
+  postedBy?: Maybe<UserWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<
+    | FlightControllerMerchantLinkWhereInput[]
+    | FlightControllerMerchantLinkWhereInput
+  >;
+  OR?: Maybe<
+    | FlightControllerMerchantLinkWhereInput[]
+    | FlightControllerMerchantLinkWhereInput
+  >;
+  NOT?: Maybe<
+    | FlightControllerMerchantLinkWhereInput[]
+    | FlightControllerMerchantLinkWhereInput
+  >;
 }
 
 export interface FlightControllerMerchantLinkUpsertWithWhereUniqueWithoutFlightControllerInput {
@@ -2701,11 +2689,22 @@ export interface FlightControllerMerchantLinkUpsertWithWhereUniqueWithoutFlightC
   create: FlightControllerMerchantLinkCreateWithoutFlightControllerInput;
 }
 
-export interface MerchantUpdateManyMutationInput {
-  name?: Maybe<String>;
-  url?: Maybe<String>;
-  affiliateId?: Maybe<String>;
-  disabled?: Maybe<Boolean>;
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  email: String;
+  password: String;
+  links?: Maybe<LinkCreateManyWithoutPostedByInput>;
+  votes?: Maybe<VoteCreateManyWithoutUserInput>;
+  flightControllers?: Maybe<FlightControllerCreateManyWithoutPostedByInput>;
+  editedFlightControllers?: Maybe<
+    FlightControllerCreateManyWithoutUpdatedByInput
+  >;
+  addedMerchants?: Maybe<MerchantCreateManyWithoutPostedByInput>;
+  editedMerchants?: Maybe<MerchantCreateManyWithoutUpdatedByInput>;
+  AddedFlightControllers?: Maybe<
+    FlightControllerMerchantLinkCreateManyWithoutPostedByInput
+  >;
 }
 
 export interface FlightControllerUpsertWithWhereUniqueWithoutUpdatedByInput {
@@ -2847,20 +2846,10 @@ export interface FlightControllerScalarWhereInput {
   dimensions_not_starts_with?: Maybe<String>;
   dimensions_ends_with?: Maybe<String>;
   dimensions_not_ends_with?: Maybe<String>;
-  holePattern?: Maybe<String>;
-  holePattern_not?: Maybe<String>;
-  holePattern_in?: Maybe<String[] | String>;
-  holePattern_not_in?: Maybe<String[] | String>;
-  holePattern_lt?: Maybe<String>;
-  holePattern_lte?: Maybe<String>;
-  holePattern_gt?: Maybe<String>;
-  holePattern_gte?: Maybe<String>;
-  holePattern_contains?: Maybe<String>;
-  holePattern_not_contains?: Maybe<String>;
-  holePattern_starts_with?: Maybe<String>;
-  holePattern_not_starts_with?: Maybe<String>;
-  holePattern_ends_with?: Maybe<String>;
-  holePattern_not_ends_with?: Maybe<String>;
+  holePattern?: Maybe<HolePattern>;
+  holePattern_not?: Maybe<HolePattern>;
+  holePattern_in?: Maybe<HolePattern[] | HolePattern>;
+  holePattern_not_in?: Maybe<HolePattern[] | HolePattern>;
   voltageInputMin?: Maybe<Float>;
   voltageInputMin_not?: Maybe<Float>;
   voltageInputMin_in?: Maybe<Float[] | Float>;
@@ -2948,7 +2937,7 @@ export interface FlightControllerUpdateManyDataInput {
   cpu?: Maybe<String>;
   description?: Maybe<String>;
   dimensions?: Maybe<String>;
-  holePattern?: Maybe<String>;
+  holePattern?: Maybe<HolePattern>;
   voltageInputMin?: Maybe<Float>;
   voltageInputMax?: Maybe<Float>;
   osd?: Maybe<Boolean>;
@@ -2968,24 +2957,15 @@ export interface FlightControllerUpdateManyDataInput {
   cameraControl?: Maybe<Boolean>;
 }
 
-export interface FlightControllerMerchantLinkSubscriptionWhereInput {
+export interface LinkSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<FlightControllerMerchantLinkWhereInput>;
-  AND?: Maybe<
-    | FlightControllerMerchantLinkSubscriptionWhereInput[]
-    | FlightControllerMerchantLinkSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    | FlightControllerMerchantLinkSubscriptionWhereInput[]
-    | FlightControllerMerchantLinkSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    | FlightControllerMerchantLinkSubscriptionWhereInput[]
-    | FlightControllerMerchantLinkSubscriptionWhereInput
-  >;
+  node?: Maybe<LinkWhereInput>;
+  AND?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
+  OR?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
+  NOT?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
 }
 
 export interface VoteScalarWhereInput {
@@ -3024,10 +3004,12 @@ export interface UserUpsertWithoutLinksInput {
   create: UserCreateWithoutLinksInput;
 }
 
-export interface FlightControllerMerchantLinkUpdateManyMutationInput {
-  url?: Maybe<String>;
-  price?: Maybe<Float>;
-  inStock?: Maybe<Boolean>;
+export interface LinkCreateInput {
+  id?: Maybe<ID_Input>;
+  description: String;
+  url: String;
+  postedBy?: Maybe<UserCreateOneWithoutLinksInput>;
+  votes?: Maybe<VoteCreateManyWithoutLinkInput>;
 }
 
 export interface MerchantCreateManyWithoutPostedByInput {
@@ -3074,27 +3056,23 @@ export interface VotePreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
 }
 
-export interface FlightControllerMerchantLinkConnection {
-  pageInfo: PageInfo;
-  edges: FlightControllerMerchantLinkEdge[];
+export interface FlightControllerMerchantLinkEdge {
+  node: FlightControllerMerchantLink;
+  cursor: String;
 }
 
-export interface FlightControllerMerchantLinkConnectionPromise
-  extends Promise<FlightControllerMerchantLinkConnection>,
+export interface FlightControllerMerchantLinkEdgePromise
+  extends Promise<FlightControllerMerchantLinkEdge>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<FlightControllerMerchantLinkEdge>>() => T;
-  aggregate: <T = AggregateFlightControllerMerchantLinkPromise>() => T;
+  node: <T = FlightControllerMerchantLinkPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface FlightControllerMerchantLinkConnectionSubscription
-  extends Promise<AsyncIterator<FlightControllerMerchantLinkConnection>>,
+export interface FlightControllerMerchantLinkEdgeSubscription
+  extends Promise<AsyncIterator<FlightControllerMerchantLinkEdge>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <
-    T = Promise<AsyncIterator<FlightControllerMerchantLinkEdgeSubscription>>
-  >() => T;
-  aggregate: <T = AggregateFlightControllerMerchantLinkSubscription>() => T;
+  node: <T = FlightControllerMerchantLinkSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface MerchantPreviousValues {
@@ -3131,43 +3109,27 @@ export interface MerchantPreviousValuesSubscription
   disabled: () => Promise<AsyncIterator<Boolean>>;
 }
 
-export interface AggregateFlightController {
-  count: Int;
+export interface FlightControllerMerchantLinkConnection {
+  pageInfo: PageInfo;
+  edges: FlightControllerMerchantLinkEdge[];
 }
 
-export interface AggregateFlightControllerPromise
-  extends Promise<AggregateFlightController>,
+export interface FlightControllerMerchantLinkConnectionPromise
+  extends Promise<FlightControllerMerchantLinkConnection>,
     Fragmentable {
-  count: () => Promise<Int>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<FlightControllerMerchantLinkEdge>>() => T;
+  aggregate: <T = AggregateFlightControllerMerchantLinkPromise>() => T;
 }
 
-export interface AggregateFlightControllerSubscription
-  extends Promise<AsyncIterator<AggregateFlightController>>,
+export interface FlightControllerMerchantLinkConnectionSubscription
+  extends Promise<AsyncIterator<FlightControllerMerchantLinkConnection>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <
+    T = Promise<AsyncIterator<FlightControllerMerchantLinkEdgeSubscription>>
+  >() => T;
+  aggregate: <T = AggregateFlightControllerMerchantLinkSubscription>() => T;
 }
 
 export interface FlightControllerEdge {
@@ -3189,21 +3151,36 @@ export interface FlightControllerEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface VoteEdge {
-  node: Vote;
-  cursor: String;
+export interface AggregateFlightController {
+  count: Int;
 }
 
-export interface VoteEdgePromise extends Promise<VoteEdge>, Fragmentable {
-  node: <T = VotePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface VoteEdgeSubscription
-  extends Promise<AsyncIterator<VoteEdge>>,
+export interface AggregateFlightControllerPromise
+  extends Promise<AggregateFlightController>,
     Fragmentable {
-  node: <T = VoteSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<Int>;
+}
+
+export interface AggregateFlightControllerSubscription
+  extends Promise<AsyncIterator<AggregateFlightController>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateVote {
+  count: Int;
+}
+
+export interface AggregateVotePromise
+  extends Promise<AggregateVote>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateVoteSubscription
+  extends Promise<AsyncIterator<AggregateVote>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -3231,20 +3208,65 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-export interface AggregateUser {
-  count: Int;
+export interface VoteConnection {
+  pageInfo: PageInfo;
+  edges: VoteEdge[];
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
+export interface VoteConnectionPromise
+  extends Promise<VoteConnection>,
     Fragmentable {
-  count: () => Promise<Int>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<VoteEdge>>() => T;
+  aggregate: <T = AggregateVotePromise>() => T;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
+export interface VoteConnectionSubscription
+  extends Promise<AsyncIterator<VoteConnection>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<VoteEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateVoteSubscription>() => T;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface FlightControllerConnection {
@@ -3268,25 +3290,20 @@ export interface FlightControllerConnectionSubscription
   aggregate: <T = AggregateFlightControllerSubscription>() => T;
 }
 
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
+export interface BatchPayload {
+  count: Long;
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  count: () => Promise<Long>;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  count: () => Promise<AsyncIterator<Long>>;
 }
 
 export interface FlightControllerMerchantLink {
@@ -3340,20 +3357,393 @@ export interface FlightControllerMerchantLinkNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface BatchPayload {
-  count: Long;
+export interface UserPreviousValues {
+  id: ID_Output;
+  name: String;
+  email: String;
+  password: String;
 }
 
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
     Fragmentable {
-  count: () => Promise<Long>;
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
 }
 
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+}
+
+export interface FlightController {
+  id: ID_Output;
+  createdAt?: DateTimeOutput;
+  updatedAt?: DateTimeOutput;
+  name?: String;
+  disabled?: Boolean;
+  releaseDate?: DateTimeOutput;
+  uarts?: Int;
+  gyroOne?: Float;
+  gyroTwo?: Float;
+  weightInGrams?: Float;
+  cpu?: String;
+  description?: String;
+  dimensions?: String;
+  holePattern?: HolePattern;
+  voltageInputMin?: Float;
+  voltageInputMax?: Float;
+  osd?: Boolean;
+  accelerometer?: Boolean;
+  barometer?: Boolean;
+  spektrumPort?: Boolean;
+  usbInterface?: Boolean;
+  ledWS2812Support?: Boolean;
+  rssiPad?: Boolean;
+  currentSensor?: Boolean;
+  beeperPad?: Boolean;
+  beeperOnBoard?: Boolean;
+  antiVibrationGrommets?: Boolean;
+  builtInReceiver?: ReceiverProtocol;
+  threeVoltOutput?: Boolean;
+  fiveVoltOut?: Boolean;
+  cameraControl?: Boolean;
+}
+
+export interface FlightControllerPromise
+  extends Promise<FlightController>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  postedBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  merchantLinks: <T = FragmentableArray<FlightControllerMerchantLink>>(args?: {
+    where?: FlightControllerMerchantLinkWhereInput;
+    orderBy?: FlightControllerMerchantLinkOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<String>;
+  disabled: () => Promise<Boolean>;
+  releaseDate: () => Promise<DateTimeOutput>;
+  uarts: () => Promise<Int>;
+  gyroOne: () => Promise<Float>;
+  gyroTwo: () => Promise<Float>;
+  weightInGrams: () => Promise<Float>;
+  cpu: () => Promise<String>;
+  description: () => Promise<String>;
+  dimensions: () => Promise<String>;
+  holePattern: () => Promise<HolePattern>;
+  voltageInputMin: () => Promise<Float>;
+  voltageInputMax: () => Promise<Float>;
+  osd: () => Promise<Boolean>;
+  accelerometer: () => Promise<Boolean>;
+  barometer: () => Promise<Boolean>;
+  spektrumPort: () => Promise<Boolean>;
+  usbInterface: () => Promise<Boolean>;
+  ledWS2812Support: () => Promise<Boolean>;
+  rssiPad: () => Promise<Boolean>;
+  currentSensor: () => Promise<Boolean>;
+  beeperPad: () => Promise<Boolean>;
+  beeperOnBoard: () => Promise<Boolean>;
+  antiVibrationGrommets: () => Promise<Boolean>;
+  builtInReceiver: () => Promise<ReceiverProtocol>;
+  threeVoltOutput: () => Promise<Boolean>;
+  fiveVoltOut: () => Promise<Boolean>;
+  cameraControl: () => Promise<Boolean>;
+}
+
+export interface FlightControllerSubscription
+  extends Promise<AsyncIterator<FlightController>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  postedBy: <T = UserSubscription>() => T;
+  updatedBy: <T = UserSubscription>() => T;
+  merchantLinks: <
+    T = Promise<AsyncIterator<FlightControllerMerchantLinkSubscription>>
+  >(args?: {
+    where?: FlightControllerMerchantLinkWhereInput;
+    orderBy?: FlightControllerMerchantLinkOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<AsyncIterator<String>>;
+  disabled: () => Promise<AsyncIterator<Boolean>>;
+  releaseDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  uarts: () => Promise<AsyncIterator<Int>>;
+  gyroOne: () => Promise<AsyncIterator<Float>>;
+  gyroTwo: () => Promise<AsyncIterator<Float>>;
+  weightInGrams: () => Promise<AsyncIterator<Float>>;
+  cpu: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  dimensions: () => Promise<AsyncIterator<String>>;
+  holePattern: () => Promise<AsyncIterator<HolePattern>>;
+  voltageInputMin: () => Promise<AsyncIterator<Float>>;
+  voltageInputMax: () => Promise<AsyncIterator<Float>>;
+  osd: () => Promise<AsyncIterator<Boolean>>;
+  accelerometer: () => Promise<AsyncIterator<Boolean>>;
+  barometer: () => Promise<AsyncIterator<Boolean>>;
+  spektrumPort: () => Promise<AsyncIterator<Boolean>>;
+  usbInterface: () => Promise<AsyncIterator<Boolean>>;
+  ledWS2812Support: () => Promise<AsyncIterator<Boolean>>;
+  rssiPad: () => Promise<AsyncIterator<Boolean>>;
+  currentSensor: () => Promise<AsyncIterator<Boolean>>;
+  beeperPad: () => Promise<AsyncIterator<Boolean>>;
+  beeperOnBoard: () => Promise<AsyncIterator<Boolean>>;
+  antiVibrationGrommets: () => Promise<AsyncIterator<Boolean>>;
+  builtInReceiver: () => Promise<AsyncIterator<ReceiverProtocol>>;
+  threeVoltOutput: () => Promise<AsyncIterator<Boolean>>;
+  fiveVoltOut: () => Promise<AsyncIterator<Boolean>>;
+  cameraControl: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface FlightControllerNullablePromise
+  extends Promise<FlightController | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  postedBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  merchantLinks: <T = FragmentableArray<FlightControllerMerchantLink>>(args?: {
+    where?: FlightControllerMerchantLinkWhereInput;
+    orderBy?: FlightControllerMerchantLinkOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<String>;
+  disabled: () => Promise<Boolean>;
+  releaseDate: () => Promise<DateTimeOutput>;
+  uarts: () => Promise<Int>;
+  gyroOne: () => Promise<Float>;
+  gyroTwo: () => Promise<Float>;
+  weightInGrams: () => Promise<Float>;
+  cpu: () => Promise<String>;
+  description: () => Promise<String>;
+  dimensions: () => Promise<String>;
+  holePattern: () => Promise<HolePattern>;
+  voltageInputMin: () => Promise<Float>;
+  voltageInputMax: () => Promise<Float>;
+  osd: () => Promise<Boolean>;
+  accelerometer: () => Promise<Boolean>;
+  barometer: () => Promise<Boolean>;
+  spektrumPort: () => Promise<Boolean>;
+  usbInterface: () => Promise<Boolean>;
+  ledWS2812Support: () => Promise<Boolean>;
+  rssiPad: () => Promise<Boolean>;
+  currentSensor: () => Promise<Boolean>;
+  beeperPad: () => Promise<Boolean>;
+  beeperOnBoard: () => Promise<Boolean>;
+  antiVibrationGrommets: () => Promise<Boolean>;
+  builtInReceiver: () => Promise<ReceiverProtocol>;
+  threeVoltOutput: () => Promise<Boolean>;
+  fiveVoltOut: () => Promise<Boolean>;
+  cameraControl: () => Promise<Boolean>;
+}
+
+export interface MerchantEdge {
+  node: Merchant;
+  cursor: String;
+}
+
+export interface MerchantEdgePromise
+  extends Promise<MerchantEdge>,
+    Fragmentable {
+  node: <T = MerchantPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MerchantEdgeSubscription
+  extends Promise<AsyncIterator<MerchantEdge>>,
+    Fragmentable {
+  node: <T = MerchantSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface FlightControllerSubscriptionPayload {
+  mutation: MutationType;
+  node: FlightController;
+  updatedFields: String[];
+  previousValues: FlightControllerPreviousValues;
+}
+
+export interface FlightControllerSubscriptionPayloadPromise
+  extends Promise<FlightControllerSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = FlightControllerPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = FlightControllerPreviousValuesPromise>() => T;
+}
+
+export interface FlightControllerSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<FlightControllerSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = FlightControllerSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = FlightControllerPreviousValuesSubscription>() => T;
+}
+
+export interface AggregateLink {
+  count: Int;
+}
+
+export interface AggregateLinkPromise
+  extends Promise<AggregateLink>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateLinkSubscription
+  extends Promise<AsyncIterator<AggregateLink>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface FlightControllerPreviousValues {
+  id: ID_Output;
+  createdAt?: DateTimeOutput;
+  updatedAt?: DateTimeOutput;
+  name?: String;
+  disabled?: Boolean;
+  releaseDate?: DateTimeOutput;
+  uarts?: Int;
+  gyroOne?: Float;
+  gyroTwo?: Float;
+  weightInGrams?: Float;
+  cpu?: String;
+  description?: String;
+  dimensions?: String;
+  holePattern?: HolePattern;
+  voltageInputMin?: Float;
+  voltageInputMax?: Float;
+  osd?: Boolean;
+  accelerometer?: Boolean;
+  barometer?: Boolean;
+  spektrumPort?: Boolean;
+  usbInterface?: Boolean;
+  ledWS2812Support?: Boolean;
+  rssiPad?: Boolean;
+  currentSensor?: Boolean;
+  beeperPad?: Boolean;
+  beeperOnBoard?: Boolean;
+  antiVibrationGrommets?: Boolean;
+  builtInReceiver?: ReceiverProtocol;
+  threeVoltOutput?: Boolean;
+  fiveVoltOut?: Boolean;
+  cameraControl?: Boolean;
+}
+
+export interface FlightControllerPreviousValuesPromise
+  extends Promise<FlightControllerPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+  disabled: () => Promise<Boolean>;
+  releaseDate: () => Promise<DateTimeOutput>;
+  uarts: () => Promise<Int>;
+  gyroOne: () => Promise<Float>;
+  gyroTwo: () => Promise<Float>;
+  weightInGrams: () => Promise<Float>;
+  cpu: () => Promise<String>;
+  description: () => Promise<String>;
+  dimensions: () => Promise<String>;
+  holePattern: () => Promise<HolePattern>;
+  voltageInputMin: () => Promise<Float>;
+  voltageInputMax: () => Promise<Float>;
+  osd: () => Promise<Boolean>;
+  accelerometer: () => Promise<Boolean>;
+  barometer: () => Promise<Boolean>;
+  spektrumPort: () => Promise<Boolean>;
+  usbInterface: () => Promise<Boolean>;
+  ledWS2812Support: () => Promise<Boolean>;
+  rssiPad: () => Promise<Boolean>;
+  currentSensor: () => Promise<Boolean>;
+  beeperPad: () => Promise<Boolean>;
+  beeperOnBoard: () => Promise<Boolean>;
+  antiVibrationGrommets: () => Promise<Boolean>;
+  builtInReceiver: () => Promise<ReceiverProtocol>;
+  threeVoltOutput: () => Promise<Boolean>;
+  fiveVoltOut: () => Promise<Boolean>;
+  cameraControl: () => Promise<Boolean>;
+}
+
+export interface FlightControllerPreviousValuesSubscription
+  extends Promise<AsyncIterator<FlightControllerPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+  disabled: () => Promise<AsyncIterator<Boolean>>;
+  releaseDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  uarts: () => Promise<AsyncIterator<Int>>;
+  gyroOne: () => Promise<AsyncIterator<Float>>;
+  gyroTwo: () => Promise<AsyncIterator<Float>>;
+  weightInGrams: () => Promise<AsyncIterator<Float>>;
+  cpu: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  dimensions: () => Promise<AsyncIterator<String>>;
+  holePattern: () => Promise<AsyncIterator<HolePattern>>;
+  voltageInputMin: () => Promise<AsyncIterator<Float>>;
+  voltageInputMax: () => Promise<AsyncIterator<Float>>;
+  osd: () => Promise<AsyncIterator<Boolean>>;
+  accelerometer: () => Promise<AsyncIterator<Boolean>>;
+  barometer: () => Promise<AsyncIterator<Boolean>>;
+  spektrumPort: () => Promise<AsyncIterator<Boolean>>;
+  usbInterface: () => Promise<AsyncIterator<Boolean>>;
+  ledWS2812Support: () => Promise<AsyncIterator<Boolean>>;
+  rssiPad: () => Promise<AsyncIterator<Boolean>>;
+  currentSensor: () => Promise<AsyncIterator<Boolean>>;
+  beeperPad: () => Promise<AsyncIterator<Boolean>>;
+  beeperOnBoard: () => Promise<AsyncIterator<Boolean>>;
+  antiVibrationGrommets: () => Promise<AsyncIterator<Boolean>>;
+  builtInReceiver: () => Promise<AsyncIterator<ReceiverProtocol>>;
+  threeVoltOutput: () => Promise<AsyncIterator<Boolean>>;
+  fiveVoltOut: () => Promise<AsyncIterator<Boolean>>;
+  cameraControl: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface LinkConnection {
+  pageInfo: PageInfo;
+  edges: LinkEdge[];
+}
+
+export interface LinkConnectionPromise
+  extends Promise<LinkConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<LinkEdge>>() => T;
+  aggregate: <T = AggregateLinkPromise>() => T;
+}
+
+export interface LinkConnectionSubscription
+  extends Promise<AsyncIterator<LinkConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<LinkEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateLinkSubscription>() => T;
 }
 
 export interface User {
@@ -3587,382 +3977,169 @@ export interface UserNullablePromise
   }) => T;
 }
 
-export interface AggregateMerchant {
-  count: Int;
-}
-
-export interface AggregateMerchantPromise
-  extends Promise<AggregateMerchant>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateMerchantSubscription
-  extends Promise<AsyncIterator<AggregateMerchant>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface FlightController {
-  id: ID_Output;
-  createdAt?: DateTimeOutput;
-  updatedAt?: DateTimeOutput;
-  name?: String;
-  disabled?: Boolean;
-  releaseDate?: DateTimeOutput;
-  uarts?: Int;
-  gyroOne?: Float;
-  gyroTwo?: Float;
-  weightInGrams?: Float;
-  cpu?: String;
-  description?: String;
-  dimensions?: String;
-  holePattern?: String;
-  voltageInputMin?: Float;
-  voltageInputMax?: Float;
-  osd?: Boolean;
-  accelerometer?: Boolean;
-  barometer?: Boolean;
-  spektrumPort?: Boolean;
-  usbInterface?: Boolean;
-  ledWS2812Support?: Boolean;
-  rssiPad?: Boolean;
-  currentSensor?: Boolean;
-  beeperPad?: Boolean;
-  beeperOnBoard?: Boolean;
-  antiVibrationGrommets?: Boolean;
-  builtInReceiver?: ReceiverProtocol;
-  threeVoltOutput?: Boolean;
-  fiveVoltOut?: Boolean;
-  cameraControl?: Boolean;
-}
-
-export interface FlightControllerPromise
-  extends Promise<FlightController>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  postedBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  merchantLinks: <T = FragmentableArray<FlightControllerMerchantLink>>(args?: {
-    where?: FlightControllerMerchantLinkWhereInput;
-    orderBy?: FlightControllerMerchantLinkOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  name: () => Promise<String>;
-  disabled: () => Promise<Boolean>;
-  releaseDate: () => Promise<DateTimeOutput>;
-  uarts: () => Promise<Int>;
-  gyroOne: () => Promise<Float>;
-  gyroTwo: () => Promise<Float>;
-  weightInGrams: () => Promise<Float>;
-  cpu: () => Promise<String>;
-  description: () => Promise<String>;
-  dimensions: () => Promise<String>;
-  holePattern: () => Promise<String>;
-  voltageInputMin: () => Promise<Float>;
-  voltageInputMax: () => Promise<Float>;
-  osd: () => Promise<Boolean>;
-  accelerometer: () => Promise<Boolean>;
-  barometer: () => Promise<Boolean>;
-  spektrumPort: () => Promise<Boolean>;
-  usbInterface: () => Promise<Boolean>;
-  ledWS2812Support: () => Promise<Boolean>;
-  rssiPad: () => Promise<Boolean>;
-  currentSensor: () => Promise<Boolean>;
-  beeperPad: () => Promise<Boolean>;
-  beeperOnBoard: () => Promise<Boolean>;
-  antiVibrationGrommets: () => Promise<Boolean>;
-  builtInReceiver: () => Promise<ReceiverProtocol>;
-  threeVoltOutput: () => Promise<Boolean>;
-  fiveVoltOut: () => Promise<Boolean>;
-  cameraControl: () => Promise<Boolean>;
-}
-
-export interface FlightControllerSubscription
-  extends Promise<AsyncIterator<FlightController>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  postedBy: <T = UserSubscription>() => T;
-  updatedBy: <T = UserSubscription>() => T;
-  merchantLinks: <
-    T = Promise<AsyncIterator<FlightControllerMerchantLinkSubscription>>
-  >(args?: {
-    where?: FlightControllerMerchantLinkWhereInput;
-    orderBy?: FlightControllerMerchantLinkOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  name: () => Promise<AsyncIterator<String>>;
-  disabled: () => Promise<AsyncIterator<Boolean>>;
-  releaseDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  uarts: () => Promise<AsyncIterator<Int>>;
-  gyroOne: () => Promise<AsyncIterator<Float>>;
-  gyroTwo: () => Promise<AsyncIterator<Float>>;
-  weightInGrams: () => Promise<AsyncIterator<Float>>;
-  cpu: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  dimensions: () => Promise<AsyncIterator<String>>;
-  holePattern: () => Promise<AsyncIterator<String>>;
-  voltageInputMin: () => Promise<AsyncIterator<Float>>;
-  voltageInputMax: () => Promise<AsyncIterator<Float>>;
-  osd: () => Promise<AsyncIterator<Boolean>>;
-  accelerometer: () => Promise<AsyncIterator<Boolean>>;
-  barometer: () => Promise<AsyncIterator<Boolean>>;
-  spektrumPort: () => Promise<AsyncIterator<Boolean>>;
-  usbInterface: () => Promise<AsyncIterator<Boolean>>;
-  ledWS2812Support: () => Promise<AsyncIterator<Boolean>>;
-  rssiPad: () => Promise<AsyncIterator<Boolean>>;
-  currentSensor: () => Promise<AsyncIterator<Boolean>>;
-  beeperPad: () => Promise<AsyncIterator<Boolean>>;
-  beeperOnBoard: () => Promise<AsyncIterator<Boolean>>;
-  antiVibrationGrommets: () => Promise<AsyncIterator<Boolean>>;
-  builtInReceiver: () => Promise<AsyncIterator<ReceiverProtocol>>;
-  threeVoltOutput: () => Promise<AsyncIterator<Boolean>>;
-  fiveVoltOut: () => Promise<AsyncIterator<Boolean>>;
-  cameraControl: () => Promise<AsyncIterator<Boolean>>;
-}
-
-export interface FlightControllerNullablePromise
-  extends Promise<FlightController | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  postedBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  merchantLinks: <T = FragmentableArray<FlightControllerMerchantLink>>(args?: {
-    where?: FlightControllerMerchantLinkWhereInput;
-    orderBy?: FlightControllerMerchantLinkOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  name: () => Promise<String>;
-  disabled: () => Promise<Boolean>;
-  releaseDate: () => Promise<DateTimeOutput>;
-  uarts: () => Promise<Int>;
-  gyroOne: () => Promise<Float>;
-  gyroTwo: () => Promise<Float>;
-  weightInGrams: () => Promise<Float>;
-  cpu: () => Promise<String>;
-  description: () => Promise<String>;
-  dimensions: () => Promise<String>;
-  holePattern: () => Promise<String>;
-  voltageInputMin: () => Promise<Float>;
-  voltageInputMax: () => Promise<Float>;
-  osd: () => Promise<Boolean>;
-  accelerometer: () => Promise<Boolean>;
-  barometer: () => Promise<Boolean>;
-  spektrumPort: () => Promise<Boolean>;
-  usbInterface: () => Promise<Boolean>;
-  ledWS2812Support: () => Promise<Boolean>;
-  rssiPad: () => Promise<Boolean>;
-  currentSensor: () => Promise<Boolean>;
-  beeperPad: () => Promise<Boolean>;
-  beeperOnBoard: () => Promise<Boolean>;
-  antiVibrationGrommets: () => Promise<Boolean>;
-  builtInReceiver: () => Promise<ReceiverProtocol>;
-  threeVoltOutput: () => Promise<Boolean>;
-  fiveVoltOut: () => Promise<Boolean>;
-  cameraControl: () => Promise<Boolean>;
-}
-
-export interface MerchantConnection {
-  pageInfo: PageInfo;
-  edges: MerchantEdge[];
-}
-
-export interface MerchantConnectionPromise
-  extends Promise<MerchantConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<MerchantEdge>>() => T;
-  aggregate: <T = AggregateMerchantPromise>() => T;
-}
-
-export interface MerchantConnectionSubscription
-  extends Promise<AsyncIterator<MerchantConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<MerchantEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateMerchantSubscription>() => T;
-}
-
-export interface FlightControllerSubscriptionPayload {
+export interface VoteSubscriptionPayload {
   mutation: MutationType;
-  node: FlightController;
+  node: Vote;
   updatedFields: String[];
-  previousValues: FlightControllerPreviousValues;
+  previousValues: VotePreviousValues;
 }
 
-export interface FlightControllerSubscriptionPayloadPromise
-  extends Promise<FlightControllerSubscriptionPayload>,
+export interface VoteSubscriptionPayloadPromise
+  extends Promise<VoteSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = FlightControllerPromise>() => T;
+  node: <T = VotePromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = FlightControllerPreviousValuesPromise>() => T;
+  previousValues: <T = VotePreviousValuesPromise>() => T;
 }
 
-export interface FlightControllerSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<FlightControllerSubscriptionPayload>>,
+export interface VoteSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<VoteSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = FlightControllerSubscription>() => T;
+  node: <T = VoteSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = FlightControllerPreviousValuesSubscription>() => T;
+  previousValues: <T = VotePreviousValuesSubscription>() => T;
 }
 
-export interface LinkEdge {
-  node: Link;
-  cursor: String;
+export interface FlightControllerMerchantLinkSubscriptionPayload {
+  mutation: MutationType;
+  node: FlightControllerMerchantLink;
+  updatedFields: String[];
+  previousValues: FlightControllerMerchantLinkPreviousValues;
 }
 
-export interface LinkEdgePromise extends Promise<LinkEdge>, Fragmentable {
-  node: <T = LinkPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface LinkEdgeSubscription
-  extends Promise<AsyncIterator<LinkEdge>>,
+export interface FlightControllerMerchantLinkSubscriptionPayloadPromise
+  extends Promise<FlightControllerMerchantLinkSubscriptionPayload>,
     Fragmentable {
-  node: <T = LinkSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  mutation: () => Promise<MutationType>;
+  node: <T = FlightControllerMerchantLinkPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <
+    T = FlightControllerMerchantLinkPreviousValuesPromise
+  >() => T;
 }
 
-export interface FlightControllerPreviousValues {
-  id: ID_Output;
-  createdAt?: DateTimeOutput;
-  updatedAt?: DateTimeOutput;
-  name?: String;
-  disabled?: Boolean;
-  releaseDate?: DateTimeOutput;
-  uarts?: Int;
-  gyroOne?: Float;
-  gyroTwo?: Float;
-  weightInGrams?: Float;
-  cpu?: String;
-  description?: String;
-  dimensions?: String;
-  holePattern?: String;
-  voltageInputMin?: Float;
-  voltageInputMax?: Float;
-  osd?: Boolean;
-  accelerometer?: Boolean;
-  barometer?: Boolean;
-  spektrumPort?: Boolean;
-  usbInterface?: Boolean;
-  ledWS2812Support?: Boolean;
-  rssiPad?: Boolean;
-  currentSensor?: Boolean;
-  beeperPad?: Boolean;
-  beeperOnBoard?: Boolean;
-  antiVibrationGrommets?: Boolean;
-  builtInReceiver?: ReceiverProtocol;
-  threeVoltOutput?: Boolean;
-  fiveVoltOut?: Boolean;
-  cameraControl?: Boolean;
-}
-
-export interface FlightControllerPreviousValuesPromise
-  extends Promise<FlightControllerPreviousValues>,
+export interface FlightControllerMerchantLinkSubscriptionPayloadSubscription
+  extends Promise<
+      AsyncIterator<FlightControllerMerchantLinkSubscriptionPayload>
+    >,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-  disabled: () => Promise<Boolean>;
-  releaseDate: () => Promise<DateTimeOutput>;
-  uarts: () => Promise<Int>;
-  gyroOne: () => Promise<Float>;
-  gyroTwo: () => Promise<Float>;
-  weightInGrams: () => Promise<Float>;
-  cpu: () => Promise<String>;
-  description: () => Promise<String>;
-  dimensions: () => Promise<String>;
-  holePattern: () => Promise<String>;
-  voltageInputMin: () => Promise<Float>;
-  voltageInputMax: () => Promise<Float>;
-  osd: () => Promise<Boolean>;
-  accelerometer: () => Promise<Boolean>;
-  barometer: () => Promise<Boolean>;
-  spektrumPort: () => Promise<Boolean>;
-  usbInterface: () => Promise<Boolean>;
-  ledWS2812Support: () => Promise<Boolean>;
-  rssiPad: () => Promise<Boolean>;
-  currentSensor: () => Promise<Boolean>;
-  beeperPad: () => Promise<Boolean>;
-  beeperOnBoard: () => Promise<Boolean>;
-  antiVibrationGrommets: () => Promise<Boolean>;
-  builtInReceiver: () => Promise<ReceiverProtocol>;
-  threeVoltOutput: () => Promise<Boolean>;
-  fiveVoltOut: () => Promise<Boolean>;
-  cameraControl: () => Promise<Boolean>;
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = FlightControllerMerchantLinkSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <
+    T = FlightControllerMerchantLinkPreviousValuesSubscription
+  >() => T;
 }
 
-export interface FlightControllerPreviousValuesSubscription
-  extends Promise<AsyncIterator<FlightControllerPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
-  disabled: () => Promise<AsyncIterator<Boolean>>;
-  releaseDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  uarts: () => Promise<AsyncIterator<Int>>;
-  gyroOne: () => Promise<AsyncIterator<Float>>;
-  gyroTwo: () => Promise<AsyncIterator<Float>>;
-  weightInGrams: () => Promise<AsyncIterator<Float>>;
-  cpu: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  dimensions: () => Promise<AsyncIterator<String>>;
-  holePattern: () => Promise<AsyncIterator<String>>;
-  voltageInputMin: () => Promise<AsyncIterator<Float>>;
-  voltageInputMax: () => Promise<AsyncIterator<Float>>;
-  osd: () => Promise<AsyncIterator<Boolean>>;
-  accelerometer: () => Promise<AsyncIterator<Boolean>>;
-  barometer: () => Promise<AsyncIterator<Boolean>>;
-  spektrumPort: () => Promise<AsyncIterator<Boolean>>;
-  usbInterface: () => Promise<AsyncIterator<Boolean>>;
-  ledWS2812Support: () => Promise<AsyncIterator<Boolean>>;
-  rssiPad: () => Promise<AsyncIterator<Boolean>>;
-  currentSensor: () => Promise<AsyncIterator<Boolean>>;
-  beeperPad: () => Promise<AsyncIterator<Boolean>>;
-  beeperOnBoard: () => Promise<AsyncIterator<Boolean>>;
-  antiVibrationGrommets: () => Promise<AsyncIterator<Boolean>>;
-  builtInReceiver: () => Promise<AsyncIterator<ReceiverProtocol>>;
-  threeVoltOutput: () => Promise<AsyncIterator<Boolean>>;
-  fiveVoltOut: () => Promise<AsyncIterator<Boolean>>;
-  cameraControl: () => Promise<AsyncIterator<Boolean>>;
-}
-
-export interface AggregateFlightControllerMerchantLink {
+export interface AggregateUser {
   count: Int;
 }
 
-export interface AggregateFlightControllerMerchantLinkPromise
-  extends Promise<AggregateFlightControllerMerchantLink>,
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateFlightControllerMerchantLinkSubscription
-  extends Promise<AsyncIterator<AggregateFlightControllerMerchantLink>>,
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface FlightControllerMerchantLinkPreviousValues {
+  id: ID_Output;
+  url: String;
+  price: Float;
+  inStock?: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt?: DateTimeOutput;
+}
+
+export interface FlightControllerMerchantLinkPreviousValuesPromise
+  extends Promise<FlightControllerMerchantLinkPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  url: () => Promise<String>;
+  price: () => Promise<Float>;
+  inStock: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface FlightControllerMerchantLinkPreviousValuesSubscription
+  extends Promise<AsyncIterator<FlightControllerMerchantLinkPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  url: () => Promise<AsyncIterator<String>>;
+  price: () => Promise<AsyncIterator<Float>>;
+  inStock: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface Link {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  description: String;
+  url: String;
+}
+
+export interface LinkPromise extends Promise<Link>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  description: () => Promise<String>;
+  url: () => Promise<String>;
+  postedBy: <T = UserPromise>() => T;
+  votes: <T = FragmentableArray<Vote>>(args?: {
+    where?: VoteWhereInput;
+    orderBy?: VoteOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface LinkSubscription
+  extends Promise<AsyncIterator<Link>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  description: () => Promise<AsyncIterator<String>>;
+  url: () => Promise<AsyncIterator<String>>;
+  postedBy: <T = UserSubscription>() => T;
+  votes: <T = Promise<AsyncIterator<VoteSubscription>>>(args?: {
+    where?: VoteWhereInput;
+    orderBy?: VoteOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface LinkNullablePromise
+  extends Promise<Link | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  description: () => Promise<String>;
+  url: () => Promise<String>;
+  postedBy: <T = UserPromise>() => T;
+  votes: <T = FragmentableArray<Vote>>(args?: {
+    where?: VoteWhereInput;
+    orderBy?: VoteOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface Merchant {
@@ -4048,221 +4225,41 @@ export interface MerchantNullablePromise
   disabled: () => Promise<Boolean>;
 }
 
-export interface AggregateVote {
+export interface MerchantConnection {
+  pageInfo: PageInfo;
+  edges: MerchantEdge[];
+}
+
+export interface MerchantConnectionPromise
+  extends Promise<MerchantConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MerchantEdge>>() => T;
+  aggregate: <T = AggregateMerchantPromise>() => T;
+}
+
+export interface MerchantConnectionSubscription
+  extends Promise<AsyncIterator<MerchantConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MerchantEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMerchantSubscription>() => T;
+}
+
+export interface AggregateFlightControllerMerchantLink {
   count: Int;
 }
 
-export interface AggregateVotePromise
-  extends Promise<AggregateVote>,
+export interface AggregateFlightControllerMerchantLinkPromise
+  extends Promise<AggregateFlightControllerMerchantLink>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateVoteSubscription
-  extends Promise<AsyncIterator<AggregateVote>>,
+export interface AggregateFlightControllerMerchantLinkSubscription
+  extends Promise<AsyncIterator<AggregateFlightControllerMerchantLink>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface FlightControllerMerchantLinkSubscriptionPayload {
-  mutation: MutationType;
-  node: FlightControllerMerchantLink;
-  updatedFields: String[];
-  previousValues: FlightControllerMerchantLinkPreviousValues;
-}
-
-export interface FlightControllerMerchantLinkSubscriptionPayloadPromise
-  extends Promise<FlightControllerMerchantLinkSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = FlightControllerMerchantLinkPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <
-    T = FlightControllerMerchantLinkPreviousValuesPromise
-  >() => T;
-}
-
-export interface FlightControllerMerchantLinkSubscriptionPayloadSubscription
-  extends Promise<
-      AsyncIterator<FlightControllerMerchantLinkSubscriptionPayload>
-    >,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = FlightControllerMerchantLinkSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <
-    T = FlightControllerMerchantLinkPreviousValuesSubscription
-  >() => T;
-}
-
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
-    Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface FlightControllerMerchantLinkPreviousValues {
-  id: ID_Output;
-  url: String;
-  price: Float;
-  inStock?: Boolean;
-  createdAt: DateTimeOutput;
-  updatedAt?: DateTimeOutput;
-}
-
-export interface FlightControllerMerchantLinkPreviousValuesPromise
-  extends Promise<FlightControllerMerchantLinkPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  url: () => Promise<String>;
-  price: () => Promise<Float>;
-  inStock: () => Promise<Boolean>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface FlightControllerMerchantLinkPreviousValuesSubscription
-  extends Promise<AsyncIterator<FlightControllerMerchantLinkPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  url: () => Promise<AsyncIterator<String>>;
-  price: () => Promise<AsyncIterator<Float>>;
-  inStock: () => Promise<AsyncIterator<Boolean>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface UserPreviousValues {
-  id: ID_Output;
-  name: String;
-  email: String;
-  password: String;
-}
-
-export interface UserPreviousValuesPromise
-  extends Promise<UserPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
-}
-
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-}
-
-export interface Link {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  description: String;
-  url: String;
-}
-
-export interface LinkPromise extends Promise<Link>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  description: () => Promise<String>;
-  url: () => Promise<String>;
-  postedBy: <T = UserPromise>() => T;
-  votes: <T = FragmentableArray<Vote>>(args?: {
-    where?: VoteWhereInput;
-    orderBy?: VoteOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface LinkSubscription
-  extends Promise<AsyncIterator<Link>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  description: () => Promise<AsyncIterator<String>>;
-  url: () => Promise<AsyncIterator<String>>;
-  postedBy: <T = UserSubscription>() => T;
-  votes: <T = Promise<AsyncIterator<VoteSubscription>>>(args?: {
-    where?: VoteWhereInput;
-    orderBy?: VoteOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface LinkNullablePromise
-  extends Promise<Link | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  description: () => Promise<String>;
-  url: () => Promise<String>;
-  postedBy: <T = UserPromise>() => T;
-  votes: <T = FragmentableArray<Vote>>(args?: {
-    where?: VoteWhereInput;
-    orderBy?: VoteOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface AggregateLink {
-  count: Int;
-}
-
-export interface AggregateLinkPromise
-  extends Promise<AggregateLink>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateLinkSubscription
-  extends Promise<AsyncIterator<AggregateLink>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface FlightControllerMerchantLinkEdge {
-  node: FlightControllerMerchantLink;
-  cursor: String;
-}
-
-export interface FlightControllerMerchantLinkEdgePromise
-  extends Promise<FlightControllerMerchantLinkEdge>,
-    Fragmentable {
-  node: <T = FlightControllerMerchantLinkPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface FlightControllerMerchantLinkEdgeSubscription
-  extends Promise<AsyncIterator<FlightControllerMerchantLinkEdge>>,
-    Fragmentable {
-  node: <T = FlightControllerMerchantLinkSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface MerchantSubscriptionPayload {
@@ -4366,101 +4363,94 @@ export interface LinkSubscriptionPayloadSubscription
   previousValues: <T = LinkPreviousValuesSubscription>() => T;
 }
 
-export interface VoteConnection {
-  pageInfo: PageInfo;
-  edges: VoteEdge[];
-}
-
-export interface VoteConnectionPromise
-  extends Promise<VoteConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<VoteEdge>>() => T;
-  aggregate: <T = AggregateVotePromise>() => T;
-}
-
-export interface VoteConnectionSubscription
-  extends Promise<AsyncIterator<VoteConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<VoteEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateVoteSubscription>() => T;
-}
-
-export interface LinkConnection {
-  pageInfo: PageInfo;
-  edges: LinkEdge[];
-}
-
-export interface LinkConnectionPromise
-  extends Promise<LinkConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<LinkEdge>>() => T;
-  aggregate: <T = AggregateLinkPromise>() => T;
-}
-
-export interface LinkConnectionSubscription
-  extends Promise<AsyncIterator<LinkConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<LinkEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateLinkSubscription>() => T;
-}
-
-export interface MerchantEdge {
-  node: Merchant;
+export interface VoteEdge {
+  node: Vote;
   cursor: String;
 }
 
-export interface MerchantEdgePromise
-  extends Promise<MerchantEdge>,
-    Fragmentable {
-  node: <T = MerchantPromise>() => T;
+export interface VoteEdgePromise extends Promise<VoteEdge>, Fragmentable {
+  node: <T = VotePromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface MerchantEdgeSubscription
-  extends Promise<AsyncIterator<MerchantEdge>>,
+export interface VoteEdgeSubscription
+  extends Promise<AsyncIterator<VoteEdge>>,
     Fragmentable {
-  node: <T = MerchantSubscription>() => T;
+  node: <T = VoteSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface VoteSubscriptionPayload {
-  mutation: MutationType;
-  node: Vote;
-  updatedFields: String[];
-  previousValues: VotePreviousValues;
+export interface LinkEdge {
+  node: Link;
+  cursor: String;
 }
 
-export interface VoteSubscriptionPayloadPromise
-  extends Promise<VoteSubscriptionPayload>,
+export interface LinkEdgePromise extends Promise<LinkEdge>, Fragmentable {
+  node: <T = LinkPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface LinkEdgeSubscription
+  extends Promise<AsyncIterator<LinkEdge>>,
     Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = VotePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = VotePreviousValuesPromise>() => T;
+  node: <T = LinkSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface VoteSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<VoteSubscriptionPayload>>,
+export interface AggregateMerchant {
+  count: Int;
+}
+
+export interface AggregateMerchantPromise
+  extends Promise<AggregateMerchant>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = VoteSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = VotePreviousValuesSubscription>() => T;
+  count: () => Promise<Int>;
 }
 
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
+export interface AggregateMerchantSubscription
+  extends Promise<AsyncIterator<AggregateMerchant>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
 
 /*
 The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
 */
 export type Float = number;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+*/
+export type Int = number;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
+
+export type Long = string;
 
 /*
 DateTime scalar input type, allowing Date
@@ -4473,17 +4463,9 @@ DateTime scalar output type, which is always a string
 export type DateTimeOutput = string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+The `Boolean` scalar type represents `true` or `false`.
 */
-export type Int = number;
-
-export type Long = string;
-
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
+export type Boolean = boolean;
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
@@ -4521,6 +4503,10 @@ export const models: Model[] = [
   },
   {
     name: "ReceiverProtocol",
+    embedded: false
+  },
+  {
+    name: "HolePattern",
     embedded: false
   }
 ];

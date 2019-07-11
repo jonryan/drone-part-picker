@@ -12,6 +12,7 @@ type Query {
     userList: UserList!
     merchantList: MerchantList!
     getMerchant(id: ID!): Merchant!
+    getHolePatternOptions: HolePattern
 }
 
 type Mutation {
@@ -105,11 +106,11 @@ input FlightControllerFilter{
     ledWS2812Support: Boolean
     osd: Boolean
     accelerometer: Boolean
-    accelerometer: Boolean
     barometer: Boolean
     usbInterface: Boolean
     rssiPad: Boolean
     currentSensor: Boolean
+    holePattern: HolePattern
     beeperOnBoard: Boolean
     antiVibrationGrommets: Boolean
     builtInReceiver: ReceiverProtocol
@@ -127,7 +128,7 @@ input AddFlightControllerInput{
     cpu: String
     dimensions: String
     description: String
-    holePattern: String
+    holePattern: HolePattern
     voltageInputMin: Float
     voltageInputMax: Float
     builtInReceiver: ReceiverProtocol
@@ -158,7 +159,7 @@ type FlightController {
   cpu: String
   dimensions: String
   description: String
-  holePattern: String
+  holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean

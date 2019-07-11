@@ -31,6 +31,10 @@ var models = [
   {
     name: "ReceiverProtocol",
     embedded: false
+  },
+  {
+    name: "HolePattern",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({

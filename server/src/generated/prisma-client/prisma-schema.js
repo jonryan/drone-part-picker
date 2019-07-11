@@ -50,7 +50,7 @@ type FlightController {
   cpu: String
   description: String
   dimensions: String
-  holePattern: String
+  holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
@@ -91,7 +91,7 @@ input FlightControllerCreateInput {
   cpu: String
   description: String
   dimensions: String
-  holePattern: String
+  holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
@@ -140,7 +140,7 @@ input FlightControllerCreateWithoutMerchantLinksInput {
   cpu: String
   description: String
   dimensions: String
-  holePattern: String
+  holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
@@ -174,7 +174,7 @@ input FlightControllerCreateWithoutPostedByInput {
   cpu: String
   description: String
   dimensions: String
-  holePattern: String
+  holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
@@ -208,7 +208,7 @@ input FlightControllerCreateWithoutUpdatedByInput {
   cpu: String
   description: String
   dimensions: String
-  holePattern: String
+  holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
@@ -675,7 +675,7 @@ type FlightControllerPreviousValues {
   cpu: String
   description: String
   dimensions: String
-  holePattern: String
+  holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
@@ -824,20 +824,10 @@ input FlightControllerScalarWhereInput {
   dimensions_not_starts_with: String
   dimensions_ends_with: String
   dimensions_not_ends_with: String
-  holePattern: String
-  holePattern_not: String
-  holePattern_in: [String!]
-  holePattern_not_in: [String!]
-  holePattern_lt: String
-  holePattern_lte: String
-  holePattern_gt: String
-  holePattern_gte: String
-  holePattern_contains: String
-  holePattern_not_contains: String
-  holePattern_starts_with: String
-  holePattern_not_starts_with: String
-  holePattern_ends_with: String
-  holePattern_not_ends_with: String
+  holePattern: HolePattern
+  holePattern_not: HolePattern
+  holePattern_in: [HolePattern!]
+  holePattern_not_in: [HolePattern!]
   voltageInputMin: Float
   voltageInputMin_not: Float
   voltageInputMin_in: [Float!]
@@ -923,7 +913,7 @@ input FlightControllerUpdateInput {
   cpu: String
   description: String
   dimensions: String
-  holePattern: String
+  holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
@@ -954,7 +944,7 @@ input FlightControllerUpdateManyDataInput {
   cpu: String
   description: String
   dimensions: String
-  holePattern: String
+  holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
@@ -985,7 +975,7 @@ input FlightControllerUpdateManyMutationInput {
   cpu: String
   description: String
   dimensions: String
-  holePattern: String
+  holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
@@ -1054,7 +1044,7 @@ input FlightControllerUpdateWithoutMerchantLinksDataInput {
   cpu: String
   description: String
   dimensions: String
-  holePattern: String
+  holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
@@ -1087,7 +1077,7 @@ input FlightControllerUpdateWithoutPostedByDataInput {
   cpu: String
   description: String
   dimensions: String
-  holePattern: String
+  holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
@@ -1120,7 +1110,7 @@ input FlightControllerUpdateWithoutUpdatedByDataInput {
   cpu: String
   description: String
   dimensions: String
-  holePattern: String
+  holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
@@ -1301,20 +1291,10 @@ input FlightControllerWhereInput {
   dimensions_not_starts_with: String
   dimensions_ends_with: String
   dimensions_not_ends_with: String
-  holePattern: String
-  holePattern_not: String
-  holePattern_in: [String!]
-  holePattern_not_in: [String!]
-  holePattern_lt: String
-  holePattern_lte: String
-  holePattern_gt: String
-  holePattern_gte: String
-  holePattern_contains: String
-  holePattern_not_contains: String
-  holePattern_starts_with: String
-  holePattern_not_starts_with: String
-  holePattern_ends_with: String
-  holePattern_not_ends_with: String
+  holePattern: HolePattern
+  holePattern_not: HolePattern
+  holePattern_in: [HolePattern!]
+  holePattern_not_in: [HolePattern!]
   voltageInputMin: Float
   voltageInputMin_not: Float
   voltageInputMin_in: [Float!]
@@ -1370,6 +1350,12 @@ input FlightControllerWhereInput {
 
 input FlightControllerWhereUniqueInput {
   id: ID
+}
+
+enum HolePattern {
+  SIXTEEN
+  TWENTY
+  THIRTY
 }
 
 type Link {

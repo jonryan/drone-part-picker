@@ -45,7 +45,7 @@ type FlightController{
     cpu: String
     description: String
     dimensions: String
-    holePattern: String
+    holePattern: HolePattern
     voltageInputMin: Float
     voltageInputMax: Float
     osd: Boolean
@@ -95,4 +95,10 @@ enum ReceiverProtocol{
     FRSKY
     FLYSKY
     SPEKTRUM
+}
+
+enum HolePattern{
+    SIXTEEN # 16x16
+    TWENTY # 20x20
+    THIRTY # 30.5x30.5
 }
