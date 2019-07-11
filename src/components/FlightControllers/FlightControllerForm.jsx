@@ -4,6 +4,8 @@ import FormErrors from '../FormErrors.js'
 import {Container, Button, Table, Row, Col, Form} from 'react-bootstrap'
 import {Field, Formik} from 'formik'
 import ProductMerchantForm from "../Merchant/ProductMerchantForm";
+import FlightControllerSizeDropdown from './Inputs/FlightControllerSizeDropdown.jsx';
+import ReceiverProtocolDropdown from './Inputs/ReceiverProtocolDropdown.jsx';
 
 const CheckboxInput = (props) => (
   <Field {...props} render={({field}) => {
@@ -161,28 +163,7 @@ class FlightControllerForm extends Component {
                           />
                         </fieldset>
                       </Form.Group>
-                      <Form.Group controlId="holePattern">
-                        <Form.Label>Hole Pattern (mm)</Form.Label>
-                        <fieldset className="form-group">
-                          <Field
-                            name="holePattern"
-                            component="select"
-                            className="form-control"
-                          >
-                            <option value="">--- Select a Hole Pattern--</option>
-                            <option value="SIXTEEN">16x16mm</option>
-                            <option value="TWENTY">20x20mm</option>
-                            <option value="THIRTY">30.5x30.5mm</option>
-                          </Field>
-                          <Field
-                            name="holePattern"
-                            type="text"
-                            className="form-control form-control-lg"
-                            placeholder=""
-                            required
-                          />
-                        </fieldset>
-                      </Form.Group>
+                      <FlightControllerSizeDropdown />
                       <Form.Group controlId="voltageInputMin">
                         <Form.Label>Minimum Voltage Input</Form.Label>
                         <fieldset className="form-group">
@@ -207,23 +188,7 @@ class FlightControllerForm extends Component {
                         </fieldset>
                       </Form.Group>
 
-                      <Form.Group controlId="builtInReceiver">
-                        <Form.Label>Built-In Receiver</Form.Label>
-                        <fieldset className="form-group">
-                          <Field
-                            name="builtInReceiver"
-                            component="select"
-                            placeholder='WHAT?'
-                            className="form-control"
-                          >
-                            <option value="">--- Select a Receiver Type --</option>
-                            <option value="SPEKTRUM">Spektrum</option>
-                            <option value="FRSKY">FrSky</option>
-                            <option value="FLYSKY">FlySky</option>
-                            <option value="CROSSFIRE">Crossfire</option>
-                          </Field>
-                        </fieldset>
-                      </Form.Group>
+                      <ReceiverProtocolDropdown/>
 
                       <div className="form-check">
                         <CheckboxInput
