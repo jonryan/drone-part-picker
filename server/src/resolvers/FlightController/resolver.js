@@ -16,7 +16,32 @@ const resolver = {
 
     builtInReceiver(parent, args, context) {
       return context.prisma.flightController({ id: parent.id }).builtInReceiver()
+    },
+
+    holeSize(parent, args, context) {
+      return context.prisma.flightController({ id: parent.id }).holeSize()
+    },
+
+    holePattern(parent, args, context) {
+      return context.prisma.flightController({ id: parent.id }).holePattern()
+    },
+
+    barometer(parent, args, context) {
+      return context.prisma.flightController({ id: parent.id }).barometer()
+    },
+
+    cpu(parent, args, context) {
+      return context.prisma.flightController({ id: parent.id }).cpu()
+    },
+
+    gyroOne(parent, args, context) {
+      return context.prisma.flightController({ id: parent.id }).gyroOne()
+    },
+
+    gyroTwo(parent, args, context) {
+      return context.prisma.flightController({ id: parent.id }).gyroTwo()
     }
+
   },
 
   Query: {
@@ -53,6 +78,7 @@ const resolver = {
       const where = fcFilters ? {
         AND: [
           ...andFilters,
+          { threeVoltOutput: fcFilters.threeVoltOutput},
           { holePattern_in: fcFilters.holePattern},
           { builtInReceiver_in: fcFilters.builtInReceiver },
           { voltageInputMax_gte: fcFilters.voltageInputMax },
@@ -62,12 +88,10 @@ const resolver = {
           { name_contains: fcFilters.name },
           { osd: fcFilters.osd },
           { ledWS2812Support: fcFilters.ledWS2812Support },
-          { accelerometer: fcFilters.accelerometer },
           { barometer: fcFilters.barometer },
-          { rssiPad: fcFilters.rssiPad },
-          { currentSensor: fcFilters.currentSensor },
           { beeperOnBoard: fcFilters.beeperOnBoard },
           { antiVibrationGrommets: fcFilters.antiVibrationGrommets },
+          { cameraControl: fcFilters.cameraControl },
         ]
       } : {}
 

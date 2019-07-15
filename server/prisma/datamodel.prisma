@@ -39,30 +39,37 @@ type FlightController{
     disabled: Boolean
     releaseDate: DateTime
     uarts: Int
-    gyroOne: Float
-    gyroTwo: Float
+    gyroOne: Gyro
+    gyroTwo: Gyro
     weightInGrams: Float
-    cpu: String
+    cpu: CPU
     description: String
     dimensions: String
     holePattern: HolePattern
+
     voltageInputMin: Float
     voltageInputMax: Float
     osd: Boolean
-    accelerometer: Boolean
-    barometer: Boolean
+    barometer: Baro
     spektrumPort: Boolean
-    usbInterface: Boolean
     ledWS2812Support: Boolean
-    rssiPad: Boolean
-    currentSensor: Boolean
-    beeperPad: Boolean
     beeperOnBoard: Boolean
     antiVibrationGrommets: Boolean
     builtInReceiver: ReceiverProtocol
-    threeVoltOutput: Boolean
-    fiveVoltOut: Boolean
     cameraControl: Boolean
+    pdb: Boolean
+    threeVoltOutput: Float
+    fiveVoltOutput: Float
+    eightVoltOutput: Float
+    nineVoltOutput: Float
+    onBoardFlash: Int
+    sdCardSlot: Boolean
+    fourInOneConnector: Boolean
+    currentSensorRating: Float
+    maxCurrent: Float
+    holeSize: HoleSize
+
+
 }
 
 type Merchant{
@@ -102,3 +109,27 @@ enum HolePattern{
     TWENTY # 20x20
     THIRTY # 30.5x30.5
 }
+
+enum HoleSize{
+    M3
+    M2
+}
+
+enum Gyro{
+    MPU6000
+    ICM20689
+}
+
+enum CPU{
+    STM32F405
+    STM32H7400
+    STM32F745
+    STM32F411
+    STM32F722
+}
+
+enum Baro{
+    BMP388
+    BMP280
+}
+

@@ -27,8 +27,21 @@ type AggregateVote {
   count: Int!
 }
 
+enum Baro {
+  BMP388
+  BMP280
+}
+
 type BatchPayload {
   count: Long!
+}
+
+enum CPU {
+  STM32F405
+  STM32H7400
+  STM32F745
+  STM32F411
+  STM32F722
 }
 
 scalar DateTime
@@ -44,30 +57,34 @@ type FlightController {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
+  gyroOne: Gyro
+  gyroTwo: Gyro
   weightInGrams: Float
-  cpu: String
+  cpu: CPU
   description: String
   dimensions: String
   holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
+  barometer: Baro
   spektrumPort: Boolean
-  usbInterface: Boolean
   ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  threeVoltOutput: Boolean
-  fiveVoltOut: Boolean
   cameraControl: Boolean
+  pdb: Boolean
+  threeVoltOutput: Float
+  fiveVoltOutput: Float
+  eightVoltOutput: Float
+  nineVoltOutput: Float
+  onBoardFlash: Int
+  sdCardSlot: Boolean
+  fourInOneConnector: Boolean
+  currentSensorRating: Float
+  maxCurrent: Float
+  holeSize: HoleSize
 }
 
 type FlightControllerConnection {
@@ -85,30 +102,34 @@ input FlightControllerCreateInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
+  gyroOne: Gyro
+  gyroTwo: Gyro
   weightInGrams: Float
-  cpu: String
+  cpu: CPU
   description: String
   dimensions: String
   holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
+  barometer: Baro
   spektrumPort: Boolean
-  usbInterface: Boolean
   ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  threeVoltOutput: Boolean
-  fiveVoltOut: Boolean
   cameraControl: Boolean
+  pdb: Boolean
+  threeVoltOutput: Float
+  fiveVoltOutput: Float
+  eightVoltOutput: Float
+  nineVoltOutput: Float
+  onBoardFlash: Int
+  sdCardSlot: Boolean
+  fourInOneConnector: Boolean
+  currentSensorRating: Float
+  maxCurrent: Float
+  holeSize: HoleSize
 }
 
 input FlightControllerCreateManyWithoutPostedByInput {
@@ -134,30 +155,34 @@ input FlightControllerCreateWithoutMerchantLinksInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
+  gyroOne: Gyro
+  gyroTwo: Gyro
   weightInGrams: Float
-  cpu: String
+  cpu: CPU
   description: String
   dimensions: String
   holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
+  barometer: Baro
   spektrumPort: Boolean
-  usbInterface: Boolean
   ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  threeVoltOutput: Boolean
-  fiveVoltOut: Boolean
   cameraControl: Boolean
+  pdb: Boolean
+  threeVoltOutput: Float
+  fiveVoltOutput: Float
+  eightVoltOutput: Float
+  nineVoltOutput: Float
+  onBoardFlash: Int
+  sdCardSlot: Boolean
+  fourInOneConnector: Boolean
+  currentSensorRating: Float
+  maxCurrent: Float
+  holeSize: HoleSize
 }
 
 input FlightControllerCreateWithoutPostedByInput {
@@ -168,30 +193,34 @@ input FlightControllerCreateWithoutPostedByInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
+  gyroOne: Gyro
+  gyroTwo: Gyro
   weightInGrams: Float
-  cpu: String
+  cpu: CPU
   description: String
   dimensions: String
   holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
+  barometer: Baro
   spektrumPort: Boolean
-  usbInterface: Boolean
   ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  threeVoltOutput: Boolean
-  fiveVoltOut: Boolean
   cameraControl: Boolean
+  pdb: Boolean
+  threeVoltOutput: Float
+  fiveVoltOutput: Float
+  eightVoltOutput: Float
+  nineVoltOutput: Float
+  onBoardFlash: Int
+  sdCardSlot: Boolean
+  fourInOneConnector: Boolean
+  currentSensorRating: Float
+  maxCurrent: Float
+  holeSize: HoleSize
 }
 
 input FlightControllerCreateWithoutUpdatedByInput {
@@ -202,30 +231,34 @@ input FlightControllerCreateWithoutUpdatedByInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
+  gyroOne: Gyro
+  gyroTwo: Gyro
   weightInGrams: Float
-  cpu: String
+  cpu: CPU
   description: String
   dimensions: String
   holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
+  barometer: Baro
   spektrumPort: Boolean
-  usbInterface: Boolean
   ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  threeVoltOutput: Boolean
-  fiveVoltOut: Boolean
   cameraControl: Boolean
+  pdb: Boolean
+  threeVoltOutput: Float
+  fiveVoltOutput: Float
+  eightVoltOutput: Float
+  nineVoltOutput: Float
+  onBoardFlash: Int
+  sdCardSlot: Boolean
+  fourInOneConnector: Boolean
+  currentSensorRating: Float
+  maxCurrent: Float
+  holeSize: HoleSize
 }
 
 type FlightControllerEdge {
@@ -631,34 +664,44 @@ enum FlightControllerOrderByInput {
   voltageInputMax_DESC
   osd_ASC
   osd_DESC
-  accelerometer_ASC
-  accelerometer_DESC
   barometer_ASC
   barometer_DESC
   spektrumPort_ASC
   spektrumPort_DESC
-  usbInterface_ASC
-  usbInterface_DESC
   ledWS2812Support_ASC
   ledWS2812Support_DESC
-  rssiPad_ASC
-  rssiPad_DESC
-  currentSensor_ASC
-  currentSensor_DESC
-  beeperPad_ASC
-  beeperPad_DESC
   beeperOnBoard_ASC
   beeperOnBoard_DESC
   antiVibrationGrommets_ASC
   antiVibrationGrommets_DESC
   builtInReceiver_ASC
   builtInReceiver_DESC
-  threeVoltOutput_ASC
-  threeVoltOutput_DESC
-  fiveVoltOut_ASC
-  fiveVoltOut_DESC
+  currentSensor_ASC
+  currentSensor_DESC
   cameraControl_ASC
   cameraControl_DESC
+  pdb_ASC
+  pdb_DESC
+  threeVoltOutput_ASC
+  threeVoltOutput_DESC
+  fiveVoltOutput_ASC
+  fiveVoltOutput_DESC
+  eightVoltOutput_ASC
+  eightVoltOutput_DESC
+  nineVoltOutput_ASC
+  nineVoltOutput_DESC
+  onBoardFlash_ASC
+  onBoardFlash_DESC
+  sdCardSlot_ASC
+  sdCardSlot_DESC
+  fourInOneConnector_ASC
+  fourInOneConnector_DESC
+  currentSensorRating_ASC
+  currentSensorRating_DESC
+  maxCurrent_ASC
+  maxCurrent_DESC
+  holeSize_ASC
+  holeSize_DESC
 }
 
 type FlightControllerPreviousValues {
@@ -669,30 +712,35 @@ type FlightControllerPreviousValues {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
+  gyroOne: Gyro
+  gyroTwo: Gyro
   weightInGrams: Float
-  cpu: String
+  cpu: CPU
   description: String
   dimensions: String
   holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
+  barometer: Baro
   spektrumPort: Boolean
-  usbInterface: Boolean
   ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  threeVoltOutput: Boolean
-  fiveVoltOut: Boolean
+  currentSensor: Boolean
   cameraControl: Boolean
+  pdb: Boolean
+  threeVoltOutput: Float
+  fiveVoltOutput: Float
+  eightVoltOutput: Float
+  nineVoltOutput: Float
+  onBoardFlash: Int
+  sdCardSlot: Boolean
+  fourInOneConnector: Boolean
+  currentSensorRating: Float
+  maxCurrent: Float
+  holeSize: HoleSize
 }
 
 input FlightControllerScalarWhereInput {
@@ -758,22 +806,14 @@ input FlightControllerScalarWhereInput {
   uarts_lte: Int
   uarts_gt: Int
   uarts_gte: Int
-  gyroOne: Float
-  gyroOne_not: Float
-  gyroOne_in: [Float!]
-  gyroOne_not_in: [Float!]
-  gyroOne_lt: Float
-  gyroOne_lte: Float
-  gyroOne_gt: Float
-  gyroOne_gte: Float
-  gyroTwo: Float
-  gyroTwo_not: Float
-  gyroTwo_in: [Float!]
-  gyroTwo_not_in: [Float!]
-  gyroTwo_lt: Float
-  gyroTwo_lte: Float
-  gyroTwo_gt: Float
-  gyroTwo_gte: Float
+  gyroOne: Gyro
+  gyroOne_not: Gyro
+  gyroOne_in: [Gyro!]
+  gyroOne_not_in: [Gyro!]
+  gyroTwo: Gyro
+  gyroTwo_not: Gyro
+  gyroTwo_in: [Gyro!]
+  gyroTwo_not_in: [Gyro!]
   weightInGrams: Float
   weightInGrams_not: Float
   weightInGrams_in: [Float!]
@@ -782,20 +822,10 @@ input FlightControllerScalarWhereInput {
   weightInGrams_lte: Float
   weightInGrams_gt: Float
   weightInGrams_gte: Float
-  cpu: String
-  cpu_not: String
-  cpu_in: [String!]
-  cpu_not_in: [String!]
-  cpu_lt: String
-  cpu_lte: String
-  cpu_gt: String
-  cpu_gte: String
-  cpu_contains: String
-  cpu_not_contains: String
-  cpu_starts_with: String
-  cpu_not_starts_with: String
-  cpu_ends_with: String
-  cpu_not_ends_with: String
+  cpu: CPU
+  cpu_not: CPU
+  cpu_in: [CPU!]
+  cpu_not_in: [CPU!]
   description: String
   description_not: String
   description_in: [String!]
@@ -846,22 +876,14 @@ input FlightControllerScalarWhereInput {
   voltageInputMax_gte: Float
   osd: Boolean
   osd_not: Boolean
-  accelerometer: Boolean
-  accelerometer_not: Boolean
-  barometer: Boolean
-  barometer_not: Boolean
+  barometer: Baro
+  barometer_not: Baro
+  barometer_in: [Baro!]
+  barometer_not_in: [Baro!]
   spektrumPort: Boolean
   spektrumPort_not: Boolean
-  usbInterface: Boolean
-  usbInterface_not: Boolean
   ledWS2812Support: Boolean
   ledWS2812Support_not: Boolean
-  rssiPad: Boolean
-  rssiPad_not: Boolean
-  currentSensor: Boolean
-  currentSensor_not: Boolean
-  beeperPad: Boolean
-  beeperPad_not: Boolean
   beeperOnBoard: Boolean
   beeperOnBoard_not: Boolean
   antiVibrationGrommets: Boolean
@@ -870,12 +892,76 @@ input FlightControllerScalarWhereInput {
   builtInReceiver_not: ReceiverProtocol
   builtInReceiver_in: [ReceiverProtocol!]
   builtInReceiver_not_in: [ReceiverProtocol!]
-  threeVoltOutput: Boolean
-  threeVoltOutput_not: Boolean
-  fiveVoltOut: Boolean
-  fiveVoltOut_not: Boolean
+  currentSensor: Boolean
+  currentSensor_not: Boolean
   cameraControl: Boolean
   cameraControl_not: Boolean
+  pdb: Boolean
+  pdb_not: Boolean
+  threeVoltOutput: Float
+  threeVoltOutput_not: Float
+  threeVoltOutput_in: [Float!]
+  threeVoltOutput_not_in: [Float!]
+  threeVoltOutput_lt: Float
+  threeVoltOutput_lte: Float
+  threeVoltOutput_gt: Float
+  threeVoltOutput_gte: Float
+  fiveVoltOutput: Float
+  fiveVoltOutput_not: Float
+  fiveVoltOutput_in: [Float!]
+  fiveVoltOutput_not_in: [Float!]
+  fiveVoltOutput_lt: Float
+  fiveVoltOutput_lte: Float
+  fiveVoltOutput_gt: Float
+  fiveVoltOutput_gte: Float
+  eightVoltOutput: Float
+  eightVoltOutput_not: Float
+  eightVoltOutput_in: [Float!]
+  eightVoltOutput_not_in: [Float!]
+  eightVoltOutput_lt: Float
+  eightVoltOutput_lte: Float
+  eightVoltOutput_gt: Float
+  eightVoltOutput_gte: Float
+  nineVoltOutput: Float
+  nineVoltOutput_not: Float
+  nineVoltOutput_in: [Float!]
+  nineVoltOutput_not_in: [Float!]
+  nineVoltOutput_lt: Float
+  nineVoltOutput_lte: Float
+  nineVoltOutput_gt: Float
+  nineVoltOutput_gte: Float
+  onBoardFlash: Int
+  onBoardFlash_not: Int
+  onBoardFlash_in: [Int!]
+  onBoardFlash_not_in: [Int!]
+  onBoardFlash_lt: Int
+  onBoardFlash_lte: Int
+  onBoardFlash_gt: Int
+  onBoardFlash_gte: Int
+  sdCardSlot: Boolean
+  sdCardSlot_not: Boolean
+  fourInOneConnector: Boolean
+  fourInOneConnector_not: Boolean
+  currentSensorRating: Float
+  currentSensorRating_not: Float
+  currentSensorRating_in: [Float!]
+  currentSensorRating_not_in: [Float!]
+  currentSensorRating_lt: Float
+  currentSensorRating_lte: Float
+  currentSensorRating_gt: Float
+  currentSensorRating_gte: Float
+  maxCurrent: Float
+  maxCurrent_not: Float
+  maxCurrent_in: [Float!]
+  maxCurrent_not_in: [Float!]
+  maxCurrent_lt: Float
+  maxCurrent_lte: Float
+  maxCurrent_gt: Float
+  maxCurrent_gte: Float
+  holeSize: HoleSize
+  holeSize_not: HoleSize
+  holeSize_in: [HoleSize!]
+  holeSize_not_in: [HoleSize!]
   AND: [FlightControllerScalarWhereInput!]
   OR: [FlightControllerScalarWhereInput!]
   NOT: [FlightControllerScalarWhereInput!]
@@ -907,30 +993,35 @@ input FlightControllerUpdateInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
+  gyroOne: Gyro
+  gyroTwo: Gyro
   weightInGrams: Float
-  cpu: String
+  cpu: CPU
   description: String
   dimensions: String
   holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
+  barometer: Baro
   spektrumPort: Boolean
-  usbInterface: Boolean
   ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  threeVoltOutput: Boolean
-  fiveVoltOut: Boolean
+  currentSensor: Boolean
   cameraControl: Boolean
+  pdb: Boolean
+  threeVoltOutput: Float
+  fiveVoltOutput: Float
+  eightVoltOutput: Float
+  nineVoltOutput: Float
+  onBoardFlash: Int
+  sdCardSlot: Boolean
+  fourInOneConnector: Boolean
+  currentSensorRating: Float
+  maxCurrent: Float
+  holeSize: HoleSize
 }
 
 input FlightControllerUpdateManyDataInput {
@@ -938,30 +1029,35 @@ input FlightControllerUpdateManyDataInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
+  gyroOne: Gyro
+  gyroTwo: Gyro
   weightInGrams: Float
-  cpu: String
+  cpu: CPU
   description: String
   dimensions: String
   holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
+  barometer: Baro
   spektrumPort: Boolean
-  usbInterface: Boolean
   ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  threeVoltOutput: Boolean
-  fiveVoltOut: Boolean
+  currentSensor: Boolean
   cameraControl: Boolean
+  pdb: Boolean
+  threeVoltOutput: Float
+  fiveVoltOutput: Float
+  eightVoltOutput: Float
+  nineVoltOutput: Float
+  onBoardFlash: Int
+  sdCardSlot: Boolean
+  fourInOneConnector: Boolean
+  currentSensorRating: Float
+  maxCurrent: Float
+  holeSize: HoleSize
 }
 
 input FlightControllerUpdateManyMutationInput {
@@ -969,30 +1065,35 @@ input FlightControllerUpdateManyMutationInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
+  gyroOne: Gyro
+  gyroTwo: Gyro
   weightInGrams: Float
-  cpu: String
+  cpu: CPU
   description: String
   dimensions: String
   holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
+  barometer: Baro
   spektrumPort: Boolean
-  usbInterface: Boolean
   ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  threeVoltOutput: Boolean
-  fiveVoltOut: Boolean
+  currentSensor: Boolean
   cameraControl: Boolean
+  pdb: Boolean
+  threeVoltOutput: Float
+  fiveVoltOutput: Float
+  eightVoltOutput: Float
+  nineVoltOutput: Float
+  onBoardFlash: Int
+  sdCardSlot: Boolean
+  fourInOneConnector: Boolean
+  currentSensorRating: Float
+  maxCurrent: Float
+  holeSize: HoleSize
 }
 
 input FlightControllerUpdateManyWithoutPostedByInput {
@@ -1038,30 +1139,35 @@ input FlightControllerUpdateWithoutMerchantLinksDataInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
+  gyroOne: Gyro
+  gyroTwo: Gyro
   weightInGrams: Float
-  cpu: String
+  cpu: CPU
   description: String
   dimensions: String
   holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
+  barometer: Baro
   spektrumPort: Boolean
-  usbInterface: Boolean
   ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  threeVoltOutput: Boolean
-  fiveVoltOut: Boolean
+  currentSensor: Boolean
   cameraControl: Boolean
+  pdb: Boolean
+  threeVoltOutput: Float
+  fiveVoltOutput: Float
+  eightVoltOutput: Float
+  nineVoltOutput: Float
+  onBoardFlash: Int
+  sdCardSlot: Boolean
+  fourInOneConnector: Boolean
+  currentSensorRating: Float
+  maxCurrent: Float
+  holeSize: HoleSize
 }
 
 input FlightControllerUpdateWithoutPostedByDataInput {
@@ -1071,30 +1177,35 @@ input FlightControllerUpdateWithoutPostedByDataInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
+  gyroOne: Gyro
+  gyroTwo: Gyro
   weightInGrams: Float
-  cpu: String
+  cpu: CPU
   description: String
   dimensions: String
   holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
+  barometer: Baro
   spektrumPort: Boolean
-  usbInterface: Boolean
   ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  threeVoltOutput: Boolean
-  fiveVoltOut: Boolean
+  currentSensor: Boolean
   cameraControl: Boolean
+  pdb: Boolean
+  threeVoltOutput: Float
+  fiveVoltOutput: Float
+  eightVoltOutput: Float
+  nineVoltOutput: Float
+  onBoardFlash: Int
+  sdCardSlot: Boolean
+  fourInOneConnector: Boolean
+  currentSensorRating: Float
+  maxCurrent: Float
+  holeSize: HoleSize
 }
 
 input FlightControllerUpdateWithoutUpdatedByDataInput {
@@ -1104,30 +1215,35 @@ input FlightControllerUpdateWithoutUpdatedByDataInput {
   disabled: Boolean
   releaseDate: DateTime
   uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
+  gyroOne: Gyro
+  gyroTwo: Gyro
   weightInGrams: Float
-  cpu: String
+  cpu: CPU
   description: String
   dimensions: String
   holePattern: HolePattern
   voltageInputMin: Float
   voltageInputMax: Float
   osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
+  barometer: Baro
   spektrumPort: Boolean
-  usbInterface: Boolean
   ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  threeVoltOutput: Boolean
-  fiveVoltOut: Boolean
+  currentSensor: Boolean
   cameraControl: Boolean
+  pdb: Boolean
+  threeVoltOutput: Float
+  fiveVoltOutput: Float
+  eightVoltOutput: Float
+  nineVoltOutput: Float
+  onBoardFlash: Int
+  sdCardSlot: Boolean
+  fourInOneConnector: Boolean
+  currentSensorRating: Float
+  maxCurrent: Float
+  holeSize: HoleSize
 }
 
 input FlightControllerUpdateWithWhereUniqueWithoutPostedByInput {
@@ -1225,22 +1341,14 @@ input FlightControllerWhereInput {
   uarts_lte: Int
   uarts_gt: Int
   uarts_gte: Int
-  gyroOne: Float
-  gyroOne_not: Float
-  gyroOne_in: [Float!]
-  gyroOne_not_in: [Float!]
-  gyroOne_lt: Float
-  gyroOne_lte: Float
-  gyroOne_gt: Float
-  gyroOne_gte: Float
-  gyroTwo: Float
-  gyroTwo_not: Float
-  gyroTwo_in: [Float!]
-  gyroTwo_not_in: [Float!]
-  gyroTwo_lt: Float
-  gyroTwo_lte: Float
-  gyroTwo_gt: Float
-  gyroTwo_gte: Float
+  gyroOne: Gyro
+  gyroOne_not: Gyro
+  gyroOne_in: [Gyro!]
+  gyroOne_not_in: [Gyro!]
+  gyroTwo: Gyro
+  gyroTwo_not: Gyro
+  gyroTwo_in: [Gyro!]
+  gyroTwo_not_in: [Gyro!]
   weightInGrams: Float
   weightInGrams_not: Float
   weightInGrams_in: [Float!]
@@ -1249,20 +1357,10 @@ input FlightControllerWhereInput {
   weightInGrams_lte: Float
   weightInGrams_gt: Float
   weightInGrams_gte: Float
-  cpu: String
-  cpu_not: String
-  cpu_in: [String!]
-  cpu_not_in: [String!]
-  cpu_lt: String
-  cpu_lte: String
-  cpu_gt: String
-  cpu_gte: String
-  cpu_contains: String
-  cpu_not_contains: String
-  cpu_starts_with: String
-  cpu_not_starts_with: String
-  cpu_ends_with: String
-  cpu_not_ends_with: String
+  cpu: CPU
+  cpu_not: CPU
+  cpu_in: [CPU!]
+  cpu_not_in: [CPU!]
   description: String
   description_not: String
   description_in: [String!]
@@ -1313,22 +1411,14 @@ input FlightControllerWhereInput {
   voltageInputMax_gte: Float
   osd: Boolean
   osd_not: Boolean
-  accelerometer: Boolean
-  accelerometer_not: Boolean
-  barometer: Boolean
-  barometer_not: Boolean
+  barometer: Baro
+  barometer_not: Baro
+  barometer_in: [Baro!]
+  barometer_not_in: [Baro!]
   spektrumPort: Boolean
   spektrumPort_not: Boolean
-  usbInterface: Boolean
-  usbInterface_not: Boolean
   ledWS2812Support: Boolean
   ledWS2812Support_not: Boolean
-  rssiPad: Boolean
-  rssiPad_not: Boolean
-  currentSensor: Boolean
-  currentSensor_not: Boolean
-  beeperPad: Boolean
-  beeperPad_not: Boolean
   beeperOnBoard: Boolean
   beeperOnBoard_not: Boolean
   antiVibrationGrommets: Boolean
@@ -1337,12 +1427,76 @@ input FlightControllerWhereInput {
   builtInReceiver_not: ReceiverProtocol
   builtInReceiver_in: [ReceiverProtocol!]
   builtInReceiver_not_in: [ReceiverProtocol!]
-  threeVoltOutput: Boolean
-  threeVoltOutput_not: Boolean
-  fiveVoltOut: Boolean
-  fiveVoltOut_not: Boolean
+  currentSensor: Boolean
+  currentSensor_not: Boolean
   cameraControl: Boolean
   cameraControl_not: Boolean
+  pdb: Boolean
+  pdb_not: Boolean
+  threeVoltOutput: Float
+  threeVoltOutput_not: Float
+  threeVoltOutput_in: [Float!]
+  threeVoltOutput_not_in: [Float!]
+  threeVoltOutput_lt: Float
+  threeVoltOutput_lte: Float
+  threeVoltOutput_gt: Float
+  threeVoltOutput_gte: Float
+  fiveVoltOutput: Float
+  fiveVoltOutput_not: Float
+  fiveVoltOutput_in: [Float!]
+  fiveVoltOutput_not_in: [Float!]
+  fiveVoltOutput_lt: Float
+  fiveVoltOutput_lte: Float
+  fiveVoltOutput_gt: Float
+  fiveVoltOutput_gte: Float
+  eightVoltOutput: Float
+  eightVoltOutput_not: Float
+  eightVoltOutput_in: [Float!]
+  eightVoltOutput_not_in: [Float!]
+  eightVoltOutput_lt: Float
+  eightVoltOutput_lte: Float
+  eightVoltOutput_gt: Float
+  eightVoltOutput_gte: Float
+  nineVoltOutput: Float
+  nineVoltOutput_not: Float
+  nineVoltOutput_in: [Float!]
+  nineVoltOutput_not_in: [Float!]
+  nineVoltOutput_lt: Float
+  nineVoltOutput_lte: Float
+  nineVoltOutput_gt: Float
+  nineVoltOutput_gte: Float
+  onBoardFlash: Int
+  onBoardFlash_not: Int
+  onBoardFlash_in: [Int!]
+  onBoardFlash_not_in: [Int!]
+  onBoardFlash_lt: Int
+  onBoardFlash_lte: Int
+  onBoardFlash_gt: Int
+  onBoardFlash_gte: Int
+  sdCardSlot: Boolean
+  sdCardSlot_not: Boolean
+  fourInOneConnector: Boolean
+  fourInOneConnector_not: Boolean
+  currentSensorRating: Float
+  currentSensorRating_not: Float
+  currentSensorRating_in: [Float!]
+  currentSensorRating_not_in: [Float!]
+  currentSensorRating_lt: Float
+  currentSensorRating_lte: Float
+  currentSensorRating_gt: Float
+  currentSensorRating_gte: Float
+  maxCurrent: Float
+  maxCurrent_not: Float
+  maxCurrent_in: [Float!]
+  maxCurrent_not_in: [Float!]
+  maxCurrent_lt: Float
+  maxCurrent_lte: Float
+  maxCurrent_gt: Float
+  maxCurrent_gte: Float
+  holeSize: HoleSize
+  holeSize_not: HoleSize
+  holeSize_in: [HoleSize!]
+  holeSize_not_in: [HoleSize!]
   AND: [FlightControllerWhereInput!]
   OR: [FlightControllerWhereInput!]
   NOT: [FlightControllerWhereInput!]
@@ -1352,10 +1506,20 @@ input FlightControllerWhereUniqueInput {
   id: ID
 }
 
+enum Gyro {
+  MPU6000
+  ICM20689
+}
+
 enum HolePattern {
   SIXTEEN
   TWENTY
   THIRTY
+}
+
+enum HoleSize {
+  M3
+  M2
 }
 
 type Link {
@@ -2798,4 +2962,3 @@ input VoteWhereUniqueInput {
 }
 `
       }
-    

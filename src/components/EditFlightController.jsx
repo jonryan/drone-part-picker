@@ -1,72 +1,106 @@
 import React, {Component} from 'react';
-import {Container} from 'react-bootstrap'
 import gql from 'graphql-tag'
 import {Mutation, Query} from 'react-apollo'
 import Page from '../components/Page'
 import FlightControllerForm from './FlightControllers/FlightControllerForm.jsx'
+import _ from 'underscore'
+import {DataUtils} from '../DataUtils.js';
+
 let moment = require('moment')
 
 const EDIT_FLIGHT_CONTROLLER = gql`
-  mutation editFlightController($flightController: UpdateFlightControllerInput!){
-    updateFlightController(flightController: $flightController){
-      id
-      createdAt
-      description
-      postedBy{
-        id,
-        name,
-        email
-      }
+    mutation editFlightController($flightController: UpdateFlightControllerInput!){
+        updateFlightController(flightController: $flightController){
+            id
+            name
+            disabled
+            releaseDate
+            uarts
+            gyroOne
+            gyroTwo
+            weightInGrams
+            cpu
+            dimensions
+            description
+            holePattern
+            onBoardFlash
+            voltageInputMin
+            voltageInputMax
+            osd
+            threeVoltOutput
+            fiveVoltOutput
+            eightVoltOutput
+            nineVoltOutput
+            cameraControl
+            pdb
+            barometer
+            spektrumPort
+            ledWS2812Support
+            beeperOnBoard
+            antiVibrationGrommets
+            builtInReceiver
+            sdCardSlot
+            fourInOneConnector
+            currentSensorRating
+            maxCurrent
+            holeSize
+        }
     }
-  }
 `
 
 export const GET_FLIGHTCONTROLLER = gql`
-  query getFlightController($id: ID!){
-    getFlightController(id: $id){
-      id
-      name
-      disabled
-      releaseDate
-      uarts
-      gyroOne
-      gyroTwo
-      weightInGrams
-      cpu
-      dimensions
-      description
-      holePattern
-      voltageInputMin
-      voltageInputMax
-      osd
-      accelerometer
-      barometer
-      spektrumPort
-      usbInterface
-      ledWS2812Support
-      rssiPad
-      currentSensor
-      beeperPad
-      beeperOnBoard
-      antiVibrationGrommets
-      builtInReceiver
-      postedBy{
-        id
-        name
-        email
-      }
-      merchantLinks{
-        id
-        price
-        url
-        inStock
-        merchant{
-          id
-          name
+    query getFlightController($id: ID!){
+        getFlightController(id: $id){
+            id
+            name
+            disabled
+            releaseDate
+            uarts
+            gyroOne
+            gyroTwo
+            weightInGrams
+            cpu
+            dimensions
+            description
+            holePattern
+            onBoardFlash
+            voltageInputMin
+            voltageInputMax
+            osd
+            threeVoltOutput
+            fiveVoltOutput
+            eightVoltOutput
+            nineVoltOutput
+            cameraControl
+            pdb
+            barometer
+            spektrumPort
+            ledWS2812Support
+            beeperOnBoard
+            antiVibrationGrommets
+            builtInReceiver
+            sdCardSlot
+            fourInOneConnector
+            currentSensorRating
+            maxCurrent
+            holeSize
+            postedBy{
+                id
+                name
+                email
+            }
+            merchantLinks{
+                id
+                price
+                url
+                inStock
+                merchant{
+                    id
+                    name
+                }
+            }
         }
-      }
     }
-  }
 `
 
 
@@ -85,6 +119,8 @@ class EditFlightController extends Component {
       fc = this.props.location.state.fc;
     }
 
+
+
     console.log("fc", fc);
 
 
@@ -95,7 +131,11 @@ class EditFlightController extends Component {
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching</div>
             if (error) return <div>Error</div>
-            data.getFlightController.releaseDate = moment(data.getFlightController.releaseDate).format('YYYY-MM-DD')
+
+            console.log('data.getFlightController.releaseDate', data.getFlightController.releaseDate);
+            if(data.getFlightController.releaseDate){
+              data.getFlightController.releaseDate = moment(data.getFlightController.releaseDate).format('YYYY-MM-DD')
+            }
 
             return (
               <Mutation mutation={EDIT_FLIGHT_CONTROLLER}>
@@ -103,20 +143,17 @@ class EditFlightController extends Component {
                   <FlightControllerForm
                     fc={data.getFlightController}
                     onSubmit={async (values, { setSubmitting, setErrors }) => {
+                      console.log('setErrors', setErrors)
+                      setSubmitting(false)
                       values = {...values}
                       values.id = data.getFlightController.id;
-                      // I've got to null out values so they don't get sent to the server as empty strings.
-                      values.builtInReceiver = (values.builtInReceiver) ? values.builtInReceiver : null
+                      values = DataUtils.cleansFlightControllerInput(values)
                       console.log('onSubmit', data, values)
-                      const { data: mutationData } = await updateFlightController({
+                      const response = await updateFlightController({
                         variables: { flightController: values }
                       })
+                      console.log('Result', response.data.mutationData)
 
-
-
-                      console.log('Result', mutationData)
-
-                      setSubmitting(false)
                       history.push(`/products/flight-controller/1`)
                       // TODO: Figure out errors
                       // setErrors(transformGraphQLErrors(mutationData.updateFlightController.errors))

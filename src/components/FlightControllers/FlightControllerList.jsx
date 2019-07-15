@@ -25,12 +25,11 @@ export const FC_LIST_QUERY  = gql`
                 voltageInputMin
                 voltageInputMax
                 osd
-                accelerometer
                 barometer
                 spektrumPort
-                usbInterface
                 ledWS2812Support
                 builtInReceiver
+                threeVoltOutput
                 postedBy{
                     id
                 }
@@ -63,7 +62,7 @@ class FlightControllerList extends Component {
 
     this.state = {
       flightControllerFilter: {},
-      viewMode: 'card',
+      viewMode: 'table',
     }
   }
 
@@ -164,7 +163,7 @@ class FlightControllerList extends Component {
                     {viewMode === 'card' && (
                         <Row>
                           {FCs.map((fc, index) => (
-                            <Col md={3} key={index}>
+                            <Col sm={1} md={6} lg={4} key={index}>
                               <FlightControllerCard
                                 fc={fc}
                                 key={index}
