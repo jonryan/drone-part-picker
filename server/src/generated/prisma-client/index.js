@@ -27,6 +27,30 @@ var models = [
   {
     name: "FlightControllerMerchantLink",
     embedded: false
+  },
+  {
+    name: "ReceiverProtocol",
+    embedded: false
+  },
+  {
+    name: "HolePattern",
+    embedded: false
+  },
+  {
+    name: "HoleSize",
+    embedded: false
+  },
+  {
+    name: "Gyro",
+    embedded: false
+  },
+  {
+    name: "CPU",
+    embedded: false
+  },
+  {
+    name: "Baro",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({

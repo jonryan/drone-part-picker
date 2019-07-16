@@ -105,9 +105,6 @@ class MerchantForm extends Component {
                 ))}
               </ul>
             )}
-
-
-
           </Col>
         </Row>
       </Container>

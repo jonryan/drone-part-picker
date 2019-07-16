@@ -4,9 +4,19 @@ import FormErrors from '../FormErrors.js'
 import {Container, Button, Table, Row, Col, Form} from 'react-bootstrap'
 import {Field, Formik} from 'formik'
 import ProductMerchantForm from "../Merchant/ProductMerchantForm";
+import FlightControllerSizeDropdown from './Inputs/FlightControllerSizeDropdown.jsx';
+import ReceiverProtocolDropdown from './Inputs/ReceiverProtocolDropdown.jsx';
+import CheckboxFormInput from '../CheckboxFormInput.jsx';
+import GyroDropdown from './Inputs/GyroDropdown.jsx';
+import HoleSizeDropdown from './Inputs/HoleSizeDropdown.jsx';
+import VoltageInputMinDropdown from './Inputs/VoltageInputMinDropdown.jsx';
+import CpuDropdown from './Inputs/CpuDropdown.jsx';
+import BaroDropdown from './Inputs/BaroDropdown.jsx';
+import VoltageInputMaxDropdown from './Inputs/VoltageInputMaxDropdown.jsx';
 
 const CheckboxInput = (props) => (
   <Field {...props} render={({field}) => {
+    console.log('field', field);
     return <input
       {...field}
       className={'form-check-input'}
@@ -47,32 +57,7 @@ class FlightControllerForm extends Component {
         <Row>
           <Col>
             <Formik
-              initialValues={{
-                name: fc.name || '',
-                description: fc.description || '',
-                releaseDate: fc.releaseDate || '',
-                uarts: fc.uarts || 0,
-                weightInGrams: fc.weightInGrams || 0,
-                cpu: fc.cpu || '',
-                // releaseDateUpdated: fc.releaseDateUpdated || new Date(),
-                dimensions: fc.dimensions || '',
-                holePattern: fc.holePattern || '',
-                voltageInputMin: fc.voltageInputMin || 0,
-                voltageInputMax: fc.voltageInputMax || 0,
-                osd: fc.osd || false,
-                accelerometer: fc.accelerometer || false,
-                barometer: fc.barometer || false,
-                spektrumPort: fc.spektrumPort || false,
-                usbInterface: fc.usbInterface || false,
-                ledWS2812Support: fc.ledWS2812Support || false,
-                rssiPad: fc.rssiPad || false,
-                currentSensor: fc.currentSensor || false,
-                accelerometer: fc.accelerometer || false,
-                beeperPad: fc.beeperPad || false,
-                beeperOnBoard: fc.beeperOnBoard || false,
-                antiVibrationGrommets: fc.antiVibrationGrommets || false,
-                builtInReceiver: fc.builtInReceiver || '',
-              }}
+              initialValues={{...fc}}
               onSubmit={onSubmit}
             >
               {({values, isSubmitting, handleSubmit, setFieldValue, errors}) => (
@@ -104,7 +89,6 @@ class FlightControllerForm extends Component {
                             className="form-control"
                             rows="8"
                             placeholder="Tell a little about the flight controller"
-                            required
                           />
                         </fieldset>
                       </Form.Group>
@@ -115,46 +99,24 @@ class FlightControllerForm extends Component {
                             name="releaseDate"
                             type="date"
                             className="form-control form-control-lg"
-                            required
                           />
                         </fieldset>
                       </Form.Group>
-                      <Form.Group controlId="uart">
-                        <Form.Label>Number of UARTs</Form.Label>
-                        <fieldset className="form-group">
-                          <Field
-                            name="uarts"
-                            type="number"
-                            className="form-control form-control-lg"
-                            placeholder=""
-                            required
-                          />
-                        </fieldset>
-                      </Form.Group>
+
+                      <h4>Size & Weight</h4>
                       <Form.Group controlId="weightInGrams">
-                        <Form.Label>Weight In Grams</Form.Label>
+                        <Form.Label>Board Weight (g)</Form.Label>
                         <fieldset className="form-group">
                           <Field
                             name="weightInGrams"
                             type="number"
                             className="form-control form-control-lg"
                             placeholder=""
-                            required
                           />
                         </fieldset>
                       </Form.Group>
-                      <Form.Group controlId="cpu">
-                        <Form.Label>CPU</Form.Label>
-                        <fieldset className="form-group">
-                          <Field
-                            name="cpu"
-                            type="text"
-                            className="form-control form-control-lg"
-                            placeholder=""
-                            required
-                          />
-                        </fieldset>
-                      </Form.Group>
+                      <HoleSizeDropdown/>
+                      <FlightControllerSizeDropdown />
                       <Form.Group controlId="dimensions">
                         <Form.Label>Board Dimensions (mm)</Form.Label>
                         <fieldset className="form-group">
@@ -163,148 +125,167 @@ class FlightControllerForm extends Component {
                             type="text"
                             className="form-control form-control-lg"
                             placeholder=""
-                            required
                           />
                         </fieldset>
                       </Form.Group>
-                      <Form.Group controlId="holePattern">
-                        <Form.Label>Hole Pattern (mm)</Form.Label>
-                        <fieldset className="form-group">
-                          <Field
-                            name="holePattern"
-                            type="text"
-                            className="form-control form-control-lg"
-                            placeholder=""
-                            required
-                          />
-                        </fieldset>
+
+                      <h4>Voltages</h4>
+                      <VoltageInputMinDropdown/>
+                      <VoltageInputMaxDropdown/>
+                      <Form.Group controlId="threeVoltOutput">
+                        <Form.Label>3V Output in Amps - Default to 0.1 if unknown - 1A = 1000mA</Form.Label>
+                        <Field
+                          name="threeVoltOutput"
+                          type="number"
+                          className="form-control"
+                        />
                       </Form.Group>
-                      <Form.Group controlId="voltageInputMin">
-                        <Form.Label>Minimum Voltage Input</Form.Label>
+                      <Form.Group controlId="fiveVoltOutput">
+                        <Form.Label>5V Output in Amps - Default to 0.1 if unknown - 1A = 1000mA</Form.Label>
+                        <Field
+                          name="fiveVoltOutput"
+                          type="number"
+                          className="form-control"
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="eightVoltOutput">
+                        <Form.Label>8V Output in Amps - Default to 0.1 if unknown - 1A = 1000mA</Form.Label>
+                        <Field
+                          name="eightVoltOutput"
+                          type="number"
+                          className="form-control"
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="nineVoltOutput">
+                        <Form.Label>9V Output in Amps - Default to 0.1 if unknown - 1A = 1000mA</Form.Label>
+                        <Field
+                          name="nineVoltOutput"
+                          type="number"
+                          className="form-control"
+                        />
+                      </Form.Group>
+
+                      <div className="form-check">
+                        <CheckboxFormInput
+                          name='pdb'
+                          id='pdb'
+                          className="form-check-input"
+                          label='PDB Included'
+                        />
+                      </div>
+
+                      {values.pdb && (
+                        <div>
+                          <Form.Group controlId="currentSensorRating">
+                            <Form.Label>Maximum Current Rating in A - 100 = 100A</Form.Label>
+                            <Field
+                              name="currentSensorRating"
+                              type="number"
+                              className="form-control"
+                            />
+                          </Form.Group>
+                        </div>
+                      )}
+
+
+
+                      <h4>Hardware</h4>
+                      <CpuDropdown/>
+                      <GyroDropdown fieldName={'gyroOne'} displayValue={'Primary Gyro'}/>
+                      <GyroDropdown fieldName={'gyroTwo'} displayValue={'Secondary Gyro'}/>
+                      <Form.Group controlId="uart">
+                        <Form.Label>Number of UARTs</Form.Label>
                         <fieldset className="form-group">
                           <Field
-                            name="voltageInputMin"
+                            name="uarts"
                             type="number"
                             className="form-control form-control-lg"
                             placeholder=""
-                            required
                           />
                         </fieldset>
                       </Form.Group>
+                      <ReceiverProtocolDropdown/>
+                      <BaroDropdown/>
+                      <div className="form-check">
+                        <CheckboxFormInput
+                          name='osd'
+                          id='osd'
+                          className="form-check-input"
+                          label='Built-in OSD'
+                        />
+                      </div>
 
-                      <Form.Group controlId="voltageInputMax">
-                        <Form.Label>Maximum Voltage Input</Form.Label>
-                        <fieldset className="form-group">
-                          <Field
-                            name="voltageInputMax"
-                            type="number"
-                            className="form-control form-control-lg"
-                            placeholder=""
-                          />
-                        </fieldset>
+                      <div className="form-check">
+                        <CheckboxFormInput
+                          name='spektrumPort'
+                          id='spektrumPort'
+                          className="form-check-input"
+                          label='Spektrum Satellite Port'
+                        />
+                      </div>
+
+                      <div className="form-check">
+                        <CheckboxFormInput
+                          name='ledWS2812Support'
+                          id='ledWS2812Support'
+                          className="form-check-input"
+                          label='LED WS2812 Support'
+                        />
+                      </div>
+
+                      <div className="form-check">
+                        <CheckboxFormInput
+                          name='beeperOnBoard'
+                          id='beeperOnBoard'
+                          className="form-check-input"
+                          label='On-Board Beeper'
+                        />
+                      </div>
+                      <div className="form-check">
+                        <CheckboxFormInput
+                          name='antiVibrationGrommets'
+                          id='antiVibrationGrommets'
+                          className="form-check-input"
+                          label='Anti-Vibration Grommets'
+                        />
+                      </div>
+
+                      <div className="form-check">
+                        <CheckboxFormInput
+                          name='cameraControl'
+                          id='cameraControl'
+                          className="form-check-input"
+                          label='Built-In Camera Control'
+                        />
+                      </div>
+
+                      <div className="form-check">
+                        <CheckboxFormInput
+                          name='fourInOneConnector'
+                          id='fourInOneConnector'
+                          className="form-check-input"
+                          label='4-in-1 Connector'
+                        />
+                      </div>
+
+                      <div className="form-check">
+                        <CheckboxFormInput
+                          name='sdCardSlot'
+                          id='sdCardSlot'
+                          className="form-check-input"
+                          label='SD-Card Slot'
+                        />
+                      </div>
+
+
+                      <Form.Group controlId="onBoardFlash">
+                        <Form.Label>On-Board Flash in  megabytes - 200 === 200mb</Form.Label>
+                        <Field
+                          name="onBoardFlash"
+                          type="number"
+                          className="form-control"
+                        />
                       </Form.Group>
-
-                      <Form.Group controlId="builtInReceiver">
-                        <Form.Label>Built-In Receiver</Form.Label>
-                        <fieldset className="form-group">
-                          <Field
-                            name="builtInReceiver"
-                            component="select"
-                            placeholder='WHAT?'
-                            className="form-control"
-                          >
-                            <option value="">--- Select a Receiver Type --</option>
-                            <option value="Spektrum">Spektrum</option>
-                            <option value="FrSky">FrSky</option>
-                            <option value="Crossfire">Crossfire</option>
-                          </Field>
-                        </fieldset>
-                      </Form.Group>
-
-                      <div className="form-check">
-                        <CheckboxInput
-                          name="osd"
-                          className="form-check-input"
-                        />
-                        <label title="Built-in OSD" type="checkbox" className="form-check-label">
-                          Built-in OSD
-                        </label>
-                      </div>
-
-                      <div className="form-check">
-                        <CheckboxInput
-                          name="barometer"
-                          className="form-check-input"
-                        />
-                        <label title="Built-in Barometer" type="checkbox"  className="form-check-label">
-                          Built-in Barometer
-                        </label>
-                      </div>
-
-                      <div className="form-check">
-                        <CheckboxInput
-                          name="spektrumPort"
-                          className="form-check-input"
-                        />
-                        <label title="Spektrum Satellite Port" type="checkbox"  className="form-check-label">
-                          Spektrum Satellite Port
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <CheckboxInput
-                          name="usbInterface"
-                          className="form-check-input"
-                        />
-                        <label title="USB Interface" type="checkbox"  className="form-check-label">
-                          USB Interface
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <CheckboxInput
-                          name="ledWS2812Support"
-                          className="form-check-input"
-                        />
-                        <label title="LED WS2812 Support" type="checkbox"  className="form-check-label">
-                          LED WS2812 Support
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <CheckboxInput
-                          name="rssiPad"
-                          className="form-check-input"
-                        />
-                        <label title="RSSI Pad" type="checkbox"  className="form-check-label">
-                          RSSI Pad
-                        </label>
-                      </div>
-
-                      <div className="form-check">
-                        <CheckboxInput
-                          name="currentSensor"
-                          className="form-check-input"
-                        />
-                        <label title="Current Sensor" type="checkbox"  className="form-check-label">
-                          Current Sensor
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <CheckboxInput
-                          name="beeperOnBoard"
-                          className="form-check-input"
-                        />
-                        <label title="On-Board Beeper" type="checkbox"  className="form-check-label">
-                          On-Board Beeper
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <CheckboxInput
-                          name="antiVibrationGrommets"
-                          className="form-check-input"
-                        />
-                        <label title="Anti-Vibration Grommets" type="checkbox"  className="form-check-label">
-                          Anti-Vibration Grommets
-                        </label>
-                      </div>
 
                       <hr/>
 
@@ -393,6 +374,10 @@ FlightControllerForm.propTypes = {
 };
 
 FlightControllerForm.defaultProps = {
-  fc: {},
+  fc: {
+    description: '',
+    pdb: false,
+
+  },
 }
 export default FlightControllerForm;

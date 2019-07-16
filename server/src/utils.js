@@ -9,6 +9,7 @@ function getUserId(context) {
     return userId
   }
 
+
   throw new Error('Not authenticated')
 }
 

@@ -5,6 +5,7 @@ import { Mutation } from 'react-apollo';
 import { Query } from 'react-apollo'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
+import {getLowestPrice} from "../../utils";
 
 export const FC_DELETE_MUTATION = gql`
   mutation deleteFlightController($id: ID!){
@@ -18,18 +19,7 @@ export const FC_DELETE_MUTATION = gql`
 
 class FlightController extends Component {
 
-  _getLowestPrice = (prices) => {
-    if(!prices || prices.length < 1){
-      return "N/A"
-    }
-    let lowest = 99999999;
-    prices.forEach((price, index) => {
-      if(price.price < lowest){
-        lowest = price.price
-      }
-    })
-    return `$${lowest}`
-  }
+
 
   render() {
     let {fc, deleteCB} = this.props
@@ -38,7 +28,7 @@ class FlightController extends Component {
       <tr>
         <td>{fc.name}</td>
         <td>{fc.manufacturer}</td>
-        <td>{this._getLowestPrice(fc.merchantLinks)}</td>
+        <td>{getLowestPrice(fc.merchantLinks)}</td>
         <td>5 Stars</td>
         <td>13</td>
         <td>05/05/2019</td>

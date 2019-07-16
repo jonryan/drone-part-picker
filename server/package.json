@@ -11,8 +11,11 @@
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "glob": "^7.1.4",
     "graphql-yoga": "^1.18.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.11",
+    "path": "^0.12.7",
     "prisma-client-lib": "^1.34.0",
     "underscore": "^1.9.1"
   },

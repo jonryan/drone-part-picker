@@ -6,21 +6,25 @@ type Query {
     link(id: String!): Link!
     getFlightController(id: ID!): FlightController!
     flightControllerFeed: FlightControllerFeed!
+    flightControllerFilter(
+        flightControllerFilter: FlightControllerFilter!
+    ) : FlightControllerFeed!
     userList: UserList!
     merchantList: MerchantList!
     getMerchant(id: ID!): Merchant!
+    getHolePatternOptions: HolePattern
 }
 
 type Mutation {
     post(
-      url: String!,
-      description: String!
+        url: String!,
+        description: String!
     ): Link!
     addFlightController(
-      flightController: AddFlightControllerInput!
+        flightController: AddFlightControllerInput!
     ) : FlightController
     updateFlightController(
-      flightController: UpdateFlightControllerInput!
+        flightController: UpdateFlightControllerInput!
     ) : FlightController
     deleteFlightController(id: ID!) : FlightController
     signup(email: String!, password: String!, name: String!): AuthPayload
@@ -33,141 +37,192 @@ type Mutation {
     updateMerchant(merchant: MerchantEdit!) : Merchant
     # Flight Controller Merchant Link
     addFlightControllerMerchantLink(flightControllerMerchantLink : AddFlightControllerMerchantLink):
-      FlightControllerMerchantLink
+    FlightControllerMerchantLink
     deleteFlightControllerMerchantLink(id: ID!) : FlightControllerMerchantLink
     deleteMerchant(id: ID!) : Merchant
 }
 
+
 type Subscription {
-  newLink: Link
-  newVote: Vote
+    newLink: Link
+    newVote: Vote
 }
 
 type Vote {
-  id: ID!
-  link: Link!
-  user: User!
+    id: ID!
+    link: Link!
+    user: User!
 }
 
 type FlightControllerFeed {
-  flightControllers: [FlightController!]!
-  count: Int!
+    flightControllers: [FlightController!]!
+    count: Int!
 }
 
 type UserList {
-  users: [User!]!
+    users: [User!]!
 }
 
 
-
+### FlightController
 input UpdateFlightControllerInput{
-  id: ID!
-  name: String
-  disabled: Boolean
-  releaseDate: String
-  uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
-  weightInGrams: Float
-  cpu: String
-  dimensions: String
-  description: String
-  holePattern: String
-  voltageInputMin: Float
-  voltageInputMax: Float
-  osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
-  spektrumPort: Boolean
-  usbInterface: Boolean
-  ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
-  beeperOnBoard: Boolean
-  antiVibrationGrommets: Boolean
-  builtInReceiver: String
-  postedBy: UserInput
-  createdAt: DateTime
+    id: ID!
+    name: String
+    disabled: Boolean
+    releaseDate: String
+    uarts: Int
+    gyroOne: Gyro
+    gyroTwo: Gyro
+    weightInGrams: Float
+    cpu: CPU
+    dimensions: String
+    description: String
+    holePattern: String
+    voltageInputMin: Float
+    voltageInputMax: Float
+    osd: Boolean
+    threeVoltOutput: Float
+    cameraControl: Boolean
+    barometer: Baro
+    spektrumPort: Boolean
+    ledWS2812Support: Boolean
+    beeperOnBoard: Boolean
+    antiVibrationGrommets: Boolean
+    builtInReceiver: ReceiverProtocol
+    postedBy: UserInput
+    createdAt: DateTime
+    pdb: Boolean
+    fiveVoltOutput: Float
+    eightVoltOutput: Float
+    nineVoltOutput: Float
+    onBoardFlash: Int
+    sdCardSlot: Boolean
+    fourInOneConnector: Boolean
+    currentSensorRating: Float
+    maxCurrent: Float
+    holeSize: HoleSize
+}
+
+input FlightControllerFilter{
+    name: String
+    minUarts: Int
+    releaseDateAfter: DateTime
+    voltageInputMin: Float
+    voltageInputMax: Float
+    spektrumPort: Boolean
+    ledWS2812Support: Boolean
+    osd: Boolean
+    barometer: Baro
+    threeVoltOutput: Float
+    cameraControl: Boolean
+    holePattern: HolePattern
+    beeperOnBoard: Boolean
+    antiVibrationGrommets: Boolean
+    builtInReceiver: ReceiverProtocol
+    pdb: Boolean
+    cpu: CPU
+    fiveVoltOutput: Float
+    eightVoltOutput: Float
+    nineVoltOutput: Float
+    onBoardFlash: Int
+    sdCardSlot: Boolean
+    fourInOneConnector: Boolean
+    currentSensorRating: Float
+    maxCurrent: Float
+    holeSize: HoleSize
 }
 
 
 input AddFlightControllerInput{
-  name: String
-  disabled: Boolean
-  releaseDate: String
-  uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
-  weightInGrams: Float
-  cpu: String
-  dimensions: String
-  description: String
-  holePattern: String
-  voltageInputMin: Float
-  voltageInputMax: Float
-  osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
-  spektrumPort: Boolean
-  usbInterface: Boolean
-  ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
-  beeperOnBoard: Boolean
-  antiVibrationGrommets: Boolean
-  builtInReceiver: String
-  postedBy: UserInput
-  createdAt: DateTime
+    name: String
+    disabled: Boolean
+    releaseDate: String
+    uarts: Int
+    gyroOne: Gyro
+    gyroTwo: Gyro
+    weightInGrams: Float
+    cpu: CPU
+    dimensions: String
+    description: String
+    holePattern: HolePattern
+    voltageInputMin: Float
+    voltageInputMax: Float
+    builtInReceiver: ReceiverProtocol
+    osd: Boolean
+    threeVoltOutput: Float
+    cameraControl: Boolean
+    barometer: Baro
+    spektrumPort: Boolean
+    ledWS2812Support: Boolean
+    beeperOnBoard: Boolean
+    antiVibrationGrommets: Boolean
+    postedBy: UserInput
+    createdAt: DateTime
+    pdb: Boolean
+    fiveVoltOutput: Float
+    eightVoltOutput: Float
+    nineVoltOutput: Float
+    onBoardFlash: Int
+    sdCardSlot: Boolean
+    fourInOneConnector: Boolean
+    currentSensorRating: Float
+    maxCurrent: Float
+    holeSize: HoleSize
 }
 
 type FlightController {
-  id: ID
-  name: String
-  disabled: Boolean
-  releaseDate: String
-  uarts: Int
-  gyroOne: Float
-  gyroTwo: Float
-  weightInGrams: Float
-  cpu: String
-  dimensions: String
-  description: String
-  holePattern: String
-  voltageInputMin: Float
-  voltageInputMax: Float
-  osd: Boolean
-  accelerometer: Boolean
-  barometer: Boolean
-  spektrumPort: Boolean
-  usbInterface: Boolean
-  ledWS2812Support: Boolean
-  rssiPad: Boolean
-  currentSensor: Boolean
-  beeperPad: Boolean
-  beeperOnBoard: Boolean
-  antiVibrationGrommets: Boolean
-  builtInReceiver: String
-  postedBy: User
-  updatedBy: User
-  createdAt: DateTime
-  updatedAt: DateTime
-  merchantLinks: [FlightControllerMerchantLink!]!
+    id: ID
+    name: String
+    disabled: Boolean
+    releaseDate: String
+    uarts: Int
+    gyroOne: Gyro
+    gyroTwo: Gyro
+    weightInGrams: Float
+    cpu: CPU
+    dimensions: String
+    description: String
+    holePattern: HolePattern
+    voltageInputMin: Float
+    voltageInputMax: Float
+    osd: Boolean
+    threeVoltOutput: Float
+    cameraControl: Boolean
+    barometer: Baro
+    spektrumPort: Boolean
+    ledWS2812Support: Boolean
+    beeperOnBoard: Boolean
+    antiVibrationGrommets: Boolean
+    builtInReceiver: ReceiverProtocol
+    postedBy: User
+    updatedBy: User
+    createdAt: DateTime
+    updatedAt: DateTime
+    merchantLinks: [FlightControllerMerchantLink!]!
+    pdb: Boolean
+    fiveVoltOutput: Float
+    eightVoltOutput: Float
+    nineVoltOutput: Float
+    onBoardFlash: Int
+    sdCardSlot: Boolean
+    fourInOneConnector: Boolean
+    currentSensorRating: Float
+    maxCurrent: Float
+    holeSize: HoleSize
 }
 
 ##### Merchant
 type Merchant {
-  id: ID!
-  name: String!
-  url: String!
-  postedBy: User
-  updatedBy: User
-  createdAt: DateTime
-  updatedAt: DateTime
-  affiliateId: String
-  disabled: Boolean
-  flightControllers: [FlightControllerMerchantLink!]!
+    id: ID!
+    name: String!
+    url: String!
+    postedBy: User
+    updatedBy: User
+    createdAt: DateTime
+    updatedAt: DateTime
+    affiliateId: String
+    disabled: Boolean
+    flightControllers: [FlightControllerMerchantLink!]!
 }
 
 input MerchantInput {
@@ -186,35 +241,35 @@ input MerchantEdit {
 }
 
 type MerchantList {
-  merchants: [Merchant!]!
+    merchants: [Merchant!]!
 }
 
 #### Flight Controller Merchant Links
 type FlightControllerMerchantLink{
-  id: ID!
-  merchant: Merchant!
-  flightController: FlightController!
-  url: String!
-  price: Float!
-  inStock: Boolean
-  postedBy: User
-  createdAt: DateTime
-  updatedAt: DateTime
+    id: ID!
+    merchant: Merchant!
+    flightController: FlightController!
+    url: String!
+    price: Float!
+    inStock: Boolean
+    postedBy: User
+    createdAt: DateTime
+    updatedAt: DateTime
 }
 
 input AddFlightControllerMerchantLink{
-  id: ID
-  merchantId: String!
-  flightControllerId: String!
-  url: String!
-  price: Float!
-  inStock: Boolean
+    id: ID
+    merchantId: String!
+    flightControllerId: String!
+    url: String!
+    price: Float!
+    inStock: Boolean
 }
 
 #### Links
 type Feed {
-  links: [Link!]!
-  count: Int!
+    links: [Link!]!
+    count: Int!
 }
 
 type Link {
@@ -228,38 +283,70 @@ type Link {
 
 #### User Auth
 type AuthPayload {
-  token: String
-  user: User
+    token: String
+    user: User
 }
 
 type User {
-  id: ID!
-  name: String!
-  email: String!
-  links: [Link!]!
-  flightControllers: [FlightController!]!
-  addedMerchants: [Merchant!]!
-  editedMerchants: [Merchant!]!
-  editedFlightControllers: [Merchant!]!
+    id: ID!
+    name: String!
+    email: String!
+    links: [Link!]!
+    flightControllers: [FlightController!]!
+    addedMerchants: [Merchant!]!
+    editedMerchants: [Merchant!]!
+    editedFlightControllers: [Merchant!]!
 }
 
 input UserInput {
-  id: ID!
-  name: String!
-  email: String!
+    id: ID!
+    name: String!
+    email: String!
 }
 
 enum ReceiverProtocol{
-  CROSSFIRE
-  DSMX
-  FRSKY
+    CROSSFIRE
+    FRSKY
+    FLYSKY
+    SPEKTRUM
 }
 
-enum LinkOrderByInput {
-  description_ASC
-  description_DESC
-  url_ASC
-  url_DESC
-  createdAt_ASC
-  createdAt_DESC
+enum HolePattern{
+    SIXTEEN # 16x16
+    TWENTY # 20x20
+    THIRTY # 30.5x30.5
 }
+
+enum HoleSize{
+    M3
+    M2
+}
+
+enum Gyro{
+    MPU6000
+    ICM20689
+}
+
+enum CPU{
+    STM32F405
+    STM32H7400
+    STM32F745
+    STM32F411
+    STM32F722
+}
+
+enum Baro{
+    BMP388
+    BMP280
+}
+
+
+enum LinkOrderByInput {
+    description_ASC
+    description_DESC
+    url_ASC
+    url_DESC
+    createdAt_ASC
+    createdAt_DESC
+}
+
