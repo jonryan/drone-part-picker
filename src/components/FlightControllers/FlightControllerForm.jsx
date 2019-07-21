@@ -103,6 +103,8 @@ class FlightControllerForm extends Component {
                         </fieldset>
                       </Form.Group>
 
+                      <hr/>
+
                       <h4>Size & Weight</h4>
                       <Form.Group controlId="weightInGrams">
                         <Form.Label>Board Weight (g)</Form.Label>
@@ -128,6 +130,8 @@ class FlightControllerForm extends Component {
                           />
                         </fieldset>
                       </Form.Group>
+
+                      <hr/>
 
                       <h4>Voltages</h4>
                       <VoltageInputMinDropdown/>
@@ -187,7 +191,7 @@ class FlightControllerForm extends Component {
                         </div>
                       )}
 
-
+                      <hr/>
 
                       <h4>Hardware</h4>
                       <CpuDropdown/>
