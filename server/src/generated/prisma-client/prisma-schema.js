@@ -676,8 +676,6 @@ enum FlightControllerOrderByInput {
   antiVibrationGrommets_DESC
   builtInReceiver_ASC
   builtInReceiver_DESC
-  currentSensor_ASC
-  currentSensor_DESC
   cameraControl_ASC
   cameraControl_DESC
   pdb_ASC
@@ -728,7 +726,6 @@ type FlightControllerPreviousValues {
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  currentSensor: Boolean
   cameraControl: Boolean
   pdb: Boolean
   threeVoltOutput: Float
@@ -892,8 +889,6 @@ input FlightControllerScalarWhereInput {
   builtInReceiver_not: ReceiverProtocol
   builtInReceiver_in: [ReceiverProtocol!]
   builtInReceiver_not_in: [ReceiverProtocol!]
-  currentSensor: Boolean
-  currentSensor_not: Boolean
   cameraControl: Boolean
   cameraControl_not: Boolean
   pdb: Boolean
@@ -1009,7 +1004,6 @@ input FlightControllerUpdateInput {
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  currentSensor: Boolean
   cameraControl: Boolean
   pdb: Boolean
   threeVoltOutput: Float
@@ -1045,7 +1039,6 @@ input FlightControllerUpdateManyDataInput {
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  currentSensor: Boolean
   cameraControl: Boolean
   pdb: Boolean
   threeVoltOutput: Float
@@ -1081,7 +1074,6 @@ input FlightControllerUpdateManyMutationInput {
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  currentSensor: Boolean
   cameraControl: Boolean
   pdb: Boolean
   threeVoltOutput: Float
@@ -1155,7 +1147,6 @@ input FlightControllerUpdateWithoutMerchantLinksDataInput {
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  currentSensor: Boolean
   cameraControl: Boolean
   pdb: Boolean
   threeVoltOutput: Float
@@ -1193,7 +1184,6 @@ input FlightControllerUpdateWithoutPostedByDataInput {
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  currentSensor: Boolean
   cameraControl: Boolean
   pdb: Boolean
   threeVoltOutput: Float
@@ -1231,7 +1221,6 @@ input FlightControllerUpdateWithoutUpdatedByDataInput {
   beeperOnBoard: Boolean
   antiVibrationGrommets: Boolean
   builtInReceiver: ReceiverProtocol
-  currentSensor: Boolean
   cameraControl: Boolean
   pdb: Boolean
   threeVoltOutput: Float
@@ -1427,8 +1416,6 @@ input FlightControllerWhereInput {
   builtInReceiver_not: ReceiverProtocol
   builtInReceiver_in: [ReceiverProtocol!]
   builtInReceiver_not_in: [ReceiverProtocol!]
-  currentSensor: Boolean
-  currentSensor_not: Boolean
   cameraControl: Boolean
   cameraControl_not: Boolean
   pdb: Boolean
@@ -2962,3 +2949,4 @@ input VoteWhereUniqueInput {
 }
 `
       }
+    

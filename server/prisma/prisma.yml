@@ -1,5 +1,8 @@
 # The HTTP endpoint for your Prisma API
-endpoint: https://us1.prisma.sh/corey-snyder/hackernews-node/dev
+
+endpoint: https://us1.prisma.sh/corey-snyder/hackernews-node/dev #Prisma Server Endpoint
+#endpoint: http://prism-Publi-1NX25XXJPKTRC-1994595457.us-east-1.elb.amazonaws.com #Amazon Deployed
+
 
 # Points to the file that contains your datamodel
 datamodel: datamodel.prisma

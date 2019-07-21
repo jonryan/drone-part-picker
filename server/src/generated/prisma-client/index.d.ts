@@ -412,8 +412,6 @@ export type FlightControllerOrderByInput =
   | "antiVibrationGrommets_DESC"
   | "builtInReceiver_ASC"
   | "builtInReceiver_DESC"
-  | "currentSensor_ASC"
-  | "currentSensor_DESC"
   | "cameraControl_ASC"
   | "cameraControl_DESC"
   | "pdb_ASC"
@@ -653,7 +651,6 @@ export interface FlightControllerUpdateInput {
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<ReceiverProtocol>;
-  currentSensor?: Maybe<Boolean>;
   cameraControl?: Maybe<Boolean>;
   pdb?: Maybe<Boolean>;
   threeVoltOutput?: Maybe<Float>;
@@ -822,8 +819,6 @@ export interface FlightControllerWhereInput {
   builtInReceiver_not?: Maybe<ReceiverProtocol>;
   builtInReceiver_in?: Maybe<ReceiverProtocol[] | ReceiverProtocol>;
   builtInReceiver_not_in?: Maybe<ReceiverProtocol[] | ReceiverProtocol>;
-  currentSensor?: Maybe<Boolean>;
-  currentSensor_not?: Maybe<Boolean>;
   cameraControl?: Maybe<Boolean>;
   cameraControl_not?: Maybe<Boolean>;
   pdb?: Maybe<Boolean>;
@@ -1161,7 +1156,6 @@ export interface FlightControllerUpdateWithoutPostedByDataInput {
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<ReceiverProtocol>;
-  currentSensor?: Maybe<Boolean>;
   cameraControl?: Maybe<Boolean>;
   pdb?: Maybe<Boolean>;
   threeVoltOutput?: Maybe<Float>;
@@ -1329,7 +1323,6 @@ export interface FlightControllerCreateInput {
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<ReceiverProtocol>;
-  currentSensor?: Maybe<Boolean>;
   cameraControl?: Maybe<Boolean>;
   pdb?: Maybe<Boolean>;
   threeVoltOutput?: Maybe<Float>;
@@ -1487,7 +1480,6 @@ export interface FlightControllerCreateWithoutPostedByInput {
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<ReceiverProtocol>;
-  currentSensor?: Maybe<Boolean>;
   cameraControl?: Maybe<Boolean>;
   pdb?: Maybe<Boolean>;
   threeVoltOutput?: Maybe<Float>;
@@ -1547,7 +1539,6 @@ export interface FlightControllerUpdateWithoutUpdatedByDataInput {
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<ReceiverProtocol>;
-  currentSensor?: Maybe<Boolean>;
   cameraControl?: Maybe<Boolean>;
   pdb?: Maybe<Boolean>;
   threeVoltOutput?: Maybe<Float>;
@@ -1669,7 +1660,6 @@ export interface FlightControllerCreateWithoutUpdatedByInput {
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<ReceiverProtocol>;
-  currentSensor?: Maybe<Boolean>;
   cameraControl?: Maybe<Boolean>;
   pdb?: Maybe<Boolean>;
   threeVoltOutput?: Maybe<Float>;
@@ -1834,7 +1824,6 @@ export interface FlightControllerCreateWithoutMerchantLinksInput {
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<ReceiverProtocol>;
-  currentSensor?: Maybe<Boolean>;
   cameraControl?: Maybe<Boolean>;
   pdb?: Maybe<Boolean>;
   threeVoltOutput?: Maybe<Float>;
@@ -2064,7 +2053,6 @@ export interface FlightControllerUpdateWithoutMerchantLinksDataInput {
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<ReceiverProtocol>;
-  currentSensor?: Maybe<Boolean>;
   cameraControl?: Maybe<Boolean>;
   pdb?: Maybe<Boolean>;
   threeVoltOutput?: Maybe<Float>;
@@ -2659,7 +2647,6 @@ export interface FlightControllerUpdateManyMutationInput {
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<ReceiverProtocol>;
-  currentSensor?: Maybe<Boolean>;
   cameraControl?: Maybe<Boolean>;
   pdb?: Maybe<Boolean>;
   threeVoltOutput?: Maybe<Float>;
@@ -2965,8 +2952,6 @@ export interface FlightControllerScalarWhereInput {
   builtInReceiver_not?: Maybe<ReceiverProtocol>;
   builtInReceiver_in?: Maybe<ReceiverProtocol[] | ReceiverProtocol>;
   builtInReceiver_not_in?: Maybe<ReceiverProtocol[] | ReceiverProtocol>;
-  currentSensor?: Maybe<Boolean>;
-  currentSensor_not?: Maybe<Boolean>;
   cameraControl?: Maybe<Boolean>;
   cameraControl_not?: Maybe<Boolean>;
   pdb?: Maybe<Boolean>;
@@ -3084,7 +3069,6 @@ export interface FlightControllerUpdateManyDataInput {
   beeperOnBoard?: Maybe<Boolean>;
   antiVibrationGrommets?: Maybe<Boolean>;
   builtInReceiver?: Maybe<ReceiverProtocol>;
-  currentSensor?: Maybe<Boolean>;
   cameraControl?: Maybe<Boolean>;
   pdb?: Maybe<Boolean>;
   threeVoltOutput?: Maybe<Float>;
@@ -3758,7 +3742,6 @@ export interface FlightController {
   beeperOnBoard?: Boolean;
   antiVibrationGrommets?: Boolean;
   builtInReceiver?: ReceiverProtocol;
-  currentSensor?: Boolean;
   cameraControl?: Boolean;
   pdb?: Boolean;
   threeVoltOutput?: Float;
@@ -3810,7 +3793,6 @@ export interface FlightControllerPromise
   beeperOnBoard: () => Promise<Boolean>;
   antiVibrationGrommets: () => Promise<Boolean>;
   builtInReceiver: () => Promise<ReceiverProtocol>;
-  currentSensor: () => Promise<Boolean>;
   cameraControl: () => Promise<Boolean>;
   pdb: () => Promise<Boolean>;
   threeVoltOutput: () => Promise<Float>;
@@ -3864,7 +3846,6 @@ export interface FlightControllerSubscription
   beeperOnBoard: () => Promise<AsyncIterator<Boolean>>;
   antiVibrationGrommets: () => Promise<AsyncIterator<Boolean>>;
   builtInReceiver: () => Promise<AsyncIterator<ReceiverProtocol>>;
-  currentSensor: () => Promise<AsyncIterator<Boolean>>;
   cameraControl: () => Promise<AsyncIterator<Boolean>>;
   pdb: () => Promise<AsyncIterator<Boolean>>;
   threeVoltOutput: () => Promise<AsyncIterator<Float>>;
@@ -3916,7 +3897,6 @@ export interface FlightControllerNullablePromise
   beeperOnBoard: () => Promise<Boolean>;
   antiVibrationGrommets: () => Promise<Boolean>;
   builtInReceiver: () => Promise<ReceiverProtocol>;
-  currentSensor: () => Promise<Boolean>;
   cameraControl: () => Promise<Boolean>;
   pdb: () => Promise<Boolean>;
   threeVoltOutput: () => Promise<Float>;
@@ -4018,7 +3998,6 @@ export interface FlightControllerPreviousValues {
   beeperOnBoard?: Boolean;
   antiVibrationGrommets?: Boolean;
   builtInReceiver?: ReceiverProtocol;
-  currentSensor?: Boolean;
   cameraControl?: Boolean;
   pdb?: Boolean;
   threeVoltOutput?: Float;
@@ -4059,7 +4038,6 @@ export interface FlightControllerPreviousValuesPromise
   beeperOnBoard: () => Promise<Boolean>;
   antiVibrationGrommets: () => Promise<Boolean>;
   builtInReceiver: () => Promise<ReceiverProtocol>;
-  currentSensor: () => Promise<Boolean>;
   cameraControl: () => Promise<Boolean>;
   pdb: () => Promise<Boolean>;
   threeVoltOutput: () => Promise<Float>;
@@ -4100,7 +4078,6 @@ export interface FlightControllerPreviousValuesSubscription
   beeperOnBoard: () => Promise<AsyncIterator<Boolean>>;
   antiVibrationGrommets: () => Promise<AsyncIterator<Boolean>>;
   builtInReceiver: () => Promise<AsyncIterator<ReceiverProtocol>>;
-  currentSensor: () => Promise<AsyncIterator<Boolean>>;
   cameraControl: () => Promise<AsyncIterator<Boolean>>;
   pdb: () => Promise<AsyncIterator<Boolean>>;
   threeVoltOutput: () => Promise<AsyncIterator<Float>>;

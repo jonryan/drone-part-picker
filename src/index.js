@@ -18,8 +18,11 @@ import { split } from 'apollo-link'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
 
+// const graphQLServerPath = 'prism-Publi-1NX25XXJPKTRC-1994595457.us-east-1.elb.amazonaws.com'
+const graphQLServerPath = 'localhost:4000'
+
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000'
+  uri: `http://${graphQLServerPath}`
 })
 
 const authLink = setContext((_, { headers }) => {
@@ -33,7 +36,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000`,
+  uri: `ws://${graphQLServerPath}`,
   options: {
     reconnect: true,
     connectionParams: {
