@@ -19,6 +19,7 @@
 ##### API
  * [Realworld-GraphQL](https://github.com/thebergamo/realworld-graphql) - GraphQL NodeJS Server Example
  * [Realworld-NodeJS](https://github.com/gothinkster/node-express-realworld-example-app)
+ * [Prisma Nexus Example](https://github.com/Kandelborg/KATS)
  
 ##### Front-End
  * [Realworld-React-Apollo](https://github.com/dostu/react-apollo-realworld-example-app)
