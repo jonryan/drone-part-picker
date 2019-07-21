@@ -15,19 +15,31 @@ class Header extends Component {
 
     return (
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="#home">Drone Part Picker</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         {/* TODO: Incorporate the MENU here*/}
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/">New</Nav.Link>
-            <Nav.Link href="/top">Top</Nav.Link>
-            <Nav.Link href="/create">Add Link</Nav.Link>
-            <Nav.Link href="/search">Search</Nav.Link>
-            <Nav.Link href="/products/flight-controller/1">Flight Controllers</Nav.Link>
-            <Nav.Link href="/add-flight-controller">Add FC</Nav.Link>
-            <Nav.Link href="/add-merchant">Add Merchant</Nav.Link>
-            <Nav.Link href="/merchants">Merchants</Nav.Link>
+            {/*<Nav.Link href="/">New</Nav.Link>*/}
+            {/*<Nav.Link href="/top">Top</Nav.Link>*/}
+            {/*<Nav.Link href="/create">Add Link</Nav.Link>*/}
+            {/*<Nav.Link href="/search">Search</Nav.Link>*/}
+            {authToken ? (
+              <React.Fragment>
+                <NavDropdown title="Flight Controllers">
+                  <NavDropdown.Item href="/products/flight-controller/1">View Flight Controllers</NavDropdown.Item>
+                  <NavDropdown.Item href="/add-flight-controller">Add Flight Controller</NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="Merchants">
+                  <NavDropdown.Item href="/merchants">View Merchants</NavDropdown.Item>
+                  <NavDropdown.Item href="/add-merchant">Add Merchant</NavDropdown.Item>
+                </NavDropdown>
+              </React.Fragment>
+            ) : (
+              <Nav.Link href="/products/flight-controller/1">Flight Controllers</Nav.Link>
+            )}
+
+
 
           </Nav>
           <Nav>
