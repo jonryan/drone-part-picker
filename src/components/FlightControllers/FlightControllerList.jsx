@@ -157,7 +157,6 @@ class FlightControllerList extends Component {
                   ? (this.props.match.params.page - 1) * LINKS_PER_PAGE
                   : 0
 
-
                 return (
                   <React.Fragment>
                     {viewMode === 'card' && (

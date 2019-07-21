@@ -10,42 +10,42 @@ let _ = require('underscore')
 
 
 const FC_MUTATION = gql`
-    mutation addFlightController($flightController: AddFlightControllerInput!){
-        addFlightController(flightController: $flightController){
-            name
-            disabled
-            releaseDate
-            uarts
-            gyroOne
-            gyroTwo
-            weightInGrams
-            cpu
-            dimensions
-            description
-            holePattern
-            onBoardFlash
-            voltageInputMin
-            voltageInputMax
-            osd
-            threeVoltOutput
-            fiveVoltOutput
-            eightVoltOutput
-            nineVoltOutput
-            cameraControl
-            pdb
-            barometer
-            spektrumPort
-            ledWS2812Support
-            beeperOnBoard
-            antiVibrationGrommets
-            builtInReceiver
-            sdCardSlot
-            fourInOneConnector
-            currentSensorRating
-            maxCurrent
-            holeSize
-        }
+  mutation addFlightController($flightController: AddFlightControllerInput!){
+    addFlightController(flightController: $flightController){
+      name
+      disabled
+      releaseDate
+      uarts
+      gyroOne
+      gyroTwo
+      weightInGrams
+      cpu
+      dimensions
+      description
+      holePattern
+      onBoardFlash
+      voltageInputMin
+      voltageInputMax
+      osd
+      threeVoltOutput
+      fiveVoltOutput
+      eightVoltOutput
+      nineVoltOutput
+      cameraControl
+      pdb
+      barometer
+      spektrumPort
+      ledWS2812Support
+      beeperOnBoard
+      antiVibrationGrommets
+      builtInReceiver
+      sdCardSlot
+      fourInOneConnector
+      currentSensorRating
+      maxCurrent
+      holeSize
     }
+  }
 `
 
 class AddFlightController extends Component {
@@ -58,30 +58,33 @@ class AddFlightController extends Component {
       <Mutation mutation={FC_MUTATION}>
         {addFlightController => (
           <Page title="Flight Controller Edit" className="editor-page">
-            <h1>Add New Flight Controller</h1>
-            <FlightControllerForm
-              fc={{
+            <Container>
+              <h1 className='mt-4'>Add New Flight Controller</h1>
+              <FlightControllerForm
+                fc={{
 
-              }}
-              onSubmit={async (values, { setSubmitting, setErrors }) => {
-                console.log("values", values)
+                }}
+                onSubmit={async (values, { setSubmitting, setErrors }) => {
+                  console.log("values", values)
 
 
-                values = DataUtils.cleansFlightControllerInput(values)
-                const { data } = await addFlightController({ variables: { flightController: values } })
+                  values = DataUtils.cleansFlightControllerInput(values)
+                  const { data } = await addFlightController({ variables: { flightController: values } })
 
-                console.log('data', data)
-                setSubmitting(false)
-                // TODO: Get errors coming back from API in errors prop so they'll be picked up here
-                // setErrors(transformGraphQLErrors(data.addFlightController.errors))
-                // if (!_.isEmpty(data.addFlightController.errors)) return
+                  console.log('data', data)
+                  setSubmitting(false)
+                  // TODO: Get errors coming back from API in errors prop so they'll be picked up here
+                  // setErrors(transformGraphQLErrors(data.addFlightController.errors))
+                  // if (!_.isEmpty(data.addFlightController.errors)) return
 
-                // TODO: Figure out how to do this with the returne from my graphQL response
-                // const slug = _.get(data, 'createArticle.article.slug')
-                // history.push(`/flightcontroller/${slug}`)
-                history.push(`/products/flight-controller/1`)
-              }}
-            />
+                  // TODO: Figure out how to do this with the returne from my graphQL response
+                  // const slug = _.get(data, 'createArticle.article.slug')
+                  // history.push(`/flightcontroller/${slug}`)
+                  history.push(`/products/flight-controller/1`)
+                }}
+              />
+
+            </Container>
           </Page>
         )}
       </Mutation>
