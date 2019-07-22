@@ -25,7 +25,7 @@ class AddMerchant extends Component {
     return (
       <Mutation mutation={MERCHANT_MUTATION}>
           {AddMerchant => (
-            <Page title="Flight Controller Edit" className="editor-page">
+            <Page title="Merchant Add/Edit" className="editor-page">
               <h1>Add a Merchant</h1>
               <MerchantForm
                 onSubmit={async (values, { setSubmitting, setErrors }) => {

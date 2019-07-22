@@ -8,7 +8,25 @@ import FlightController from './FlightController.jsx';
 import {Container, Row, Col, Card, Table,} from 'react-bootstrap'
 import FlightControllerCard from "./FlightControllerCard";
 import FlightControllerFiltersForm from './FlightControllerFiltersForm.jsx';
+import styled, { createGlobalStyle } from 'styled-components/macro'
+
 const _ = require('underscore')
+
+
+const FiltersSidebar = styled.div`
+    width: 400px;
+    border-right: 1px solid rgb(226, 226, 226);
+    padding: 20px;
+    
+    h5{
+      border-bottom: 1px solid #e2e2e2;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+    
+`
+
+
 
 export const FC_LIST_QUERY  = gql`
     query flightControllerFilter($flightControllerFilter: FlightControllerFilter!){
@@ -62,7 +80,7 @@ class FlightControllerList extends Component {
 
     this.state = {
       flightControllerFilter: {},
-      viewMode: 'table',
+      viewMode: 'card',
     }
   }
 
@@ -115,33 +133,40 @@ class FlightControllerList extends Component {
   render() {
 
     const {viewMode} = this.state
+
     return (
-      <Page title="Add Merchant" className="editor-page">
+      <Page title="View Flight Controllers" className="editor-page">
         <Container fluid className={'mt-4'}>
           <Row>
             <Col md={'auto'}>
-              <Card style={{width: 400}}>
-                <Card.Header as="h5">Filters</Card.Header>
-                <Card.Body>
+              <FiltersSidebar>
+                <h5>Filters:</h5>
+                <div>
                   <FlightControllerFiltersForm
                     submitCB={this._updateFilters}
                   />
-                </Card.Body>
-              </Card>
+                </div>
+              </FiltersSidebar>
             </Col>
 
             <Col>
               <Row className='mb-5'>
                 <Col sm={12}>
-  <div className={'float-right'}>
-                  <span onClick={()=>this.setState({viewMode: 'table'})}>
-                    Table View
-                  </span>
-                <span className='m-3'>|</span>
-                  <span onClick={()=>this.setState({viewMode: 'card'})}>
-                    Card View
-                  </span>
-                </div>
+                  <div className={'float-right'}>
+                    <a
+                      href='#'
+                      className={(viewMode !== 'table' ? 'text-muted cursor-pointer' : 'text-primary')}
+                      onClick={()=>this.setState({viewMode: 'table'})}>
+                      Table View
+                    </a>
+                  <span className='m-3'>|</span>
+                    <a
+                      href='#'
+                      className={(viewMode !== 'card' ? 'text-muted cursor-pointer' : 'text-primary')}
+                      onClick={()=>this.setState({viewMode: 'card'})}>
+                      Card View
+                    </a>
+                  </div>
                 </Col>
               </Row>
 
@@ -162,7 +187,7 @@ class FlightControllerList extends Component {
                     {viewMode === 'card' && (
                         <Row>
                           {FCs.map((fc, index) => (
-                            <Col sm={1} md={6} lg={4} key={index}>
+                            <Col sm={1} md={6} lg={3} key={index}>
                               <FlightControllerCard
                                 fc={fc}
                                 key={index}

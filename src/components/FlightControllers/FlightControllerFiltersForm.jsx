@@ -7,6 +7,14 @@ import FlightControllerSizeDropdown from './Inputs/FlightControllerSizeDropdown.
 import CheckboxFormInput from '../CheckboxFormInput.jsx';
 import _ from 'underscore';
 import ReceiverProtocolDropdown from './Inputs/ReceiverProtocolDropdown.jsx';
+import styled, { createGlobalStyle } from 'styled-components/macro'
+
+
+const OutlineButton = styled.button`
+  border: 1px solid grey;
+  width: 100%;
+  padding: 10px;
+`
 
 class FlightControllerFiltersForm extends Component {
 
@@ -195,9 +203,9 @@ class FlightControllerFiltersForm extends Component {
               <ReceiverProtocolDropdown/>
 
               {errors.minUarts && touched.minUarts && errors.minUarts}
-              <button type="submit" disabled={isSubmitting}>
+              <OutlineButton type="submit" disabled={isSubmitting}>
                 Submit
-              </button>
+              </OutlineButton>
             </form>
           )}
         </Formik>
