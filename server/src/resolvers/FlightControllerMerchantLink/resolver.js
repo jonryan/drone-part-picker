@@ -37,8 +37,9 @@ const resolver = {
 
       if(args.flightControllerMerchantLink.id){
         // EDIT EXISTING
-        const productFound = await context.prisma.flightControllerMerchantLink({ id: args.flightControllerMerchantLink.id })
-        if (productFound) {
+        const merchantLinkFound = await context.prisma.flightControllerMerchantLink({ id: args.flightControllerMerchantLink.id })
+        console.log("merchantLinkFound", merchantLinkFound)
+        if (merchantLinkFound) {
           return context.prisma.updateFlightControllerMerchantLink({
             data: {
               url: args.flightControllerMerchantLink.url,
@@ -56,6 +57,16 @@ const resolver = {
 
       }else{
         // ADD NEW
+        const objToSave = {
+          url: args.flightControllerMerchantLink.url,
+          price: args.flightControllerMerchantLink.price,
+          inStock: args.flightControllerMerchantLink.inStock,
+          postedBy: { connect: { id: userId } },
+          flightController: { connect: { id: args.flightControllerMerchantLink.flightControllerId } },
+          merchant: { connect: { id: args.flightControllerMerchantLink.merchantId } },
+        }
+        console.log('add new', objToSave)
+
         return context.prisma.createFlightControllerMerchantLink({
           url: args.flightControllerMerchantLink.url,
           price: args.flightControllerMerchantLink.price,

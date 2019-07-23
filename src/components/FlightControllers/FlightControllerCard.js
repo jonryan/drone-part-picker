@@ -12,6 +12,7 @@ const FlightControllerCardContainer = styled.div`
   background-color: white;
   margin-bottom: 25px;
   box-shadow: 0px 1px 7px #e6e6e6;
+  cursor: pointer;
 `
 
 
@@ -34,6 +35,7 @@ const RatingIndicator = styled.span`
   padding: 2px 10px;
   border-radius: 12px;
   color: white;
+  white-space: nowrap;
   
   ::after {
     content: ' ★';
@@ -42,11 +44,13 @@ const RatingIndicator = styled.span`
 const SmallMutedText = styled.span`
   font-size: 15px;
   color: #c1c1c1;
+  white-space: nowrap;
 `
 
 const Price = styled.h5`
     font-size: 18px;
     font-weight: bold;
+    white-space: nowrap;
 `
 
 const Heart = styled.div`
@@ -95,6 +99,7 @@ const Badge = styled.div`
     left: -10px;
     box-shadow: 1px 1px 5px #bdbdbd;
     padding: 0;
+    max-width: 71%;
     
     .underEdge{
       position: absolute;
@@ -121,15 +126,26 @@ const Badge = styled.div`
 `
 
 const productImage = require('./fc.jpg')
-require('./FlightControllerCard.scss')
 
 class FlightControllerCard extends Component {
+
+  constructor(props) {
+    super(props);
+
+
+  }
+
+
+  goToFlightController(){
+    window.location = `/flight-controller/${this.props.fc.id}`
+  }
+
   render() {
 
     let {fc, filters} = this.props;
 
     return (
-      <FlightControllerCardContainer className={'card'}>
+      <FlightControllerCardContainer className={'card'} onClick={()=> this.goToFlightController()}>
         <Badge blue>
           <div className="underEdge"></div>
           New!

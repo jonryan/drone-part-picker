@@ -13,6 +13,7 @@ import EditFlightController from './EditFlightController.jsx';
 import AddMerchant from "./Merchant/AddMerchant";
 import ViewMerchants from "./Merchant/ViewMerchants";
 import EditMerchant from "./Merchant/EditMerchant";
+import ViewFlightController from './FlightControllers/FlightControllerPage.js'
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <Route exact path='/products/flight-controller/:page' component={FlightControllerList } />
           <Route exact path='/add-flight-controller' component={AddFlightController } />
           <Route exact path='/edit-flight-controller/:fc' component={EditFlightController } />
+          <Route exact path='/flight-controller/:fc' component={ViewFlightController } />
           <Route exact path='/add-merchant' component={AddMerchant } />
           <Route exact path='/merchants' component={ViewMerchants } />
           <Route exact path='/edit-merchant/:merchant' component={EditMerchant } />
