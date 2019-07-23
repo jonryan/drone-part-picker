@@ -6,6 +6,7 @@ import {Field, Formik} from 'formik'
 import gql from 'graphql-tag'
 import {Mutation, Query} from 'react-apollo'
 import {GET_FLIGHTCONTROLLER} from '../EditFlightController'
+import MerchantSelector from './MerchantSelector.js';
 const _ = require('underscore')
 
 const CheckboxInput = (props) => (
@@ -77,17 +78,11 @@ class ProductMerchantForm extends Component {
                     }}>
                       <fieldset disabled={isSubmitting}>
                         <Modal.Body>
-                          <Form.Group controlId="Price">
+                          <Form.Group controlId="MerchantID">
                             <Form.Label>Merchant ID</Form.Label>
-                            <Field
-                              name="merchantId"
-                              type="text"
-                              autoComplete='off'
-                              className="form-control"
-                              placeholder=""
-                              required
-                            />
+                            <MerchantSelector/>
                           </Form.Group>
+
                           <Form.Group controlId="Price">
                             <Form.Label>Price</Form.Label>
                             <Field
