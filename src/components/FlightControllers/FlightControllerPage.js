@@ -7,6 +7,7 @@ import FlightControllerCard from './FlightControllerList.jsx';
 import styled, { createGlobalStyle } from 'styled-components/macro'
 import {Link} from 'react-router-dom'
 import {AUTH_TOKEN} from '../../constants.js'
+import BoardDimensionsDisplay from './BoardDimensionsDisplay.jsx';
 
 let moment = require('moment')
 const authToken = localStorage.getItem(AUTH_TOKEN)
@@ -146,13 +147,13 @@ const WhereToBuyList = ({links}) => {
                 </Row>
               </ListGroup.Item>
             ))}
-            <ListGroup.Item>
+            <ListGroup.Item className='text-center'>
               <a href="#">🤔 Tell us if we're missing a Merchant or if something is incorrect</a>
             </ListGroup.Item>
           </ListGroup>
         )}
         {links.length < 1 && (
-          <h5>🤔 No Prices added yet, <a href="#">Tell us if we're missing one!</a></h5>
+          <h5 className='text-center'>🤔 No Prices added yet, <a href="#">Tell us if we're missing one!</a></h5>
         )}
       </Card.Body>
     </Card>
@@ -239,8 +240,8 @@ class ViewFlightController extends Component {
                         <Card.Title>Size & Weight</Card.Title>
                         <ListGroup variant="flush" className='mb-5'>
                           <ListGroup.Item>Weight: {flightController.uarts}g</ListGroup.Item>
-                          <ListGroup.Item>Mounting Holes: {flightController.holeSize} </ListGroup.Item>
-                          <ListGroup.Item>Hole Pattern: {flightController.holePattern}</ListGroup.Item>
+                          <ListGroup.Item>Mounting Hole Size: {flightController.holeSize} </ListGroup.Item>
+                          <ListGroup.Item>Hole Pattern: <BoardDimensionsDisplay size={flightController.holePattern}/></ListGroup.Item>
                           <ListGroup.Item>Board Dimensions: {flightController.dimensions}</ListGroup.Item>
                         </ListGroup>
                         <Card.Title>Voltages</Card.Title>

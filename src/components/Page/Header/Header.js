@@ -15,7 +15,7 @@ class Header extends Component {
 
     return (
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">Drone Part Picker</Navbar.Brand>
+        <Navbar.Brand href="/">Drone Part Picker</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         {/* TODO: Incorporate the MENU here*/}
         <Navbar.Collapse id="basic-navbar-nav">
