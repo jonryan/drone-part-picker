@@ -8,6 +8,8 @@ import {Link} from 'react-router-dom'
 import {AUTH_TOKEN} from '../../constants.js'
 import BoardDimensionsDisplay from './BoardDimensionsDisplay.jsx';
 import {RatingIndicator, InStock} from '../StyledComponents/StoreComponents.js';
+import CustomBreadcrumb from '../CustomBreadcrumb.js';
+import LoadingIndicatorCentered from '../LoadingIndicatorCentered.js';
 
 let moment = require('moment')
 const authToken = localStorage.getItem(AUTH_TOKEN)
@@ -135,11 +137,10 @@ class ViewFlightController extends Component {
     return (
       <Page title="Flight Controller" className="editor-page">
 
-
-        <Container className='mt-5'>
+        <Container>
             <Query query={GET_FLIGHTCONTROLLER} variables={{id: fc}}>
               {({ loading, error, data }) => {
-                if (loading) return <div>Fetching</div>
+                if (loading) return <LoadingIndicatorCentered/>
                 if (error) return <div>Error</div>
 
                 console.log('data.getFlightController.releaseDate', data.getFlightController.releaseDate);
@@ -151,6 +152,17 @@ class ViewFlightController extends Component {
 
                 return (
                   <React.Fragment>
+                    <CustomBreadcrumb
+                      links={[
+                        {
+                          name: 'Flight Controllers',
+                          url: '/products/flight-controller/1',
+                        },{
+                          name: flightController.name
+                        }
+                      ]}
+                    />
+
                     {authToken && (
                       <div className="">
                         <Link to={`/edit-flight-controller/${flightController.id}`}>

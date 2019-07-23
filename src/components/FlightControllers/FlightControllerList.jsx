@@ -9,7 +9,8 @@ import {Container, Row, Col, Table, Form} from 'react-bootstrap'
 import FlightControllerCard from "./FlightControllerCard";
 import FlightControllerFiltersForm from './FlightControllerFiltersForm.jsx';
 import styled from 'styled-components/macro'
-import { BeatLoader } from 'react-spinners';
+import LoadingIndicatorCentered from '../LoadingIndicatorCentered.js';
+
 
 const _ = require('underscore')
 
@@ -185,13 +186,7 @@ class FlightControllerList extends Component {
 
                 console.log('error', error, data);
                 if (loading) return (
-                  <div className={'text-center mt-5'}>
-                    <BeatLoader
-                      sizeUnit={"px"}
-                      size={18}
-                      color={'#007bff'}
-                    />
-                  </div>
+                  <LoadingIndicatorCentered/>
                 )
                 if (error) return (
                   <div

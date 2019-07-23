@@ -65,8 +65,6 @@ const Heart = styled.div`
 `
 
 const Badge = styled.div`
-    
-     
     background: ${
       props => {
         if (props.green) {
@@ -106,19 +104,19 @@ const Badge = styled.div`
       height: 8px;
       width: 8px;
       background: ${
-  props => {
-    if (props.green) {
-      return 'linear-gradient(229deg,#5a926a 50%,rgba(90,146,106,0) 50.1%);';
+        props => {
+          if (props.green) {
+            return 'linear-gradient(229deg,#5a926a 50%,rgba(90,146,106,0) 50.1%);';
+          }
+          else if (props.gold) {
+            return 'linear-gradient(229deg,#6d5812 50%,rgba(90,146,106,0) 50.1%); ';
+          }
+          else if (props.blue) {
+            return 'linear-gradient(229deg,#274c62 50%,rgba(90,146,106,0) 50.1%);';
+          }
+        }
+      }; 
     }
-    else if (props.gold) {
-      return 'linear-gradient(229deg,#6d5812 50%,rgba(90,146,106,0) 50.1%); ';
-    }
-    else if (props.blue) {
-      return 'linear-gradient(229deg,#274c62 50%,rgba(90,146,106,0) 50.1%);';
-    }
-  }
-  }; 
-      }
 `
 
 const productImage = require('./fc.jpg')

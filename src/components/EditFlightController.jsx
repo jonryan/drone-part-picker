@@ -5,6 +5,7 @@ import Page from '../components/Page'
 import FlightControllerForm from './FlightControllers/FlightControllerForm.jsx'
 import _ from 'underscore'
 import {DataUtils} from '../DataUtils.js';
+import LoadingIndicatorCentered from './LoadingIndicatorCentered.js';
 
 let moment = require('moment')
 
@@ -129,7 +130,7 @@ class EditFlightController extends Component {
         <h1>Edit Flight Controller</h1>
         <Query query={GET_FLIGHTCONTROLLER} variables={{id: fc}}>
           {({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>
+            if (loading) return <LoadingIndicatorCentered/>
             if (error) return <div>Error</div>
 
             console.log('data.getFlightController.releaseDate', data.getFlightController.releaseDate);
