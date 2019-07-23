@@ -5,10 +5,11 @@ import { Query } from 'react-apollo'
 import Page from '../Page'
 import {LINKS_PER_PAGE} from '../../constants.js';
 import FlightController from './FlightController.jsx';
-import {Container, Row, Col, Card, Table,} from 'react-bootstrap'
+import {Container, Row, Col, Table, Form} from 'react-bootstrap'
 import FlightControllerCard from "./FlightControllerCard";
 import FlightControllerFiltersForm from './FlightControllerFiltersForm.jsx';
-import styled, { createGlobalStyle } from 'styled-components/macro'
+import styled from 'styled-components/macro'
+import { BeatLoader } from 'react-spinners';
 
 const _ = require('underscore')
 
@@ -150,22 +151,31 @@ class FlightControllerList extends Component {
             </Col>
 
             <Col>
-              <Row className='mb-5'>
+              <Row className='mb-3'>
                 <Col sm={12}>
-                  <div className={'float-right'}>
+                  <div className={'float-left'}>
                     <a
                       href='#'
                       className={(viewMode !== 'table' ? 'text-muted cursor-pointer' : 'text-primary')}
                       onClick={()=>this.setState({viewMode: 'table'})}>
-                      Table View
+                      <i className="fas fa-th-list" style={{fontSize: 20}}></i>
                     </a>
-                  <span className='m-3'>|</span>
+                  <span className='m-2' style={{fontSize: 25}}>|</span>
                     <a
                       href='#'
                       className={(viewMode !== 'card' ? 'text-muted cursor-pointer' : 'text-primary')}
                       onClick={()=>this.setState({viewMode: 'card'})}>
-                      Card View
+                      <i className="fas fa-th" style={{fontSize: 20}}></i>
                     </a>
+                  </div>
+                  <div className="float-right">
+                    <Form.Control as="select" size='sm'>
+                      <option value="">--- Sort By ---</option>
+                      <option>Newest Added</option>
+                      <option>Lowest Price</option>
+                      <option>Highest Price</option>
+                      <option>Most Popular</option>
+                    </Form.Control>
                   </div>
                 </Col>
               </Row>
@@ -174,8 +184,22 @@ class FlightControllerList extends Component {
               {({ loading, error, data, subscribeToMore }) => {
 
                 console.log('error', error, data);
-                if (loading) return <div>Fetching</div>
-                if (error) return <div>Error</div>
+                if (loading) return (
+                  <div className={'text-center mt-5'}>
+                    <BeatLoader
+                      sizeUnit={"px"}
+                      size={18}
+                      color={'#007bff'}
+                    />
+                  </div>
+                )
+                if (error) return (
+                  <div
+                    className={'text-center mt-5'}
+                  >
+                    Error: {error}
+                  </div>
+                )
 
                 const FCs = this._getFCsToRender(data)
                 const pageIndex = this.props.match.params.page

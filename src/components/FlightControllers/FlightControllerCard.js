@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import {Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import StarRatingComponent from 'react-star-rating-component';
 import {getLowestPrice} from "../../utils";
 
-import styled, { createGlobalStyle } from 'styled-components/macro'
-import FlightControllerForm from "./FlightControllerForm";
+import styled from 'styled-components/macro'
 
 const FlightControllerCardContainer = styled.div`
   border: 1px solid #ececec;
@@ -14,8 +12,6 @@ const FlightControllerCardContainer = styled.div`
   box-shadow: 0px 1px 7px #e6e6e6;
   cursor: pointer;
 `
-
-
 
 const CardDetailsContainer = styled.div`
   padding: 5px 20px;

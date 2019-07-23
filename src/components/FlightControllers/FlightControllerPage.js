@@ -1,64 +1,16 @@
 import React, {Component} from 'react';
 import gql from 'graphql-tag'
 import {Container, Row, Col, ListGroup, Card, Button, } from 'react-bootstrap'
-import {Mutation, Query} from 'react-apollo'
+import {Query} from 'react-apollo'
 import Page from '../../components/Page'
-import FlightControllerCard from './FlightControllerList.jsx';
-import styled, { createGlobalStyle } from 'styled-components/macro'
+import styled from 'styled-components/macro'
 import {Link} from 'react-router-dom'
 import {AUTH_TOKEN} from '../../constants.js'
 import BoardDimensionsDisplay from './BoardDimensionsDisplay.jsx';
+import {RatingIndicator, InStock} from '../StyledComponents/StoreComponents.js';
 
 let moment = require('moment')
 const authToken = localStorage.getItem(AUTH_TOKEN)
-
-const RatingIndicator = styled.span`
-  background: #f6c57d;
-  padding: 2px 10px;
-  border-radius: 12px;
-  color: white;
-  white-space: nowrap;
-  
-  ::after {
-    content: ' ★';
-  }
-`
-
-const InStock = styled.span`
-  background: ${
-    props => {
-      if (!props.inStock) {
-        return '#820500';
-      }
-      else{
-        return '#00620c';
-      }
-    }
-  };
-  padding: 2px 10px;
-  border-radius: 12px;
-  color: white;
-  width: 111px;
-  white-space: nowrap;
-  font-size: 12px;
-  width: 92px;
-  display: inline-block;
-  text-align: center;
-  
-  &:after {
-    content: ${
-      props => {
-        if (!props.inStock) {
-          return '"Out of Stock"';
-        }
-        else{
-          return '"In Stock"';
-        }
-      }
-    };
-  }
-`
-
 
 export const GET_FLIGHTCONTROLLER = gql`
     query getFlightController($id: ID!){

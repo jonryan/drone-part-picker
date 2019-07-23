@@ -7,7 +7,8 @@ import FlightControllerSizeDropdown from './Inputs/FlightControllerSizeDropdown.
 import CheckboxFormInput from '../CheckboxFormInput.jsx';
 import _ from 'underscore';
 import ReceiverProtocolDropdown from './Inputs/ReceiverProtocolDropdown.jsx';
-import styled, { createGlobalStyle } from 'styled-components/macro'
+import styled from 'styled-components/macro'
+import TooltipOsd from '../Tooltips/TooltipOSD.js';
 
 
 const OutlineButton = styled.button`
@@ -125,12 +126,14 @@ class FlightControllerFiltersForm extends Component {
               </Form.Group>
 
               <div className="form-check">
-                <CheckboxFormInput
-                  name='osd'
-                  id='osd'
-                  className="form-check-input"
-                  label='Built-in OSD'
-                />
+                <TooltipOsd>
+                  <CheckboxFormInput
+                    name='osd'
+                    id='osd'
+                    className="form-check-input"
+                    label='Built-in OSD'
+                  />
+                </TooltipOsd>
               </div>
 
               <div className="form-check">
