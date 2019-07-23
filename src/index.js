@@ -17,6 +17,7 @@ import {AUTH_TOKEN} from './constants.js';
 import { split } from 'apollo-link'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
+require("@fortawesome/fontawesome-free/js/all.js")
 
 // const graphQLServerPath = 'prism-Publi-1NX25XXJPKTRC-1994595457.us-east-1.elb.amazonaws.com'
 const graphQLServerPath = 'localhost:4000'
