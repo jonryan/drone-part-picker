@@ -204,38 +204,38 @@ class ViewFlightController extends Component {
                         <Card.Title>Size & Weight</Card.Title>
                         <ListGroup variant="flush" className='mb-5'>
                           <ListGroup.Item>Weight: {flightController.uarts}g</ListGroup.Item>
-                          <ListGroup.Item>Mounting Hole Size: {flightController.holeSize} </ListGroup.Item>
+                          <ListGroup.Item>Mounting Hole Size: {flightController.holeSize ? flightController.holeSize : 'Unknown'} </ListGroup.Item>
                           <ListGroup.Item>Hole Pattern: <BoardDimensionsDisplay size={flightController.holePattern}/></ListGroup.Item>
-                          <ListGroup.Item>Board Dimensions: {flightController.dimensions}</ListGroup.Item>
+                          <ListGroup.Item>Board Dimensions: {flightController.dimensions ? `${flightController.dimensions}mm` : ''}</ListGroup.Item>
                         </ListGroup>
                         <Card.Title>Voltages</Card.Title>
                         <ListGroup variant="flush" className='mb-5'>
-                          <ListGroup.Item>Minimum Voltage In: {flightController.voltageInputMin}</ListGroup.Item>
-                          <ListGroup.Item>Maximum Voltage In: {flightController.voltageInputMax}</ListGroup.Item>
-                          <ListGroup.Item>3V Output: {flightController.threeVoltOutput ? (<span>{flightController.threeVoltOutput} Amps</span>) : (<span>👎</span>)}</ListGroup.Item>
-                          <ListGroup.Item>5V Output: {flightController.fiveVoltOutput ? (<span>{flightController.fiveVoltOutput} Amps</span>) : (<span>👎</span>)}</ListGroup.Item>
-                          <ListGroup.Item>8V Output: {flightController.eightVoltOutput ? (<span>{flightController.eightVoltOutput} Amps</span>) : (<span>👎</span>)}</ListGroup.Item>
-                          <ListGroup.Item>9V Output: {flightController.nineVoltOutput ? (<span>{flightController.nineVoltOutput} Amps</span>) : (<span>👎</span>)}</ListGroup.Item>
+                          <ListGroup.Item>Minimum Voltage In: {flightController.voltageInputMin}v</ListGroup.Item>
+                          <ListGroup.Item>Maximum Voltage In: {flightController.voltageInputMax}v</ListGroup.Item>
+                          <ListGroup.Item>3V Output: {flightController.threeVoltOutput ? (<span>{flightController.threeVoltOutput} Amps</span>) : (<span>❌</span>)}</ListGroup.Item>
+                          <ListGroup.Item>5V Output: {flightController.fiveVoltOutput ? (<span>{flightController.fiveVoltOutput} Amps</span>) : (<span>❌</span>)}</ListGroup.Item>
+                          <ListGroup.Item>8V Output: {flightController.eightVoltOutput ? (<span>{flightController.eightVoltOutput} Amps</span>) : (<span>❌</span>)}</ListGroup.Item>
+                          <ListGroup.Item>9V Output: {flightController.nineVoltOutput ? (<span>{flightController.nineVoltOutput} Amps</span>) : (<span>❌</span>)}</ListGroup.Item>
                           <ListGroup.Item>PDB: {flightController.pdb ? (<span>✅</span>) : (<span>❌</span>)}</ListGroup.Item>
-                          <ListGroup.Item>PDB Max Current Rating: {flightController.pdb ? (<span>{flightController.maxCurrent}</span>) : (<span>n/a</span>)}</ListGroup.Item>
+                          <ListGroup.Item>PDB Max Current Rating: {flightController.pdb ? (<span>{flightController.maxCurrent ? flightController.maxCurrent : 'Unknown'}</span>) : (<span>n/a</span>)}</ListGroup.Item>
                         </ListGroup>
                         <Card.Title>Hardware</Card.Title>
                         <ListGroup variant="flush" className='mb-5'>
-                          <ListGroup.Item>CPU: {flightController.cpu}</ListGroup.Item>
-                          <ListGroup.Item>Primary Gyro: {flightController.gyroOne}</ListGroup.Item>
-                          <ListGroup.Item>Secondary Gyro: {flightController.gyroTwo ? flightController.gyroTwo : 'n/a'}</ListGroup.Item>
+                          <ListGroup.Item>CPU: {flightController.cpu ? flightController.cpu : 'Unknown'}</ListGroup.Item>
+                          <ListGroup.Item>Primary Gyro: {flightController.gyroOne ? flightController.gyroOne : 'Unknown'}</ListGroup.Item>
+                          <ListGroup.Item>Secondary Gyro: {flightController.gyroTwo ? flightController.gyroTwo : (<span>❌</span>)}</ListGroup.Item>
                           <ListGroup.Item># of UARTS:  {flightController.uarts}</ListGroup.Item>
-                          <ListGroup.Item>Barometer:  {flightController.barometer}</ListGroup.Item>
+                          <ListGroup.Item>Barometer:  {flightController.barometer ? flightController.barometer : (<span>❌</span>)}</ListGroup.Item>
                           <ListGroup.Item>Built-in Receiver:  {flightController.builtInReceiver}</ListGroup.Item>
-                          <ListGroup.Item>Built-In OSD:  {flightController.osd ? '✅' : ''}</ListGroup.Item>
+                          <ListGroup.Item>Built-In OSD:  {flightController.osd ? '✅' : (<span>❌</span>)}</ListGroup.Item>
                           <ListGroup.Item>Spektrum Satellite Port:  {flightController.spektrumPort ? '✅' : ''}</ListGroup.Item>
-                          <ListGroup.Item>LED WS2812 Support:  {flightController.ledWS2812Support ? '✅' : ''}</ListGroup.Item>
-                          <ListGroup.Item>On-Board Beeper:  {flightController.beeperOnBoard ? '✅' : ''}</ListGroup.Item>
-                          <ListGroup.Item>4-in-1 Connector:  {flightController.fourInOneConnector ? '✅' : ''}</ListGroup.Item>
-                          <ListGroup.Item>Built-In Camera Control:  {flightController.cameraControl ? '✅' : ''}</ListGroup.Item>
-                          <ListGroup.Item>SD-Card Slot:  {flightController.sdCardSlot ? '✅' : ''}</ListGroup.Item>
-                          <ListGroup.Item>On-Board Flash: {flightController.onBoardFlash}</ListGroup.Item>
-                          <ListGroup.Item>Anti-Vibration Grommets:  {flightController.antiVibrationGrommets ? '✅' : ''}</ListGroup.Item>
+                          <ListGroup.Item>LED WS2812 Support:  {flightController.ledWS2812Support ? '✅' :  (<span>❌</span>)}</ListGroup.Item>
+                          <ListGroup.Item>On-Board Beeper:  {flightController.beeperOnBoard ? '✅' :  (<span>❌</span>)}</ListGroup.Item>
+                          <ListGroup.Item>4-in-1 Connector:  {flightController.fourInOneConnector ? '✅' :  (<span>❌</span>)}</ListGroup.Item>
+                          <ListGroup.Item>Built-In Camera Control:  {flightController.cameraControl ? '✅' :  (<span>❌</span>)}</ListGroup.Item>
+                          <ListGroup.Item>SD-Card Slot:  {flightController.sdCardSlot ? '✅' :  (<span>❌</span>)}</ListGroup.Item>
+                          <ListGroup.Item>On-Board Flash: {flightController.onBoardFlash ? flightController.onBoardFlash :  (<span>❌</span>)}</ListGroup.Item>
+                          <ListGroup.Item>Anti-Vibration Grommets:  {flightController.antiVibrationGrommets ? '✅' :  (<span>❌</span>)}</ListGroup.Item>
                         </ListGroup>
                       </Card.Body>
 
