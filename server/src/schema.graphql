@@ -109,11 +109,11 @@ input FlightControllerFilter{
     releaseDateAfter: DateTime
     voltageInputMin: Float
     voltageInputMax: Float
+    gyroOne: Gyro
     spektrumPort: Boolean
     ledWS2812Support: Boolean
     osd: Boolean
     barometer: Baro
-    threeVoltOutput: Float
     cameraControl: Boolean
     holePattern: HolePattern
     beeperOnBoard: Boolean
@@ -121,9 +121,10 @@ input FlightControllerFilter{
     builtInReceiver: ReceiverProtocol
     pdb: Boolean
     cpu: CPU
-    fiveVoltOutput: Float
-    eightVoltOutput: Float
-    nineVoltOutput: Float
+    threeVoltOutput: Boolean
+    fiveVoltOutput: Boolean
+    eightVoltOutput: Boolean
+    nineVoltOutput: Boolean
     onBoardFlash: Int
     sdCardSlot: Boolean
     fourInOneConnector: Boolean

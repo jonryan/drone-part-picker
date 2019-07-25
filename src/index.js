@@ -21,6 +21,8 @@ require("@fortawesome/fontawesome-free/js/all.js")
 
 // const graphQLServerPath = 'prism-Publi-1NX25XXJPKTRC-1994595457.us-east-1.elb.amazonaws.com'
 const graphQLServerPath = 'localhost:4000'
+// const graphQLServerPath = '172.31.9.203' //PrivateIP
+// const graphQLServerPath = '54.161.30.49' //Public IP
 
 const httpLink = createHttpLink({
   uri: `http://${graphQLServerPath}`

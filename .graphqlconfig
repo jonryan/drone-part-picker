@@ -8,7 +8,7 @@
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
-        "url": "http://localhost:4000/",
+        "url": "http://172.31.9.203/",
         "headers": {
           "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjang0MjY3YzJpMTFyMGIxMng0YWxraDQ4IiwiaWF0IjoxNTYwOTk4NDQ4fQ.8K_KfWL_8bDyaYZ3tBZIemvTsJlU9Cbxqy-EH2mIjDs"
         }

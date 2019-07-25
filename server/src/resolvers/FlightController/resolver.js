@@ -75,10 +75,33 @@ const resolver = {
 
       let andFilters = [];
 
+      if(fcFilters.gyroOne){
+        andFilters.push({ OR: [
+            {
+              gyroOne_in: [fcFilters.gyroOne]
+            },{
+              gyroTwo_in: [fcFilters.gyroOne]
+            }
+          ]}
+        )
+      }
+
+      if(fcFilters.threeVoltOutput){
+        andFilters.push({ threeVoltOutput_gt: 0},)
+      }
+      if(fcFilters.fiveVoltOutput){
+        andFilters.push({ fiveVoltOutput_gt: 0},)
+      }
+      if(fcFilters.eightVoltOutput){
+        andFilters.push({ eightVoltOutput_gt: 0},)
+      }
+      if(fcFilters.nineVoltOutput){
+        andFilters.push({ nineVoltOutput_gt: 0},)
+      }
+
       const where = fcFilters ? {
         AND: [
           ...andFilters,
-          { threeVoltOutput: fcFilters.threeVoltOutput},
           { holePattern_in: fcFilters.holePattern},
           { builtInReceiver_in: fcFilters.builtInReceiver },
           { voltageInputMax_gte: fcFilters.voltageInputMax },
@@ -88,10 +111,12 @@ const resolver = {
           { name_contains: fcFilters.name },
           { osd: fcFilters.osd },
           { ledWS2812Support: fcFilters.ledWS2812Support },
-          { barometer: fcFilters.barometer },
+          { barometer_in: fcFilters.barometer },
           { beeperOnBoard: fcFilters.beeperOnBoard },
           { antiVibrationGrommets: fcFilters.antiVibrationGrommets },
           { cameraControl: fcFilters.cameraControl },
+
+
         ]
       } : {}
 

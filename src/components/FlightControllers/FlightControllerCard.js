@@ -5,12 +5,16 @@ import {getLowestPrice} from "../../utils";
 
 import styled from 'styled-components/macro'
 
-const FlightControllerCardContainer = styled.div`
+const FlightControllerCardContainer = styled.a`
   border: 1px solid #ececec;
   background-color: white;
   margin-bottom: 25px;
   box-shadow: 0px 1px 7px #e6e6e6;
   cursor: pointer;
+  
+  &:hover{
+    text-decoration: none;
+  }
 `
 
 const CardDetailsContainer = styled.div`
@@ -20,9 +24,10 @@ const CardDetailsContainer = styled.div`
   h5.card-title{
     color: #7b7b7b;
     font-weight: 300;
-    height: 50px;
+    height: 45px;
     overflow: hidden;
-    line-height: 26px;
+    line-height: 21px;
+    font-size: 16px;
   }
 `
 
@@ -139,7 +144,9 @@ class FlightControllerCard extends Component {
     let {fc, filters} = this.props;
 
     return (
-      <FlightControllerCardContainer className={'card'} onClick={()=> this.goToFlightController()}>
+      <FlightControllerCardContainer
+        href={`/flight-controller/${this.props.fc.id}`}
+        className={'card'}>
         <Badge blue>
           <div className="underEdge"></div>
           New!

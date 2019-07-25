@@ -201,6 +201,14 @@ class FlightControllerList extends Component {
                   ? (this.props.match.params.page - 1) * LINKS_PER_PAGE
                   : 0
 
+                if(!FCs || FCs.length < 1){
+                  return (
+                    <h1 className="text-center">
+                      Sorry, No Results Match Your Search.
+                    </h1>
+                  )
+                }
+
                 return (
                   <React.Fragment>
                     {viewMode === 'card' && (
