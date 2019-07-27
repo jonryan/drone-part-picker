@@ -1,3 +1,10 @@
+## Deployment
+There are 3 main pieces that get deployed
+1. FE - The app is built doing a `yarn build` which populates the `build` directory, that is what is deployed. It is deployed to an Amazon S3 bucket and public routing is turned on to access it directly: http://drone-part-picker.s3-website-us-east-1.amazonaws.com/products/flight-controller/1. 
+2. Node API - This is the `/server` directory and it's deployed an an amazon EC2 Linux AMI. I expose public access to port 80, and thenr un nginx on the box to direct port `80` to port `4000` where the server is set to run at. 
+3. Prisma.io ORM/DB - This was deployed via a CloudFormation template that I got from [this tutorial](https://www.prisma.io/tutorials/deploy-prisma-to-aws-fargate-ct14/). I know that a public URL is exposed and that's what I piont my NodeAPI at. 
+
+
 ## Technologies Involved and Documentation
 ### FE & BE
  * [GraphQL](https://graphql.org/learn/) 
