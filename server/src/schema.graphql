@@ -21,6 +21,7 @@ type Mutation {
         url: String!,
         description: String!
     ): Link!
+    updateUser(user: UserEdit!) : User
     addFlightController(
         flightController: AddFlightControllerInput!
     ) : FlightController
@@ -294,11 +295,19 @@ type User {
     name: String!
     email: String!
     links: [Link!]!
+    role: Role
     flightControllers: [FlightController!]!
     addedMerchants: [Merchant!]!
     editedMerchants: [Merchant!]!
     editedFlightControllers: [Merchant!]!
+}
+
+input UserEdit{
+    id: ID!
+    name: String
     role: Role
+    email: String
+    disabled: Boolean
 }
 
 input UserInput {
