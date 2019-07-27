@@ -111,7 +111,7 @@ const resolver = {
           { name_contains: fcFilters.name },
           { osd: fcFilters.osd },
           { ledWS2812Support: fcFilters.ledWS2812Support },
-          { barometer_in: fcFilters.barometer },
+          // { barometer_not: fcFilters.barometer },
           { beeperOnBoard: fcFilters.beeperOnBoard },
           { antiVibrationGrommets: fcFilters.antiVibrationGrommets },
           { cameraControl: fcFilters.cameraControl },

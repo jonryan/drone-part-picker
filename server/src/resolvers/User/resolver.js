@@ -27,10 +27,27 @@ const resolver = {
 
   Query: {
     async userList(parent, args, context, info){
-
       let users = context.prisma.users()
       console.log('userList', users);
       return {users}
+    },
+    async getUser(parent, args, context, info){
+      const user = await context.prisma.user({ id: args.id })
+      if(user){
+        return user
+      }else{
+        throw new Error(`No User Found by ID: ${args.id}`)
+      }
+    },
+    async me(parent, args, context, info){
+      const userId = getUserId(context)
+      const user = await context.prisma.user({ id: userId })
+
+      if(user){
+        return user
+      }else{
+        return null
+      }
     }
   },
   Mutation: {
