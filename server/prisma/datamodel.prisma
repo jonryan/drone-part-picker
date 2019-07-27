@@ -12,6 +12,8 @@ type User {
     id: ID! @id
     name: String!
     email: String! @unique
+    updatedBy: User @relation(name: "EditedUser")
+    updatedAt: DateTime @updatedAt
     password: String!
     links: [Link!]!
     votes: [Vote!]!
