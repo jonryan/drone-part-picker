@@ -27,7 +27,7 @@ class GyroDropdown extends Component {
           const values = data['__type'].enumValues
 
           return (
-            <Form.Group controlId="builtInReceiver">
+            <Form.Group controlId={this.props.fieldName}>
               <Form.Label>{this.props.displayValue}</Form.Label>
               <fieldset className="form-group">
                 <Field
