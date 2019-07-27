@@ -20,6 +20,7 @@ type User {
     addedMerchants: [Merchant!]! @relation(name: "AddedMerchants")
     editedMerchants: [Merchant!]! @relation(name: "EditedMerchants")
     AddedFlightControllers: [FlightControllerMerchantLink!]! @relation(name: "AddedFlightControllerMerchantLinks")
+    role: Role @default(value: USER)
 }
 
 type Vote{
@@ -133,3 +134,9 @@ enum Baro{
     BMP280
 }
 
+enum Role{
+    USER
+    CONTENTCREATOR
+    ADVANCEDCONTENTCREATOR
+    ADMIN
+}

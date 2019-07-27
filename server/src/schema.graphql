@@ -9,10 +9,11 @@ type Query {
     flightControllerFilter(
         flightControllerFilter: FlightControllerFilter!
     ) : FlightControllerFeed!
+    getUser(id: ID!): User!
     userList: UserList!
     merchantList: MerchantList!
     getMerchant(id: ID!): Merchant!
-    getHolePatternOptions: HolePattern
+    me: User
 }
 
 type Mutation {
@@ -297,12 +298,14 @@ type User {
     addedMerchants: [Merchant!]!
     editedMerchants: [Merchant!]!
     editedFlightControllers: [Merchant!]!
+    role: Role
 }
 
 input UserInput {
     id: ID!
     name: String!
     email: String!
+    role: Role!
 }
 
 enum ReceiverProtocol{
@@ -351,3 +354,10 @@ enum LinkOrderByInput {
     createdAt_DESC
 }
 
+
+enum Role{
+    USER
+    CONTENTCREATOR
+    ADVANCEDCONTENTCREATOR
+    ADMIN
+}
