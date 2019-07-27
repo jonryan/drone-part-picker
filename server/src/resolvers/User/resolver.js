@@ -80,6 +80,33 @@ const resolver = {
         token,
         user,
       }
+    },
+
+    async updateUser(parent, args, context, info){
+      const userId = getUserId(context)
+
+      console.log('args', args)
+      let existingUser = await context.prisma.user({ id: args.user.id })
+
+      console.log('existingUser', existingUser)
+      if(!existingUser){
+        throw new Error('No such User found by that ID')
+      }
+
+      let updatedUser = {
+        ...existingUser,
+        ...args.user,
+        updatedBy: { connect: { id: userId } },
+      };
+      delete updatedUser.id; // Can't have ID
+      delete updatedUser.createdAt; // Can't have ID
+      delete updatedUser.updatedAt; // Can't have ID
+      await context.prisma.updateUser({
+        data: updatedUser,
+        where: {id: existingUser.id}
+      })
+
+      return {...updatedUser, id: existingUser.id};
     }
   }
 }
