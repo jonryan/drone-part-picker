@@ -322,7 +322,11 @@ export type LinkOrderByInput =
 
 export type Gyro = "MPU6000" | "ICM20689";
 
-export type HoleSize = "M3" | "M2";
+export type Role =
+  | "USER"
+  | "CONTENTCREATOR"
+  | "ADVANCEDCONTENTCREATOR"
+  | "ADMIN";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -332,7 +336,27 @@ export type UserOrderByInput =
   | "email_ASC"
   | "email_DESC"
   | "password_ASC"
-  | "password_DESC";
+  | "password_DESC"
+  | "role_ASC"
+  | "role_DESC";
+
+export type HoleSize = "M3" | "M2";
+
+export type MerchantOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "url_ASC"
+  | "url_DESC"
+  | "affiliateId_ASC"
+  | "affiliateId_DESC"
+  | "disabled_ASC"
+  | "disabled_DESC";
 
 export type CPU =
   | "STM32F405"
@@ -346,24 +370,6 @@ export type HolePattern = "SIXTEEN" | "TWENTY" | "THIRTY";
 export type Baro = "BMP388" | "BMP280";
 
 export type ReceiverProtocol = "CROSSFIRE" | "FRSKY" | "FLYSKY" | "SPEKTRUM";
-
-export type FlightControllerMerchantLinkOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "url_ASC"
-  | "url_DESC"
-  | "price_ASC"
-  | "price_DESC"
-  | "inStock_ASC"
-  | "inStock_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type MutationType = "CREATED" | "UPDATED" | "DELETED";
-
-export type VoteOrderByInput = "id_ASC" | "id_DESC";
 
 export type FlightControllerOrderByInput =
   | "id_ASC"
@@ -437,21 +443,23 @@ export type FlightControllerOrderByInput =
   | "holeSize_ASC"
   | "holeSize_DESC";
 
-export type MerchantOrderByInput =
+export type FlightControllerMerchantLinkOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "url_ASC"
+  | "url_DESC"
+  | "price_ASC"
+  | "price_DESC"
+  | "inStock_ASC"
+  | "inStock_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "url_ASC"
-  | "url_DESC"
-  | "affiliateId_ASC"
-  | "affiliateId_DESC"
-  | "disabled_ASC"
-  | "disabled_DESC";
+  | "updatedAt_DESC";
+
+export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+
+export type VoteOrderByInput = "id_ASC" | "id_DESC";
 
 export interface FlightControllerUpdateManyWithoutPostedByInput {
   create?: Maybe<
@@ -506,6 +514,7 @@ export interface UserCreateWithoutEditedMerchantsInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkCreateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface UserUpsertWithoutEditedFlightControllersInput {
@@ -926,6 +935,7 @@ export interface UserUpdateWithoutFlightControllersDataInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface MerchantSubscriptionWhereInput {
@@ -1045,6 +1055,7 @@ export interface UserUpdateInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface VoteUpdateWithWhereUniqueWithoutLinkInput {
@@ -1097,6 +1108,7 @@ export interface UserUpdateWithoutVotesDataInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface LinkUpdateInput {
@@ -1201,6 +1213,7 @@ export interface UserUpdateWithoutEditedFlightControllersDataInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface LinkUpdateManyWithWhereNestedInput {
@@ -1358,6 +1371,7 @@ export interface UserCreateWithoutFlightControllersInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkCreateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface LinkUpdateWithoutVotesDataInput {
@@ -1401,6 +1415,7 @@ export interface UserUpdateWithoutLinksDataInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface UserCreateWithoutVotesInput {
@@ -1418,6 +1433,7 @@ export interface UserCreateWithoutVotesInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkCreateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface FlightControllerUpdateManyWithoutUpdatedByInput {
@@ -1512,6 +1528,7 @@ export interface UserCreateWithoutEditedFlightControllersInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkCreateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface FlightControllerUpdateWithoutUpdatedByDataInput {
@@ -1624,6 +1641,7 @@ export interface UserCreateWithoutLinksInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkCreateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface FlightControllerMerchantLinkUpdateWithoutFlightControllerDataInput {
@@ -1733,6 +1751,7 @@ export interface UserCreateWithoutAddedMerchantsInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkCreateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface UserUpdateWithoutAddedMerchantsDataInput {
@@ -1749,6 +1768,7 @@ export interface UserUpdateWithoutAddedMerchantsDataInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface MerchantCreateWithoutUpdatedByInput {
@@ -1862,6 +1882,7 @@ export interface UserCreateWithoutAddedFlightControllersInput {
   >;
   addedMerchants?: Maybe<MerchantCreateManyWithoutPostedByInput>;
   editedMerchants?: Maybe<MerchantCreateManyWithoutUpdatedByInput>;
+  role?: Maybe<Role>;
 }
 
 export interface FlightControllerMerchantLinkUpdateManyWithoutMerchantInput {
@@ -2093,6 +2114,7 @@ export interface UserCreateInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkCreateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface UserUpdateOneRequiredWithoutAddedFlightControllersInput {
@@ -2127,6 +2149,7 @@ export interface UserUpdateWithoutAddedFlightControllersDataInput {
   >;
   addedMerchants?: Maybe<MerchantUpdateManyWithoutPostedByInput>;
   editedMerchants?: Maybe<MerchantUpdateManyWithoutUpdatedByInput>;
+  role?: Maybe<Role>;
 }
 
 export interface LinkCreateInput {
@@ -2225,6 +2248,7 @@ export interface UserUpdateWithoutEditedMerchantsDataInput {
   AddedFlightControllers?: Maybe<
     FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
   >;
+  role?: Maybe<Role>;
 }
 
 export interface VoteCreateManyWithoutLinkInput {
@@ -2518,6 +2542,10 @@ export interface UserWhereInput {
   AddedFlightControllers_every?: Maybe<FlightControllerMerchantLinkWhereInput>;
   AddedFlightControllers_some?: Maybe<FlightControllerMerchantLinkWhereInput>;
   AddedFlightControllers_none?: Maybe<FlightControllerMerchantLinkWhereInput>;
+  role?: Maybe<Role>;
+  role_not?: Maybe<Role>;
+  role_in?: Maybe<Role[] | Role>;
+  role_not_in?: Maybe<Role[] | Role>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
@@ -2607,6 +2635,7 @@ export interface UserUpdateManyMutationInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
+  role?: Maybe<Role>;
 }
 
 export interface MerchantUpdateManyWithWhereNestedInput {
@@ -3476,6 +3505,7 @@ export interface User {
   name: String;
   email: String;
   password: String;
+  role?: Role;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
@@ -3548,6 +3578,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
     first?: Int;
     last?: Int;
   }) => T;
+  role: () => Promise<Role>;
 }
 
 export interface UserSubscription
@@ -3626,6 +3657,7 @@ export interface UserSubscription
     first?: Int;
     last?: Int;
   }) => T;
+  role: () => Promise<AsyncIterator<Role>>;
 }
 
 export interface UserNullablePromise
@@ -3700,6 +3732,7 @@ export interface UserNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
+  role: () => Promise<Role>;
 }
 
 export interface AggregateMerchant {
@@ -4291,6 +4324,7 @@ export interface UserPreviousValues {
   name: String;
   email: String;
   password: String;
+  role?: Role;
 }
 
 export interface UserPreviousValuesPromise
@@ -4300,6 +4334,7 @@ export interface UserPreviousValuesPromise
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
+  role: () => Promise<Role>;
 }
 
 export interface UserPreviousValuesSubscription
@@ -4309,6 +4344,7 @@ export interface UserPreviousValuesSubscription
   name: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  role: () => Promise<AsyncIterator<Role>>;
 }
 
 export interface Link {
@@ -4684,6 +4720,10 @@ export const models: Model[] = [
   },
   {
     name: "Baro",
+    embedded: false
+  },
+  {
+    name: "Role",
     embedded: false
   }
 ];

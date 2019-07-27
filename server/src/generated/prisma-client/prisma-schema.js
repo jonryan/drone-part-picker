@@ -2280,6 +2280,13 @@ enum ReceiverProtocol {
   SPEKTRUM
 }
 
+enum Role {
+  USER
+  CONTENTCREATOR
+  ADVANCEDCONTENTCREATOR
+  ADMIN
+}
+
 type Subscription {
   flightController(where: FlightControllerSubscriptionWhereInput): FlightControllerSubscriptionPayload
   flightControllerMerchantLink(where: FlightControllerMerchantLinkSubscriptionWhereInput): FlightControllerMerchantLinkSubscriptionPayload
@@ -2301,6 +2308,7 @@ type User {
   addedMerchants(where: MerchantWhereInput, orderBy: MerchantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Merchant!]
   editedMerchants(where: MerchantWhereInput, orderBy: MerchantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Merchant!]
   AddedFlightControllers(where: FlightControllerMerchantLinkWhereInput, orderBy: FlightControllerMerchantLinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlightControllerMerchantLink!]
+  role: Role
 }
 
 type UserConnection {
@@ -2321,6 +2329,7 @@ input UserCreateInput {
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
   AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
+  role: Role
 }
 
 input UserCreateOneWithoutAddedFlightControllersInput {
@@ -2369,6 +2378,7 @@ input UserCreateWithoutAddedFlightControllersInput {
   editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
+  role: Role
 }
 
 input UserCreateWithoutAddedMerchantsInput {
@@ -2382,6 +2392,7 @@ input UserCreateWithoutAddedMerchantsInput {
   editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
   AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
+  role: Role
 }
 
 input UserCreateWithoutEditedFlightControllersInput {
@@ -2395,6 +2406,7 @@ input UserCreateWithoutEditedFlightControllersInput {
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
   AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
+  role: Role
 }
 
 input UserCreateWithoutEditedMerchantsInput {
@@ -2408,6 +2420,7 @@ input UserCreateWithoutEditedMerchantsInput {
   editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
+  role: Role
 }
 
 input UserCreateWithoutFlightControllersInput {
@@ -2421,6 +2434,7 @@ input UserCreateWithoutFlightControllersInput {
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
   AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
+  role: Role
 }
 
 input UserCreateWithoutLinksInput {
@@ -2434,6 +2448,7 @@ input UserCreateWithoutLinksInput {
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
   AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
+  role: Role
 }
 
 input UserCreateWithoutVotesInput {
@@ -2447,6 +2462,7 @@ input UserCreateWithoutVotesInput {
   addedMerchants: MerchantCreateManyWithoutPostedByInput
   editedMerchants: MerchantCreateManyWithoutUpdatedByInput
   AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
+  role: Role
 }
 
 type UserEdge {
@@ -2463,6 +2479,8 @@ enum UserOrderByInput {
   email_DESC
   password_ASC
   password_DESC
+  role_ASC
+  role_DESC
 }
 
 type UserPreviousValues {
@@ -2470,6 +2488,7 @@ type UserPreviousValues {
   name: String!
   email: String!
   password: String!
+  role: Role
 }
 
 type UserSubscriptionPayload {
@@ -2501,12 +2520,14 @@ input UserUpdateInput {
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
   AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
+  role: Role
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
+  role: Role
 }
 
 input UserUpdateOneRequiredWithoutAddedFlightControllersInput {
@@ -2578,6 +2599,7 @@ input UserUpdateWithoutAddedFlightControllersDataInput {
   editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
+  role: Role
 }
 
 input UserUpdateWithoutAddedMerchantsDataInput {
@@ -2590,6 +2612,7 @@ input UserUpdateWithoutAddedMerchantsDataInput {
   editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
   AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
+  role: Role
 }
 
 input UserUpdateWithoutEditedFlightControllersDataInput {
@@ -2602,6 +2625,7 @@ input UserUpdateWithoutEditedFlightControllersDataInput {
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
   AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
+  role: Role
 }
 
 input UserUpdateWithoutEditedMerchantsDataInput {
@@ -2614,6 +2638,7 @@ input UserUpdateWithoutEditedMerchantsDataInput {
   editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
+  role: Role
 }
 
 input UserUpdateWithoutFlightControllersDataInput {
@@ -2626,6 +2651,7 @@ input UserUpdateWithoutFlightControllersDataInput {
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
   AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
+  role: Role
 }
 
 input UserUpdateWithoutLinksDataInput {
@@ -2638,6 +2664,7 @@ input UserUpdateWithoutLinksDataInput {
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
   AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
+  role: Role
 }
 
 input UserUpdateWithoutVotesDataInput {
@@ -2650,6 +2677,7 @@ input UserUpdateWithoutVotesDataInput {
   addedMerchants: MerchantUpdateManyWithoutPostedByInput
   editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
   AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
+  role: Role
 }
 
 input UserUpsertWithoutAddedFlightControllersInput {
@@ -2765,6 +2793,10 @@ input UserWhereInput {
   AddedFlightControllers_every: FlightControllerMerchantLinkWhereInput
   AddedFlightControllers_some: FlightControllerMerchantLinkWhereInput
   AddedFlightControllers_none: FlightControllerMerchantLinkWhereInput
+  role: Role
+  role_not: Role
+  role_in: [Role!]
+  role_not_in: [Role!]
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

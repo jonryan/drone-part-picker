@@ -51,11 +51,15 @@ var models = [
   {
     name: "Baro",
     embedded: false
+  },
+  {
+    name: "Role",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `http://prism-Publi-1NX25XXJPKTRC-1994595457.us-east-1.elb.amazonaws.com`
+  endpoint: `https://us1.prisma.sh/corey-snyder/hackernews-node/dev`
 });
 exports.prisma = new exports.Prisma();
