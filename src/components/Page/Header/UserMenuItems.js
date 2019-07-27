@@ -1,37 +1,44 @@
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
-import { NavLink } from 'react-router-dom'
+import {NavLink, withRouter} from 'react-router-dom'
+import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
+import {AUTH_TOKEN} from '../../../constants.js';
 // import Avatar from '../../Avatar'
 
-const UserMenuItems = ({ user }) => (
-  <Fragment>
-    <li className="nav-item">
-      <NavLink exact to="/" className="nav-link">Home</NavLink>
-    </li>
-    <li className="nav-item">
-      <NavLink to="/editor" className="nav-link">
-        <i className="ion-compose" />&nbsp;New Post
-      </NavLink>
-    </li>
-    <li className="nav-item">
-      <NavLink to="/settings" className="nav-link">
-        <i className="ion-gear-a" />&nbsp;Settings
-      </NavLink>
-    </li>
-    <li className="nav-item">
-      <NavLink to={`/profile/${user.username}`} className="nav-link">
-        {/*<Avatar src={user.image} className="user-pic" alt="" />*/}
-        {user.username}
-      </NavLink>
-    </li>
-  </Fragment>
-)
+const UserMenuItems = ({ user, history }) => {
+
+  console.log('history', history, user)
+
+  return ((
+  <Navbar.Collapse id="basic-navbar-nav">
+    <Nav className="mr-auto">
+      <NavDropdown title="Flight Controllers">
+        <NavDropdown.Item href="/products/flight-controller/1">View Flight Controllers</NavDropdown.Item>
+        <NavDropdown.Item href="/add-flight-controller">Add Flight Controller</NavDropdown.Item>
+      </NavDropdown>
+      <NavDropdown title="Merchants">
+        <NavDropdown.Item href="/merchants">View Merchants</NavDropdown.Item>
+        <NavDropdown.Item href="/add-merchant">Add Merchant</NavDropdown.Item>
+      </NavDropdown>
+    </Nav>
+    <Nav>
+      <Nav.Link
+        onClick={() => {
+          localStorage.removeItem(AUTH_TOKEN)
+          window.location.reload()
+        }}
+        href="#">{user.name} Log Out</Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+))
+}
 
 UserMenuItems.propTypes = {
   user: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-    image: PropTypes.string
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired
 }
 
-export default UserMenuItems
+export default withRouter(UserMenuItems)

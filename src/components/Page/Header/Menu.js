@@ -4,13 +4,13 @@ import GuestMenuItems from './GuestMenuItems'
 import UserMenuItems from './UserMenuItems'
 
 const Menu = () => (
-  <ul className="nav navbar-nav pull-xs-right">
-    <WithUser>
-      {viewer => (
-        viewer ? <UserMenuItems user={viewer.user} /> : <GuestMenuItems />
+  <WithUser>
+    {user => {
+      return (
+        user ? <UserMenuItems user={user} /> : <GuestMenuItems />
       )}
-    </WithUser>
-  </ul>
+    }
+  </WithUser>
 )
 
 export default Menu
