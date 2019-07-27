@@ -43,7 +43,7 @@ class Login extends Component {
             type="email"
             id="inputEmail"
             className="form-control"
-            placeholder="Email address" r
+            placeholder="Email address"
             equired=""
            autoFocus="" autoComplete="off"
           />
@@ -52,15 +52,15 @@ class Login extends Component {
                  id="inputPassword"
                  className="form-control"
                  placeholder="Password"
-                 required="true"
+                 required={true}
                  value={password}
                  onChange={e => this.setState({ password: e.target.value })}
                  autoComplete="off"/>
-          <div className="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me"/> Remember me
-            </label>
-          </div>
+          {/*<div className="checkbox mb-3">*/}
+            {/*<label>*/}
+              {/*<input type="checkbox" value="remember-me"/> Remember me*/}
+            {/*</label>*/}
+          {/*</div>*/}
           <Mutation
             mutation={login ? LOGIN_MUTATION : SIGNUP_MUTATION}
             variables={{ email, password, name }}
