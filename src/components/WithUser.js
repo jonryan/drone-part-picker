@@ -9,6 +9,7 @@ const GET_VIEWER = gql`
             email
             name
             id
+            role
         }
     }
 `

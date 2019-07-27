@@ -3,6 +3,7 @@ import React, { Fragment } from 'react'
 import {NavLink, withRouter} from 'react-router-dom'
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import {AUTH_TOKEN} from '../../../constants.js';
+import AdminMenuItems from './AdminMenuItems.jsx';
 // import Avatar from '../../Avatar'
 
 const UserMenuItems = ({ user, history }) => {
@@ -20,7 +21,11 @@ const UserMenuItems = ({ user, history }) => {
         <NavDropdown.Item href="/merchants">View Merchants</NavDropdown.Item>
         <NavDropdown.Item href="/add-merchant">Add Merchant</NavDropdown.Item>
       </NavDropdown>
+      {user.role === 'ADMIN' && (
+        <AdminMenuItems/>
+      )}
     </Nav>
+
     <Nav>
       <Nav.Link
         onClick={() => {
