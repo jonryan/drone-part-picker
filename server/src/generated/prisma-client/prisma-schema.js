@@ -2300,6 +2300,8 @@ type User {
   id: ID!
   name: String!
   email: String!
+  updatedBy: User
+  updatedAt: DateTime
   password: String!
   links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link!]
   votes(where: VoteWhereInput, orderBy: VoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vote!]
@@ -2321,6 +2323,7 @@ input UserCreateInput {
   id: ID
   name: String!
   email: String!
+  updatedBy: UserCreateOneWithoutUpdatedByInput
   password: String!
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
@@ -2362,6 +2365,11 @@ input UserCreateOneWithoutLinksInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateOneWithoutUpdatedByInput {
+  create: UserCreateWithoutUpdatedByInput
+  connect: UserWhereUniqueInput
+}
+
 input UserCreateOneWithoutVotesInput {
   create: UserCreateWithoutVotesInput
   connect: UserWhereUniqueInput
@@ -2371,6 +2379,7 @@ input UserCreateWithoutAddedFlightControllersInput {
   id: ID
   name: String!
   email: String!
+  updatedBy: UserCreateOneWithoutUpdatedByInput
   password: String!
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
@@ -2385,6 +2394,7 @@ input UserCreateWithoutAddedMerchantsInput {
   id: ID
   name: String!
   email: String!
+  updatedBy: UserCreateOneWithoutUpdatedByInput
   password: String!
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
@@ -2399,6 +2409,7 @@ input UserCreateWithoutEditedFlightControllersInput {
   id: ID
   name: String!
   email: String!
+  updatedBy: UserCreateOneWithoutUpdatedByInput
   password: String!
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
@@ -2413,6 +2424,7 @@ input UserCreateWithoutEditedMerchantsInput {
   id: ID
   name: String!
   email: String!
+  updatedBy: UserCreateOneWithoutUpdatedByInput
   password: String!
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
@@ -2427,6 +2439,7 @@ input UserCreateWithoutFlightControllersInput {
   id: ID
   name: String!
   email: String!
+  updatedBy: UserCreateOneWithoutUpdatedByInput
   password: String!
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
@@ -2441,7 +2454,23 @@ input UserCreateWithoutLinksInput {
   id: ID
   name: String!
   email: String!
+  updatedBy: UserCreateOneWithoutUpdatedByInput
   password: String!
+  votes: VoteCreateManyWithoutUserInput
+  flightControllers: FlightControllerCreateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
+  addedMerchants: MerchantCreateManyWithoutPostedByInput
+  editedMerchants: MerchantCreateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkCreateManyWithoutPostedByInput
+  role: Role
+}
+
+input UserCreateWithoutUpdatedByInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
   editedFlightControllers: FlightControllerCreateManyWithoutUpdatedByInput
@@ -2455,6 +2484,7 @@ input UserCreateWithoutVotesInput {
   id: ID
   name: String!
   email: String!
+  updatedBy: UserCreateOneWithoutUpdatedByInput
   password: String!
   links: LinkCreateManyWithoutPostedByInput
   flightControllers: FlightControllerCreateManyWithoutPostedByInput
@@ -2477,6 +2507,8 @@ enum UserOrderByInput {
   name_DESC
   email_ASC
   email_DESC
+  updatedAt_ASC
+  updatedAt_DESC
   password_ASC
   password_DESC
   role_ASC
@@ -2487,6 +2519,7 @@ type UserPreviousValues {
   id: ID!
   name: String!
   email: String!
+  updatedAt: DateTime
   password: String!
   role: Role
 }
@@ -2512,6 +2545,7 @@ input UserSubscriptionWhereInput {
 input UserUpdateInput {
   name: String
   email: String
+  updatedBy: UserUpdateOneWithoutUpdatedByInput
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
@@ -2589,9 +2623,19 @@ input UserUpdateOneWithoutLinksInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateOneWithoutUpdatedByInput {
+  create: UserCreateWithoutUpdatedByInput
+  update: UserUpdateWithoutUpdatedByDataInput
+  upsert: UserUpsertWithoutUpdatedByInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
 input UserUpdateWithoutAddedFlightControllersDataInput {
   name: String
   email: String
+  updatedBy: UserUpdateOneWithoutUpdatedByInput
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
@@ -2605,6 +2649,7 @@ input UserUpdateWithoutAddedFlightControllersDataInput {
 input UserUpdateWithoutAddedMerchantsDataInput {
   name: String
   email: String
+  updatedBy: UserUpdateOneWithoutUpdatedByInput
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
@@ -2618,6 +2663,7 @@ input UserUpdateWithoutAddedMerchantsDataInput {
 input UserUpdateWithoutEditedFlightControllersDataInput {
   name: String
   email: String
+  updatedBy: UserUpdateOneWithoutUpdatedByInput
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
@@ -2631,6 +2677,7 @@ input UserUpdateWithoutEditedFlightControllersDataInput {
 input UserUpdateWithoutEditedMerchantsDataInput {
   name: String
   email: String
+  updatedBy: UserUpdateOneWithoutUpdatedByInput
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
@@ -2644,6 +2691,7 @@ input UserUpdateWithoutEditedMerchantsDataInput {
 input UserUpdateWithoutFlightControllersDataInput {
   name: String
   email: String
+  updatedBy: UserUpdateOneWithoutUpdatedByInput
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
@@ -2657,7 +2705,22 @@ input UserUpdateWithoutFlightControllersDataInput {
 input UserUpdateWithoutLinksDataInput {
   name: String
   email: String
+  updatedBy: UserUpdateOneWithoutUpdatedByInput
   password: String
+  votes: VoteUpdateManyWithoutUserInput
+  flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+  editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
+  addedMerchants: MerchantUpdateManyWithoutPostedByInput
+  editedMerchants: MerchantUpdateManyWithoutUpdatedByInput
+  AddedFlightControllers: FlightControllerMerchantLinkUpdateManyWithoutPostedByInput
+  role: Role
+}
+
+input UserUpdateWithoutUpdatedByDataInput {
+  name: String
+  email: String
+  password: String
+  links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
   editedFlightControllers: FlightControllerUpdateManyWithoutUpdatedByInput
@@ -2670,6 +2733,7 @@ input UserUpdateWithoutLinksDataInput {
 input UserUpdateWithoutVotesDataInput {
   name: String
   email: String
+  updatedBy: UserUpdateOneWithoutUpdatedByInput
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   flightControllers: FlightControllerUpdateManyWithoutPostedByInput
@@ -2708,6 +2772,11 @@ input UserUpsertWithoutFlightControllersInput {
 input UserUpsertWithoutLinksInput {
   update: UserUpdateWithoutLinksDataInput!
   create: UserCreateWithoutLinksInput!
+}
+
+input UserUpsertWithoutUpdatedByInput {
+  update: UserUpdateWithoutUpdatedByDataInput!
+  create: UserCreateWithoutUpdatedByInput!
 }
 
 input UserUpsertWithoutVotesInput {
@@ -2758,6 +2827,15 @@ input UserWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
+  updatedBy: UserWhereInput
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   password: String
   password_not: String
   password_in: [String!]
