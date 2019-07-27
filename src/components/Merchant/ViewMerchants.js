@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { Container, Table,  } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
+import LoadingIndicatorCentered from '../FlightControllers/FlightControllerList.jsx';
 
 export const MERCHANT_LIST_QUERY = gql`
   query {
@@ -43,11 +44,17 @@ class ViewMerchants extends Component {
         <Container fluid>
           <h1>Merchant List</h1>
         <Query query={MERCHANT_LIST_QUERY}>
-          {({ loading, error, data, subscribeToMore }) => {
+          {({ loading, error, data }) => {
 
             console.log('data', data)
-            if (loading) return <div>Fetching</div>
-            if (error) return <div>Error</div>
+            if (loading) return (
+              <LoadingIndicatorCentered/>
+            )
+            if (error) return (
+              <div className={'text-center mt-5'}>
+                Error: {error}
+              </div>
+            )
 
             const merchants = this._getMerchantsToRender(data);
 
