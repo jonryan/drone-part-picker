@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../logo.svg';
 import '../styles/App.css';
 import '../styles/custom.scss';
 import LinkList from './LinkList.jsx';
@@ -14,6 +13,9 @@ import AddMerchant from "./Merchant/AddMerchant";
 import ViewMerchants from "./Merchant/ViewMerchants";
 import EditMerchant from "./Merchant/EditMerchant";
 import ViewFlightController from './FlightControllers/FlightControllerPage.js'
+import UsersPage from './Pages/Users/UsersPage.jsx';
+import UserPage from './Pages/Users/UserPage.jsx';
+import ProtectedRoute from '../components/ProtectedRoute.jsx';
 
 function App() {
 
@@ -28,12 +30,14 @@ function App() {
           <Route exact path='/top' component={LinkList} />
           <Route exact path='/new/:page' component={LinkList} />
           <Route exact path='/products/flight-controller/:page' component={FlightControllerList } />
-          <Route exact path='/add-flight-controller' component={AddFlightController } />
-          <Route exact path='/edit-flight-controller/:fc' component={EditFlightController } />
+          <ProtectedRoute exact path='/add-flight-controller' component={AddFlightController } />
+          <ProtectedRoute exact path='/edit-flight-controller/:fc' component={EditFlightController } />
           <Route exact path='/flight-controller/:fc' component={ViewFlightController } />
-          <Route exact path='/add-merchant' component={AddMerchant } />
           <Route exact path='/merchants' component={ViewMerchants } />
-          <Route exact path='/edit-merchant/:merchant' component={EditMerchant } />
+          <ProtectedRoute exact path='/add-merchant' component={AddMerchant } />
+          <ProtectedRoute exact path='/edit-merchant/:merchant' component={EditMerchant } />
+          <ProtectedRoute exact path='/users' component={UsersPage}/>
+          <ProtectedRoute exact path='/user/:userId' component={UserPage} />
         </Switch>
       </div>
     </div>
